@@ -57,7 +57,7 @@ h6 {
 
 html,
 body {
-  height: 100%
+  height: auto;
 }
 
 body {
@@ -648,7 +648,6 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active) {
   background: linear-gradient(90deg, #d70a84 0%, #51127f 100%);
   border-radius: 10px;
   border: none;
-  margin-right: -51px;
 }
 
 .bttn-2:hover {
@@ -2185,12 +2184,9 @@ label {
 }
 
 .create-btn {
-  padding: 0px 20px;
   margin-top: 0px;
   border-radius: 10px;
-  margin-right: 20px;
 }
-
 
 .login-button {
   padding: 10px 20px 12px 20px;
@@ -2230,8 +2226,6 @@ label {
   background: linear-gradient(90deg, #d70a84 0%, #51127f 100%);
   border-radius: 10px;
   border: none;
-  margin-top: 1px;
-  margin-right: -51px;
 }
 
 .signup-button {
@@ -2242,8 +2236,6 @@ label {
   background: linear-gradient(90deg, #d70a84 0%, #51127f 100%);
   border-radius: 10px;
   border: none;
-  margin-top: 1px;
-  margin-right: -51px;
 }
 
 #register-form .g-recaptcha {

@@ -11,7 +11,7 @@
                         <li>
                             <?php if (!empty($settings->facebook)) : ?>
                             <li>
-                              <a target="_blank" href="https://www.facebook.com/ektasitech
+                              <a target="_blank" href="https://www.facebook.com/ektasitech">
                                   <i class="fab fa-facebook-f"></i>
                               </a>
                             </li>

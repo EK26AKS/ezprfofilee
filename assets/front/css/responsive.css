@@ -694,7 +694,7 @@
     }
     /* price cards */
     .ezprofile-main .section-padding.price-section{
-        height: 235px !important;
+        height: auto !important;
     }
     section.pack {
         margin: 60px 0px;
