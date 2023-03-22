@@ -1,5 +1,4 @@
 <div class="signupform" id="contact-page">
-
     <div class="row">
         <div class="col-md-offset-2 col-md-12 col-sm-12">
             <?php if (!empty($this->session->flashdata('msg'))): ?>

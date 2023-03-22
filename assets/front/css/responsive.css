@@ -1,12 +1,3 @@
-/* Medium Layout: 1280px. */
-
-@media only screen and (min-width: 992px) and (max-width: 1200px) {
-    .service-area {
-        padding-top: 120px;
-    }
-}
-
-
 /* Tablet Layout: 768px. */
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -99,8 +90,6 @@
         border-bottom: 1px solid #E8EBF2;
     }
 
-
-
     .single-count {
         width: 100%;
         border-bottom: 1px solid #E8EBF2;
@@ -181,8 +170,6 @@
         right: 25px;
         bottom: -5px;
     }
-
-
 
     .accordion .accordion-title {
         font-size: 14px;
@@ -431,7 +418,6 @@
         margin-top: 30px;
     }
 
-
     .signupform {
         width: 100%;
         box-shadow: none;
@@ -560,8 +546,6 @@
 
 }
 
-
-
 /* new css start */
 
 /* Extra small devices (phones, 600px and down) */
@@ -685,10 +669,7 @@
         display: none;
     }
 
-    .log-box .box-one {
-        width: 100%;
-    }
-
+    .log-box .box-one,
     .log-box {
         width: 100%;
         box-shadow: none;
@@ -696,6 +677,7 @@
     .box-one .forgot_pass {
         text-align: center;
     }
+
     .log-box h1 {
         font-size: 20px;
         text-align: center;
@@ -704,11 +686,26 @@
         width: 100%;
         margin-left: 3px;
     }
+
     #login-form .form-group input {
         width: 100%;
         padding: 20px;
     }
+    .signupform .box-one h1{
+        padding: unset;
+    }
 
+    #register-form .form-group{
+        padding: 0px;
+    }
+    #register-form .checkbox{
+        margin: unset;
+        padding: 0px 0px;
+    }
+    #register-form .btn{
+        margin: 0px;
+        width: 100%;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -729,13 +726,40 @@
         margin-bottom: unset;
     }
 
+    /* create profile page */
+   
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {}
+@media only screen and (max-width: 768px) {
+    .signupform,
+    .signupform .box-one {
+        width: 100%;
+        box-shadow: unset;
+    }
+    .box-two {
+        display: none;
+    }
+
+    .logo_img {
+        margin-bottom: -65px;
+    }
+    .footer-copyright-text.text-left{
+        text-align: center !important;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    
+}
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {}
+@media only screen and (min-width: 1200px) {
+    .service-area {
+        padding-top: 120px;
+    }
+}
