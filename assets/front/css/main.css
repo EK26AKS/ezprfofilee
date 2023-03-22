@@ -32,7 +32,6 @@
     background: linear-gradient(90deg, #d70a84 0%, #51127f 100%);
     border-radius: 10px;
     border: none;
-    margin-top: 10px;
 }
 
 /* ==============================
@@ -59,6 +58,7 @@
     background-color: #ffffff;
     -webkit-box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.09);
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.09);
+    animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
 }
 
 .mainmenu-area .equal-height {
@@ -1207,7 +1207,7 @@ label.label.label-warning.custom {
     font-size: 13px;
 }
 
-/*      Just for presentation        */
+/* Just for presentation */
 .c-p {
     color: #286efb !important;
 }
@@ -1239,7 +1239,7 @@ label.label.label-warning.custom {
 }
 
 .space-200 {
-    height: 200px;
+    height: 100px;
     display: block;
 }
 
