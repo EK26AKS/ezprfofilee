@@ -43,10 +43,13 @@
 /* Mobile Layout: 320px. */
 
 @media only screen and (max-width: 805px) {
-    body {
+    .col-md-5.contact-form {
         font-size: 16px;
+        margin-right: 13px;
     }
-
+    .col-md-6.contact-form{
+    margin-bottom: -4em;
+    }
     .home-layout {
         height: 280px;
         width: auto !important;
@@ -576,11 +579,6 @@
         margin-top: 27px;
     }
 
-    .contactarea {
-        box-shadow: none;
-        width: 112%;
-    }
-
     .login-box-body {
         box-shadow: none;
     }
@@ -604,8 +602,9 @@
         margin-left: 10px;
     }
     
-    a.send-msg-btn {
-        padding-left: 1em;
+    .contact-form .send-msg-btn {
+        padding-left: 5em;
+        padding-right: 60px;
     }
 
     .logo_img {
@@ -623,15 +622,11 @@
         margin-top: 260px;
     }
 
-    footer {
-        margin-top: 1300px;
-    }
-
     .contactarea {
         box-shadow: none;
-        margin-left: -67px;
-        width: 112%;
-    }
+        /* margin-left: -67px; */
+        /* margin-right: -46px; */
+       }
 
     .mobile-navmenu.navbar {
         margin-bottom: unset;
