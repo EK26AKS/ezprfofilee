@@ -598,9 +598,7 @@
 
     .contactarea {
         box-shadow: none;
-        /* margin-left: -67px; */
-        /* margin-right: -46px; */
-       }
+    }
 
     .mobile-navmenu.navbar {
         margin-bottom: unset;
@@ -680,8 +678,9 @@
     .signupform,
     .signupform .box-one {
         width: 100%;
+        box-shadow: unset;
     }
-
+  
     .box-two {
         display: none;
     }
