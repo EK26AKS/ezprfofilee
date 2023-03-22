@@ -32,43 +32,51 @@
                 </div>
                 <?php endif ?>
             </div>
+            <form method="post" action="<?php echo base_url('home/send_message'); ?>">
             <div class="col-md-12">
                 <!-- column start -->
-                <div class="col-md-6 contact-form">
-                    <form method="post" action="https://formsubmit.co/info@ezprofile.in">
-                        <div class="col-md-12 col-sm-12">
+                <div class="col-md-6 col-sm-12 contact-form contact-form-top">
+                    
+                        <div class="col-md-12 cf-fields col-sm-12">
                             <label for="firstname">Firstname *</label>
-                            <input type="text" name="firstname" required />
+                            <input type="text" name="first_name" id="first_name" required/>
                         </div>
-                        <div class="col-md-12 m-top-20">
+                        <div class="col-md-12 col-sm-12 cf-fields m-top-20">
                             <label for="lastname">Lastname *</label>
-                            <input type="text" name="lastname" required />
+                            <input type="text" name="last_name" id="last_name" required />
                         </div>
-                        <div class="col-md-12 m-top-20">
+                        <div class="col-md-12 col-sm-12 cf-fields m-top-20">
                             <label for="email">Email *</label>
-                            <input type="email" name="email" required />
+                            <input type="email" name="email" id="email" required  />
                         </div>
 
                         <!-- csrf token -->
                         <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>"
                             value="<?php echo $this->security->get_csrf_hash();?>">
 
-                        <div class="col-sm-6">
+                        <!-- recaptcha start -->
+                        <div class="col-sm-12">
                             <?php if ($settings->enable_captcha == 1 && $settings->captcha_site_key != ''): ?>
                             <div class="g-recaptcha"
                                 data-sitekey="<?php echo html_escape($settings->captcha_site_key); ?>"></div>
                             <?php endif ?>
                         </div>
+                        <!-- recaptcha End -->
 
-                    </form>
+                    
                 </div>
-                <div class="col-md-5 contact-form">
-                    <label for="name" required>Write Your Message</label><br>
-                    <textarea name="" id="" cols="30" rows="10"></textarea><br>
-                    <a href="mailto:someone@example.com" class="send-msg-btn">Send Message</a>
+                <div class="col-md-6 col-sm-12 contact-form">
+                    <label for="name" required>Write Your Message</label>
+                    <div class="floating-label-form-group input-controls control-group">
+                        <textarea id="message" name="message"  rows="6" cols="33" required></textarea>
+                        <p class="help-block text-danger"></p>
+                    </div>
+                    <div id="success"></div>
+                    <button type="submit" class="send-msg-btn">Send Message</button>
                 </div>
                 <!-- column end -->
             </div>
+            </form>
         </div>
     </div>
     <!-- CONTAINER END -->

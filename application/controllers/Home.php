@@ -182,20 +182,27 @@ class Home extends Home_Controller {
     {     
         if ($_POST) {
             $data = array(
-                'name' => $this->input->post('name', true),
+                'first_name' => $this->input->post('first_name', true),
+                'last_name' => $this->input->post('last_name', true),
                 'email' => $this->input->post('email', true),
                 'message' => $this->input->post('message', true),
                 'created_at' => my_date_now()
             );
-            $data = $this->security->xss_clean($data);
+            print_r($data);
+
+            // $data = $this->security->xss_clean($data);
             
             //check reCAPTCHA status
-            if (!$this->recaptcha_verify_request()) {
-                $this->session->set_flashdata('error', 'Recaptcha is required'); 
-            } else {
-                $this->common_model->insert($data, 'site_contacts');
-                $this->session->set_flashdata('msg', 'Message send Successfully');
-            }
+            // if (!$this->recaptcha_verify_request()) {
+            //     $this->session->set_flashdata('error', 'Recaptcha is required'); 
+            // } else {
+            //     $this->common_model->insert($data, 'site_contacts');
+            //     $this->session->set_flashdata('msg', 'Message send Successfully');
+            // }
+
+            $this->common_model->insert($data, 'site_contacts');
+            $this->session->set_flashdata('msg', 'Message send Successfully');
+
             redirect($_SERVER['HTTP_REFERER']);
         }
     }

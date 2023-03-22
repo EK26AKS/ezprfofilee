@@ -34,14 +34,7 @@
 /* Mobile Layout: 320px. */
 
 @media only screen and (max-width: 805px) {
-    .col-md-5.contact-form {
-        font-size: 16px;
-        margin-right: 13px;
-    }
 
-    .col-md-6.contact-form {
-        margin-bottom: -4em;
-    }
 
     .home-layout {
         height: 280px;
@@ -553,11 +546,36 @@
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
+    /* contact page css */
+    .contact-form {
+        margin-left: unset;
+        padding: unset;
+    }
+
     footer .footer-copyright-text {
         text-align: center !important;
         margin: 10px 0px;
     }
 
+    .cf-fields {
+        padding: unset;
+    }
+
+    .contact-form.contact-form-top {
+        margin-top: 30px;
+    }
+
+    .contact-form {
+        margin: unset;
+    }
+
+    .contactarea {
+        box-shadow: none;
+        padding: unset;
+        margin-bottom: 60px;
+    }
+
+    /* pricing start */
     .price-col {
         width: 95%;
         margin-left: 10px;
@@ -582,9 +600,7 @@
         margin-top: -51px;
     }
 
-    .contactarea {
-        box-shadow: none;
-    }
+
 
     .mobile-navmenu.navbar {
         margin-bottom: unset;
