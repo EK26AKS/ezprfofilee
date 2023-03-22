@@ -1877,6 +1877,12 @@ form button[type=submit] {
   padding: 60px 0px;
 }
 
+.section-padding.price-section{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .contact-form-area #create-btn {
   background: linear-gradient(90deg, #d70a84 0%, #51127f 100%);
   border-radius: 10px;
