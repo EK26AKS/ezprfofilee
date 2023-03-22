@@ -2,12 +2,13 @@
     display: none;
 }
 
-.slicknav_menu > a {
+.slicknav_menu>a {
     width: 50%;
     display: inline-block;
 }
 
 @media screen and (max-width: 800px) {
+
     /* #menu is the original menu */
     .js #menu {
         display: none;
@@ -16,6 +17,7 @@
     .js .slicknav_menu {
         display: block;
     }
+
     .mainmenu-area {
         display: none;
     }
@@ -124,16 +126,17 @@
     display: inline-block;
     padding: 5px;
 }
+
 .slicknav_menu .slicknav_nav a:hover {
     color: #f17272;
 }
 
-.slicknav_menu .slicknav_nav li > a {
+.slicknav_menu .slicknav_nav li>a {
     padding-right: 18px;
     position: relative;
 }
 
-.slicknav_menu .slicknav_nav li > a a {
+.slicknav_menu .slicknav_nav li>a a {
     padding: 0;
 }
 
@@ -147,7 +150,7 @@
     transition: 0.3s;
 }
 
-.slicknav_menu .slicknav_nav li.slicknav_open > a > .slicknav_arrow {
+.slicknav_menu .slicknav_nav li.slicknav_open>a>.slicknav_arrow {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
 }
