@@ -38,9 +38,11 @@
         font-size: 16px;
         margin-right: 13px;
     }
-    .col-md-6.contact-form{
-    margin-bottom: -4em;
+
+    .col-md-6.contact-form {
+        margin-bottom: -4em;
     }
+
     .home-layout {
         height: 280px;
         width: auto !important;
@@ -664,7 +666,7 @@
         width: 100%;
         box-shadow: unset;
     }
-  
+
     .box-two {
         display: none;
     }
@@ -674,6 +676,7 @@
         width: 100%;
         box-shadow: none;
     }
+
     .box-one .forgot_pass {
         text-align: center;
     }
@@ -682,6 +685,7 @@
         font-size: 20px;
         text-align: center;
     }
+
     .box-one .btn {
         width: 100%;
         margin-left: 3px;
@@ -691,20 +695,31 @@
         width: 100%;
         padding: 20px;
     }
-    .signupform .box-one h1{
+
+    .signupform .box-one h1 {
         padding: unset;
     }
 
-    #register-form .form-group{
+    #register-form .form-group {
         padding: 0px;
     }
-    #register-form .checkbox{
+
+    #register-form .checkbox {
         margin: unset;
         padding: 0px 0px;
     }
-    #register-form .btn{
+
+    #register-form .btn {
         margin: 0px;
         width: 100%;
+    }
+
+    form#lost-form {
+        margin-bottom: 5px;
+    }
+
+    div#forgot-area {
+        margin-top: 25px;
     }
 }
 
@@ -726,17 +741,20 @@
         margin-bottom: unset;
     }
 
-    /* create profile page */
-   
+    button.btn.btn-info.btn-block.signin_btn.margin-top-10 {
+        width: 100%;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
+
     .signupform,
     .signupform .box-one {
         width: 100%;
         box-shadow: unset;
     }
+
     .box-two {
         display: none;
     }
@@ -744,15 +762,14 @@
     .logo_img {
         margin-bottom: -65px;
     }
-    .footer-copyright-text.text-left{
+
+    .footer-copyright-text.text-left {
         text-align: center !important;
     }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-    
-}
+@media only screen and (min-width: 768px) {}
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {}

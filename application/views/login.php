@@ -257,9 +257,8 @@
                 <!-- csrf token -->
                 <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>"
                     value="<?php echo $this->security->get_csrf_hash();?>">
-                <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-info btn-block signin_btn margin-top-10"
-                        style="width:50%; margin:auto;">Submit</button>
+                <div class="col-md-12 col-sm-12 text-center">
+                    <button type="submit" class="btn btn-info btn-block signin_btn margin-top-10">Submit</button>
                 </div>
             </div>
         </form>
