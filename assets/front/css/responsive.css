@@ -534,6 +534,7 @@
 
     .log-box .box-one {
         width: 100%;
+        margin-left: 10px;
     }
 
     .log-box {
@@ -552,7 +553,13 @@
         width: 100%;
         padding: 20px;
     }
-
+    .box-one .forgot_pass{
+        text-align: center;
+    }
+    .box-one .btn {
+    width: 100%;
+    margin-left: 3px; 
+    }
     .btn-outline-primary {
         width: 50%
     }
