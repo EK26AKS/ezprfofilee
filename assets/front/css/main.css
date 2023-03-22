@@ -71,7 +71,6 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    margin-right: -28px;
 }
 
 .primary-menu>ul>li {
@@ -1696,7 +1695,7 @@ a#scrollUp {
     bottom: 30px;
     width: 35px;
     height: 35px;
-    background-color: #286efb;
+    background-color: #c60b84;
     text-align: center;
     line-height: 34px;
     color: #ffffff;
