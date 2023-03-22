@@ -431,7 +431,7 @@
         margin-top: 30px;
     }
 
-    
+
     .signupform {
         width: 100%;
         box-shadow: none;
@@ -488,7 +488,7 @@
     .footer-bottom .text-right {
         text-align: center !important;
     }
- 
+
     .view-button {
         margin-left: -38px;
     }
@@ -528,38 +528,6 @@
         color: black;
     }
 
-    .box-two {
-        display: none;
-    }
-
-    .log-box .box-one {
-        width: 100%;
-        margin-left: 10px;
-    }
-
-    .log-box {
-        margin: 0px;
-        padding-left: 20px;
-        width: 100%;
-        box-shadow: none;
-    }
-
-    .log-box h1 {
-        font-size: 20px;
-        text-align: center;
-    }
-
-    #login-form .form-group input {
-        width: 100%;
-        padding: 20px;
-    }
-    .box-one .forgot_pass{
-        text-align: center;
-    }
-    .box-one .btn {
-    width: 100%;
-    margin-left: 3px; 
-    }
     .btn-outline-primary {
         width: 50%
     }
@@ -608,10 +576,9 @@
         width: 95%;
         margin-left: 10px;
     }
-    
-    .contact-form .send-msg-btn {
-        padding-left: 5em;
-        padding-right: 60px;
+
+    a.send-msg-btn {
+        padding-left: 1em;
     }
 
     .logo_img {
@@ -680,7 +647,7 @@
         padding-top: unset;
         font-size: 28px;
     }
-   
+
     /* vcard sections */
     .section-padding {
         padding: 30px 0px;
@@ -696,29 +663,66 @@
         font-size: 28px;
     }
 
-    .hero-title-sub{
+    .hero-title-sub {
         margin-left: unset;
     }
+
     /* price cards */
-    .ezprofile-main .section-padding.price-section{
+    .ezprofile-main .section-padding.price-section {
         height: auto !important;
     }
+
     section.pack {
         margin: 60px 0px;
     }
+
+    /* create profile */
+    .signupform,
+    .signupform .box-one {
+        width: 100%;
+    }
+
+    .box-two {
+        display: none;
+    }
+
+    .log-box .box-one {
+        width: 100%;
+    }
+
+    .log-box {
+        margin: 0px;
+        padding-left: 20px;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    .log-box h1 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    #login-form .form-group input {
+        width: 100%;
+        padding: 20px;
+    }
+
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
+
     #mobile-nav-wrapper .login-button,
     #mobile-nav-wrapper .signup-button {
         margin-left: 10px;
         margin-right: unset;
         text-align: center;
     }
-    .sample-vcards .row.temp{
+
+    .sample-vcards .row.temp {
         width: 100%;
     }
+
     .mobile-navmenu.navbar {
         margin-bottom: unset;
     }
@@ -726,9 +730,7 @@
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-
-}
+@media only screen and (min-width: 768px) {}
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {}
