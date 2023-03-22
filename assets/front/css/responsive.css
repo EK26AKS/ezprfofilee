@@ -708,7 +708,12 @@
         width: 100%;
         padding: 20px;
     }
-
+    form#lost-form {
+    margin-bottom: 5px;
+    }
+    div#forgot-area {
+        margin-top: 25px;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -728,7 +733,9 @@
     .mobile-navmenu.navbar {
         margin-bottom: unset;
     }
-
+    button.btn.btn-info.btn-block.signin_btn.margin-top-10 {
+        width: 100%;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
