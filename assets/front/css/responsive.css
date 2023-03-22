@@ -609,7 +609,7 @@
     }
 
     .logo_img {
-        margin-bottom: -60px;
+        margin-bottom: -61px;
     }
 
     .log-box .box-two {
@@ -621,6 +621,10 @@
     .log-box {
         margin-bottom: 514px;
         margin-top: 260px;
+    }
+
+    footer {
+        margin-top: 1300px;
     }
 
     .contactarea {
