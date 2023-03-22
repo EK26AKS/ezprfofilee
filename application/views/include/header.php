@@ -164,7 +164,7 @@
                                 <?php endif ?>
                             </li>
                         </ul>
-                        <div class="create-btn">
+                        <div class="create-btn <?php if (is_admin()){ echo "dashboard-btn-wrap"; } ?>">
                         <?php if ($this->session->userdata('logged_in') == TRUE): ?>
                             
                             <?php if (is_admin()): ?>

@@ -428,12 +428,7 @@
         margin-top: 30px;
     }
 
-    .price-col {
-        width: 61%;
-        margin-left: 105px;
-        margin-bottom: 95px
-    }
-
+    
     .social-icons ul>li {
         margin-top: 70px;
     }
@@ -609,6 +604,12 @@
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
+    .price-col {
+        width: auto;
+        margin-left: 105px;
+        margin-bottom: 95px
+    }
+    
     a.send-msg-btn {
         padding-left: 1em;
     }
