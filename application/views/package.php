@@ -27,7 +27,7 @@
        <div class="row minh-600">
 
           <?php $i=1; foreach ($packages as $package): ?>
-            <div class="price-col col-md-offset-1 col-md-<?php echo(12/count($packages)) ?>">
+            <div class="price-col col-md-offset-1 col-sm-12 col-md-<?php echo(12/count($packages)) ?>">
                <div class="pricing-table purple text-center">
 
                 <h1 class="package_title mb-50"><?php echo html_escape($package->name); ?></h1>

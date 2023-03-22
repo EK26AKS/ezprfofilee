@@ -57,7 +57,7 @@
 
 </head>
 
-<body data-target=".primary-menu">
+<body data-target=".primary-menu" class="ezprofile-main">
 
     <div class="respon-logo">
         <a href="<?php echo base_url() ?>"><img src="<?php echo base_url($settings->logo) ?>" alt=""></a>
@@ -164,7 +164,7 @@
                                 <?php endif ?>
                             </li>
                         </ul>
-                        <div class="create-btn">
+                        <div class="create-btn <?php if (is_admin()){ echo "dashboard-btn-wrap"; } ?>">
                         <?php if ($this->session->userdata('logged_in') == TRUE): ?>
                             
                             <?php if (is_admin()): ?>

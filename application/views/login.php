@@ -315,13 +315,13 @@
               </div>
             </div>
             <div class="col-md-6 p-top-20">
-              <p class="footer-para2 text-left">
-                © 2023 EKTASI Technology, All Rights Reserved
+              <p class="footer-copyright-text text-left">
+                © <?php echo date("Y"); ?> EKTASI Technology, All Rights Reserved
               </p>
           </div>   
         <div class="col-md-6 p-top-20">
           <div class="footer-link">
-            <ul class="text-right footer-para3">  
+            <ul class="text-right footer-legal-link">  
                 <li><a href="<?php echo base_url('privacy_policy') ?>">Privacy Policy |</a></li>
                 <li><a href="<?php echo base_url('terms-and-conditions') ?>">Terms and Conditions |</a></li>
                  <li><a href="<?php echo base_url('refund_policy') ?>">Refund Policy</a></li>
