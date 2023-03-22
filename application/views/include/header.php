@@ -57,7 +57,7 @@
 
 </head>
 
-<body data-target=".primary-menu">
+<body data-target=".primary-menu" class="ezprofile-main">
 
     <div class="respon-logo">
         <a href="<?php echo base_url() ?>"><img src="<?php echo base_url($settings->logo) ?>" alt=""></a>

@@ -429,10 +429,6 @@
     }
 
     
-    .social-icons ul>li {
-        margin-top: 70px;
-    }
-
     .signupform {
         width: 100%;
         box-shadow: none;
@@ -562,13 +558,7 @@
         font-size: 19px;
     }
 
-   
-
-    footer .footer-para2 {
-        text-align: center !important;
-    }
-
-    footer .footer-para3 {
+    footer .footer-legal-link {
         text-align: center !important;
         margin-left: -75px;
     }
@@ -604,10 +594,14 @@
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
 
+    footer .footer-copyright-text {
+        text-align: center !important;
+        margin: 10px 0px;
+    }
+
     .price-col {
-        width: auto;
-        margin-left: 105px;
-        margin-bottom: 95px
+        width: 95%;
+        margin-left: 10px;
     }
     
     a.send-msg-btn {
@@ -699,7 +693,13 @@
     .hero-title-sub{
         margin-left: unset;
     }
-    
+    /* price cards */
+    .ezprofile-main .section-padding.price-section{
+        height: 235px !important;
+    }
+    section.pack {
+        margin: 60px 0px;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -712,6 +712,9 @@
     }
     .sample-vcards .row.temp{
         width: 100%;
+    }
+    .mobile-navmenu.navbar {
+        margin-bottom: unset;
     }
 
 }

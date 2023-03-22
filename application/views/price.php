@@ -1,13 +1,11 @@
 <section class="section-padding price-section"
     style="background-image: url('<?php echo base_url() ?>assets/images/bgimage.png'); background-position: left top; height:300px">
 
-    <div class="container">
-
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="page-title" data-aos="fade-up">
                     <h2 class="title1 text-white">Explore Our Pricing</h2>
-
                     <div class="space-20"></div>
 
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -19,7 +17,6 @@
                         </label>
                     </div>
 
-                    <div class="space-60"></div>
                 </div>
             </div>
         </div>
@@ -28,7 +25,7 @@
     <div class="row">
 
         <?php $i=1; foreach ($packages as $package): ?>
-        <div class="price-col col-md-offset-1 col-sm-12 col-md-<?php echo(12/count($packages)) ?>">
+        <div class="price-col col-sm-12 col-md-<?php echo(12/count($packages)) ?>">
             <div class="pricing-table purple text-center" data-aos="fade-up" data-aos-delay="<?php echo $i * 200; ?>">
                 <!-- Price -->
                 <div class="price-tag mb-20 mt-20">
