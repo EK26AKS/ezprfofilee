@@ -1,0 +1,6 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "^6.6",
+        "jeroendesloovere/vcard": "^1.7"
+    }
+}
