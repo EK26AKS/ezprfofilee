@@ -416,9 +416,9 @@ footer .footer-link li {
 }
 
 footer .footer-link li a {
-  color: #000;
-  margin: 4px;
-  font-size: 10px;
+    color: #000;
+     margin: 4px;
+    font-size: 11px;
 }
 
 footer .border-bottom {
@@ -2227,10 +2227,6 @@ label {
 .login-button:hover,
 .btn.signup-button:hover {
   color: #fff;
-}
-
-#register-form .g-recaptcha {
-  margin-left: 10px;
 }
 
 .view-button {

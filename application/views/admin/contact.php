@@ -17,7 +17,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
                         <th>Email</th>
                         <th>Message</th>
                         <th>Date</th>
@@ -27,9 +28,9 @@
                 <tbody>
                   <?php $i=1; foreach ($contacts as $contact): ?>
                     <tr id="row_<?php echo html_escape($contact->id); ?>">
-                        
                         <td><?php echo $i; ?></td>
-                        <td><?php echo html_escape($contact->name); ?></td>
+                        <td><?php echo html_escape($contact->first_name); ?></td>
+                        <td><?php echo html_escape($contact->last_name); ?></td>
                         <td><?php echo html_escape($contact->email); ?></td>
                         <td><?php echo html_escape($contact->message); ?></td>
                         <td><span class="label label-default"> <?php echo my_date_show_time($contact->created_at); ?> </span></td>
@@ -43,7 +44,6 @@
 
                         </td>
                     </tr>
-                    
                   <?php $i++; endforeach; ?>
                 </tbody>
             </table>

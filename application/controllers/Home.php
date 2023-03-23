@@ -175,8 +175,6 @@ class Home extends Home_Controller {
         }
     }
 
-
-
     //send contact message
     public function send_message()
     {     
@@ -188,17 +186,16 @@ class Home extends Home_Controller {
                 'message' => $this->input->post('message', true),
                 'created_at' => my_date_now()
             );
-            print_r($data);
 
-            // $data = $this->security->xss_clean($data);
+            $data = $this->security->xss_clean($data);
             
             //check reCAPTCHA status
-            // if (!$this->recaptcha_verify_request()) {
-            //     $this->session->set_flashdata('error', 'Recaptcha is required'); 
-            // } else {
-            //     $this->common_model->insert($data, 'site_contacts');
-            //     $this->session->set_flashdata('msg', 'Message send Successfully');
-            // }
+            if (!$this->recaptcha_verify_request()) {
+                $this->session->set_flashdata('error', 'Recaptcha is required'); 
+            } else {
+                $this->common_model->insert($data, 'site_contacts');
+                $this->session->set_flashdata('msg', 'Message send Successfully');
+            }
 
             $this->common_model->insert($data, 'site_contacts');
             $this->session->set_flashdata('msg', 'Message send Successfully');
