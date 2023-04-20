@@ -893,10 +893,11 @@ button {
     }
 }
 
-.header-navigation .signup_button{
+.header-navigation .signup_button {
     margin-left: 15px !important;
     background: linear-gradient(270deg, #0034BE 0%, #191970 100%) !important;
 }
+
 /*===========================
     3. Hero css 
 ===========================*/
@@ -1125,7 +1126,8 @@ button {
     content: '\f104';
     font-family: Flaticon;
 }
-.saas-analysis{
+
+.saas-analysis {
     display: none;
 }
 
@@ -1140,11 +1142,13 @@ button {
     border-radius: 10px;
     border: 2px solid #F2F8FF;
 }
+
 .saas-features .features-box {
     background: linear-gradient(white, white) padding-box, linear-gradient(to right, #D70A84, #51127F) border-box;
     border-radius: 10px;
     border: 4px solid transparent;
 }
+
 .saas-features .features-item:hover i {
     animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
@@ -1407,16 +1411,19 @@ button {
     display: inline-block;
 }
 
-.pricing-wrapper .ezprofile-pricing__wrap{
+.pricing-wrapper .ezprofile-pricing__wrap {
     margin: 0px 120px !important;
 }
+
 .saas-pricing .pricing-tabs .nav-tabs {
     justify-content: center;
     border: none;
 }
+
 .saas-pricing .pricing-item .title h2.price {
     color: #000000 !important;
 }
+
 .saas-pricing .pricing-tabs .nav-tabs .nav-link {
     font-size: 14px;
     font-weight: 500;
@@ -1662,9 +1669,11 @@ button {
     background: #1574F6;
     color: #fff;
 }
-.ezprofile-accordion .card .card-body p{
+
+.ezprofile-accordion .card .card-body p {
     color: #000000 !important;
 }
+
 /* user-form-section section */
 .user-form-section .user-form .title {
     margin-bottom: 20px;
@@ -1681,7 +1690,7 @@ button {
 .user-form-section .user-form form .form_group .form_control {
     padding: 0 20px;
     height: 50px;
-    border: 1px solid #1574F6;
+    border: 1px solid #c21975;
 }
 
 .user-form-section .user-form form .form_group p a {
@@ -2144,9 +2153,11 @@ ul.pagination li {
     margin-bottom: 0px;
     color: #000000 !important;
 }
-.contacts-section .contact-form{
+
+.contacts-section .contact-form {
     padding: 20px 30px;
 }
+
 .contacts-section .contact-form h2 {
     margin-bottom: 10px;
 }
@@ -2175,9 +2186,11 @@ ul.pagination li {
     height: 150px;
     display: inherit;
 }
-.contacts-section .contact-form form .form_group .main-btn{
+
+.contacts-section .contact-form form .form_group .main-btn {
     padding: 8px 50px;
 }
+
 /*===========================
     7. Footer css 
 ===========================*/
@@ -2369,6 +2382,7 @@ ul.pagination li {
     padding: 20px 30px;
     border-radius: 15px;
 }
+
 /*---------------------------
 ** Cookie alert css
 ---------------------------*/
@@ -3154,8 +3168,70 @@ ul#anetErrors {
 /* END: PRE, CODE style for summernote content */
 
 /* custom css start */
-.main-menu{
+.main-menu {
     text-align: right;
+}
+
+.login-page .breadcrumbs-section {
+    display: none;
+}
+
+.user-form-section .container-fluid {
+    padding: unset !important;
+}
+
+.login-form-preview {
+    background: radial-gradient(circle, hsla(324, 91%, 44%, 1) 0%, hsla(275, 75%, 28%, 1) 100%);
+    height: 100vh;
+}
+
+.login-page .user-form {
+    padding: 0px 100px;
+    margin: 0;
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+}
+
+.ezprofile_forgot-signup span,
+.ezprofile_forgot-password a {
+    color: #000000;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.user-form-section .user-form form .form_group .main-btn.login_button {
+    background: #0B0840;
+    width: 100%;
+    padding: 8px 30px;
+    border-radius: 5px;
+}
+
+.ezprofile_forgot-signup .btn-link {
+    font-weight: 500;
+    color: #0232b9;
+    text-decoration: none;
+}
+
+.user-form-section .user-form form .form_group .form_control {
+    padding: 0 20px;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #cd0a83 !important;
+    background-color: #ffffff !important;
+}
+
+.user-form-section .user-form form .form_group .form_control {
+    padding: 0 20px;
+    height: 50px;
+    border: 1px solid #cd0a83 !important;
+}
+.login-form-preview{
+    text-align: center;
+}
+.login-form-preview img{
+    width: 75%;
+    margin-top: 15%;
 }
 /* responsive css start */
 @media only screen and (max-width: 600px) {
@@ -3164,17 +3240,48 @@ ul#anetErrors {
         margin: 0px 0px !important;
     }
 
+    .header-navigation .nav-container {
+        padding: 0 0px;
+    }
+
+    .header-navigation {
+        padding: 20px 15px;
+    }
+
     /* footer css */
     .ektasi-footer .footer-widget {
         padding: 0px 0px;
     }
-    .copyright-wrap{
+
+    .copyright-wrap {
         display: block !important;
     }
-    .social-link{
+
+    .newsletter-widget,
+    .social-link {
         text-align: center;
     }
-    .copyright-wrap .legal-links{
+
+    .copyright-wrap .legal-links {
         display: none;
     }
-  }
+    .saas-footer .footer-widget .widget.about-widget p {
+        text-align: justify;
+    }
+    .ezp-footer-links{
+        width: 50%;
+    }
+
+    /* login page */
+    .login-form-preview {
+        display: none;
+    }
+
+    .login-page .user-form {
+        position: relative;
+        padding: 30px 15px;
+        margin: 0;
+        top: unset;
+        transform: unset;
+    }
+}

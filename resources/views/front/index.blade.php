@@ -14,9 +14,9 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="hero-content">
-                        <span class="span">
+                        {{-- <span class="span">
                             {{$be->hero_section_title}}
-                        </span>
+                        </span> --}}
                         {{-- <h1>{{$be->hero_section_text}}</h1> --}}
                         <h1 class="banner-title">Using EZ Profile grow your audience and get more clients</h1>
                         <p class="banner-description">Create a page to present who you are and what you do share in just one link.</p>

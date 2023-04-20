@@ -10,7 +10,7 @@
                         <p>{{$bs->footer_text}}</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="col-lg-3 col-md-6 col-sm-6 ezp-footer-links">
                     <div class="widget useful-link-widget">
                         <h4 class="widget-title">Our Services</h4>
 
@@ -26,7 +26,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="col-lg-3 col-md-6 col-sm-6 ezp-footer-links">
                     <div class="widget useful-link-widget">
                         <h4 class="widget-title">{{$bs->useful_links_title}}</h4>
 
@@ -73,19 +73,19 @@
                         @if($bs->copyright_section ==1)
                             {{-- <p class="copyright summernote-content">{!! replaceBaseUrl($bs->copyright_text) !!}</p> --}}
                         @endif
-                        © <?php echo date('Y'); ?> EKTASI Technology. All rights reserved.
+                        © <?php echo date('Y'); ?> <a href="http://ektasi.io/" target="_blank">EKTASI Technology</a>. All rights reserved.
                     </div>
                     <div class="legal-links">
                         <p class="copyright-right">
-                            <a href="http://ez-genie.com/privacy-policy" target="_blank">Privacy Policy</a>
+                            <a href="https://ezprofile.in/privacy-policy" target="_blank">Privacy Policy</a>
                             <span>|</span>
                         </p>
                         <p class="copyright-right">
-                            <a href="http://ez-genie.com/privacy-policy" target="_blank">Terms & Conditions</a>
+                            <a href="https://ezprofile.in/tearms-and-conditions" target="_blank">Terms & Conditions</a>
                             <span>|</span>
                         </p>
                         <p class="copyright-right">
-                            <a href="http://ez-genie.com/privacy-policy" target="_blank">Refund Policy</a>
+                            <a href="https://ezprofile.in/refund-policy" target="_blank">Refund Policy</a>
                         </p>
                     </div>
                 </div>                

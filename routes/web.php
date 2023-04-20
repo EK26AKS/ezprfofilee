@@ -33,6 +33,11 @@ Route::domain($domain)->group(function() {
         Route::get('/check/{username}/username', 'Front\FrontendController@checkUsername')->name('front.username.check');
         Route::get('/p/{slug}', 'Front\FrontendController@dynamicPage')->name('front.dynamicPage');
         Route::view('/success', 'front.success')->name('success.page');
+
+        // legal pages
+        Route::get('/privacy-policy', 'Front\FrontendController@privacy')->name('front.privacy-policy');
+        Route::get('/refund-policy', 'Front\FrontendController@refund')->name('front.refund-policy');
+        Route::get('/tearms-and-conditions', 'Front\FrontendController@tearmsAndCondtions')->name('front.tearms-and-conditions');
     });
 
     Route::group(['middleware' => ['web', 'guest', 'setlang']], function () {

@@ -41,7 +41,7 @@
     </style>
     @endif
 </head>
-<body>
+<body class="{{ Request::path() === 'login' ? 'login-page' : '' }}">
 
 @if ($bs->preloader_status == 1)
 <!--====== Start Preloader ======-->
@@ -71,6 +71,8 @@
             </div>
         </div>
     </section><!--====== End Breadcrumbs-section ======-->    
+
+
 @endif
 
 @yield('content')

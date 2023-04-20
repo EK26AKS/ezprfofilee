@@ -6,6 +6,7 @@
 @section('pagename')
     - {{__("Login")}}
 @endsection
+
 @section('breadcrumb-title')
     {{__("Login")}}
 @endsection
@@ -15,10 +16,15 @@
 
 @section('content')
     <!--====== Start user-form-section ======-->
-    <section class="user-form-section pt-120 pb-120">
-        <div class="container">
+    <section class="user-form-section">
+        <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-7">
+                    <div class="login-form-preview">
+                        <img src="{{asset('assets/front/img/login-page.png')}}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-5">
                     <div class="user-form">
                         <div class="title">
                             <h3>{{__('login')}}</h3>
@@ -57,15 +63,15 @@
                                 @endif
                             </div>
                             <div class="form_group d-sm-flex justify-content-between">
-                                <div>
+                                <div class="ezprofile_forgot-password">
                                     <a href="{{route('user.forgot.password.form')}}">{{__('Lost your password')}}?</a>
                                 </div>
-                                <div>
-                                    <span>{{__("Don't have an account?")}} <a class="btn-link" href="{{route('front.pricing')}}">{{__("Click Here")}}</a> {{__("to Signup")}}</span>
+                                <div class="ezprofile_forgot-signup">
+                                    <span>{{__("New to EZ Profile?")}} <a class="btn-link" href="{{route('front.pricing')}}">{{__("Get Started")}}</a></span>
                                 </div>
                             </div>
                             <div class="form_group">
-                                <button class="main-btn">{{__('LOG IN')}}</button>
+                                <button class="main-btn login_button">{{__('LOG IN')}}</button>
                             </div>
                         </form>
                     </div>
