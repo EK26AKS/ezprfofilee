@@ -9,24 +9,21 @@
 
 @section('content')
     <!--====== Start Saas-banner section ======-->
-    <section class="saas-banner">
-        <div class="shape">
-            <img data-src="{{asset('assets/front/img/shape-1.png')}}" class="img-fluid img-1 lazy" alt="">
-            <img data-src="{{asset('assets/front/img/shape-2.png')}}" class="img-fluid img-2 lazy" alt="">
-        </div>
-        <div class="container">
+    <section class="saas-banner" style="background-image: url('{{asset('assets/front/img/banner.png')}}');">
+        <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="hero-content">
                         <span class="span">
                             {{$be->hero_section_title}}
                         </span>
-                        <h1>{{$be->hero_section_text}}</h1>
+                        {{-- <h1>{{$be->hero_section_text}}</h1> --}}
+                        <h1 class="banner-title">Using EZ Profile grow your audience and get more clients</h1>
+                        <p class="banner-description">Create a page to present who you are and what you do share in just one link.</p>
                         <ul>
-
                             @if(!empty($be->hero_section_button_url))
                                 <li>
-                                    <a href="{{$be->hero_section_button_url}}" class="main-btn">{{$be->hero_section_button_text}}
+                                    <a href="{{$be->hero_section_button_url}}" class="main-btn banner_button">{{$be->hero_section_button_text}}
                                         <i class="fal fa-long-arrow-alt-right"></i>
                                     </a>
                                 </li>
@@ -89,7 +86,7 @@
             <div class="row">
                 @foreach($features as $feature)
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="features-item mb-40">
+                        <div class="features-item mb-40 features-box">
                             <i class="{{$feature->icon}}"></i>
                             <h4>{{$feature->title}}</h4>
                             <p>{{ $feature->text }}</p>
@@ -239,7 +236,7 @@
     <section class="saas-pricing pt-110 pb-120">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-6">
+                <div class="col-lg-6 ezprofile-tab_wrapper">
                     <div class="section-title-one text-center mb-50">
                         @if (!empty($bs->pricing_title))
                         <span class="span">{{$bs->pricing_title}}</span>
@@ -253,7 +250,7 @@
 
             @if (count($terms) > 1)
             <div class="row justify-content-center">
-                <div class="col-lg-4">
+                <div class="col-lg-4 ezprofile-tab_wrapper">
                     <div class="pricing-tabs text-center">
                         <ul class="nav nav-tabs">
                             @foreach ($terms as $term)
@@ -270,7 +267,7 @@
             <div class="pricing-wrapper tab-content">
                 @foreach ($terms as $term)
                 <div id="{{strtolower($term)}}" class="tab-pane {{$loop->first ? 'show active' : ''}} fade">
-                    <div class="row no-gutters ">
+                    <div class="row no-gutters ezprofile-pricing__wrap">
                         @php
                             $packages = \App\Models\Package::where('status', '1')->where('featured', '1')->where('term', strtolower($term))->get();
                         @endphp
@@ -278,7 +275,7 @@
                             @php
                                 $pFeatures = json_decode($package->features);
                             @endphp
-                            <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="pricing-item">
                                     <div class="title">
                                         <h3>{{$package->title}}</h3>
@@ -303,7 +300,7 @@
                                             class="main-btn">{{__('Signup')}}</a>
                                         @else
                                             <a href="{{route('front.register.view',['status' => 'regular','id'=> $package->id])}}"
-                                            class="main-btn">{{__('Purchase')}}</a>
+                                            class="main-btn">{{__('Buy Now')}}</a>
                                         @endif
                                     </div>
                                 </div>

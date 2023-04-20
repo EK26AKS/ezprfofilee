@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="faq-wrapper mb-40">
-                        <div class="accordion" id="accordionExample">
+                        <div class="accordion ezprofile-accordion" id="accordionExample">
                           @foreach($faqs as $key => $faq)
                               @if($key == 0)
                                     <div class="card">

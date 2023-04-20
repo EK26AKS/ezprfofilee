@@ -55,7 +55,8 @@
                 <div class="nav-push-item d-none d-xl-block">
                     @guest
                         <div class="navbar-btn">
-                            <a href="{{route('user.login')}}" class="main-btn"><i class="fal fa-sign-in-alt"></i>{{__('Login')}}</a>
+                            <a href="{{route('user.login')}}" class="main-btn login_button"><i class="fal fa-sign-in-alt"></i>{{__('Login')}}</a>
+                            <a href="{{route('front.pricing')}}" class="main-btn signup_button"><i class="fal fa-sign-in-alt"></i>{{__('Sign Up')}}</a>
                         </div>
                     @endguest
                     @auth
@@ -64,7 +65,7 @@
                         </div>
                     @endauth
                 </div>
-                <div class="nav-push-item language">
+                {{-- <div class="nav-push-item language">
                     <div class="navbar-btn">
                         @if(!empty($currentLang))
                             <select onchange="handleSelect(this)">
@@ -75,7 +76,7 @@
                             </select>
                         @endif
                     </div>
-                </div>
+                </div> --}}
     
                 <!-- Navbar Toggler -->
                 <div class="navbar-toggler">

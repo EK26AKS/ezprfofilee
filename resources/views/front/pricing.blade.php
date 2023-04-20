@@ -22,7 +22,7 @@
  
             @if (count($terms) > 1)
             <div class="row justify-content-center">
-                <div class="col-lg-4">
+                <div class="col-lg-4 ezprofile-tab_wrapper">
                     <div class="pricing-tabs text-center">
                         <ul class="nav nav-tabs">
                             @foreach ($terms as $term)
@@ -39,7 +39,7 @@
             <div class="pricing-wrapper tab-content">
                 @foreach ($terms as $term)
                 <div id="{{strtolower($term)}}" class="tab-pane {{$loop->first ? 'show active' : ''}} fade">
-                    <div class="row no-gutters ">
+                    <div class="row no-gutters ezprofile-pricing__wrap">
                         @php
                             $packages = \App\Models\Package::where('status', '1')->where('term', strtolower($term))->get();
                         @endphp
@@ -47,7 +47,7 @@
                             @php
                                 $pFeatures = json_decode($package->features);
                             @endphp
-                            <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="pricing-item">
                                     <div class="title">
                                         <h3>{{$package->title}}</h3>
@@ -71,7 +71,7 @@
                                             class="main-btn">{{__('Signup')}}</a>
                                         @else
                                             <a href="{{route('front.register.view',['status' => 'regular','id'=> $package->id])}}"
-                                            class="main-btn">{{__('Purchase')}}</a>
+                                            class="main-btn">{{__('Buy Now')}}</a>
                                         @endif
                                     </div>
                                 </div>
