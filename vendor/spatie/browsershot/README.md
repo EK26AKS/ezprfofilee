@@ -1,6 +1,3 @@
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
-
 <p align="center"><img src="/art/socialcard.png" alt="Social Card of Spatie's Browsershot"></p>
 
 # Convert a webpage to an image or pdf using headless Chrome
@@ -34,6 +31,12 @@ You can also use an arbitrary html input, simply replace the `url` method with `
 Browsershot::html('<h1>Hello world!!</h1>')->save('example.pdf');
 ```
 
+If your HTML input is already in a file locally use the :
+
+```php
+Browsershot::htmlFromFilePath('/local/path/to/file.html')->save('example.pdf');
+```
+
 Browsershot also can get the body of an html page after JavaScript has been executed:
 
 ```php
@@ -49,6 +52,12 @@ $requests = Browsershot::url('https://example.com')
 foreach ($requests as $request) {
     $url = $request['url']; //https://example.com/
 }
+```
+
+To use Chrome's new [headless mode](https://developers.google.com/web/updates/2017/04/headless-chrome) pass the `newHeadless` method:
+
+```php
+Browsershot::url('https://example.com')->newHeadless()->save($pathToImage);
 ```
 
 ## Support us

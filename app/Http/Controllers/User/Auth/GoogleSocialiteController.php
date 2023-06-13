@@ -12,22 +12,11 @@ use App\Models\User;
 
 class GoogleSocialiteController extends Controller
 {
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
     }
-       
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    
     public function handleCallback(Request $request)
     {
         if (Session::has('link')) {
@@ -38,39 +27,43 @@ class GoogleSocialiteController extends Controller
         }
 
         try {
-            
             $user = Socialite::driver('google')->user();
-            $findUser = User::where('social_id', $user->id)->first();
-         
-            // dd($findUser);
+            $findUser = $this->findOrCreateUser($user);
 
-            if ($findUser) {
+            Auth::login($findUser);
 
-                $data = Auth::login($findUser);
-
-                if ($findUser->status == 1) {
-                    return redirect('/user/dashboard')->with('success', trans('login Successfully'));
-                } else {
-                    Auth::logout();
-                    return redirect('/login')->with('error', trans('NOt Accesible'));
+            if (Auth::user()->email_verified == 0 || Auth::user()->status == 0) {
+                Auth::logout();
+                if (Auth::user()->email_verified == 0) {
+                    return back()->with('err', toastrMsg('Your email is not verified!'));
+                } elseif (Auth::user()->status == 0) {
+                    return back()->with('err', toastrMsg('Your account is disabled'));
                 }
-
-                return redirect('user/dashboard');
-
-            } else {
-                $newUser = User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'social_id' => $user->id,
-                    'social_type' => 'google',
-                    'password' => encrypt('my-google')
-                ]);
-
-                Auth::login($newUser);
-                return redirect( $redirectUrl);
             }
+
+            return redirect($redirectUrl);
         } catch (Exception $e) {
-            dd($e->getMessage());
+            // Handle the exception gracefully, show error message, and redirect back
+            return redirect()->route('login')->with('error', 'An error occurred during Google login.');
+        }
+    }
+
+
+    private function findOrCreateUser($googleUser)
+    {
+        $user = User::where('social_id', $googleUser->id)->first();
+        
+        if ($user) {
+            return $user;
+        } else {
+            return User::create([
+                'name' => $googleUser->name,
+                'email' => $googleUser->email,
+                'social_id' => $googleUser->id,
+                'social_type' => 'google',
+                'status' => 1,
+                'email_verified' => 1,
+            ]);
         }
     }
 }
