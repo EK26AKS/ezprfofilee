@@ -50,7 +50,7 @@ class UlinkController extends Controller
         $ulink->url = $request->url;
         $ulink->save();
 
-        Session::flash('success', 'Useful link added successfully!');
+        Session::flash('success', __('Useful link added successfully!'));
         return "success";
     }
 
@@ -72,7 +72,7 @@ class UlinkController extends Controller
         $ulink->url = $request->url;
         $ulink->save();
 
-        Session::flash('success', 'Useful link updated successfully!');
+        Session::flash('success', __('Useful link updated successfully!'));
         return "success";
     }
 
@@ -82,7 +82,7 @@ class UlinkController extends Controller
         $ulink = Ulink::findOrFail($request->ulink_id);
         $ulink->delete();
 
-        Session::flash('success', 'Ulink deleted successfully!');
+        Session::flash('success', __('Ulink deleted successfully!'));
         return back();
     }
 }

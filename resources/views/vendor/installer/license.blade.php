@@ -20,12 +20,12 @@
                     <button type="button" class="close" id="close_alert" data-dismiss="alert" aria-hidden="true">
                         <i class="fa fa-close" aria-hidden="true"></i>
                     </button>
-                    <p style="margin-bottom: 0px;">{{session()->get('license_error')}}</p>
+                    <p class="mrb-0">{{session()->get('license_error')}}</p>
                 </div>
             @endif
 
-            <div class="alert alert-warning" style="background-color: #fff3cd; color: #856404;">
-                <p style="margin-bottom: 0px; color: orange;">Make sure your internet connection is ON</p>
+            <div class="alert alert-warning">
+                <p class="mrb-0">If your internet connection is off, then please turn it on first</p>
             </div>
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="buttons">
-                    <button class="button" type="submit" style="font-size: 14px;">
+                    <button class="button verify-btn" type="submit">
                         Verify
                         <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
                     </button>

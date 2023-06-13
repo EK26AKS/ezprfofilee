@@ -17,14 +17,6 @@
 	<p><strong><small>{{ trans('installer_messages.final.log') }}</small></strong></p>
 	<pre><code>{{ $finalStatusMessage }}</code></pre>
 
-
-    <blockquote>
-        <p><strong>Admin Panel Information</strong></p>
-        <strong>URL: </strong>{your_website_url}/admin <br>
-        <strong>Username: </strong>admin <br>
-        <strong>Password: </strong>admin
-    </blockquote>
-
 	<p><strong><small>{{ trans('installer_messages.final.env') }}</small></strong></p>
 	<pre><code>{{ $finalEnvFile }}</code></pre>
 

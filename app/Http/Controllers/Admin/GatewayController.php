@@ -41,7 +41,7 @@ class GatewayController extends Controller
 
         $paypal->save();
 
-        $request->session()->flash('success', "Paypal informations updated successfully!");
+        $request->session()->flash('success', __("Updated successfully!"));
 
         return back();
     }
@@ -59,7 +59,7 @@ class GatewayController extends Controller
 
         $stripe->save();
 
-        $request->session()->flash('success', "Stripe informations updated successfully!");
+        $request->session()->flash('success', __("Updated successfully!"));
 
         return back();
     }
@@ -77,7 +77,7 @@ class GatewayController extends Controller
 
         $paystack->save();
 
-        $request->session()->flash('success', "Paystack informations updated successfully!");
+        $request->session()->flash('success', __("Updated successfully!"));
 
         return back();
     }
@@ -99,7 +99,7 @@ class GatewayController extends Controller
         $paytm->save();
 
 
-        $request->session()->flash('success', "Paytm informations updated successfully!");
+        $request->session()->flash('success', __("Updated successfully!"));
 
         return back();
     }
@@ -117,7 +117,7 @@ class GatewayController extends Controller
 
         $flutterwave->save();
 
-        $request->session()->flash('success', "Flutterwave informations updated successfully!");
+        $request->session()->flash('success', __("Updated successfully!"));
 
         return back();
     }
@@ -125,148 +125,109 @@ class GatewayController extends Controller
     public function instamojoUpdate(Request $request) {
         $instamojo = PaymentGateway::find(13);
         $instamojo->status = $request->status;
-
         $information = [];
         $information['key'] = $request->key;
         $information['token'] = $request->token;
         $information['sandbox_check'] = $request->sandbox_check;
         $information['text'] = "Pay via your Instamojo account.";
-
         $instamojo->information = json_encode($information);
-
         $instamojo->save();
-
-        $request->session()->flash('success', "Instamojo informations updated successfully!");
-
+        $request->session()->flash('success', __("Updated successfully!"));
         return back();
     }
 
     public function mollieUpdate(Request $request) {
         $mollie = PaymentGateway::find(17);
         $mollie->status = $request->status;
-
         $information = [];
         $information['key'] = $request->key;
         $information['text'] = "Pay via your Mollie Payment account.";
-
         $mollie->information = json_encode($information);
-
         $mollie->save();
-
         $arr = ['MOLLIE_KEY' => $request->key];
         setEnvironmentValue($arr);
         \Artisan::call('config:clear');
-
-        $request->session()->flash('success', "Mollie Payment informations updated successfully!");
-
+        $request->session()->flash('success', __("Updated successfully!"));
         return back();
     }
 
     public function razorpayUpdate(Request $request) {
         $razorpay = PaymentGateway::find(9);
         $razorpay->status = $request->status;
-
         $information = [];
         $information['key'] = $request->key;
         $information['secret'] = $request->secret;
         $information['text'] = "Pay via your Razorpay account.";
-
         $razorpay->information = json_encode($information);
-
         $razorpay->save();
-
-        $request->session()->flash('success', "Razorpay informations updated successfully!");
-
+        $request->session()->flash('success', __("Updated successfully!"));
         return back();
     }
 
     public function anetUpdate(Request $request) {
         $anet = PaymentGateway::find(20);
         $anet->status = $request->status;
-
         $information = [];
         $information['login_id'] = $request->login_id;
         $information['transaction_key'] = $request->transaction_key;
         $information['public_key'] = $request->public_key;
         $information['sandbox_check'] = $request->sandbox_check;
         $information['text'] = "Pay via your Authorize.net account.";
-
         $anet->information = json_encode($information);
-
         $anet->save();
-
-        $request->session()->flash('success', "Authorize.net informations updated successfully!");
-
+        $request->session()->flash('success', __("Updated successfully!"));
         return back();
     }
 
     public function mercadopagoUpdate(Request $request) {
         $mercadopago = PaymentGateway::find(19);
         $mercadopago->status = $request->status;
-
         $information = [];
         $information['token'] = $request->token;
         $information['sandbox_check'] = $request->sandbox_check;
         $information['text'] = "Pay via your Mercado Pago account.";
-
         $mercadopago->information = json_encode($information);
-
         $mercadopago->save();
-
-        $request->session()->flash('success', "Mercado Pago informations updated successfully!");
-
+        $request->session()->flash('success', __("Updated successfully!"));
         return back();
-
     }
 
     public function offline(Request $request) {
         $data['ogateways'] = OfflineGateway::orderBy('id', 'DESC')->get();
-
         return view('admin.gateways.offline.index', $data);
     }
-
     public function store(Request $request) {
-
         $rules = [
             'name' => 'required|max:100',
             'short_description' => 'nullable',
             'serial_number' => 'required|integer',
             'is_receipt' => 'required',
         ];
-
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             $errmsgs = $validator->getMessageBag()->add('error', 'true');
             return response()->json($validator->errors());
         }
-
         $in = $request->all();
-
         OfflineGateway::create($in);
-
-        Session::flash('success', 'Gateway added successfully!');
+        Session::flash('success', __('Store successfully!'));
         return "success";
     }
 
     public function update(Request $request) {
-
         $rules = [
             'name' => 'required|max:100',
             'short_description' => 'nullable',
             'serial_number' => 'required|integer',
         ];
-
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             $validator->getMessageBag()->add('error', 'true');
             return response()->json($validator->errors());
         }
-
         $in = $request->except('_token', 'ogateway_id');
-
         OfflineGateway::where('id', $request->ogateway_id)->update($in);
-
-        Session::flash('success', 'Gateway updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return "success";
     }
 
@@ -275,8 +236,7 @@ class GatewayController extends Controller
         $og = OfflineGateway::find($request->ogateway_id);
         $og->status = $request->status;
         $og->save();
-
-        Session::flash('success', 'Gateway status changed successfully!');
+        Session::flash('success', __('Gateway status changed successfully!'));
         return back();
     }
 
@@ -284,8 +244,7 @@ class GatewayController extends Controller
     {
         $ogateway = OfflineGateway::findOrFail($request->ogateway_id);
         $ogateway->delete();
-
-        Session::flash('success', 'Gateway deleted successfully!');
+        Session::flash('success', __('Gateway deleted successfully!'));
         return back();
     }
 

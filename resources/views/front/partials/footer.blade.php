@@ -18,11 +18,11 @@
                             $ulinks = App\Models\Ulink::where('language_id',$currentLang->id)->orderby('id','desc')->get();
                         @endphp
                         <ul class="widget-link">
-                            <li><a href="https://ezprofile.in/">EZ Profile</a></li>
-                            <li><a href="https://ezstore.in/">EZ Store</a></li>
-                            <li><a href="https://ezsocial.in/">EZ Social</a></li>
-                            <li><a href="#">EZ WordPress</a></li>
-                            <li><a href="http://ez-genie.com/">EZ Genie</a></li>
+                            <li><a href="https://ezprofile.in/" target="_blank">EZ Profile</a></li>
+                            <li><a href="https://ezstore.in/" target="_blank">EZ Store</a></li>
+                            <li><a href="https://ezsocial.in/" target="_blank">EZ Social</a></li>
+                            <li><a href="https://ezwordpress.in/" target="_blank">EZ WordPress</a></li>
+                            <li><a href="http://ez-genie.com/" target="_blank">EZ Genie</a></li>
                         </ul>
                     </div>
                 </div>

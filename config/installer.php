@@ -13,7 +13,7 @@ return [
     |
     */
     'core' => [
-        'minPhpVersion' => '8.0.2',
+        'minPhpVersion' => '7.2.0',
     ],
     'final' => [
         'key' => true,
@@ -31,9 +31,7 @@ return [
             'tokenizer',
             'JSON',
             'cURL',
-            'XML',
-            'imagick',
-            'GMP'
+            'XML'
         ],
     ],
 
@@ -49,7 +47,10 @@ return [
     'permissions' => [
         'storage/framework/'     => '775',
         'storage/logs/'          => '775',
-        'bootstrap/cache/'       => '775'
+        'bootstrap/cache/'       => '775',
+        '../assets/admin/img/'    => '775',
+        '../assets/front/img/'    => '775',
+        '../assets/front/invoices/'    => '775'
     ],
 
     /*

@@ -9,7 +9,8 @@
 	<link rel="icon" href="{{!empty($userBs->favicon) ? asset('assets/front/img/user/'.$userBs->favicon) : ''}}">
 	@includeif('user.partials.styles')
     @php
-        $selLang = App\Models\Language::where('code', request()->input('language'))->first();
+         $selLang = App\Models\User\Language::where('code', request()->input('language'))->where('user_id',Auth::guard('web')->user()->id)->first();
+         $currentLang = App\Models\User\Language::where('code',Session::get('currentLangCode'))->where('user_id',Auth::guard('web')->user()->id)->first();
     @endphp
     @if (!empty($selLang) && $selLang->rtl == 1)
     <style>
@@ -25,9 +26,26 @@
     </style>
     @endif
 
-    @yield('styles')
+    @if (!empty($selLang) && $selLang->rtl == 1 )
+    <!--====== RTL Style css ======-->
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/admin-rtl.css') }}">
+    @endif
+
+     @if($currentLang->code !== 'ar')
+       <style>
+        .navbar-expand-lg .navbar-nav .dropdown-menu {
+            left: auto;
+            right: 0;
+        }
+    </style>
+     @endif
+
+    @if($currentLang->rtl == 1 && $selLang == null)
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/admin-rtl.css') }}">
+    @endif
 
 </head>
+
 <body @if(request()->cookie('user-theme') == 'dark') data-background-color="dark" @endif>
 	<div class="wrapper">
 
@@ -51,6 +69,28 @@
 		</div>
 
 	</div>
+
+      @php
+    $user = Auth::guard('web')->user();
+     $holidays = App\Models\User\UserHoliday::where('user_id', $user->id)
+            ->pluck('date')
+            ->toArray();
+        $dats = [];
+        foreach ($holidays as $value) {
+            $dats[] = Carbon\Carbon::parse($value)->format('Y-m-d');
+        }
+        $holidays = $dats;
+        $weekends = App\Models\User\UserDay::where('user_id', $user->id)
+            ->where('weekend', 1)
+            ->pluck('index')
+            ->toArray();
+    @endphp
+
+     <script>
+        var $holidays = '<?php echo json_encode($holidays); ?>'
+        var $weekends = '<?php echo json_encode($weekends); ?>'
+    
+    </script>
 
 	@includeif('user.partials.scripts')
 

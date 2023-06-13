@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Payment;
 
-require_once("app/Http/Helpers/Twocheckout/Twocheckout.php");
+require_once("core/app/Http/Helpers/Twocheckout/Twocheckout.php");
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Twocheckout;

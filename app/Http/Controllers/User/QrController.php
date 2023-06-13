@@ -12,18 +12,20 @@ use Image;
 
 class QrController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $data['qrcodes'] = UserQrCode::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
         return view('user.qr.index', $data);
     }
 
-    public function qrCode() {
+    public function qrCode()
+    {
         $bs = BasicSetting::firstOrCreate([
             'user_id' => Auth::user()->id
         ]);
 
         if (empty($bs->qr_image) || !file_exists(public_path('assets/front/img/user/qr/' . $bs->qr_image))) {
-        	$directory = public_path('assets/front/img/user/qr/');
+            $directory = public_path('assets/front/img/user/qr/');
             @mkdir($directory, 0775, true);
             $fileName = uniqid() . '.png';
 
@@ -38,7 +40,6 @@ class QrController extends Controller
             $bs->qr_image = $fileName;
             $bs->qr_url = url(Auth::user()->username);
             $bs->save();
-
         }
 
         $data['abs'] = $bs;
@@ -189,9 +190,10 @@ class QrController extends Controller
         $bs->save();
 
         return asset('assets/front/img/user/qr/' . $qrImage);
-    }   
-    
-    public function save(Request $request) {
+    }
+
+    public function save(Request $request)
+    {
         $rules = [
             'name' => 'required|max:255'
         ];
@@ -209,19 +211,21 @@ class QrController extends Controller
 
         $this->clearFilters($bs);
 
-        Session::flash('success', 'QR Code saved successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return back();
     }
 
-    public function clear() {
+    public function clear()
+    {
         $bs = BasicSetting::where('user_id', Auth::user()->id)->first();
         $this->clearFilters($bs, 'clear');
 
-        Session::flash('success', 'Cleared all filters');
+        Session::flash('success', toastrMsg('Cleared_all_filters'));
         return back();
     }
 
-    public function clearFilters($bs, $type = NULL) {
+    public function clearFilters($bs, $type = NULL)
+    {
         @unlink(public_path('assets/front/img/user/qr/' . $bs->qr_inserted_image));
         if ($type == 'clear') {
             @unlink(public_path('assets/front/img/user/qr/' . $bs->qr_image));
@@ -247,12 +251,13 @@ class QrController extends Controller
         $bs->save();
     }
 
-    public function delete(Request $request) {
+    public function delete(Request $request)
+    {
         $qrcode = UserQrCode::where('user_id', Auth::user()->id)->where('id', $request->qrcode_id)->firstOrFail();
         @unlink(public_path('assets/front/img/user/qr/' . $qrcode->image));
         $qrcode->delete();
 
-        Session::flash('success', 'QR Code deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
     public function bulkDelete(Request $request)
@@ -263,7 +268,7 @@ class QrController extends Controller
             @unlink(public_path('assets/front/img/user/qr/' . $qrcode->image));
             $qrcode->delete();
         }
-        Session::flash('success', 'QR Codes deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 }

@@ -55,7 +55,7 @@ class FeatureController extends Controller
         $feature->serial_number = $request->serial_number;
         $feature->save();
 
-        Session::flash('success', 'Feature added successfully!');
+        Session::flash('success', __('Store successfully!'));
         return "success";
     }
 
@@ -77,7 +77,7 @@ class FeatureController extends Controller
         $feature->serial_number = $request->serial_number;
         $feature->save();
 
-        Session::flash('success', 'Feature updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 
@@ -87,7 +87,7 @@ class FeatureController extends Controller
         $feature = Feature::findOrFail($request->feature_id);
         $feature->delete();
 
-        Session::flash('success', 'Feature deleted successfully!');
+        Session::flash('success', __('Deleted successfully!'));
         return back();
     }
 }

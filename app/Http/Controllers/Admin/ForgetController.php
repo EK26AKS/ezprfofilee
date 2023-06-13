@@ -96,7 +96,7 @@ class ForgetController extends Controller
             }
         }
 
-        Session::flash('success', 'New password & current username sent successfully via mail');
+        Session::flash('success', __('New password & current username sent successfully via mail'));
         return back();
     }
 }

@@ -56,7 +56,7 @@ class BcategoryController extends Controller
         $bcategory->serial_number = $request->serial_number;
         $bcategory->save();
 
-        Session::flash('success', 'Blog category added successfully!');
+        Session::flash('success', __('Store successfully!'));
         return "success";
     }
 
@@ -80,7 +80,7 @@ class BcategoryController extends Controller
         $bcategory->serial_number = $request->serial_number;
         $bcategory->save();
 
-        Session::flash('success', 'Blog category updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return "success";
     }
 
@@ -93,7 +93,7 @@ class BcategoryController extends Controller
         }
         $bcategory->delete();
 
-        Session::flash('success', 'Blog category deleted successfully!');
+        Session::flash('success', __('Deleted successfully!'));
         return back();
     }
 
@@ -114,7 +114,7 @@ class BcategoryController extends Controller
             $bcategory->delete();
         }
 
-        Session::flash('success', 'Blog categories deleted successfully!');
+        Session::flash('success', __('Bulk deleted successfully!'));
         return "success";
     }
 }

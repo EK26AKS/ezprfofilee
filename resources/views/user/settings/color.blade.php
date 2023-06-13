@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-header">
-        <h4 class="page-title">Color Settings</h4>
+        <h4 class="page-title">{{ $keywords['Color_Settings'] ?? __('Color Settings') }}</h4>
         <ul class="breadcrumbs">
             <li class="nav-home">
                 <a href="{{route('user-dashboard')}}">
@@ -13,13 +13,13 @@
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a href="#">User</a>
+                <a href="#">{{ $keywords['Basic_Settings'] ?? __('Basic Settings') }}</a>
             </li>
             <li class="separator">
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a href="#">Color Settings</a>
+                <a href="#">{{ $keywords['Color_Settings'] ?? __('Color Settings') }}</a>
             </li>
         </ul>
     </div>
@@ -28,7 +28,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title d-inline-block">Color Settings</div>
+                    <div class="card-title d-inline-block">{{ $keywords['Color_Settings'] ?? __('Color Settings') }}</div>
                 </div>
                 <div class="card-body">
                     <div class="row justify-content-center">
@@ -38,9 +38,9 @@
                                 {{csrf_field()}}
                                 <div class="form-group">
                                     <label for="">
-                                        Base Color
+                                        {{ $keywords['Base_Color'] ?? __('Base Color') }}
                                         @if ($userBs->theme == 3 || $userBs->theme == 5)
-                                            (Primary)
+                                            ({{ $keywords['Primary'] ?? __('Primary') }})
                                         @endif
                                     </label>
                                     <input type="text" class="form-control jscolor" name="base_color" value="{{$data->base_color}}">
@@ -49,7 +49,7 @@
                                 @if ($userBs->theme == 3 || $userBs->theme == 5)
                                     <div class="form-group">
                                         <label for="">
-                                            Base Color (Secondary)
+                                            {{ $keywords['Base_Color'] ?? __('Base Color') }}  ({{ $keywords['Secondary'] ?? __('Secondary') }})
                                         </label>
                                         <input type="text" class="form-control jscolor" name="secondary_base_color" value="{{$data->secondary_base_color}}">
                                     </div>
@@ -62,7 +62,7 @@
                     <div class="form">
                         <div class="form-group from-show-notify row">
                             <div class="col-12 text-center">
-                                <button type="submit" id="permissionBtn" class="btn btn-success">Update</button>
+                                <button type="submit" id="permissionBtn" class="btn btn-success">{{ $keywords['Update'] ?? __('Update') }}</button>
                             </div>
                         </div>
                     </div>

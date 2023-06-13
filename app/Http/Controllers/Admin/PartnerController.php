@@ -94,7 +94,7 @@ class PartnerController extends Controller
         $partner->serial_number = $request->serial_number;
         $partner->save();
 
-        Session::flash('success', 'Partner added successfully!');
+        Session::flash('success', __('Store successfully!'));
         return "success";
     }
 
@@ -158,7 +158,7 @@ class PartnerController extends Controller
         $partner->serial_number = $request->serial_number;
         $partner->save();
 
-        Session::flash('success', 'Partner updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return "success";
     }
 
@@ -169,7 +169,7 @@ class PartnerController extends Controller
         @unlink(public_path('assets/front/img/partners/' . $partner->image));
         $partner->delete();
 
-        Session::flash('success', 'Partner deleted successfully!');
+        Session::flash('success', __('Deleted successfully!'));
         return back();
     }
 }

@@ -155,7 +155,6 @@ class PaypalController extends Controller
                     'type' => 'registrationWithPremiumPackage'
                 ];
                 $mailer->mailFromAdmin($data);
-
                 session()->flash('success', __('successful_payment'));
                 Session::forget('request');
                 Session::forget('paymentFor');
@@ -166,15 +165,10 @@ class PaypalController extends Controller
                 $password = uniqid('qrcode');
                 $checkout = new UserCheckoutController();
                 $user = $checkout->store($requestData, $transaction_id, $transaction_details, $amount,$be,$password);
-
-
-                
-
                 $lastMemb = $user->memberships()->orderBy('id', 'DESC')->first();
                 $activation = Carbon::parse($lastMemb->start_date);
                 $expire = Carbon::parse($lastMemb->expire_date);
                 $file_name = $this->makeInvoice($requestData,"extend",$user,$password,$amount,$requestData["payment_method"],$user->phone_number,$be->base_currency_symbol_position,$be->base_currency_symbol,$be->base_currency_text,$transaction_id,$package->title);
-
                 $mailer = new MegaMailer();
                 $data = [
                     'toMail' => $user->email,
@@ -190,8 +184,6 @@ class PaypalController extends Controller
                     'type' => 'membershipExtend'
                 ];
                 $mailer->mailFromAdmin($data);
-
-
                 session()->flash('success', __('successful_payment'));
                 Session::forget('request');
                 Session::forget('paymentFor');

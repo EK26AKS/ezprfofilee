@@ -38,7 +38,7 @@ class PushController extends Controller
             $request->file('file')->move(public_path('assets/front/img/'), 'pushnotification_icon.png');
         }
 
-        session()->flash('success', 'Push Notification icon updated!');
+        session()->flash('success', __('Push Notification icon updated!'));
         return back();
     }
 
@@ -60,7 +60,7 @@ class PushController extends Controller
 
         Notification::send(Guest::all(),new PushDemo($title, $message, $buttonText, $buttonURL));
 
-        $request->session()->flash('success', 'Push notification sent');
+        $request->session()->flash('success', __('Push notification sent'));
         return redirect()->route('admin.pushnotification.send');
     }
 }

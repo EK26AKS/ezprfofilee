@@ -11,17 +11,24 @@ use Validator;
 
 class CvController extends Controller
 {
-    public function cv() {
+    public function cv()
+    {
         $data['cvs'] = UserCv::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
         return view('user.cv.index', $data);
     }
 
-    public function edit($id) {
-        $data['cv'] = UserCv::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
+    public function edit(UserCv $cv)
+    {
+        if ($cv->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', 'Authorization Failed');
+            return back();
+        }
+        $data['cv'] = $cv;
         return view('user.cv.edit', $data);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
 
         $image = $request->file('image');
         $allowedExts = array('jpg', 'png', 'jpeg');
@@ -71,11 +78,12 @@ class CvController extends Controller
 
         $cv->save();
 
-        $request->session()->flash('success', 'CV added successfully');
+        $request->session()->flash('success', toastrMsg('Store_successfully!'));
         return 'success';
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $image = $request->file('image');
         $allowedExts = array('jpg', 'png', 'jpeg');
 
@@ -125,7 +133,7 @@ class CvController extends Controller
 
         $cv->save();
 
-        $request->session()->flash('success', 'CV updated successfully');
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
         return 'success';
     }
 
@@ -146,7 +154,7 @@ class CvController extends Controller
             $cv->user_cv_sections()->delete();
         }
         $cv->delete();
-        Session::flash('success', 'CV deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
@@ -161,22 +169,30 @@ class CvController extends Controller
             }
             $cv->delete();
         }
-        Session::flash('success', 'CVs deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 
-    public function info($id) {
-        $data['cv'] = UserCv::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
+    public function info(UserCv $cv)
+    {
+
+        if ($cv->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', 'Authorization_Failed');
+            return back();
+        }
+        $data['cv'] = $cv;
         return view('user.cv.info', $data);
     }
 
-    public function getinfos($id) {
+    public function getinfos($id)
+    {
         $cv = UserCv::find($id);
         $information = json_decode($cv->cv_information, true);
         return response()->json($information);
     }
 
-    public function updateInfo(Request $request) {
+    public function updateInfo(Request $request)
+    {
 
         $rules = [
             'icons.*' => 'required',
@@ -220,11 +236,12 @@ class CvController extends Controller
 
         $cv->save();
 
-        $request->session()->flash('success', 'CV updated successfully');
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
         return 'success';
     }
 
-    public function updateContactTitle(Request $request) {
+    public function updateContactTitle(Request $request)
+    {
         $rules = [
             'contact_title' => 'required'
         ];
@@ -239,7 +256,7 @@ class CvController extends Controller
         $cv->contact_title = clean($request->contact_title);
         $cv->save();
 
-        $request->session()->flash('success', 'Contact title updated');
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 }

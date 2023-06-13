@@ -12,15 +12,20 @@ use Validator;
 
 class CvSectionController extends Controller
 {
-    public function index($id) {
-        $cv = UserCv::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
-        $sections = UserCvSection::where('user_cv_id', $id)->orderBy('order', 'ASC')->get();
+    public function index(UserCv $cv)
+    {
+        if ($cv->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', 'Authorization Failed');
+            return back();
+        }
+        $sections = UserCvSection::where('user_cv_id', $cv->id)->orderBy('order', 'ASC')->get();
         $data['sections'] = $sections;
-        $data['cv'] = UserCv::find($id);
+        $data['cv'] = $cv;
         return view('user.cv.sections', $data);
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $data['section'] = UserCvSection::findOrFail($id);
         if ($data['section']->user_cv->user_id != Auth::user()->id) {
             return view('errors.404');
@@ -28,7 +33,8 @@ class CvSectionController extends Controller
         return view('user.cv.section-edit', $data);
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $cv = UserCv::find($request->cv_id);
 
         $rules = [
@@ -62,11 +68,12 @@ class CvSectionController extends Controller
         $section->order = $maxOrder + 1;
         $section->save();
 
-        $request->session()->flash('success', 'New Section added in CV');
+        $request->session()->flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $rules = [
             'icon' => 'required',
             'name' => 'required|max:255'
@@ -95,12 +102,13 @@ class CvSectionController extends Controller
         }
         $section->save();
 
-        $request->session()->flash('success', 'Section updated in CV');
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
 
-    public function orderUpdate(Request $request) {
+    public function orderUpdate(Request $request)
+    {
         $ids = $request->ids;
         $orders = $request->orders;
 
@@ -116,7 +124,8 @@ class CvSectionController extends Controller
         }
     }
 
-    public function content($id) {
+    public function content($id)
+    {
         $data['section'] = UserCvSection::findOrFail($id);
         if ($data['section']->user_cv->user_id != Auth::user()->id) {
             return view('errors.404');
@@ -124,13 +133,15 @@ class CvSectionController extends Controller
         return view('user.cv.section-content', $data);
     }
 
-    public function getcontents($id) {
+    public function getcontents($id)
+    {
         $section = UserCvSection::find($id);
         $content = json_decode($section->content, true);
         return response()->json($content);
     }
 
-    public function updateContent(Request $request) {
+    public function updateContent(Request $request)
+    {
 
         $rules = [
             'left_borders.*' => 'required',
@@ -176,7 +187,7 @@ class CvSectionController extends Controller
 
         $section->save();
 
-        $request->session()->flash('success', 'Content updated successfully');
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
         return 'success';
     }
 
@@ -193,7 +204,7 @@ class CvSectionController extends Controller
             return back();
         }
         $section->delete();
-        Session::flash('success', 'Section deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 }

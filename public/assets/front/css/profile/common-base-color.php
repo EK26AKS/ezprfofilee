@@ -32,3 +32,7 @@ else {
 .breadcrumbs-section {
     background: <?php echo $color; ?>08;
 }
+.profile-card .profile-link ul li a.active,
+.profile-card .profile-link ul li a:hover {
+    background-color: <?php echo $color; ?> !important;
+}

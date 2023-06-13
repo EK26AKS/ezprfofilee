@@ -24,4 +24,6 @@ class UserVcard extends Model
     public function user_vcard_testimonials() {
         return $this->hasMany('App\Models\User\UserVcardTestimonial');
     }
+
+  
 }

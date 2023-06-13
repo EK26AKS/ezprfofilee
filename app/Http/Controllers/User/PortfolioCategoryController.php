@@ -88,7 +88,7 @@ class PortfolioCategoryController extends Controller
         $bcategory->serial_number = $request->serial_number;
         $bcategory->save();
 
-        Session::flash('success', 'Portfolio category added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -150,7 +150,7 @@ class PortfolioCategoryController extends Controller
         $bcategory->serial_number = $request->serial_number;
         $bcategory->save();
 
-        Session::flash('success', 'Portfolio category updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -168,11 +168,11 @@ class PortfolioCategoryController extends Controller
     public function delete(Request $request){
         $bcategory = PortfolioCategory::where('user_id', Auth::user()->id)->where('id', $request->bcategory_id)->firstOrFail();
         if ($bcategory->portfolios()->count() > 0) {
-            Session::flash('warning', 'First, delete all the portfolios under this category!');
+            Session::flash('warning', 'First,_delete_all_the_portfolios_under_this_category!');
             return back();
         }
         $bcategory->delete();
-        Session::flash('success', 'Portfolio category deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
@@ -183,7 +183,7 @@ class PortfolioCategoryController extends Controller
         foreach ($ids as $id) {
             $bcategory = PortfolioCategory::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
             if ($bcategory->portfolios()->count() > 0) {
-                Session::flash('warning', 'First, delete all the portfolios under the selected categories!');
+                Session::flash('warning', 'First,_delete_all_the_portfolios_under_the_selected_categories!');
                 return "success";
             }
         }
@@ -193,7 +193,7 @@ class PortfolioCategoryController extends Controller
             $bcategory->delete();
         }
 
-        Session::flash('success', 'Portfolio categories deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 }

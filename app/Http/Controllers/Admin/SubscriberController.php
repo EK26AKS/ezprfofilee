@@ -85,7 +85,7 @@ class SubscriberController extends Controller
 
         $mail->send();
 
-      Session::flash('success', 'Mail sent successfully!');
+      Session::flash('success', __('Mail sent successfully!'));
       return back();
     }
 
@@ -96,7 +96,7 @@ class SubscriberController extends Controller
         $subscriber = Subscriber::findOrFail($request->subscriber_id);
         $subscriber->delete();
 
-        Session::flash('success', 'Subscriber deleted successfully!');
+        Session::flash('success', __('Subscriber deleted successfully!'));
         return back();
     }
 
@@ -109,7 +109,7 @@ class SubscriberController extends Controller
             $subscriber->delete();
         }
 
-        Session::flash('success', 'Subscribers deleted successfully!');
+        Session::flash('success', __('Subscribers deleted successfully!'));
         return "success";
     }
 }

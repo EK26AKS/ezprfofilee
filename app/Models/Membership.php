@@ -10,6 +10,9 @@ class Membership extends Model
     public $table = "memberships";
 
     protected $fillable = [
+        'package_price',
+        'discount',
+        'coupon_code',
         'price',
         'currency',
         'currency_symbol',

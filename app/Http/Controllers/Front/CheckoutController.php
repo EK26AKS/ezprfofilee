@@ -2,36 +2,54 @@
 
 namespace App\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\Payment\AuthorizenetController;
-use App\Http\Controllers\Payment\FlutterWaveController;
-use App\Http\Controllers\Payment\InstamojoController;
-use App\Http\Controllers\Payment\MercadopagoController;
-use App\Http\Controllers\Payment\MollieController;
-use App\Http\Controllers\Payment\PaypalController;
-use App\Http\Controllers\Payment\PaystackController;
-use App\Http\Controllers\Payment\PaytmController;
-use App\Http\Controllers\Payment\RazorpayController;
-use App\Http\Controllers\Payment\StripeController;
-use App\Http\Helpers\MegaMailer;
-use App\Http\Helpers\UserPermissionHelper;
-use App\Http\Requests\Checkout\CheckoutRequest;
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Coupon;
+use App\Models\Package;
 use App\Models\Language;
 use App\Models\Membership;
-use App\Models\OfflineGateway;
-use App\Models\Package;
-use App\Models\User;
-use App\Models\User\BasicSetting;
-use App\Models\User\UserPermission;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\OfflineGateway;
+use App\Http\Helpers\MegaMailer;
+use App\Models\User\BasicSetting;
+use App\Models\User\HomePageText;
+use App\Models\User\UserDay as Day;
+use App\Models\User\UserPermission;
+use App\Http\Controllers\Controller;
+use App\Models\User\UserEmailTemplate;
+use App\Models\User\UserPaymentGateway;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Helpers\UserPermissionHelper;
+use App\Http\Requests\Checkout\CheckoutRequest;
+use App\Http\Controllers\Payment\PaytmController;
+use App\Http\Controllers\Payment\MollieController;
+use App\Http\Controllers\Payment\PaypalController;
+use App\Http\Controllers\Payment\StripeController;
+use App\Http\Controllers\Payment\PaystackController;
+use App\Http\Controllers\Payment\RazorpayController;
+use App\Http\Controllers\Payment\InstamojoController;
+use App\Http\Controllers\Payment\FlutterWaveController;
+use App\Http\Controllers\Payment\MercadopagoController;
+use App\Http\Controllers\Payment\AuthorizenetController;
 
 class CheckoutController extends Controller
 {
     public function checkout(CheckoutRequest $request)
     {
+
+        $coupon = Coupon::where('code', Session::get('coupon'))->first();
+        if (!empty($coupon)) {
+            $coupon_count = $coupon->total_uses;
+            if ($coupon->maximum_uses_limit != 999999) {
+                if ($coupon_count == $coupon->maximum_uses_limit) {
+                    Session::forget('coupon');
+                    session()->flash('warning', __('This coupon reached maximum limit'));
+                    return redirect()->back();
+                }
+            }
+        }
+
         $offline_payment_gateways = OfflineGateway::all()->pluck('name')->toArray();
         $currentLang = session()->has('lang') ?
             (Language::where('code', session()->get('lang'))->first())
@@ -52,12 +70,12 @@ class CheckoutController extends Controller
             $transaction_details = "Trial";
             $user = $this->store($request->all(), $transaction_id, $transaction_details, $request->price, $be, $request->password);
 
-            
+
 
             $lastMemb = $user->memberships()->orderBy('id', 'DESC')->first();
             $activation = Carbon::parse($lastMemb->start_date);
             $expire = Carbon::parse($lastMemb->expire_date);
-            $file_name = $this->makeInvoice($request->all(), "membership", $user, $request->password, $request['price'], "Trial", $request['phone'],$be->base_currency_symbol_position,$be->base_currency_symbol,$be->base_currency_text,$transaction_id,$package->title);
+            $file_name = $this->makeInvoice($request->all(), "membership", $user, $request->password, $request['price'], "Trial", $request['phone'], $be->base_currency_symbol_position, $be->base_currency_symbol, $be->base_currency_text, $transaction_id, $package->title);
 
             $mailer = new MegaMailer();
             $data = [
@@ -77,20 +95,19 @@ class CheckoutController extends Controller
 
             session()->flash('success', __('successful_payment'));
             return redirect()->route('membership.trial.success');
-            
-        }elseif ($request->price == 0){
+        } elseif ($request->price == 0) {
             $package = Package::find($request['package_id']);
             $request['price'] = 0.00;
             $request['payment_method'] = "-";
             $transaction_id = UserPermissionHelper::uniqidReal(8);
             $transaction_details = "Free";
             $user = $this->store($request->all(), $transaction_id, $transaction_details, $request->price, $be, $request->password);
-            
+
 
             $lastMemb = $user->memberships()->orderBy('id', 'DESC')->first();
             $activation = Carbon::parse($lastMemb->start_date);
             $expire = Carbon::parse($lastMemb->expire_date);
-            $file_name = $this->makeInvoice($request->all(), "membership", $user, $request->password, $request['price'], "Free", $request['phone'],$be->base_currency_symbol_position,$be->base_currency_symbol,$be->base_currency_text,$transaction_id,$package->title);
+            $file_name = $this->makeInvoice($request->all(), "membership", $user, $request->password, $request['price'], "Free", $request['phone'], $be->base_currency_symbol_position, $be->base_currency_symbol, $be->base_currency_text, $transaction_id, $package->title);
 
             $mailer = new MegaMailer();
             $data = [
@@ -107,12 +124,11 @@ class CheckoutController extends Controller
                 'type' => 'registrationWithFreePackage'
             ];
             $mailer->mailFromAdmin($data);
-            
+
 
             session()->flash('success', __('successful_payment'));
             return redirect()->route('success.page');
-
-        }elseif ($request->payment_method == "Paypal") {
+        } elseif ($request->payment_method == "Paypal") {
             $amount = round(($request->price / $be->base_currency_rate), 2);
             $paypal = new PaypalController();
             $cancel_url = route('membership.paypal.cancel');
@@ -165,7 +181,7 @@ class CheckoutController extends Controller
             $instaMojo = new InstamojoController();
             return $instaMojo->paymentProcess($request, $amount, $success_url, $cancel_url, $title, $be);
         } elseif ($request->payment_method == "Mercado Pago") {
-            if ($be->base_currency_text != "BRL") {
+            if ($be->base_currency_text != "BRL" && $be->base_currency_text != "ARS") {
                 return redirect()->back()->with('error', __('only_mercadopago_BRL'))->withInput($request->all());
             }
             $amount = $request->price;
@@ -213,7 +229,7 @@ class CheckoutController extends Controller
             $request['receipt_name'] = null;
             if ($request->has('receipt')) {
                 $filename = time() . '.' . $request->file('receipt')->getClientOriginalExtension();
-                $directory = public_path('assets/front/img/membership/receipt');
+                $directory = public_path("assets/front/img/membership/receipt");
                 if (!file_exists($directory)) mkdir($directory, 0775, true);
                 $request->file('receipt')->move($directory, $filename);
                 $request['receipt_name'] = $filename;
@@ -243,8 +259,7 @@ class CheckoutController extends Controller
         }
         $bs = $currentLang->basic_setting;
         $token = md5(time() . $request['username'] . $request['email']);
-        $verification_link = "<a href='" . url('register/mode/'.$request['mode'].'/verify/' . $token) . "'>" . "<button type=\"button\" class=\"btn btn-primary\">Click Here</button>" . "</a>";
-
+        $verification_link = "<a href='" . url('register/mode/' . $request['mode'] . '/verify/' . $token) . "'>" . "<button type=\"button\" class=\"btn btn-primary\">Click Here</button>" . "</a>";
         $user = User::where('username', $request['username']);
         if ($user->count() == 0) {
             $user = User::create([
@@ -261,17 +276,20 @@ class CheckoutController extends Controller
                 'country' => $request["country"] ? $request["country"] : null,
                 'verification_link' => $token,
             ]);
-
             $deLang = User\Language::firstOrFail();
             $langCount = User\Language::where('user_id', $user->id)->where('is_default', 1)->count();
             if ($langCount == 0) {
-                User\Language::create([
-                    'name' => 'English',
-                    'code' => 'en',
+                $language =  User\Language::create([
+                    'name' => $deLang->name,
+                    'code' => $deLang->code,
                     'is_default' => 1,
-                    'rtl' => 0,
+                    'rtl' => $deLang->rtl,
                     'user_id' => $user->id,
                     'keywords' => $deLang->keywords
+                ]);
+                HomePageText::create([
+                    'user_id' => $user->id,
+                    'language_id' => $language->id
                 ]);
             }
             $mailer = new MegaMailer();
@@ -284,8 +302,12 @@ class CheckoutController extends Controller
                 'templateType' => 'email_verification',
                 'type' => 'emailVerification'
             ];
+            $package = Package::findOrFail($request['package_id']);
             $mailer->mailFromAdmin($data);
             Membership::create([
+                'package_price' => $package->price,
+                'discount' => session()->has('coupon_amount') ? session()->get('coupon_amount') : 0,
+                'coupon_code' => session()->has('coupon') ? session()->get('coupon') : NULL,
                 'price' => $amount,
                 'currency' => $be->base_currency_text ? $be->base_currency_text : "USD",
                 'currency_symbol' => $be->base_currency_symbol ? $be->base_currency_symbol : $be->base_currency_text,
@@ -314,19 +336,123 @@ class CheckoutController extends Controller
             ]);
             BasicSetting::create([
                 'user_id' => $user->id,
+                'email' => $user->email,
+                'website_title' => $user->username,
+                'from_name' => $user->username,
             ]);
-
+           
+            // create Day table 
+            $days = [
+                'Sunday' => 0,
+                'Monday' => 1,
+                'Tuesday' => 2,
+                'Wednesday' => 3,
+                'Thursday' => 4,
+                'Friday' => 5,
+                'Saturday' => 6
+            ];
+            foreach ($days as $key => $index) {
+                Day::create([
+                    'user_id' => $user->id,
+                    'day' => $key,
+                    'index' => $index,
+                ]);
+            }
+            // create payment gateways 
+            $payment_keywords = ['flutterwave', 'razorpay', 'paytm', 'paystack', 'instamojo', 'stripe', 'paypal', 'mollie', 'mercadopago', 'authorize.net'];
+            foreach ($payment_keywords as $key => $value) {
+                UserPaymentGateway::create([
+                    'title' => null,
+                    'user_id' => $user->id,
+                    'details' => null,
+                    'keyword' => $value,
+                    'subtitle' => null,
+                    'name' => ucfirst($value),
+                    'type' => 'automatic',
+                    'information' => null
+                ]);
+            }
+            // create email template 
+            $templates = ['email_verification', 'appointment_booking_notification', 'reset_password'];
+            foreach ($templates as $key => $val) {
+                UserEmailTemplate::create([
+                    'user_id' => $user->id,
+                    'email_type' => $val,
+                    'email_subject' => str_replace('_', ' ', $val),
+                    'email_body' => '<p></p>',
+                ]);
+            }
         } else {
             $user = $user->first();
+        }
+        // coupon update  
+        if (Session::has('coupon')) {
+            $coupon = Coupon::where('code', Session::get('coupon'))->first();
+            $coupon->total_uses = $coupon->total_uses + 1;
+            $coupon->save();
         }
         return $user;
     }
 
-    public function offlineSuccess() {
+    public function onlineSuccess()
+    {
+        Session::forget('coupon');
+        Session::forget('coupon_amount');
+        return view('front.success');
+    }
+
+    public function offlineSuccess()
+    {
+        Session::forget('coupon');
+        Session::forget('coupon_amount');
         return view('front.offline-success');
     }
 
-    public function trialSuccess() {
+    public function trialSuccess()
+    {
+        Session::forget('coupon');
+        Session::forget('coupon_amount');
         return view('front.trial-success');
+    }
+
+    public function coupon(Request $request)
+    {
+        if (session()->has('coupon')) {
+            return 'Coupon already applied';
+        }
+        $coupon = Coupon::where('code', $request->coupon)->first();
+        if (empty($coupon)) {
+            return 'This coupon does not exist';
+        }
+        $coupon_count = $coupon->total_uses;
+        if ($coupon->maximum_uses_limit != 999999) {
+            if ($coupon_count >= $coupon->maximum_uses_limit) {
+                return 'This coupon reached maximum limit';
+            }
+        }
+        $start = Carbon::parse($coupon->start_date);
+        $end = Carbon::parse($coupon->end_date);
+        $today = Carbon::parse(Carbon::now()->format('m/d/Y'));
+        $packages = $coupon->packages;
+        $packages = json_decode($packages, true);
+        $packages = !empty($packages) ? $packages : [];
+        if (!in_array($request->package_id, $packages)) {
+            return 'This coupon is not valid for this package';
+        }
+
+        if ($today->greaterThanOrEqualTo($start) && $today->lessThanOrEqualTo($end)) {
+            $package = Package::find($request->package_id);
+            $price = $package->price;
+            if ($coupon->type == 'percentage') {
+                $cAmount = ($price * $coupon->value) / 100;
+            } else {
+                $cAmount = $coupon->value;
+            }
+            Session::put('coupon', $request->coupon);
+            Session::put('coupon_amount', round($cAmount, 2));
+            return "success";
+        } else {
+            return 'This coupon does not exist';
+        }
     }
 }

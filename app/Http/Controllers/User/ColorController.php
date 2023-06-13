@@ -29,7 +29,7 @@ class ColorController extends Controller
         $data->secondary_base_color = $request->secondary_base_color;
         $data->save();
 
-        Session::flash('success', 'Base color updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return back();
     }
 }

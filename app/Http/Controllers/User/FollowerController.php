@@ -30,7 +30,7 @@ class FollowerController extends Controller
           $follow->follower_id = Auth::id();
           $follow->following_id = $id;
           $follow->save();
-          Session::flash('success', 'You have followed successfully!');
+          Session::flash('success', toastrMsg('You_have_followed_successfully!'));
           return redirect()->route('front.user.view');
       }
       else{
@@ -65,10 +65,10 @@ class FollowerController extends Controller
         ])->firstOrFail();
         if(!is_null($followCheck)){
            $followCheck->delete();
-           Session::flash('success', 'You have unfollowed successfully!');
+           Session::flash('success', toastrMsg('You_have_unfollowed_successfully!'));
            return redirect()->back();
         }else{
-            Session::flash('warning', 'You cannot unfollow the user!');
+            Session::flash('warning', 'You_cannot_unfollow_the_user!');
             return redirect()->back();
         }
     }

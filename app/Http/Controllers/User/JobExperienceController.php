@@ -41,7 +41,7 @@ class JobExperienceController extends Controller
         ])
             ->orderBy('id', 'DESC')
             ->get();
-        return view('user.job_experience.index',$data);
+        return view('user.job_experience.index', $data);
     }
 
     /**
@@ -62,24 +62,24 @@ class JobExperienceController extends Controller
      */
     public function store(Request $request)
     {
-        $rules =[
+        $rules = [
             'user_language_id' => 'required',
             'company_name' => 'required',
             'designation' => 'required',
             'start_date' => 'required',
             'serial_number' => 'required',
         ];
-        if(!array_key_exists('is_continue',$request->all())){
+        if (!array_key_exists('is_continue', $request->all())) {
             $rules['end_date'] = 'required';
             $request['is_continue'] = 0;
         }
         $messages = [
-            'user_language_id.required'=> 'The language field is required',
-            'company_name.required'=> 'The company name field is required',
-            'designation.required'=> 'The designation field is required',
-            'start_date.required'=> 'The start date field is required',
-            'end_date.required'=> 'The end date field is required',
-            'serial_number.required'=> 'The serial number field is required',
+            'user_language_id.required' => 'The language field is required',
+            'company_name.required' => 'The company name field is required',
+            'designation.required' => 'The designation field is required',
+            'start_date.required' => 'The start date field is required',
+            'end_date.required' => 'The end date field is required',
+            'serial_number.required' => 'The serial number field is required',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -92,13 +92,13 @@ class JobExperienceController extends Controller
         $newJobExperience->content = Purifier::clean($request->content);
         $newJobExperience->start_date = $request->start_date;
         $newJobExperience->end_date = $request->is_continue === "1"
-                                               ? null: $request->end_date;
+            ? null : $request->end_date;
         $newJobExperience->is_continue = $request->is_continue;
         $newJobExperience->serial_number = $request->serial_number;
         $newJobExperience->lang_id = $request->user_language_id;
         $newJobExperience->user_id = Auth::id();
         $newJobExperience->save();
-        Session::flash('success', 'Job experience added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -108,10 +108,14 @@ class JobExperienceController extends Controller
      * @param  int  $id
      * @return
      */
-    public function edit($id)
+    public function edit(JobExperience $experience)
     {
-        $data['jobExperience'] = JobExperience::query()->where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
-        return view('user.job_experience.edit',$data);
+        if ($experience->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', 'Authorization Failed');
+            return back();
+        }
+        $data['jobExperience'] = $experience;
+        return view('user.job_experience.edit', $data);
     }
 
     /**
@@ -123,21 +127,21 @@ class JobExperienceController extends Controller
      */
     public function update(Request $request)
     {
-        $rules =[
+        $rules = [
             'company_name' => 'required',
             'designation' => 'required',
             'start_date' => 'required',
             'serial_number' => 'required',
         ];
-        if(!array_key_exists('is_continue',$request->all())){
+        if (!array_key_exists('is_continue', $request->all())) {
             $rules['end_date'] = 'required';
         }
         $messages = [
-            'company_name.required'=> 'The category field is required',
-            'designation.required'=> 'The designation field is required',
-            'start_date.required'=> 'The start date field is required',
-            'end_date.required'=> 'The end date field is required',
-            'serial_number.required'=> 'The serial number field is required',
+            'company_name.required' => 'The category field is required',
+            'designation.required' => 'The designation field is required',
+            'start_date.required' => 'The start date field is required',
+            'end_date.required' => 'The end date field is required',
+            'serial_number.required' => 'The serial number field is required',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -153,12 +157,12 @@ class JobExperienceController extends Controller
         $newJobExperience->designation = $request->designation;
         $newJobExperience->content = Purifier::clean($request->content);
         $newJobExperience->start_date = $request->start_date;
-        $newJobExperience->end_date = $request->is_continue === "on" ? null: $request->end_date;
+        $newJobExperience->end_date = $request->is_continue === "on" ? null : $request->end_date;
         $newJobExperience->is_continue = $request->is_continue === "on" ? 1 : 0;
         $newJobExperience->serial_number = $request->serial_number;
         $newJobExperience->user_id = Auth::id();
         $newJobExperience->save();
-        Session::flash('success', 'Job experience updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -173,18 +177,20 @@ class JobExperienceController extends Controller
         //
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         JobExperience::where('user_id', Auth::user()->id)->where('id', $request->id)->firstOrFail()->delete();
-        Session::flash('success', 'Job experience deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
-    public function bulkDelete(Request $request){
+    public function bulkDelete(Request $request)
+    {
         $ids = $request->ids;
         foreach ($ids as $id) {
             JobExperience::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail()->delete();
         }
-        Session::flash('success', 'Job experience deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 }

@@ -66,7 +66,8 @@ class TestimonialController extends Controller
             'user_language_id' => 'required',
             'content' => 'required',
             'serial_number' => 'required|integer',
-            'image' => ['required',
+            'image' => [
+                'required',
                 function ($attribute, $value, $fail) use ($img, $allowedExts) {
                     if (!empty($img)) {
                         $ext = $img->getClientOriginalExtension();
@@ -86,7 +87,7 @@ class TestimonialController extends Controller
         $input = $request->all();
         $input['user_id'] = Auth::id();
 
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $filename = time() . '.' . $img->getClientOriginalExtension();
             $directory = public_path('assets/front/img/user/testimonials/');
             if (!file_exists($directory)) mkdir($directory, 0775, true);
@@ -98,7 +99,7 @@ class TestimonialController extends Controller
         $blog = new UserTestimonial();
         $blog->create($input);
 
-        Session::flash('success', 'Testimonial added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -119,9 +120,15 @@ class TestimonialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(UserTestimonial $testimonial)
     {
-        $data['testimonial'] = UserTestimonial::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
+
+        if ($testimonial->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', 'Authorization Failed');
+            return back();
+        }
+
+        $data['testimonial'] = $testimonial;
         return view('user.testimonial.edit', $data);
     }
 
@@ -175,15 +182,14 @@ class TestimonialController extends Controller
             $filename = time() . '.' . $img->getClientOriginalExtension();
             $directory = public_path('assets/front/img/user/testimonials/');
             $request->file('image')->move($directory, $filename);
-            if (file_exists($directory.$service->image))
-            {
-                @unlink($directory. $service->image);
+            if (file_exists($directory . $service->image)) {
+                @unlink($directory . $service->image);
             }
             $input['image'] = $filename;
         }
         $input['content'] = Purifier::clean($request->content);
         $service->update($input);
-        Session::flash('success', 'Testimonial updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -193,28 +199,28 @@ class TestimonialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         $tstm = UserTestimonial::where('user_id', Auth::user()->id)->where('id', $request->id)->firstOrFail();
-        if (file_exists(public_path('assets/front/img/user/testimonials/' . $tstm->image)))
-        {
+        if (file_exists(public_path('assets/front/img/user/testimonials/' . $tstm->image))) {
             @unlink(public_path('assets/front/img/user/testimonials/' . $tstm->image));
         }
         $tstm->delete();
-        Session::flash('success', 'Testimonial deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
-    public function bulkDelete(Request $request){
+    public function bulkDelete(Request $request)
+    {
         $ids = $request->ids;
         foreach ($ids as $id) {
             $tstm = UserTestimonial::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
-            if (file_exists(public_path('assets/front/img/user/testimonials/' . $tstm->image)))
-            {
+            if (file_exists(public_path('assets/front/img/user/testimonials/' . $tstm->image))) {
                 @unlink(public_path('assets/front/img/user/testimonials/' . $tstm->image));
             }
             $tstm->delete();
         }
-        Session::flash('success', 'Testimonial deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 }

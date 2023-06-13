@@ -1,4 +1,9 @@
-
+body {
+    text-align: right;
+}
+.dropdown-menu{
+    text-align: right;
+}
 .sidebar-widget-area .widget.recent-post-widget .recent-post-list .post-thumbnail-content img {
     margin-right: 0px;
     margin-left: 20px;

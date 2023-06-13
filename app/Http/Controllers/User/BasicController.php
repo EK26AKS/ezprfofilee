@@ -43,7 +43,7 @@ class BasicController extends Controller
         $data->theme = $request->theme;
         $data->save();
 
-        $request->session()->flash('success', 'Theme updated successfully!');
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
 
         return 'success';
     }
@@ -92,7 +92,7 @@ class BasicController extends Controller
                 $bs->save();
             }
         }
-        Session::flash('success', 'Favicon update successfully.');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return back();
     }
 
@@ -141,7 +141,7 @@ class BasicController extends Controller
                 $bs->save();
             }
         }
-        Session::flash('success', 'Logo update successfully.');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return back();
     }
 
@@ -190,7 +190,7 @@ class BasicController extends Controller
             }
         }
 
-        Session::flash('success', 'Preloader updated successfully.');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return back();
     }
 
@@ -247,7 +247,7 @@ class BasicController extends Controller
         $homeText->user_id = Auth::id();
         $homeText->language_id = $request->language_id;
         $homeText->save();
-        Session::flash('success', 'Home page text updated successfully.');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -266,7 +266,7 @@ class BasicController extends Controller
             $homeText->save();
         }
 
-        Session::flash('success', 'Image removed');
+        Session::flash('success', toastrMsg('Image_Removed'));
         return "success";
     }
 
@@ -304,7 +304,7 @@ class BasicController extends Controller
                 $bs->save();
             }
         }
-        Session::flash('success', 'Pdf update successfully.');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -315,7 +315,7 @@ class BasicController extends Controller
         $bs->cv_original = NULL;
         $bs->save();
 
-        Session::flash('success', 'CV removed successfully');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
@@ -350,8 +350,10 @@ class BasicController extends Controller
     public function updateSEO(Request $request)
     {
       // first, get the language info from db
-      $language = Language::where('code', $request->language)->where('user_id', Auth::user()->id)->first();
+     
+      $language = Language::where('code', $request->language)->where('user_id', Auth::guard('web')->user()->id)->first();
       $langId = $language->id;
+      
 
       // then, get the seo info of that language from db
       $seo = SEO::where('language_id', $langId)->where('user_id', Auth::user()->id)->first();
@@ -359,8 +361,128 @@ class BasicController extends Controller
       // else update the existing seo info of that language
       $seo->update($request->all());
 
-      $request->session()->flash('success', 'SEO Informations updated successfully!');
+      $request->session()->flash('success', toastrMsg('Updated_successfully!'));
 
       return redirect()->back();
+    }
+
+
+    public function plugins()
+    {
+        $data = BasicSetting::where('user_id', Auth::guard('web')->user()->id)
+            ->select('whatsapp_status', 'whatsapp_number', 'whatsapp_header_title', 'whatsapp_popup_status', 'whatsapp_popup_message', 'analytics_status', 'measurement_id', 'disqus_status', 'disqus_short_name', 'pixel_status', 'pixel_id', 'tawkto_status', 'tawkto_direct_chat_link')
+            ->first();
+        return view('user.settings.plugins', compact('data'));
+    }
+
+    public function updateAnalytics(Request $request)
+    {
+        $rules = [
+            'analytics_status' => 'required',
+            'measurement_id' => 'required'
+        ];
+
+        $request->validate($rules);
+
+        BasicSetting::where('user_id', Auth::guard('web')->user()->id)->update(
+            [
+                'analytics_status' => $request->analytics_status,
+                'measurement_id' => $request->measurement_id
+            ]
+        );
+
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
+
+        return back();
+    }
+
+    public function updateWhatsApp(Request $request)
+    {
+        $rules = [
+            'whatsapp_status' => 'required',
+            'whatsapp_number' => 'required',
+            'whatsapp_header_title' => 'required',
+            'whatsapp_popup_status' => 'required',
+            'whatsapp_popup_message' => 'required'
+        ];
+
+        $request->validate($rules);
+
+        BasicSetting::where('user_id', Auth::guard('web')->user()->id)->update(
+            [
+                'whatsapp_status' => $request->whatsapp_status,
+                'whatsapp_number' => $request->whatsapp_number,
+                'whatsapp_header_title' => $request->whatsapp_header_title,
+                'whatsapp_popup_status' => $request->whatsapp_popup_status,
+                'whatsapp_popup_message' => clean($request->whatsapp_popup_message)
+            ]
+        );
+
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
+
+        return back();
+    }
+
+    public function updateDisqus(Request $request)
+    {
+        $rules = [
+            'disqus_status' => 'required',
+            'disqus_short_name' => 'required'
+        ];
+
+        $request->validate($rules);
+
+        BasicSetting::where('user_id', Auth::guard('web')->user()->id)->update(
+            [
+                'disqus_status' => $request->disqus_status,
+                'disqus_short_name' => $request->disqus_short_name
+            ]
+        );
+
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
+
+        return back();
+    }
+
+    public function updatePixel(Request $request)
+    {
+        $rules = [
+            'pixel_status' => 'required',
+            'pixel_id' => 'required'
+        ];
+
+        $request->validate($rules);
+
+        BasicSetting::where('user_id', Auth::guard('web')->user()->id)->update(
+            [
+                'pixel_status' => $request->pixel_status,
+                'pixel_id' => $request->pixel_id
+            ]
+        );
+
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
+
+        return back();
+    }
+
+    public function updateTawkto(Request $request)
+    {
+        $rules = [
+            'tawkto_status' => 'required',
+            'tawkto_direct_chat_link' => 'required'
+        ];
+
+        $request->validate($rules);
+
+        BasicSetting::where('user_id', Auth::guard('web')->user()->id)->update(
+            [
+                'tawkto_status' => $request->tawkto_status,
+                'tawkto_direct_chat_link' => $request->tawkto_direct_chat_link
+            ]
+        );
+
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
+
+        return back();
     }
 }

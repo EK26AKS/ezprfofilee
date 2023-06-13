@@ -52,7 +52,7 @@ class PushDemo extends Notification
     {
         $push = (new WebPushMessage)
                 ->title($this->title)
-                ->icon('assets/front/img/pushnotification_icon.png')
+                ->icon(public_path('assets/front/img/pushnotification_icon.png'))
                 ->action($this->buttonText, $this->buttonURL);
 
         if (!empty($this->message)) {

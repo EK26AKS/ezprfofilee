@@ -58,7 +58,7 @@ class ContactController extends Controller
      
         $be->save();
 
-        Session::flash('success', 'Contact page updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 }

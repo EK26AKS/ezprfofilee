@@ -51,7 +51,7 @@ class EmailController extends Controller
             $be->save();
         }
 
-        Session::flash('success', 'SMTP configuration updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 
@@ -64,18 +64,15 @@ class EmailController extends Controller
         $messages = [
             'to_mail.required' => 'Mail Address is required.'
         ];
-
         $request->validate([
             'to_mail' => 'required',
         ], $messages);
-
         $bes = BasicExtended::all();
         foreach ($bes as $key => $be) {
             $be->to_mail = $request->to_mail;
             $be->save();
         }
-
-        Session::flash('success', 'Mail address updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 

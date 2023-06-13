@@ -30,4 +30,25 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'paytm-wallet' => [
+        'env' => '',
+        'merchant_id' => '',
+        'merchant_key' => '',
+        'merchant_website' => '',
+        'channel' => '',
+        'industry_type' => '',
+    ],
+
+    'stripe' => [
+        'key' => '',
+        'secret' => '',
+    ],
+
+    'google' => [
+        'client_id' => '30890069006-rmd28roee2f4js2iqa9dtub43n40s2bk.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://ezprofile.in/callback/google',
+    ], 
+
+
 ];

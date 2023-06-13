@@ -14,7 +14,15 @@
     <ul class="list">
         @foreach($permissions['permissions'] as $permission)
         <li class="list__item list__item--permissions {{ $permission['isSet'] ? 'success' : 'error' }}">
-            {{ $permission['folder'] }}
+            @if ($permission['folder'] == '../assets/admin/img/')
+                assets/admin/img/
+            @elseif ($permission['folder'] == '../assets/front/img/')
+                assets/front/img/
+            @elseif ($permission['folder'] == '../assets/front/invoices/')
+                assets/front/invoices/
+            @else
+                core/{{ $permission['folder'] }}
+            @endif
 
             <span>
                 <i class="fa fa-fw fa-{{ $permission['isSet'] ? 'check-circle-o' : 'exclamation-circle' }}"></i>

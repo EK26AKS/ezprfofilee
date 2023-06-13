@@ -2,20 +2,31 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Timezone;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\BasicSetting;
-use App\Models\BasicExtended;
-use App\Models\Language;
-use App\Models\Seo;
-use Session;
-use Validator;
 use Artisan;
+use Session;
 use Purifier;
+use Validator;
+use App\Models\Seo;
+use App\Models\Language;
+use App\Models\Timezone;
+use App\Models\BasicSetting;
+use Illuminate\Http\Request;
+use App\Models\BasicExtended;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
 
 class BasicController extends Controller
 {
+
+    public function setLocaleAdmin(Request $request)
+    {
+        Session::put('admin_lang', 'admin_' . $request->code);
+        app()->setLocale('admin_' . $request->code);
+        // Config::get('app.locale');
+        return $request->code;
+    }
+
+
     public function favicon(Request $request)
     {
         $data['abs'] = BasicSetting::firstOrFail();
@@ -59,7 +70,7 @@ class BasicController extends Controller
                 $bs->save();
             }
         }
-        Session::flash('success', 'Favicon update successfully.');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 
@@ -106,7 +117,7 @@ class BasicController extends Controller
                 $bs->save();
             }
         }
-        Session::flash('success', 'Logo update successfully.');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 
@@ -152,7 +163,7 @@ class BasicController extends Controller
             }
             $bs->save();
         }
-        Session::flash('success', 'Preloader updated successfully.');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 
@@ -201,7 +212,7 @@ class BasicController extends Controller
             setEnvironmentValue($arr);
             \Artisan::call('config:clear');
         }
-        Session::flash('success', 'Basic informations updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 
@@ -226,7 +237,7 @@ class BasicController extends Controller
         }
 
         $be->save();
-        Session::flash('success', 'Slider data updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 
@@ -273,7 +284,7 @@ class BasicController extends Controller
                 $bs->save();
             }
         }
-        Session::flash('success', 'Breadcrumb update successfully.');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 
@@ -310,7 +321,7 @@ class BasicController extends Controller
             $bs->save();
         }
 
-        Session::flash('success', 'Plugins updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 
@@ -370,7 +381,7 @@ class BasicController extends Controller
         }
 
         if ($request->maintenance_status == 1) {
-            @unlink('storage/framework/down');
+            @unlink('core/storage/framework/down');
             Artisan::call($down);
         } else {
             Artisan::call('up');
@@ -384,7 +395,7 @@ class BasicController extends Controller
             'secret_path' => $request->secret_path
         ]);
 
-        $request->session()->flash('success', 'Maintenance Info updated successfully!');
+        $request->session()->flash('success', __('Maintenance Info updated successfully!'));
 
         return redirect()->back();
     }
@@ -407,7 +418,7 @@ class BasicController extends Controller
             $bs->update($request->all());
         }
 
-        Session::flash('success', 'Sections customized successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 
@@ -435,7 +446,7 @@ class BasicController extends Controller
         $be->cookie_alert_button_text = $request->cookie_alert_button_text;
         $be->save();
 
-        Session::flash('success', 'Cookie alert updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 
@@ -471,11 +482,15 @@ class BasicController extends Controller
         // first, get the language info from db
         $language = Language::where('code', $request->language)->first();
         $langId = $language->id;
+
         // then, get the seo info of that language from db
         $seo = SEO::where('language_id', $langId)->first();
+
         // else update the existing seo info of that language
         $seo->update($request->all());
-        $request->session()->flash('success', 'SEO Informations updated successfully!');
+
+        $request->session()->flash('success', __('Updated successfully!'));
+
         return redirect()->back();
     }
 }

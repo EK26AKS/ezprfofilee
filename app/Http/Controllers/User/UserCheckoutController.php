@@ -162,7 +162,7 @@ class UserCheckoutController extends Controller
             $request['status'] = "0";
             if ($request->hasFile('receipt')) {
                 $filename = time() . '.' . $request->file('receipt')->getClientOriginalExtension();
-                $directory = public_path('assets/front/img/membership/receipt');
+                $directory = public_path("assets/front/img/membership/receipt");
                 @mkdir($directory, 0775, true);
                 $request->file('receipt')->move($directory, $filename);
                 $request['receipt_name'] = $filename;

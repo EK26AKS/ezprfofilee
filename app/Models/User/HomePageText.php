@@ -30,6 +30,8 @@ class HomePageText extends Model
         "blog_title",
         "get_in_touch_keyword",
         "get_in_touch_title",
+        "language_id",
+        "user_id",
     ];
     public function language() {
         return $this->belongsTo('App\Models\User\Language','language_id');

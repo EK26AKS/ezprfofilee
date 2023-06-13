@@ -66,6 +66,8 @@ class Kernel extends HttpKernel
         'checkUserPermission' => \App\Http\Middleware\CheckPermissionUser::class,
         'Demo' => \App\Http\Middleware\Demo::class,
         'routeAccess' => \App\Http\Middleware\RouteAccess::class,
+        'adminLang' => \App\Http\Middleware\AdminLocale::class,
+        'activeCustomer' => \App\Http\Middleware\checkActiveCustomer::class,
     ];
 
     /**

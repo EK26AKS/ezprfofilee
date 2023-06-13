@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Models\User\UserVcard;
-use App\Models\User\UserVcardProject;
-use App\Models\User\UserVcardService;
-use App\Models\User\UserVcardTestimonial;
 use Auth;
-use Illuminate\Http\Request;
 use Session;
 use Validator;
+use Illuminate\Http\Request;
+use App\Models\User\UserVcard;
+use App\Http\Controllers\Controller;
+use App\Models\User\UserVcardProject;
+use App\Models\User\UserVcardService;
+use App\Http\Helpers\LimitCheckerHelper;
+use App\Models\User\UserVcardTestimonial;
 
 class VcardController extends Controller
 {
@@ -25,15 +26,23 @@ class VcardController extends Controller
         return view('user.vcard.create');
     }
 
-    public function edit($id)
+    public function edit(UserVcard $uservcard)
     {
-        $data['vcard'] = UserVcard::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
+        if ($uservcard->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', 'Authorization Failed');
+            return back();
+        }
+        $data['vcard'] = $uservcard;
         return view('user.vcard.edit', $data);
     }
 
-    public function services($id)
+    public function services(UserVcard $uservcard)
     {
-        $vcard = UserVcard::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();;
+        if ($uservcard->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', 'Authorization Failed');
+            return back();
+        }
+        $vcard = $uservcard;
         $services = $vcard->user_vcard_services()->orderBy('id', 'DESC')->get();
 
         $data['vcard'] = $vcard;
@@ -94,7 +103,7 @@ class VcardController extends Controller
         $service = new UserVcardService();
         $service->create($input);
 
-        Session::flash('success', 'Service added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -152,7 +161,7 @@ class VcardController extends Controller
         }
         $service->update($input);
 
-        Session::flash('success', 'Service updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -167,7 +176,7 @@ class VcardController extends Controller
         $service = UserVcardService::findOrFail($request->service_id);
         @unlink(public_path('assets/front/img/user/services/' . $service->image));
         $service->delete();
-        Session::flash('success', 'Service deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
@@ -179,12 +188,22 @@ class VcardController extends Controller
             @unlink(public_path('assets/front/img/user/services/' . $service->image));
             $service->delete();
         }
-        Session::flash('success', 'Services deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return "success";
     }
 
     public function store(Request $request)
     {
+
+
+        $user  = Auth::guard('web')->user();
+        $vcard_limit =  LimitCheckerHelper::vcardLimitchecker($user->id);
+        $vcards = UserVcard::where('user_id', $user->id)->orderBy('id', 'DESC')->get();
+        if ($vcards->count() >= $vcard_limit) {
+            Session::flash('warning', toastrMsg('maximum_limit_exceeded'));
+            return "success";
+        }
+
         $profileImg = $request->file('profile_image');
         $coverImg = $request->file('cover_image');
         $allowedExts = array('jpg', 'png', 'jpeg');
@@ -232,7 +251,6 @@ class VcardController extends Controller
             'labels.*.required' => 'The Label field cannot be empty',
             'values.*.required' => 'The Value field cannot be empty'
         ];
-
 
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -296,12 +314,23 @@ class VcardController extends Controller
 
         $vcard->save();
 
-        $request->session()->flash('success', 'Vcard added successfully');
+        $request->session()->flash('success', toastrMsg('Store_successfully!'));
         return 'success';
     }
 
     public function update(Request $request)
     {
+
+        $user  = Auth::guard('web')->user();
+        $vcard_limit =  LimitCheckerHelper::vcardLimitchecker($user->id);
+        $vcards = UserVcard::where('user_id', $user->id)->orderBy('id', 'DESC')->get();
+
+        if ($vcards->count() > $vcard_limit) {
+            Session::flash('warning', toastrMsg('maximum_limit_exceeded'));
+            return "success";
+        }
+
+
         $profileImg = $request->file('profile_image');
         $coverImg = $request->file('cover_image');
         $allowedExts = array('jpg', 'png', 'jpeg');
@@ -411,7 +440,7 @@ class VcardController extends Controller
 
         $vcard->save();
 
-        $request->session()->flash('success', 'Vcard updated successfully');
+        $request->session()->flash('success', toastrMsg('Updated_successfully'));
         return 'success';
     }
 
@@ -427,7 +456,7 @@ class VcardController extends Controller
         @unlink(public_path('assets/front/img/user/vcard/' . $vcard->profile_image));
         @unlink(public_path('assets/front/img/user/vcard/' . $vcard->cover_image));
         $vcard->delete();
-        Session::flash('success', 'Vcard deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
@@ -440,7 +469,7 @@ class VcardController extends Controller
             @unlink(public_path('assets/front/img/user/vcard/' . $vcard->cover_image));
             $vcard->delete();
         }
-        Session::flash('success', 'Vcards deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 
@@ -514,7 +543,7 @@ class VcardController extends Controller
         $project = new UserVcardProject();
         $project->create($input);
 
-        Session::flash('success', 'Project added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -572,7 +601,7 @@ class VcardController extends Controller
         }
         $project->update($input);
 
-        Session::flash('success', 'Project updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -587,7 +616,7 @@ class VcardController extends Controller
         $project = UserVcardProject::findOrFail($request->project_id);
         @unlink(public_path('assets/front/img/user/projects/' . $project->image));
         $project->delete();
-        Session::flash('success', 'Project deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
@@ -599,7 +628,7 @@ class VcardController extends Controller
             @unlink(public_path('assets/front/img/user/projects/' . $project->image));
             $project->delete();
         }
-        Session::flash('success', 'Projects deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 
@@ -668,7 +697,7 @@ class VcardController extends Controller
         $testimonial = new UserVcardTestimonial();
         $testimonial->create($input);
 
-        Session::flash('success', 'Testimonial added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -723,7 +752,7 @@ class VcardController extends Controller
         }
         $testimonial->update($input);
 
-        Session::flash('success', 'Testimonial updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -738,7 +767,7 @@ class VcardController extends Controller
         $testimonial = UserVcardTestimonial::findOrFail($request->testimonial_id);
         @unlink(public_path('assets/front/img/user/testimonials/' . $testimonial->image));
         $testimonial->delete();
-        Session::flash('success', 'Testimonial deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
@@ -750,7 +779,7 @@ class VcardController extends Controller
             @unlink(public_path('assets/front/img/user/testimonials/' . $testimonial->image));
             $testimonial->delete();
         }
-        Session::flash('success', 'Testimonials deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 
@@ -771,7 +800,7 @@ class VcardController extends Controller
         $vcard->about = clean($request->about);
         $vcard->save();
 
-        $request->session()->flash('success', 'About & video updated successfully');
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
         return 'success';
     }
 
@@ -806,7 +835,7 @@ class VcardController extends Controller
         }
         $vcard->save();
 
-        $request->session()->flash('success', 'Preferences updated successfully');
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
         return 'success';
     }
 
@@ -846,7 +875,7 @@ class VcardController extends Controller
 
         $vcard->save();
 
-        $request->session()->flash('success', 'Colors updated successfully');
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
         return 'success';
     }
 
@@ -884,7 +913,7 @@ class VcardController extends Controller
         $vcard->keywords = $upKeywords;
         $vcard->save();
 
-        $request->session()->flash('success', 'Colors updated successfully');
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
         return 'success';
     }
 }

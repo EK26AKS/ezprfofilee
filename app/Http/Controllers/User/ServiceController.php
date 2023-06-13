@@ -81,7 +81,8 @@ class ServiceController extends Controller
             'content' => 'required',
             'detail_page' => 'required',
             'serial_number' => 'required|integer',
-            'image' => ['required',
+            'image' => [
+                'required',
                 function ($attribute, $value, $fail) use ($img, $allowedExts) {
                     if (!empty($img)) {
                         $ext = $img->getClientOriginalExtension();
@@ -116,7 +117,7 @@ class ServiceController extends Controller
         $blog = new UserService();
         $blog->create($input);
 
-        Session::flash('success', 'Service added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -137,9 +138,13 @@ class ServiceController extends Controller
      * @param int $id
      * @return
      */
-    public function edit($id)
+    public function edit(UserService $service)
     {
-        $data['service'] = UserService::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
+        if ($service->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', 'Authorization Failed');
+            return back();
+        }
+        $data['service'] = $service;
         return view('user.service.edit', $data);
     }
 
@@ -205,7 +210,7 @@ class ServiceController extends Controller
         }
         $input['content'] = Purifier::clean($request->content);
         $service->update($input);
-        Session::flash('success', 'Service updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -222,7 +227,7 @@ class ServiceController extends Controller
             @unlink(public_path('assets/front/img/user/services/' . $service->image));
         }
         $service->delete();
-        Session::flash('success', 'Service deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
@@ -236,7 +241,7 @@ class ServiceController extends Controller
             }
             $service->delete();
         }
-        Session::flash('success', 'Service deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 }

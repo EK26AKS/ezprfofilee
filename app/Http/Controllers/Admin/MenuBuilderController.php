@@ -13,12 +13,10 @@ use Illuminate\Support\Facades\Session;
 class MenuBuilderController extends Controller
 {
 
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $lang = Language::where('code', $request->language)->firstOrFail();
         $data['lang_id'] = $lang->id;
-
-        // set language
-        app()->setLocale($lang->code);
 
         // get page names of selected language
         $pages = Page::where('language_id', $lang->id)->get();
@@ -34,7 +32,8 @@ class MenuBuilderController extends Controller
         return view('admin.menu_builder.index', $data);
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         Menu::where('language_id', $request->language_id)->delete();
 
         $menu = new Menu;
@@ -42,6 +41,6 @@ class MenuBuilderController extends Controller
         $menu->menus = $request->str;
         $menu->save();
 
-        return response()->json(['status' => 'success', 'message' => 'Menu updated successfully!']);
+        return response()->json(['status' => 'success', 'message' => __('Updated successfully!')]);
     }
 }

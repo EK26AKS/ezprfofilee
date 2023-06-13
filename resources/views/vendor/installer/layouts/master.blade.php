@@ -12,6 +12,7 @@
         <link href="{{ asset('installer/css/style.min.css') }}" rel="stylesheet"/>
         @yield('style')
         <script>
+            "use strict";
             window.Laravel = <?php echo json_encode([
                 'csrfToken' => csrf_token(),
             ]); ?>
@@ -99,7 +100,7 @@
                             <button type="button" class="close" id="close_alert" data-dismiss="alert" aria-hidden="true">
                                  <i class="fa fa-close" aria-hidden="true"></i>
                             </button>
-                            <h4 style="font-size: 18px;">
+                            <h4 class="fs-18">
                                 <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
                                 {{ trans('installer_messages.forms.errorTitle') }}
                             </h4>
@@ -115,12 +116,5 @@
             </div>
         </div>
         @yield('scripts')
-        <script type="text/javascript">
-            var x = document.getElementById('error_alert');
-            var y = document.getElementById('close_alert');
-            y.onclick = function() {
-                x.style.display = "none";
-            };
-        </script>
     </body>
 </html>

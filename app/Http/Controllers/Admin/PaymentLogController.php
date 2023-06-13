@@ -218,7 +218,7 @@ class PaymentLogController extends Controller
 
         $membership->update(['status' => $request->status]);
 
-        session()->flash('success', "Membership status changed successfully!");
+        session()->flash('success', __("Membership status changed successfully!"));
         return back();
     }
 

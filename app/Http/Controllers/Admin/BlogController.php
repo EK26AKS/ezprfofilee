@@ -17,7 +17,6 @@ class BlogController extends Controller
     public function index(Request $request)
     {
         $lang = Language::where('code', $request->language)->first();
-
         $lang_id = $lang->id;
         $data['lang_id'] = $lang_id;
         $data['blogs'] = Blog::where('language_id', $lang_id)->orderBy('id', 'DESC')->get();
@@ -52,16 +51,16 @@ class BlogController extends Controller
             'content' => 'required',
             'serial_number' => 'required|integer',
             'image' => [
-                    function ($attribute, $value, $fail) use ($img, $allowedExts) {
-                        if (!empty($img)) {
-                            $ext = $img->getClientOriginalExtension();
-                            if (!in_array($ext, $allowedExts)) {
-                                return $fail("Only png, jpg, jpeg image is allowed");
-                            }
+                function ($attribute, $value, $fail) use ($img, $allowedExts) {
+                    if (!empty($img)) {
+                        $ext = $img->getClientOriginalExtension();
+                        if (!in_array($ext, $allowedExts)) {
+                            return $fail("Only png, jpg, jpeg image is allowed");
                         }
-                    },
-                ],
-            ];
+                    }
+                },
+            ],
+        ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
@@ -75,7 +74,7 @@ class BlogController extends Controller
         $input['bcategory_id'] = $request->category;
         $input['slug'] = $slug;
 
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $filename = time() . '.' . $img->getClientOriginalExtension();
             $request->session()->put('blog_image', $filename);
             $request->file('image')->move(public_path('assets/front/img/blogs/'), $filename);
@@ -87,7 +86,7 @@ class BlogController extends Controller
 
         $blog->create($input);
 
-        Session::flash('success', 'Blog added successfully!');
+        Session::flash('success', __('Store successfully!'));
         return "success";
     }
 
@@ -140,7 +139,7 @@ class BlogController extends Controller
 
         $blog->update($input);
 
-        Session::flash('success', 'Blog updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return "success";
     }
 
@@ -151,7 +150,7 @@ class BlogController extends Controller
         @unlink(public_path('assets/front/img/blogs/' . $blog->main_image));
         $blog->delete();
 
-        Session::flash('success', 'Blog deleted successfully!');
+        Session::flash('success', __('Deleted successfully!'));
         return back();
     }
 
@@ -165,7 +164,7 @@ class BlogController extends Controller
             $blog->delete();
         }
 
-        Session::flash('success', 'Blogs deleted successfully!');
+        Session::flash('success', -__('Bulk deleted successfully!'));
         return "success";
     }
 

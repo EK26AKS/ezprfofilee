@@ -72,7 +72,7 @@ class BuyPlanController extends Controller
 
 
         if($hasPendingMemb) {
-            Session::flash('warning', 'You already have a Pending Membership Request.');
+            Session::flash('warning', 'You_already_have_a_Pending_Membership_Request.');
             return back();
         }
         if($packageCount >= 2) {

@@ -136,11 +136,11 @@
                             <img data-src="{{isset($service->image) ? asset('assets/front/img/user/services/'.$service->image) : asset('assets/front/img/profile/service-1.jpg')}}" class="lazy" alt="">
                         </a>
                         @if($service->detail_page == 1)
-                        <h4 class="title"><a href="{{route('front.user.service.detail',[getParam(),'slug' => $service->slug,'id' => $service->id])}}">{{$service->name}}</a>
+                        <h4 class="title"><a href="{{route('front.user.service.detail',[getParam(),'slug' => $service->slug,'id' => $service->id])}}">{{ strlen($service->name) > 30 ? mb_substr($service->name, 0, 30, 'UTF-8') . '...' : $service->name }}</a>
                         </h4>
                         <a href="{{route('front.user.service.detail',[getParam(),'slug' => $service->slug,'id' => $service->id])}}" class="read-more-btn">{{$keywords["Read_More"] ?? "Read More"}}</a>
                         @else
-                        <h4 class="title">{{$service->name}}</h4>
+                        <h4 class="title">{{ strlen($service->name) > 30 ? mb_substr($service->name, 0, 30, 'UTF-8') . '...' : $service->name }}</h4>
                         @endif
                     </div>
                 </div>

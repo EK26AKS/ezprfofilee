@@ -94,7 +94,7 @@ class SkillCategoryController extends Controller
         $bcategory->serial_number = $request->serial_number;
         $bcategory->save();
 
-        Session::flash('success', 'Skill category added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -153,7 +153,7 @@ class SkillCategoryController extends Controller
         $bcategory->serial_number = $request->serial_number;
         $bcategory->save();
 
-        Session::flash('success', 'Skill category updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -171,11 +171,11 @@ class SkillCategoryController extends Controller
     public function delete(Request $request){
         $bcategory = SkillCategory::findOrFail($request->bcategory_id);
         if ($bcategory->skills()->count() > 0) {
-            Session::flash('warning', 'First, delete all the skills under this category!');
+            Session::flash('warning', 'First,_delete_all_the_skills_under_this_category!');
             return back();
         }
         $bcategory->delete();
-        Session::flash('success', 'Skill category deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
@@ -186,7 +186,7 @@ class SkillCategoryController extends Controller
         foreach ($ids as $id) {
             $bcategory = SkillCategory::findOrFail($id);
             if ($bcategory->skills()->count() > 0) {
-                Session::flash('warning', 'First, delete all the skills under the selected categories!');
+                Session::flash('warning', 'First,_delete_all_the_skills_under_the_selected_categories!');
                 return "success";
             }
         }
@@ -196,7 +196,7 @@ class SkillCategoryController extends Controller
             $bcategory->delete();
         }
 
-        Session::flash('success', 'Skill categories deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 }

@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class PackageController extends Controller
 {
@@ -23,12 +24,25 @@ class PackageController extends Controller
   
     public function updateSettings(Request $request)
     {
+        
+        $rules = [
+            'expiration_reminder' => 'required',
+        ];
+        $messages = [
+            'expiration_reminder.required' => 'The expiration reminder is required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            $errmsgs = $validator->getMessageBag()->add('error', 'true');
+            return response()->json($validator->errors());
+        }
       $be = BasicExtended::first();
       $be->expiration_reminder = $request->expiration_reminder;
       $be->save();
   
-      $request->session()->flash('success', 'Settings updated successfully!');
-      return back();
+      $request->session()->flash('success', __('Updated successfully!'));
+      return 'success';
     }
     public function features()
     {
@@ -47,8 +61,8 @@ class PackageController extends Controller
           $be->save();
       }
   
-      $request->session()->flash('success', 'Features updated successfully!');
-      return back();
+      $request->session()->flash('success', __('Updated successfully!'));
+      return 'success';
     }
 
     /**
@@ -99,7 +113,7 @@ class PackageController extends Controller
                         'slug' => make_slug($request->title),
                         'features' => $features,
                     ]);
-                Session::flash('success', "Package Created Successfully");
+                Session::flash('success', __("Store successfully!"));
                 return "success";
             });
         } catch (\Throwable $e) {
@@ -164,7 +178,7 @@ class PackageController extends Controller
                             'slug' => make_slug($request->title),
                             'features' => $features,
                         ]);
-                Session::flash('success', "Package Update Successfully");
+                Session::flash('success', __("Updated successfully!"));
                 return "success";
             });
         } catch (\Throwable $e) {
@@ -195,7 +209,7 @@ class PackageController extends Controller
                     }
                 }
                 $package->delete();
-                Session::flash('success', 'Package deleted successfully!');
+                Session::flash('success', __('Deleted successfully!'));
                 return back();
             });
         } catch (\Throwable $e) {
@@ -218,7 +232,7 @@ class PackageController extends Controller
                     }
                     $package->delete();
                 }
-                Session::flash('success', 'Package bulk deletion is successful!');
+                Session::flash('success', __('Bulk deletion is successful!'));
                 return "success";
             });
         } catch (\Throwable $e) {

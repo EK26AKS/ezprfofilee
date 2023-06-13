@@ -5,7 +5,7 @@
     Template Name: Portfolio HTML Template
     Template URI: site.com
     Description: Portfolio HTML Template
-    Author: WebTend 
+    Author: WebTend
     Author URI: https://webtend.net/
     Version: 1.0
 
@@ -13,7 +13,7 @@
 
 
 /*=========================
-    1. Start COMMON css 
+    1. Start COMMON css
 ==========================*/
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Dynalight&family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -233,7 +233,7 @@ button {
 	-webkit-animation: pulseloader infinite 1s linear;
 			animation: pulseloader infinite 1s linear;
   }
-  
+
   @-webkit-keyframes pulseloader {
 	0% {
 	  -webkit-transform: scale(1);
@@ -248,7 +248,7 @@ button {
 			  transform: scale(1);
 	}
   }
-  
+
   @keyframes pulseloader {
 	0% {
 		-webkit-transform: scale(1);
@@ -301,11 +301,11 @@ button {
 */
 
 /*====================
-    End COMMON css 
+    End COMMON css
 ======================*/
 
 /*====================
-    Start Header css 
+    Start Header css
 ======================*/
 .header-area .container-fluid{
 	padding-left: 70px;
@@ -336,7 +336,7 @@ button {
 	-webkit-transition-duration: 300ms;
 	transition-duration: 300ms;
 	width: 30px;
-	
+
 	display: block;
 }
 .navbar-toggler.active span:nth-of-type(1) {
@@ -470,7 +470,7 @@ button {
 	background: linear-gradient(201.22deg, #FEAF2F 23.71%, #FEAF2F 23.72%, #F57236 77.29%);
 }
 /*====================
-    End Header css 
+    End Header css
 ======================*/
 .main-wrapper{
 	position: relative;
@@ -1005,4 +1005,14 @@ button {
 	opacity: 1;
 	visibility: visible;
 	transform: translateX(0px);
+}
+
+.profile-dashboard,
+.profile-sidebar,
+.profile-edit {
+    background-color: #fff;
+}
+.order_payment_box :is(input, textarea, .form_control),
+.profile-edit :is(input, textarea) {
+    border: 1px solid rgba(1, 1, 1, 0.1);
 }

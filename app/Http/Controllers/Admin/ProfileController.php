@@ -63,7 +63,7 @@ class ProfileController extends Controller
 
       $admin->save();
 
-      Session::flash('success', 'Profile updated successfully!');
+      Session::flash('success', __('Updated successfully!'));
 
       return redirect()->back();
     }
@@ -96,7 +96,7 @@ class ProfileController extends Controller
       $user->password = bcrypt($request->password);
       $user->save();
 
-      Session::flash('success', 'Password changed successfully!');
+      Session::flash('success', __('Password changed successfully!'));
 
       return redirect()->back();
     }

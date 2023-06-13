@@ -11,23 +11,21 @@
         $(".request-loader").addClass("show");
         $("#ucategory").removeAttr('disabled');
         $.get(mainurl + "/user/blog/" + langid + "/getcats", function (data) {
-            let options = `<option value="" disabled selected>Select a category</option>`;
+            let options = `<option value="" disabled selected>-</option>`;
             for (let i = 0; i < data.length; i++) {
                 options += `<option value="${data[i].id}">${data[i].name}</option>`;
             }
             $("#ucategory").html(options);
             $(".request-loader").removeClass("show");
-
         });
         $("#pcategory").removeAttr('disabled');
         $.get(mainurl + "/user/portfolio/" + langid + "/getcats", function (data) {
-            let options = `<option value="" disabled selected>Select a category</option>`;
+            let options = `<option value="" disabled selected>-</option>`;
             for (let i = 0; i < data.length; i++) {
                 options += `<option value="${data[i].id}">${data[i].name}</option>`;
             }
             $("#pcategory").html(options);
             $(".request-loader").removeClass("show");
-
         });
         if ($(this).parents('form').hasClass('create')) {
             $.get(mainurl + "/user/rtlcheck/" + $(this).val(), function (data) {
@@ -54,7 +52,7 @@
 
                 } else {
                     $("form.create input, form.create select, form.create textarea").removeClass('rtl');
-                    
+
                     $("form.create .summernote").each(function () {
                         $(this).siblings('.note-editor').find('.note-editable').removeClass('rtl text-right');
                     });
@@ -130,12 +128,9 @@
     // make input fields RTL
     $("select[name='language_id']").on('change', function () {
         $(".request-loader").addClass("show");
-
         // product category load according to language selection
         $("#category").removeAttr('disabled');
-
         let langid = $(this).val();
-
         $("#bcategory").removeAttr('disabled');
         $.get(mainurl + "/admin/blog/" + langid + "/getcats", function (data) {
             let options = `<option value="" disabled selected>Select a category</option>`;
@@ -143,9 +138,7 @@
                 options += `<option value="${data[i].id}">${data[i].name}</option>`;
             }
             $("#bcategory").html(options);
-
         });
-
         if ($(this).parents('form').hasClass('create')) {
             $.get(mainurl + "/admin/rtlcheck/" + $(this).val(), function (data) {
                 $(".request-loader").removeClass("show");
@@ -165,14 +158,12 @@
                             $(this).addClass('rtl');
                         }
                     });
-                    
+
                     $("form.create .summernote").each(function () {
                         $(this).siblings('.note-editor').find('.note-editable').addClass('rtl text-right');
                     });
-
                 } else {
                     $("form.create input, form.create select, form.create textarea").removeClass('rtl');
-                    
                     $("form.create .summernote").each(function () {
                         $(this).siblings('.note-editor').find('.note-editable').removeClass('rtl text-right');
                     });
@@ -200,7 +191,6 @@
                     $("form.modal-form .summernote").each(function () {
                         $(this).siblings('.note-editor').find('.note-editable').addClass('rtl text-right');
                     });
-
                 } else {
                     $("form.modal-form input, form.modal-form select, form.modal-form textarea").removeClass('rtl');
                     $("form.modal-form .summernote").each(function () {
@@ -240,8 +230,6 @@
                 }
             });
         }
-
-
     });
 
     // intro section video background preview
@@ -283,7 +271,7 @@
     });
 
     if ($('.icp').length > 0) {
-        $('.icp').on('iconpickerSelected', function(event){
+        $('.icp').on('iconpickerSelected', function (event) {
             $("#inputIcon").val($(".iconpicker-component").find('i').attr('class'));
         });
     }
@@ -323,10 +311,10 @@
     });
 
     WebFont.load({
-        google: {"families":["Lato:300,400,700,900"]},
-        custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: [mainurl + '/assets/admin/css/fonts.min.css']},
-        active: function() {
-          sessionStorage.fonts = true;
+        google: { "families": ["Lato:300,400,700,900"] },
+        custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: [mainurl + '/assets/admin/css/fonts.min.css'] },
+        active: function () {
+            sessionStorage.fonts = true;
         }
-    });    
+    });
 })(jQuery); 

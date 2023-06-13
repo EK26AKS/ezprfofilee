@@ -11,75 +11,81 @@ use Session;
 
 class RoleController extends Controller
 {
-    public function index() {
-      $data['roles'] = Role::all();
-      return view('admin.role.index', $data);
+  public function index()
+  {
+    $data['roles'] = Role::all();
+    return view('admin.role.index', $data);
+  }
+
+  public function store(Request $request)
+  {
+
+    $rules = [
+      'name' => 'required|max:255',
+    ];
+
+    $validator = Validator::make($request->all(), $rules);
+    if ($validator->fails()) {
+      $errmsgs = $validator->getMessageBag()->add('error', 'true');
+      return response()->json($validator->errors());
     }
 
-    public function store(Request $request) {
+    $role = new Role;
+    $role->name = $request->name;
+    $role->save();
 
-      $rules = [
-        'name' => 'required|max:255',
-      ];
+    Session::flash('success', __('Store successfully!'));
+    return "success";
+  }
 
-      $validator = Validator::make($request->all(), $rules);
-      if ($validator->fails()) {
-        $errmsgs = $validator->getMessageBag()->add('error', 'true');
-        return response()->json($validator->errors());
-      }
+  public function update(Request $request)
+  {
+    $rules = [
+      'name' => 'required|max:255',
+    ];
 
-      $role = new Role;
-      $role->name = $request->name;
-      $role->save();
-
-      Session::flash('success', 'Role added successfully!');
-      return "success";
+    $validator = Validator::make($request->all(), $rules);
+    if ($validator->fails()) {
+      $errmsgs = $validator->getMessageBag()->add('error', 'true');
+      return response()->json($validator->errors());
     }
 
-    public function update(Request $request) {
-      $rules = [
-        'name' => 'required|max:255',
-      ];
+    $role = Role::findOrFail($request->role_id);
+    $role->name = $request->name;
+    $role->save();
 
-      $validator = Validator::make($request->all(), $rules);
-      if ($validator->fails()) {
-        $errmsgs = $validator->getMessageBag()->add('error', 'true');
-        return response()->json($validator->errors());
-      }
+    Session::flash('success', __('Updated successfully!'));
+    return "success";
+  }
 
-      $role = Role::findOrFail($request->role_id);
-      $role->name = $request->name;
-      $role->save();
+  public function delete(Request $request)
+  {
 
-      Session::flash('success', 'Role updated successfully!');
-      return "success";
-    }
-
-    public function delete(Request $request) {
-
-      $role = Role::findOrFail($request->role_id);
-      if ($role->admins()->count() > 0) {
-        Session::flash('warning', 'Please delete the users under this role first.');
-        return back();
-      }
-      $role->delete();
-
-      Session::flash('success', 'Role deleted successfully!');
+    $role = Role::findOrFail($request->role_id);
+    if ($role->admins()->count() > 0) {
+      Session::flash('warning', 'Please delete the users under this role first.');
       return back();
     }
+    $role->delete();
 
-    public function managePermissions($id) {
-      $data['role'] = Role::find($id);
-      return view('admin.role.permission.manage', $data);
-    }
+    Session::flash('success', __('Deleted successfully!'));
+    return back();
+  }
 
-    public function updatePermissions(Request $request) {
-      $permissions = json_encode($request->permissions);
-      $role = Role::find($request->role_id);
-      $role->permissions = $permissions;
-      $role->save();
+  public function managePermissions($id)
+  {
+    $data['role'] = Role::find($id);
+    return view('admin.role.permission.manage', $data);
+  }
 
-      Session::flash('success', "Permissions updated successfully for '$role->name' role");
-      return back();
-    }
+  public function updatePermissions(Request $request)
+  {
+    $permissions = json_encode($request->permissions);
+    $role = Role::find($request->role_id);
+    $role->permissions = $permissions;
+    $role->save();
+
+    Session::flash('success', __('Permissions updated successfully for ') . $role->name . __("Role"));
+    return back();
+  }
 }

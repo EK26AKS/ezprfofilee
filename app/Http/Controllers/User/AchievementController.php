@@ -33,8 +33,8 @@ class AchievementController extends Controller
             ['language_id', '=', $lang->id],
             ['user_id', '=', Auth::id()],
         ])
-        ->orderBy('id', 'DESC')
-        ->get();
+            ->orderBy('id', 'DESC')
+            ->get();
         return view('user.achievement.index', $data);
     }
 
@@ -69,7 +69,7 @@ class AchievementController extends Controller
         $achievement = new Achievement;
         $achievement->create($input);
 
-        Session::flash('success', 'Achievement added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -79,9 +79,13 @@ class AchievementController extends Controller
      * @param  int  $id
      * @return
      */
-    public function edit($id)
+    public function edit(Achievement $achievement)
     {
-        $data['achievement'] = Achievement::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
+        if ($achievement->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', toastrMsg('Authorization_Failed'));
+            return back();
+        }
+        $data['achievement'] = $achievement;
         return view('user.achievement.edit', $data);
     }
 
@@ -115,7 +119,7 @@ class AchievementController extends Controller
         $input['slug'] = $slug;
         $input['user_id'] = Auth::id();
         $achievement->update($input);
-        Session::flash('success', 'Achievement updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -123,7 +127,7 @@ class AchievementController extends Controller
     {
         $achievement = Achievement::where('user_id', Auth::user()->id)->where('id', $request->achievement_id)->firstOrFail();
         $achievement->delete();
-        Session::flash('success', 'Achievement deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
     public function bulkDelete(Request $request)
@@ -133,7 +137,7 @@ class AchievementController extends Controller
             $achievement = Achievement::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
             $achievement->delete();
         }
-        Session::flash('success', 'Achievements deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 }

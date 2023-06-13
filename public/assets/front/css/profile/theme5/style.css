@@ -5,7 +5,7 @@
     Template Name: Portfolio HTML Template
     Template URI: site.com
     Description: Portfolio HTML Template
-    Author: WebTend 
+    Author: WebTend
     Author URI: https://webtend.net/
     Version: 1.0
 
@@ -13,7 +13,7 @@
 
 
 /*=========================
-    1. Start COMMON css 
+    1. Start COMMON css
 ==========================*/
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
@@ -250,12 +250,12 @@ button {
 */
 
 /*====================
-    End COMMON css 
+    End COMMON css
 ======================*/
 
 
 /*=====================
-    Start Header css 
+    Start Header css
 =======================*/
 .navigation-wrapper{
 	position: fixed;
@@ -357,7 +357,7 @@ button {
     position: fixed;
     width: 50px;
     height: 50px;
-	top: 0;
+	  top: 0;
     left: 0;
     display: flex;
     align-items: center;
@@ -395,11 +395,11 @@ button {
 	transform: rotate(-45deg) translateY(-2px);
 }
 /*=====================
-    End Header css 
+    End Header css
 =======================*/
 
 /*=====================
-    Start Hero css 
+    Start Hero css
 =======================*/
 .main-wrapper{
 	margin-left: 300px;
@@ -467,11 +467,11 @@ button {
 }
 
 /*=====================
-    End Hero css 
+    End Hero css
 =======================*/
 
 /*=====================
-    Start About css 
+    Start About css
 =======================*/
 
 .about-content-box p{
@@ -479,11 +479,11 @@ button {
 }
 
 /*=====================
-    Start Skills css 
+    Start Skills css
 =======================*/
 
 /*=====================
-    Start Skills css 
+    Start Skills css
 =======================*/
 .skills-content-box p{
 	margin-bottom: 20px;
@@ -513,11 +513,11 @@ button {
 	float: right;
 }
 /*=======================
-    End Skills css 
+    End Skills css
 ==========================*/
 
 /*=========================
-    Start Service css 
+    Start Service css
 ==========================*/
 .service-item-one .service-img{
 	position: relative;
@@ -534,11 +534,11 @@ button {
 	font-size: 19px;
 }
 /*=========================
-    End Service css 
+    End Service css
 ==========================*/
 
 /*=========================
-    Start Resume css 
+    Start Resume css
 ==========================*/
 .resume-title{
 	margin-bottom: 40px;
@@ -588,11 +588,11 @@ button {
 	color: rgba(11, 8, 64, 0.44);
 }
 /*=========================
-    End Resume css 
+    End Resume css
 ==========================*/
 
 /*=========================
-    Start Counter css 
+    Start Counter css
 ==========================*/
 
 .counter-wrapper-one{
@@ -624,11 +624,11 @@ button {
 	font-weight: 600;
 }
 /*=========================
-    End Counter css 
+    End Counter css
 ==========================*/
 
 /*=========================
-    Start Portfolio css 
+    Start Portfolio css
 ==========================*/
 .portfolio-filter-button .filter-btn li{
 	display: inline-block;
@@ -674,11 +674,11 @@ button {
 	color: var(--white);
 }
 /*=========================
-    End Portfolio css 
+    End Portfolio css
 ==========================*/
 
 /*=========================
-    Start Testimonial css 
+    Start Testimonial css
 ==========================*/
 .testimonial-slider-one{
 	margin-left: -15px;
@@ -723,11 +723,11 @@ button {
 	border-radius: 50%;
 }
 /*=======================
-    End Testimonial css 
+    End Testimonial css
 ========================*/
 
 /*====================
-    Start Blog css 
+    Start Blog css
 ======================*/
 .blog-post-item-one .post-thumbnail img{
 	width: 100%;
@@ -762,11 +762,11 @@ button {
 	margin-right: 5px;
 }
 /*====================
-    End Blog css 
+    End Blog css
 ======================*/
 
 /*====================
-    Start Contact css 
+    Start Contact css
 ======================*/
 
 .contact-form-wrap form .form_control{
@@ -779,12 +779,12 @@ button {
 }
 
 /*====================
-    End Contact css 
+    End Contact css
 ======================*/
 
 
 /*====================
-    Start Footer css 
+    Start Footer css
 ======================*/
 .footer-wrapper-one{
     background-color: #222F5A;
@@ -817,7 +817,7 @@ button {
     color: #222F5A;
 }
 /*====================
-    End Footer css 
+    End Footer css
 ======================*/
 
 section.single-page-details {
@@ -834,9 +834,11 @@ section.single-page-details {
 .lds-ellipsis img {
     max-width: 150px;
 }
-.language-selector {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 100;
+.order_payment_box :is(input, textarea, .form_control),
+.profile-edit :is(input, textarea) {
+    border: 1px solid rgba(1, 1, 1, 0.1);
+}
+
+.header-area .nav-right{
+	background-color: #121736;
 }

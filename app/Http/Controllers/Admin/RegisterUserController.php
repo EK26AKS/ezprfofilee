@@ -2,24 +2,29 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Helpers\MegaMailer;
-use App\Http\Helpers\UserPermissionHelper;
-use App\Models\BasicExtended;
-use App\Models\BasicSetting;
-use App\Models\Membership;
-use App\Models\OfflineGateway;
-use App\Models\Package;
-use App\Models\PaymentGateway;
-use App\Models\User;
-use App\Models\User\BasicSetting as UserBasicSetting;
-use App\Models\User\Language;
-use App\Models\User\UserPermission;
-use Carbon\Carbon;
 use Hash;
 use Session;
 use Validator;
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Package;
+use App\Models\Membership;
+use App\Models\BasicSetting;
+use Illuminate\Http\Request;
+use App\Models\BasicExtended;
+use App\Models\User\Language;
+use App\Models\OfflineGateway;
+use App\Models\PaymentGateway;
+use App\Http\Helpers\MegaMailer;
+use App\Models\User\HomePageText;
+use App\Models\User\UserDay as Day;
+use App\Models\User\UserPermission;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User\UserEmailTemplate;
+use App\Models\User\UserPaymentGateway;
+use App\Http\Helpers\UserPermissionHelper;
+use App\Models\User\BasicSetting as UserBasicSetting;
 
 class RegisterUserController extends Controller
 {
@@ -27,7 +32,7 @@ class RegisterUserController extends Controller
     {
         $term = $request->term;
 
-        $users = User::when($term, function($query, $term) {
+        $users = User::when($term, function ($query, $term) {
             $query->where('username', 'like', '%' . $term . '%')->orWhere('email', 'like', '%' . $term . '%');
         })->orderBy('id', 'DESC')->paginate(10);
 
@@ -36,7 +41,7 @@ class RegisterUserController extends Controller
         $gateways = $online->merge($offline);
         $packages = Package::query()->where('status', '1')->get();
 
-        return view('admin.register_user.index',compact('users', 'gateways', 'packages'));
+        return view('admin.register_user.index', compact('users', 'gateways', 'packages'));
     }
 
     public function view($id)
@@ -48,12 +53,11 @@ class RegisterUserController extends Controller
         $offline = OfflineGateway::where('status', 1)->get();
         $gateways = $online->merge($offline);
 
-        return view('admin.register_user.details',compact('user', 'packages', 'gateways'));
-
+        return view('admin.register_user.details', compact('user', 'packages', 'gateways'));
     }
 
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
         $rules = [
             'username' => 'required|alpha_num|unique:users',
             'email' => 'required|email|unique:users',
@@ -62,18 +66,15 @@ class RegisterUserController extends Controller
             'payment_gateway' => 'required',
             'online_status' => 'required'
         ];
-
         $messages = [
             'package_id.required' => 'The package field is required',
             'online_status.required' => 'The publicly hidden field is required'
         ];
-
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             $errmsgs = $validator->getMessageBag()->add('error', 'true');
             return response()->json($validator->errors());
         }
-
         $user = User::where('username', $request['username']);
         if ($user->count() == 0) {
             $user = User::create([
@@ -84,26 +85,72 @@ class RegisterUserController extends Controller
                 'status' => 1,
                 'email_verified' => 1,
             ]);
-
             UserBasicSetting::create([
                 'user_id' => $user->id,
+                'email' => $user->email,
+                'website_title' => $user->username,
+                'from_name' => $user->username,
             ]);
         }
-        
         if ($user) {
             $deLang = Language::firstOrFail();
             $langCount = Language::where('user_id', $user->id)->where('is_default', 1)->count();
             if ($langCount == 0) {
-                Language::create([
-                    'name' => 'English',
-                    'code' => 'en',
+                $language = Language::create([
+                    'name' => $deLang->name,
+                    'code' => $deLang->code,
                     'is_default' => 1,
-                    'rtl' => 0,
+                    'rtl' => $deLang->rtl,
                     'user_id' => $user->id,
                     'keywords' => $deLang->keywords
                 ]);
+                HomePageText::create([
+                    'user_id' => $user->id,
+                    'language_id' => $language->id
+                ]);
+            }
+            // create Day table 
+            $days = [
+                'Sunday' => 0,
+                'Monday' => 1,
+                'Tuesday' => 2,
+                'Wednesday' => 3,
+                'Thursday' => 4,
+                'Friday' => 5,
+                'Saturday' => 6
+            ];
+            foreach ($days as $key => $index) {
+                Day::create([
+                    'user_id' => $user->id,
+                    'day' => $key,
+                    'index' => $index,
+                ]);
             }
 
+            // create payment gateways 
+            $payment_keywords = ['flutterwave', 'razorpay', 'paytm', 'paystack', 'instamojo', 'stripe', 'paypal', 'mollie', 'mercadopago', 'authorize.net'];
+            foreach ($payment_keywords as $key => $value) {
+                UserPaymentGateway::create([
+                    'title' => null,
+                    'user_id' => $user->id,
+                    'details' => null,
+                    'keyword' => $value,
+                    'subtitle' => null,
+                    'name' => ucfirst($value),
+                    'type' => 'automatic',
+                    'information' => null
+                ]);
+            }
+            // create email template 
+            $templates = ['email_verification', 'appointment_booking_notification', 'reset_password'];
+            foreach ($templates as $key => $val) {
+                UserEmailTemplate::create([
+                    'user_id' => $user->id,
+                    'email_type' => $val,
+                    'email_subject' => str_replace('_', ' ', $val),
+                    'email_body' => '<p></p>',
+                ]);
+            }
             $package = Package::find($request['package_id']);
             $be = BasicExtended::first();
             $bs = BasicSetting::select('website_title')->first();
@@ -117,7 +164,6 @@ class RegisterUserController extends Controller
             } elseif ($package->term === "lifetime") {
                 $endDate = Carbon::maxValue()->format('d-m-Y');
             }
-
             Membership::create([
                 'price' => $package->price,
                 'currency' => $be->base_currency_text ? $be->base_currency_text : "USD",
@@ -140,6 +186,7 @@ class RegisterUserController extends Controller
             $features[] = "Contact";
             $features[] = "Footer Mail";
             $features[] = "Profile Listing";
+
             UserPermission::create([
                 'package_id' => $request['package_id'],
                 'user_id' => $user->id,
@@ -152,7 +199,7 @@ class RegisterUserController extends Controller
                 'expire_date' => $endDate,
                 'payment_method' => $request['payment_gateway']
             ];
-            $file_name = $this->makeInvoice($requestData,"membership",$user,null,$package->price,$request['payment_gateway'],null,$be->base_currency_symbol_position,$be->base_currency_symbol,$be->base_currency_text,$transaction_id,$package->title);
+            $file_name = $this->makeInvoice($requestData, "membership", $user, null, $package->price, $request['payment_gateway'], null, $be->base_currency_symbol_position, $be->base_currency_symbol, $be->base_currency_text, $transaction_id, $package->title);
 
             $mailer = new MegaMailer();
             $startDate = Carbon::parse($startDate);
@@ -173,18 +220,26 @@ class RegisterUserController extends Controller
             $mailer->mailFromAdmin($data);
         }
 
-        Session::flash('success', 'User added successfully!');
+        Session::flash('success', __('Store successfully!'));
         return "success";
+    }
+    public function secretLogin(Request $request)
+    {
+        $user = User::where('id', $request->user_id)->first();
+        if (Auth::guard('web')->login($user, true)) {
+            return redirect()->route('user-dashboard')
+                ->withSuccess('You have Successfully loggedin');
+        }
+        return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
     }
 
     public function userban(Request $request)
     {
-        $user = User::where('id',$request->user_id)->first();
+        $user = User::where('id', $request->user_id)->first();
         $user->status = $request->status;
         $user->save();
-        Session::flash('success', 'Status update successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return back();
-
     }
 
 
@@ -195,17 +250,17 @@ class RegisterUserController extends Controller
             'email_verified' => $request->email_verified,
         ]);
 
-        Session::flash('success', 'Email status updated for ' . $user->username);
+        Session::flash('success', __('Email status updated for ') . $user->username);
         return back();
     }
 
     public function userFeatured(Request $request)
     {
-        $user = User::where('id',$request->user_id)->first();
+        $user = User::where('id', $request->user_id)->first();
         $user->featured = $request->featured;
         $user->feature_time = now();
         $user->save();
-        Session::flash('success', 'User featured update successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 
@@ -215,7 +270,7 @@ class RegisterUserController extends Controller
         if ($request->template == 1) {
             $prevImg = $request->file('preview_image');
             $allowedExts = array('jpg', 'png', 'jpeg');
-    
+
             $rules = [
                 'serial_number' => 'required|integer',
                 'preview_image' => [
@@ -230,12 +285,12 @@ class RegisterUserController extends Controller
                     },
                 ]
             ];
-    
-    
+
+
             $request->validate($rules);
         }
 
-        $user = User::where('id',$request->user_id)->first();
+        $user = User::where('id', $request->user_id)->first();
 
         if ($request->template == 1) {
             if ($request->hasFile('preview_image')) {
@@ -254,7 +309,7 @@ class RegisterUserController extends Controller
         }
         $user->preview_template = $request->template;
         $user->save();
-        Session::flash('success', 'Status updated successfully!');
+        Session::flash('success', __('Status updated successfully!'));
         return back();
     }
 
@@ -276,17 +331,17 @@ class RegisterUserController extends Controller
                 },
             ]
         ];
-    
-    
+
+
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             $errmsgs = $validator->getMessageBag()->add('error', 'true');
             return response()->json($validator->errors());
         }
 
-        $user = User::where('id',$request->user_id)->first();
+        $user = User::where('id', $request->user_id)->first();
 
-        
+
         if ($request->hasFile('preview_image')) {
             @unlink(public_path('assets/front/img/template-previews/' . $user->template_img));
             $filename = uniqid() . '.' . $prevImg->getClientOriginalExtension();
@@ -298,13 +353,14 @@ class RegisterUserController extends Controller
         $user->template_serial_number = $request->serial_number;
         $user->save();
 
-        
-        Session::flash('success', 'Status updated successfully!');
+
+        Session::flash('success', __('Status updated successfully!'));
         return "success";
     }
 
 
-    public function changePass($id) {
+    public function changePass($id)
+    {
         $data['user'] = User::findOrFail($id);
         return view('admin.register_user.password', $data);
     }
@@ -333,7 +389,7 @@ class RegisterUserController extends Controller
 
         $user->update($input);
 
-        Session::flash('success', 'Password update for ' . $user->username);
+        Session::flash('success', __('Password update for ') . $user->username);
         return back();
     }
 
@@ -438,7 +494,7 @@ class RegisterUserController extends Controller
         }
 
         if ($user->memberships()->count() > 0) {
-            foreach($user->memberships as $key => $membership) {
+            foreach ($user->memberships as $key => $membership) {
                 @unlink(public_path('assets/front/img/membership/receipt/' . $membership->receipt));
                 $membership->delete();
             }
@@ -451,6 +507,8 @@ class RegisterUserController extends Controller
         if ($user->custom_domains()->count() > 0) {
             $user->custom_domains()->delete();
         }
+
+
 
         if ($user->cvs()->count() > 0) {
             $cvs = $user->cvs;
@@ -479,11 +537,47 @@ class RegisterUserController extends Controller
                 $vcard->delete();
             }
         }
+        // Appointment related delations start
+        if ($user->appointments()->count() > 0) {
+            $user->appointments()->delete();
+        }
+        if ($user->appointment_categories()->count() > 0) {
+            $categories = $user->appointment_categories;
+            foreach ($categories as $key => $cate) {
+                @unlink(public_path('assets/user/img/category/' . $cate->image));
+                $cate->delete();
+            }
+        }
+        if ($user->form_inputs()->count() > 0) {
+            $form_inputs = $user->form_inputs;
+            foreach ($form_inputs as $key => $forminput) {
+                if ($forminput->form_input_options()->count() > 0) {
+                    $forminput->form_input_options()->delete();
+                }
+                $user->form_inputs()->delete();
+            }
+        }
+        if ($user->email_templates()->count() > 0) {
+            $user->email_templates()->delete();
+        }
+        if ($user->holidays()->count() > 0) {
+            $user->holidays()->delete();
+        }
+        if ($user->offline_payment_gateways()->count() > 0) {
+            $user->offline_payment_gateways()->delete();
+        }
+        if ($user->payment_gateways()->count() > 0) {
+            $user->payment_gateways()->delete();
+        }
+        if ($user->days()->count() > 0) {
+            $user->days()->delete();
+        }
+        // Appointment related delations end
 
         @unlink(public_path('assets/front/img/user/' . $user->photo));
         $user->delete();
 
-        Session::flash('success', 'User deleted successfully!');
+        Session::flash('success', __('Deleted successfully!'));
         return back();
     }
 
@@ -501,15 +595,15 @@ class RegisterUserController extends Controller
                     $tstm->delete();
                 }
             }
-    
+
             if ($user->social_media()->count() > 0) {
                 $user->social_media()->delete();
             }
-    
+
             if ($user->skills()->count() > 0) {
                 $user->skills()->delete();
             }
-    
+
             if ($user->services()->count() > 0) {
                 $services = $user->services()->get();
                 foreach ($services as $key => $service) {
@@ -517,11 +611,11 @@ class RegisterUserController extends Controller
                     $service->delete();
                 }
             }
-    
+
             if ($user->seos()->count() > 0) {
                 $user->seos()->delete();
             }
-    
+
             if ($user->portfolios()->count() > 0) {
                 $portfolios = $user->portfolios()->get();
                 foreach ($portfolios as $key => $portfolio) {
@@ -535,19 +629,19 @@ class RegisterUserController extends Controller
                     $portfolio->delete();
                 }
             }
-    
+
             if ($user->portfolioCategories()->count() > 0) {
                 $user->portfolioCategories()->delete();
             }
-    
+
             if ($user->permission()->count() > 0) {
                 $user->permission()->delete();
             }
-    
+
             if ($user->languages()->count() > 0) {
                 $user->languages()->delete();
             }
-    
+
             if ($user->home_page_texts()->count() > 0) {
                 $homeTexts = $user->home_page_texts()->get();
                 foreach ($homeTexts as $key => $homeText) {
@@ -558,15 +652,15 @@ class RegisterUserController extends Controller
                     $homeText->delete();
                 }
             }
-    
+
             if ($user->educations()->count() > 0) {
                 $user->educations()->delete();
             }
-    
+
             if ($user->blog_categories()->count() > 0) {
                 $user->blog_categories()->delete();
             }
-    
+
             if ($user->blogs()->count() > 0) {
                 $blogs = $user->blogs()->get();
                 foreach ($blogs as $key => $blog) {
@@ -574,7 +668,7 @@ class RegisterUserController extends Controller
                     $blog->delete();
                 }
             }
-    
+
             if ($user->basic_setting()->count() > 0) {
                 $bs = $user->basic_setting;
                 @unlink(public_path('assets/front/img/user/' . $bs->logo));
@@ -585,18 +679,18 @@ class RegisterUserController extends Controller
                 @unlink(public_path('assets/front/img/user/qr/' . $bs->qr_inserted_image));
                 $bs->delete();
             }
-    
+
             if ($user->achievements()->count() > 0) {
                 $user->achievements()->delete();
             }
 
             if ($user->memberships()->count() > 0) {
-                foreach($user->memberships as $key => $membership) {
+                foreach ($user->memberships as $key => $membership) {
                     @unlink(public_path('assets/front/img/membership/receipt/' . $membership->receipt));
                     $membership->delete();
                 }
             }
-    
+
             if ($user->job_experiences()->count() > 0) {
                 $user->job_experiences()->delete();
             }
@@ -604,7 +698,7 @@ class RegisterUserController extends Controller
             if ($user->custom_domains()->count() > 0) {
                 $user->custom_domains()->delete();
             }
-    
+
             if ($user->cvs()->count() > 0) {
                 $cvs = $user->cvs;
                 foreach ($cvs as $key => $cv) {
@@ -615,7 +709,7 @@ class RegisterUserController extends Controller
                     $cv->delete();
                 }
             }
-    
+
             if ($user->qr_codes()->count() > 0) {
                 $qrs = $user->qr_codes;
                 foreach ($qrs as $key => $qr) {
@@ -623,7 +717,7 @@ class RegisterUserController extends Controller
                     $qr->delete();
                 }
             }
-    
+
             if ($user->vcards()->count() > 0) {
                 $vcards = $user->vcards;
                 foreach ($vcards as $key => $vcard) {
@@ -632,16 +726,54 @@ class RegisterUserController extends Controller
                     $vcard->delete();
                 }
             }
-    
+
+            // Appointment related delations start
+            if ($user->appointments()->count() > 0) {
+                $user->appointments()->delete();
+            }
+            if ($user->appointment_categories()->count() > 0) {
+                $categories = $user->appointment_categories;
+                foreach ($categories as $key => $cate) {
+                    @unlink(public_path('assets/user/img/category/' . $cate->image));
+                    $cate->delete();
+                }
+            }
+            if ($user->form_inputs()->count() > 0) {
+                $form_inputs = $user->form_inputs;
+                foreach ($form_inputs as $key => $forminput) {
+                    if ($forminput->form_input_options()->count() > 0) {
+                        $forminput->form_input_options()->delete();
+                    }
+                    $user->form_inputs()->delete();
+                }
+            }
+            if ($user->email_templates()->count() > 0) {
+                $user->email_templates()->delete();
+            }
+            if ($user->holidays()->count() > 0) {
+                $user->holidays()->delete();
+            }
+            if ($user->offline_payment_gateways()->count() > 0) {
+                $user->offline_payment_gateways()->delete();
+            }
+            if ($user->payment_gateways()->count() > 0) {
+                $user->payment_gateways()->delete();
+            }
+            if ($user->days()->count() > 0) {
+                $user->days()->delete();
+            }
+            // Appointment related delations end
+
             @unlink(public_path('assets/front/img/user/' . $user->photo));
             $user->delete();
         }
 
-        Session::flash('success', 'Users deleted successfully!');
+        Session::flash('success', __('Deleted successfully!'));
         return "success";
     }
 
-    public function removeCurrPackage(Request $request) {
+    public function removeCurrPackage(Request $request)
+    {
         $userId = $request->user_id;
         $user = User::findOrFail($userId);
         $currMembership = UserPermissionHelper::currMembOrPending($userId);
@@ -659,7 +791,7 @@ class RegisterUserController extends Controller
             $currMembership->status = 2;
         }
         $currMembership->save();
-            
+
         // if next package exists
         if (!empty($nextMembership)) {
             $nextPackage = Package::find($nextMembership->package_id);
@@ -677,12 +809,13 @@ class RegisterUserController extends Controller
 
         $this->sendMail(NULL, NULL, $request->payment_method, $user, $bs, $be, 'admin_removed_current_package', NULL, $currPackage->title);
 
-        Session::flash('success', 'Current Package removed successfully!');
+        Session::flash('success', __('Current Package removed successfully!'));
         return back();
     }
 
 
-    public function sendMail($memb, $package, $paymentMethod, $user, $bs, $be, $mailType, $replacedPackage = NULL, $removedPackage = NULL) {
+    public function sendMail($memb, $package, $paymentMethod, $user, $bs, $be, $mailType, $replacedPackage = NULL, $removedPackage = NULL)
+    {
 
         if ($mailType != 'admin_removed_current_package' && $mailType != 'admin_removed_next_package') {
             $transaction_id = UserPermissionHelper::uniqidReal(8);
@@ -692,7 +825,7 @@ class RegisterUserController extends Controller
             $info['expire_date'] = $expire->toFormattedDateString();
             $info['payment_method'] = $paymentMethod;
 
-            $file_name = $this->makeInvoice($info,"membership",$user,NULL,$package->price,"Stripe",$user->phone,$be->base_currency_symbol_position,$be->base_currency_symbol,$be->base_currency_text,$transaction_id,$package->title);
+            $file_name = $this->makeInvoice($info, "membership", $user, NULL, $package->price, "Stripe", $user->phone, $be->base_currency_symbol_position, $be->base_currency_symbol, $be->base_currency_text, $transaction_id, $package->title);
         }
 
         $mailer = new MegaMailer();
@@ -703,7 +836,7 @@ class RegisterUserController extends Controller
             'website_title' => $bs->website_title,
             'templateType' => $mailType
         ];
-        
+
         if ($mailType != 'admin_removed_current_package' && $mailType != 'admin_removed_next_package') {
             $data['package_title'] = $package->title;
             $data['package_price'] = ($be->base_currency_text_position == 'left' ? $be->base_currency_text . ' ' : '') . $package->price . ($be->base_currency_text_position == 'right' ? ' ' . $be->base_currency_text : '');
@@ -723,7 +856,8 @@ class RegisterUserController extends Controller
     }
 
 
-    public function changeCurrPackage(Request $request) {
+    public function changeCurrPackage(Request $request)
+    {
         $userId = $request->user_id;
         $user = User::findOrFail($userId);
         $currMembership = UserPermissionHelper::currMembOrPending($userId);
@@ -731,9 +865,9 @@ class RegisterUserController extends Controller
 
         $be = BasicExtended::first();
         $bs = BasicSetting::select('website_title')->first();
-        
+
         $selectedPackage = Package::find($request->package_id);
-        
+
         // if the user has a next package to activate & selected package is 'lifetime' package
         if (!empty($nextMembership) && $selectedPackage->term == 'lifetime') {
             Session::flash('membership_warning', 'To add a Lifetime package as Current Package, You have to remove the next package');
@@ -792,23 +926,24 @@ class RegisterUserController extends Controller
             }
             $nextMembership->expire_date = $exDate;
             $nextMembership->save();
-        } 
-        
+        }
+
 
         $currentPackage = Package::select('title')->findOrFail($currMembership->package_id);
         $this->sendMail($selectedMemb, $selectedPackage, $request->payment_method, $user, $bs, $be, 'admin_changed_current_package', $currentPackage->title);
 
 
-        Session::flash('success', 'Current Package changed successfully!');
+        Session::flash('success', __('Current Package changed successfully!'));
         return back();
     }
 
-    public function addCurrPackage(Request $request) {
+    public function addCurrPackage(Request $request)
+    {
         $userId = $request->user_id;
         $user = User::findOrFail($userId);
         $be = BasicExtended::first();
         $bs = BasicSetting::select('website_title')->first();
-        
+
         $selectedPackage = Package::find($request->package_id);
 
         // calculate expire date for selected package
@@ -840,11 +975,12 @@ class RegisterUserController extends Controller
 
         $this->sendMail($selectedMemb, $selectedPackage, $request->payment_method, $user, $bs, $be, 'admin_added_current_package');
 
-        Session::flash('success', 'Current Package has been added successfully!');
+        Session::flash('success', __('Current Package has been added successfully!'));
         return back();
     }
 
-    public function removeNextPackage(Request $request) {
+    public function removeNextPackage(Request $request)
+    {
         $userId = $request->user_id;
         $user = User::findOrFail($userId);
         $be = BasicExtended::first();
@@ -860,11 +996,12 @@ class RegisterUserController extends Controller
 
         $this->sendMail(NULL, NULL, $request->payment_method, $user, $bs, $be, 'admin_removed_next_package', NULL, $nextPackage->title);
 
-        Session::flash('success', 'Next Package removed successfully!');
+        Session::flash('success', __('Next Package removed successfully!'));
         return back();
     }
 
-    public function changeNextPackage(Request $request) {
+    public function changeNextPackage(Request $request)
+    {
         $userId = $request->user_id;
         $user = User::findOrFail($userId);
         $bs = BasicSetting::select('website_title')->first();
@@ -872,7 +1009,7 @@ class RegisterUserController extends Controller
         $nextMembership = UserPermissionHelper::nextMembership($userId);
         $nextPackage = Package::find($nextMembership->package_id);
         $selectedPackage = Package::find($request->package_id);
-        
+
         $prevStartDate = $nextMembership->start_date;
         // set the start_date to unlimited
         $nextMembership->start_date = Carbon::parse(Carbon::maxValue()->format('d-m-Y'));
@@ -906,18 +1043,17 @@ class RegisterUserController extends Controller
             'is_trial' => 0,
             'trial_days' => 0,
         ]);
-
         $this->sendMail($selectedMemb, $selectedPackage, $request->payment_method, $user, $bs, $be, 'admin_changed_next_package', $nextPackage->title);
-
-        Session::flash('success', 'Next Package changed successfully!');
+        Session::flash('success', __('Next Package changed successfully!'));
         return back();
     }
 
-    public function addNextPackage(Request $request) {
-        $userId = $request->user_id;
+    public function addNextPackage(Request $request)
+    {
 
+        $userId = $request->user_id;
         $hasPendingMemb = UserPermissionHelper::hasPendingMembership($userId);
-        if($hasPendingMemb) {
+        if ($hasPendingMemb) {
             Session::flash('membership_warning', 'This user already has a Pending Package. Please take an action (change / remove / approve / reject) for that package first.');
             return back();
         }
@@ -927,9 +1063,7 @@ class RegisterUserController extends Controller
         $be = BasicExtended::first();
         $user = User::findOrFail($userId);
         $bs = BasicSetting::select('website_title')->first();
-        
         $selectedPackage = Package::find($request->package_id);
-
         if ($currMembership->is_trial == 1) {
             Session::flash('membership_warning', 'If your current package is trial package, then you have to change / remove the current package first.');
             return back();
@@ -972,9 +1106,17 @@ class RegisterUserController extends Controller
         }
 
 
-        Session::flash('success', 'Next Package has been added successfully!');
+        Session::flash('success', __('Next Package has been added successfully!'));
         return back();
     }
 
+    public function changeOnlineStatus(Request $request,$id)
+    {
+        User::find($id)->update([
+            'online_status' => $request->online_status
+        ]);
 
+        Session::flash('success', __('Publicly Hidden Status Changed successfully!'));
+        return back();
+    }
 }

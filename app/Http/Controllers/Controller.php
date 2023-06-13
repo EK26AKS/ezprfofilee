@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Language;
+use App\Models\User\Language as UserLanguage;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -120,5 +121,35 @@ class Controller extends BaseController
                 return back();
             }
         }
+    }
+
+    public function getUserCurrentLanguage($userId)
+    {
+        if (session()->has('user_lang')) {
+            $userCurrentLang = UserLanguage::where('code', session()->get('user_lang'))->where('user_id', $userId)->firstOrFail();
+            if (empty($userCurrentLang)) {
+                $userCurrentLang = UserLanguage::where('is_default', 1)->where('user_id', $userId)->firstOrFail();
+                session()->put('user_lang', $userCurrentLang->code);
+            }
+        } else {
+            $userCurrentLang = UserLanguage::where('is_default', 1)->where('user_id', $userId)->firstOrFail();
+        }
+        return $userCurrentLang;
+    }
+
+
+    // tanent user invoice 
+    public function userMakeInvoice($request, $member, $appointment, $category, $amount, $payment_method, $base_currency_symbol_position, $base_currency_symbol, $base_currency_text, $order_id)
+    {
+        $file_name = uniqid(8) . ".pdf";
+        $pdf = PDF::setOptions([
+            'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true,
+            'logOutputFile' => storage_path('logs/log.htm'),
+            'tempDir' => storage_path('logs/')
+        ])->loadView('pdf.user_appointment', compact('request', 'member', 'appointment','category', 'amount', 'payment_method', 'base_currency_symbol_position', 'base_currency_symbol', 'base_currency_text', 'order_id'));
+        $output = $pdf->output();
+        @mkdir(public_path('assets/front/invoices/'), 0775, true);
+        file_put_contents(public_path('assets/front/invoices/' . $file_name), $output);
+        return $file_name;
     }
 }

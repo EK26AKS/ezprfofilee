@@ -14,12 +14,14 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
-            if (\Request::is('admin') || \Request::is('admin/*')){
+        if (!$request->expectsJson()) {
+            if (\Request::is('admin') || \Request::is('admin/*')) {
                 return route('admin.login');
-            }else{
+            } elseif (str_contains(\Request::route()->getPrefix(), '{username}/user') || (str_contains(\Request::route()->getPrefix(), 'user') && \Request::getHost() != env('WEBSITE_HOST'))) {
+                return route('customer.login', getParam());
+            } else {
                 return route('user.login');
-            } 
+            }
         }
     }
 }

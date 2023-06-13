@@ -27,7 +27,7 @@ class SitemapController extends Controller
         $input['sitemap_url'] = $request->sitemap_url;
         $data->fill($input)->save();
 
-        Session::flash('success', 'Sitemap Generate Successfully');
+        Session::flash('success', __('Sitemap Generate Successfully'));
         return "success";
     }
 
@@ -46,7 +46,7 @@ class SitemapController extends Controller
         $input['filename']  = $filename;
 
         $data->update($input);
-        Session::flash('success', 'Feed updated successfully!');
+        Session::flash('success', __('Feed updated successfully!'));
         return back();
     }
 
@@ -55,7 +55,7 @@ class SitemapController extends Controller
     @unlink(public_path('assets/front/files/'.$sitemap->filename));
     $sitemap->delete();
 
-    Session::flash('success', 'Sitemap file deleted successfully!');
+    Session::flash('success', __('Sitemap file deleted successfully!'));
     return back();
     }
 }

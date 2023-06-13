@@ -33,7 +33,7 @@ class CustomDomainController extends Controller
         $be->cname_record_section_text = clean($request->cname_record_section_text);
         $be->save();
 
-        $request->session()->flash('success', 'Texts updated successfully');
+        $request->session()->flash('success', __('Updated successfully'));
         return back();
     }
 
@@ -113,7 +113,7 @@ class CustomDomainController extends Controller
             }
         }
 
-        $request->session()->flash('success', 'Status updated successfully');
+        $request->session()->flash('success', __('Updated successfully'));
         return back();
     }
 
@@ -141,6 +141,8 @@ class CustomDomainController extends Controller
 
         // Send Mail
         $mail = new PHPMailer(true);
+        $mail->CharSet = 'UTF-8';
+        $mail->Encoding = 'base64';
 
         if ($be->is_smtp == 1) {
             try {
@@ -183,7 +185,7 @@ class CustomDomainController extends Controller
             }
         }
 
-        Session::flash('success', 'Mail sent successfully!');
+        Session::flash('success', __('Mail sent successfully!'));
         return "success";
     }
 
@@ -192,7 +194,7 @@ class CustomDomainController extends Controller
         $domainId = $request->domain_id;
         $cdomain = UserCustomDomain::findOrFail($domainId);
         $cdomain->delete();
-        $request->session()->flash('success', 'Custom domain deleted successfully!');
+        $request->session()->flash('success', __('Deleted successfully!'));
         return redirect()->back();
     }
 
@@ -204,7 +206,7 @@ class CustomDomainController extends Controller
             $cdomain = UserCustomDomain::findOrFail($id);
             $cdomain->delete();
         }
-        $request->session()->flash('success', 'Custom domains deleted successfully!');
+        $request->session()->flash('success', __('Bulk deleted successfully!'));
         return "success";
     }
 }

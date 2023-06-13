@@ -87,7 +87,7 @@ class IntrosectionController extends Controller
         $input['intro_text'] = Purifier::clean($request->intro_text);
         $bs->update($input);
 
-        Session::flash('success', 'data updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return "success";
     }
 
@@ -103,7 +103,7 @@ class IntrosectionController extends Controller
             $bs->save();
         }
 
-        $request->session()->flash('success', 'Image removed successfully!');
+        $request->session()->flash('success', __('Image removed successfully!'));
         return "success";
     }
 }

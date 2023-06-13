@@ -112,6 +112,7 @@ class PopupController extends Controller
 
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
+            $errmsgs = $validator->getMessageBag()->add('error', 'true');
             return response()->json($validator->errors());
         }
 
@@ -176,7 +177,7 @@ class PopupController extends Controller
 
         $popup->save();
 
-        Session::flash('success', 'Popup added successfully!');
+        Session::flash('success', __('Store successfully!'));
         return "success";
     }
 
@@ -323,7 +324,7 @@ class PopupController extends Controller
 
         $popup->save();
 
-        Session::flash('success', 'Popup updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return "success";
     }
 
@@ -336,33 +337,29 @@ class PopupController extends Controller
         @unlink(public_path('assets/front/img/popups/' . $popup->background_image));
         $popup->delete();
 
-        Session::flash('success', 'Popup deleted successfully!');
+        Session::flash('success', __('Deleted successfully!'));
         return back();
     }
 
     public function bulkDelete(Request $request)
     {
         $ids = $request->ids;
-
         foreach ($ids as $id) {
             $popup = Popup::findOrFail($id);
             @unlink(public_path('assets/front/img/popups/' . $popup->image));
             @unlink(public_path('assets/front/img/popups/' . $popup->background_image));
             $popup->delete();
         }
-
-        Session::flash('success', 'Popups deleted successfully!');
+        Session::flash('success', __('Bulk deleted successfully!'));
         return "success";
     }
 
     public function status(Request $request)
     {
-
         $po = Popup::find($request->popup_id);
         $po->status = $request->status;
         $po->save();
-
-        Session::flash('success', 'Status changed!');
+        Session::flash('success', __('Status changed!'));
         return back();
     }
 }

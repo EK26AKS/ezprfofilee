@@ -75,7 +75,7 @@ class TestimonialController extends Controller
 
         $testimonial->create($input);
 
-        Session::flash('success', 'Testimonial added successfully!');
+        Session::flash('success', __('Testimonial added successfully!'));
         return "success";
     }
 
@@ -83,8 +83,6 @@ class TestimonialController extends Controller
     {
         $img = $request->file('image');
         $allowedExts = array('jpg', 'png', 'jpeg');
-
-
         $rules = [
             'image' => 'required',
             'comment' => 'required',
@@ -102,15 +100,12 @@ class TestimonialController extends Controller
                 },
             ],
         ];
-
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             $errmsgs = $validator->getMessageBag()->add('error', 'true');
             return response()->json($validator->errors());
         }
-
         $input = $request->all();
-
         $testimonial = Testimonial::findOrFail($request->testimonial_id);
         if ($request->hasFile('image')) {
             $main_image = time() . '.' . $img->getClientOriginalExtension();
@@ -118,11 +113,8 @@ class TestimonialController extends Controller
             $request->file('image')->move(public_path('assets/front/img/testimonials/'), $main_image);
             $input['image'] = $main_image;
         }
-
-
         $testimonial->update($input);
-
-        Session::flash('success', 'Testimonial updated successfully!');
+        Session::flash('success', __('Testimonial updated successfully!'));
         return "success";
     }
 
@@ -131,12 +123,9 @@ class TestimonialController extends Controller
         $request->validate([
             'testimonial_section_title' => 'required|max:25'
         ]);
-
         $bs = BS::where('language_id', $langid)->firstOrFail();
         $bs->testimonial_title = $request->testimonial_section_title;
-
         if ($request->hasFile('testimonial_bg_img')) {
-
             $be = BasicExtended::where('language_id', $langid)->firstOrFail();
             $filename = time() . '.' . $request->testimonial_bg_img->getClientOriginalExtension();
             $request->file('testimonial_bg_img')->move(public_path('assets/front/img/'), $filename);
@@ -144,10 +133,8 @@ class TestimonialController extends Controller
             $be->testimonial_bg_img = $filename;
             $be->save();
         }
-
         $bs->save();
-
-        Session::flash('success', 'Text updated successfully!');
+        Session::flash('success', __('Text updated successfully!'));
         return back();
     }
 
@@ -156,8 +143,7 @@ class TestimonialController extends Controller
         $testimonial = Testimonial::findOrFail($request->testimonial_id);
         @unlink(public_path('assets/front/img/testimonials/' . $testimonial->image));
         $testimonial->delete();
-
-        Session::flash('success', 'Testimonial deleted successfully!');
+        Session::flash('success', __('Testimonial deleted successfully!'));
         return back();
     }
 }

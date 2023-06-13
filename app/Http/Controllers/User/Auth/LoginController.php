@@ -45,7 +45,6 @@ class LoginController extends Controller
             $redirectUrl = route('user-dashboard');
         }
 
-
         //--- Validation Section
         if (session()->has('lang')) {
             $currentLang = Language::where('code', session()->get('lang'))->first();
@@ -55,8 +54,6 @@ class LoginController extends Controller
 
         $bs = $currentLang->basic_setting;
         $be = $currentLang->basic_extended;
-
-
 
         $rules = [
             'email'   => 'required|email',
@@ -80,12 +77,12 @@ class LoginController extends Controller
             if (Auth::guard('web')->user()->email_verified == 0 || Auth::guard('web')->user()->email_verified == 0) {
                 Auth::guard('web')->logout();
 
-                return back()->with('err', __('Your Email is not Verified!'));
+                return back()->with('err', toastrMsg('Your_Email_is_not_Verified!'));
             }
             if (Auth::guard('web')->user()->status == '0') {
                 Auth::guard('web')->logout();
 
-                return back()->with('err', __('Your account is disabled'));
+                return back()->with('err', toastrMsg('Your_account_is_disabled'));
             }
             return redirect($redirectUrl);
         }

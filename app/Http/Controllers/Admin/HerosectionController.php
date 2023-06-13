@@ -48,24 +48,20 @@ class HerosectionController extends Controller
             $validator->getMessageBag()->add('error', 'true');
             return response()->json($validator->errors());
         }
-
         $be = BasicExtended::where('language_id', $langid)->firstOrFail();
         $be->hero_section_title = $request->hero_section_title;
         $be->hero_section_text = $request->hero_section_text;
         $be->hero_section_button_text = $request->hero_section_button_text;
         $be->hero_section_button_url = $request->hero_section_button_url;
         $be->hero_section_video_url = $request->hero_section_video_url;
-
         if ($request->hasFile('image')) {
             @unlink(public_path('assets/front/img/' . $be->hero_img));
             $filename = uniqid() . '.' . $sideImg->getClientOriginalExtension();
             $sideImg->move(public_path('assets/front/img/'), $filename);
             $be->hero_img = $filename;
         }
-
         $be->save();
-
-        Session::flash('success', 'Hero Section updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return "success";
     }
 
@@ -100,7 +96,7 @@ class HerosectionController extends Controller
             $be->save();
         }
 
-        Session::flash('success', 'Informations updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return "success";
     }
 }

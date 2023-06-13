@@ -50,6 +50,7 @@ class PortfolioController extends Controller
         ])
             ->orderBy('serial_number', 'ASC')
             ->get();
+
         return view('user.portfolio.portfolio.index', $data);
     }
 
@@ -129,7 +130,8 @@ class PortfolioController extends Controller
             'category' => 'required',
             'content' => 'required',
             'serial_number' => 'required|integer',
-            'image' => ['required',
+            'image' => [
+                'required',
                 function ($attribute, $value, $fail) use ($img, $allowedExts) {
                     if (!empty($img)) {
                         $ext = $img->getClientOriginalExtension();
@@ -179,7 +181,7 @@ class PortfolioController extends Controller
             @unlink(public_path('assets/front/img/user/portfolios/' . $exSlider->image));
         }
 
-        Session::flash('success', 'Portfolio added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -200,9 +202,14 @@ class PortfolioController extends Controller
      * @param int $id
      * @return
      */
-    public function edit($id)
+    public function edit(Portfolio $portfolio)
     {
-        $data['portfolio'] = Portfolio::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
+
+        if ($portfolio->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', 'Authorization Failed');
+            return back();
+        }
+        $data['portfolio'] = $portfolio;
         $data['categories'] = PortfolioCategory::where([
             ['language_id', '=', $data['portfolio']->language_id],
             ['user_id', '=', Auth::id()],
@@ -264,7 +271,7 @@ class PortfolioController extends Controller
         if (!isset($request->featured)) $input["featured"] = "0";
         $input['content'] = Purifier::clean($request->content);
         $portfolio->update($input);
-        Session::flash('success', 'Portfolio updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -294,7 +301,7 @@ class PortfolioController extends Controller
         }
         @unlink(public_path('assets/front/img/user/portfolios/' . $portfolio->image));
         $portfolio->delete();
-        Session::flash('success', 'Portfolio deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
@@ -310,7 +317,7 @@ class PortfolioController extends Controller
             @unlink(public_path('assets/front/img/user/portfolios/' . $portfolio->image));
             $portfolio->delete();
         }
-        Session::flash('success', 'Portfolios deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 

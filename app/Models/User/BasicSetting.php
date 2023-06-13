@@ -14,10 +14,14 @@ class BasicSetting extends Model
         'logo',
         'cv',
         'base_color',
-        'theme'
+        'theme',
+        'website_title',
+        'email',
+        'from_name'
     ];
 
-    public function language(){
-        return $this->hasMany('App\Models\User\Language','user_id');
+    public function language()
+    {
+        return $this->hasMany('App\Models\User\Language', 'user_id');
     }
 }

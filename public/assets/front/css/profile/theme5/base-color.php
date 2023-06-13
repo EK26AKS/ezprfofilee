@@ -54,3 +54,8 @@ else {
 .service-item-one .service-content {
     border-left: 15px solid <?php echo $color; ?>;
 }
+
+.profile-card .profile-link ul li a.active,
+.profile-card .profile-link ul li a:hover {
+    background: var(--primary-color) !important;
+}

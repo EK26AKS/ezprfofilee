@@ -71,7 +71,7 @@ class FooterController extends Controller
         $bs->copyright_text = Purifier::clean($request->copyright_text);
         $bs->save();
 
-        Session::flash('success', 'Footer text updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return "success";
     }
 
@@ -87,7 +87,7 @@ class FooterController extends Controller
             $be->save();
         }
 
-        $request->session()->flash('success', 'Image removed successfully!');
+        $request->session()->flash('success', __('Deleted successfully!'));
         return "success";
     }
 }

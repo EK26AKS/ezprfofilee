@@ -88,7 +88,8 @@ class BlogController extends Controller
             'category' => 'required',
             'content' => 'required',
             'serial_number' => 'required|integer',
-            'image' => ['required',
+            'image' => [
+                'required',
                 function ($attribute, $value, $fail) use ($img, $allowedExts) {
                     if (!empty($img)) {
                         $ext = $img->getClientOriginalExtension();
@@ -122,7 +123,7 @@ class BlogController extends Controller
         $blog = new Blog;
         $blog->create($input);
 
-        Session::flash('success', 'Blog added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -143,9 +144,13 @@ class BlogController extends Controller
      * @param int $id
      * @return
      */
-    public function edit($id)
+    public function edit(Blog $blog)
     {
-        $data['blog'] = Blog::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
+        if ($blog->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', 'Authorization_Failed');
+            return back();
+        }
+        $data['blog'] = $blog;
         $data['bcats'] = BlogCategory::where([
             ['language_id', '=', $data['blog']->language_id],
             ['user_id', '=', Auth::id()],
@@ -207,7 +212,7 @@ class BlogController extends Controller
         }
         $input['content'] = Purifier::clean($request->content);
         $blog->update($input);
-        Session::flash('success', 'Blog updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -233,7 +238,7 @@ class BlogController extends Controller
             @unlink(public_path('assets/front/img/user/blogs/' . $blog->image));
         }
         $blog->delete();
-        Session::flash('success', 'Blog deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
@@ -247,7 +252,7 @@ class BlogController extends Controller
             }
             $blog->delete();
         }
-        Session::flash('success', 'Blogs deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 }

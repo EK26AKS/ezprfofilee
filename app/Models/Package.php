@@ -20,6 +20,7 @@ class Package extends Model
         'features',
         'meta_keywords',
         'meta_description',
+        'number_of_vcards'
     ];
 
     public function memberships() {

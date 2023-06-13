@@ -85,7 +85,7 @@ class EducationController extends Controller
         $education = new Education();
         $education->create($input);
 
-        Session::flash('success', 'Education added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -106,9 +106,14 @@ class EducationController extends Controller
      * @param int $id
      * @return
      */
-    public function edit($id)
+    public function edit(Education $education)
     {
-        $data['education'] = Education::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
+
+        if ($education->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', 'Authorization_Failed');
+            return back();
+        }
+        $data['education'] = $education;
         return view('user.user_education.edit', $data);
     }
 
@@ -141,7 +146,7 @@ class EducationController extends Controller
         $input['user_id'] = Auth::id();
         $input['short_description'] = Purifier::clean($request->short_description);
         $education->update($input);
-        Session::flash('success', 'Education updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -149,7 +154,7 @@ class EducationController extends Controller
     {
         $education = Education::where('user_id', Auth::user()->id)->where('id', $request->id)->firstOrFail();
         $education->delete();
-        Session::flash('success', 'Education deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
@@ -160,7 +165,7 @@ class EducationController extends Controller
             $education = Education::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
             $education->delete();
         }
-        Session::flash('success', 'Education deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 }

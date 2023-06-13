@@ -15,7 +15,7 @@ class CacheController extends Controller
       Artisan::call('route:clear');
       Artisan::call('view:clear');
 
-      Session::flash('success', 'Cache, route, view, config cleared successfully!');
+      Session::flash('success', __('Cache, route, view, config cleared successfully!'));
       return back();
     }
 }

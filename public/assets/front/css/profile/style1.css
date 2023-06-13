@@ -33,7 +33,7 @@
   --color-white: #fff;
   --color-black: #000000;
   --color-offwhite: #F7F5FE;
-  --color-border: rgba(0, 0, 0, 0.05);
+  --color-border: rgba(0, 0, 0, 0.07);
   --color-border-2: rgba(0, 0, 0, 0.1);
   --font-pop: 'Poppins', sans-serif;
 }
@@ -285,9 +285,9 @@ input,
 select,
 .nice-select {
   width: 100%;
-  height: 50px;
+  height: 55px;
   padding: 0px 30px;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--color-body);
   border: 1px solid var(--color-border);
   border-radius: 5px;
@@ -1813,7 +1813,7 @@ div#preloader img {
   z-index: 1;
   -webkit-transition: 0.3s;
   transition: 0.3s;
-  color: #dbd8f3;
+  color: #3a3a3a;
 }
 .template-footer .footer-content .social-links a:hover {
   color: var(--color-primary);
@@ -1839,4 +1839,8 @@ footer.template-footer .right-shape {
 }
 .experience-inner p {
   font-size: 14px;
+}
+
+.template-header .header-right .template-btn {
+  background-color: var(--color-heading);
 }

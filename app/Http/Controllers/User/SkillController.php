@@ -74,12 +74,12 @@ class SkillController extends Controller
         $input = $request->all();
         $input['language_id'] = $request->user_language_id;
         $input['slug'] = $slug;
-        $input['user_id'] = Auth::id();
+        $input['user_id'] = Auth::guard('web')->user()->id;
 
         $skill = new Skill;
         $skill->create($input);
 
-        Session::flash('success', 'Skill added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -89,9 +89,13 @@ class SkillController extends Controller
      * @param  int  $id
      * @return
      */
-    public function edit($id)
+    public function edit(Skill $skill)
     {
-        $data['skill'] = Skill::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
+        if ($skill->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', toastrMsg('Authorization_Failed'));
+            return back();
+        }
+        $data['skill'] = $skill;
         return view('user.skill.edit', $data);
     }
 
@@ -126,7 +130,7 @@ class SkillController extends Controller
         $input['slug'] = $slug;
         $input['user_id'] = Auth::id();
         $skill->update($input);
-        Session::flash('success', 'Skill updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -134,7 +138,7 @@ class SkillController extends Controller
     {
         $skill = Skill::where('user_id', Auth::user()->id)->where('id', $request->skill_id)->firstOrFail();
         $skill->delete();
-        Session::flash('success', 'Skill deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
     public function bulkDelete(Request $request)
@@ -144,7 +148,7 @@ class SkillController extends Controller
             $skill = Skill::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
             $skill->delete();
         }
-        Session::flash('success', 'Skills deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 }

@@ -42,8 +42,8 @@ class MercadopagoController extends Controller
                     'title' => $_title,
                     'description' => $_description,
                     'quantity' => 1,
-                    'currency_id' => "BRL", //unfortunately mercadopago only support BRL currency
-                    'unit_price' => round($_amount * 5.53, 2), //5.53 BRL = 1 USD
+                    'currency_id' => $bex->base_currency_text, //unfortunately mercadopago only support BRL currency
+                    'unit_price' => round($_amount, 2), //5.53 BRL = 1 USD
                 ]
             ],
             'payer' => [

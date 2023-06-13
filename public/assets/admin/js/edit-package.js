@@ -1,6 +1,6 @@
 (function ($) {
     "use strict";
-    $('input[name="is_trial"]').on('change',function(){
+    $('input[name="is_trial"]').on('change', function () {
         if ($(this).val() == 1) {
             $('#trial_day').show();
         } else {

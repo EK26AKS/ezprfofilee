@@ -9,3 +9,18 @@
         $('#trial_days').val(null);
     });
 })(jQuery); 
+
+
+"use strict";
+$(document).ready(function () {
+    $(".selectgroup-input").on('click', function () {
+        var val = $(this).val()
+        if (val == 'vCard') {
+            if ($(this).is(":checked")) {
+                $(".v-card-box").show();
+            } else {
+                $(".v-card-box").hide();
+            }
+        }
+    })
+});

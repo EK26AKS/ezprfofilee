@@ -97,12 +97,12 @@ class ForgotController extends Controller
                 }
             }
 
-            Session::flash('success', 'Your Password Reseted Successfully. Please Check your email for new Password.');
+            Session::flash('success', toastrMsg('Your_Password_Reseted_Successfully_Please_Check_your_email_for_new_Password.'));
             return back();
         } else {
 
             // user not found
-            Session::flash('err', 'No Account Found With This Email.');
+            Session::flash('err', 'No_Account_Found_With_This_Email.');
             return back();
         }
     }

@@ -11,6 +11,7 @@
         <link href="{{ asset('installer/css/style.min.css') }}" rel="stylesheet"/>
         @yield('style')
         <script>
+            "use strict";
             window.Laravel = <?php echo json_encode([
                 'csrfToken' => csrf_token(),
             ]); ?>

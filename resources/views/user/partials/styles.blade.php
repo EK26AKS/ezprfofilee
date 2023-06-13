@@ -1,5 +1,3 @@
-
-
 <!-- CSS Files -->
 <link href="{{asset('assets/front/css/all.min.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{asset('assets/admin/css/fontawesome-iconpicker.min.css')}}">
@@ -16,5 +14,6 @@
 @if(request()->cookie('user-theme') == 'dark')
 <link rel="stylesheet" href="{{asset('assets/admin/css/dark.css')}}">
 @endif
+
 
 @yield('styles')

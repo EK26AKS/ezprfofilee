@@ -27,7 +27,7 @@ class SocialController extends Controller
       $social->serial_number = $request->serial_number;
       $social->save();
 
-      Session::flash('success', 'New link added successfully!');
+      Session::flash('success', __('New link added successfully!'));
       return back();
     }
 
@@ -49,7 +49,7 @@ class SocialController extends Controller
       $social->serial_number = $request->serial_number;
       $social->save();
 
-      Session::flash('success', 'Social link updated successfully!');
+      Session::flash('success', __('Social link updated successfully!'));
       return back();
     }
 
@@ -58,7 +58,7 @@ class SocialController extends Controller
       $social = Social::findOrFail($request->socialid);
       $social->delete();
 
-      Session::flash('success', 'Social link deleted successfully!');
+      Session::flash('success', __('Social link deleted successfully!'));
       return back();
     }
 }

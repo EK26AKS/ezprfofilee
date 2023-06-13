@@ -20,7 +20,7 @@ class PreferenceController extends Controller
     public function index()
     {
         $permissions= null;
-        $user_permissions= UserPermission::where('user_id',Auth::id())->first();
+        $user_permissions= UserPermission::where('user_id',Auth::guard('web')->user()->id)->first();
         if(!is_null($user_permissions)){
             $permissions = json_decode($user_permissions->permissions,true);
         }
@@ -81,21 +81,21 @@ class PreferenceController extends Controller
     public function update(Request $request)
     {
         $permissions = json_encode($request->permissions);
-        $user_permissions= UserPermission::where('user_id',Auth::id())->first();
-        $package = UserPermissionHelper::userPackage(Auth::id());
+        $user_permissions= UserPermission::where('user_id',Auth::guard('web')->user()->id)->first();
+        $package = UserPermissionHelper::userPackage(Auth::guard('web')->user()->id);
         if(!is_null($user_permissions)){
             $user_permissions->permissions = $permissions;
             $user_permissions->package_id = $package->package_id;
-            $user_permissions->user_id = Auth::id();
+            $user_permissions->user_id = Auth::guard('web')->user()->id;
             $user_permissions->save();
         }else{
             $permission = new UserPermission();
             $permission->permissions = $permissions;
             $permission->package_id = $package->package_id;
-            $permission->user_id = Auth::id();
+            $permission->user_id = Auth::guard('web')->user()->id;
             $permission->save();
         }
-        Session::flash('success', "Preference updated successfully");
+        Session::flash('success', toastrMsg("Updated_successfully!"));
         return back();
     }
 

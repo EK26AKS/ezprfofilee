@@ -2,6 +2,7 @@
 
 use App\Http\Helpers\UserPermissionHelper;
 use App\Models\Language;
+use App\Models\User\Language as UserLang;
 use App\Models\Page;
 use App\Models\User;
 use App\Models\User\UserCustomDomain;
@@ -119,22 +120,23 @@ if (!function_exists('slug_create')) {
     }
 }
 
-if (!function_exists('hex2rgb') ) {
-    function hex2rgb( $colour ) {
-        if ( $colour[0] == '#' ) {
-                $colour = substr( $colour, 1 );
+if (!function_exists('hex2rgb')) {
+    function hex2rgb($colour)
+    {
+        if ($colour[0] == '#') {
+            $colour = substr($colour, 1);
         }
-        if ( strlen( $colour ) == 6 ) {
-                list( $r, $g, $b ) = array( $colour[0] . $colour[1], $colour[2] . $colour[3], $colour[4] . $colour[5] );
-        } elseif ( strlen( $colour ) == 3 ) {
-                list( $r, $g, $b ) = array( $colour[0] . $colour[0], $colour[1] . $colour[1], $colour[2] . $colour[2] );
+        if (strlen($colour) == 6) {
+            list($r, $g, $b) = array($colour[0] . $colour[1], $colour[2] . $colour[3], $colour[4] . $colour[5]);
+        } elseif (strlen($colour) == 3) {
+            list($r, $g, $b) = array($colour[0] . $colour[0], $colour[1] . $colour[1], $colour[2] . $colour[2]);
         } else {
-                return false;
+            return false;
         }
-        $r = hexdec( $r );
-        $g = hexdec( $g );
-        $b = hexdec( $b );
-        return array( 'red' => $r, 'green' => $g, 'blue' => $b );
+        $r = hexdec($r);
+        $g = hexdec($g);
+        $b = hexdec($b);
+        return array('red' => $r, 'green' => $g, 'blue' => $b);
     }
 }
 
@@ -201,7 +203,6 @@ if (!function_exists('create_menu')) {
             echo '</li>';
         }
         echo '</ul>';
-
     }
 }
 
@@ -218,10 +219,10 @@ if (!function_exists('format_price')) {
                 ->first();
         }
         $bex = $currentLang->basic_extended;
-        if($bex->base_currency_symbol_position == 'left'){
-           return $bex->base_currency_symbol.$value;
-        }else{
-            return  $value.$bex->base_currency_symbol;
+        if ($bex->base_currency_symbol_position == 'left') {
+            return $bex->base_currency_symbol . $value;
+        } else {
+            return  $value . $bex->base_currency_symbol;
         }
     }
 }
@@ -231,17 +232,16 @@ if (!function_exists('getParam')) {
     function getParam()
     {
         $parsedUrl = parse_url(url()->current());
-        $host = str_replace("www.","",$parsedUrl['host']);
+        $host = str_replace("www.", "", $parsedUrl['host']);
 
         // if it is path based URL, then return {username}
         if (strpos($host, env('WEBSITE_HOST')) !== false && $host == env('WEBSITE_HOST')) {
             $path = explode('/', $parsedUrl['path']);
             return $path[1];
         }
-        
+
         // if it is a subdomain / custom domain , then return the host (username.domain.ext / custom_domain.ext)
         return $host;
-        
     }
 }
 
@@ -249,10 +249,11 @@ if (!function_exists('getParam')) {
 // checks if 'current package has subdomain ?'
 
 if (!function_exists('cPackageHasSubdomain')) {
-    function cPackageHasSubdomain($user) {
+    function cPackageHasSubdomain($user)
+    {
         $currPackageFeatures = UserPermissionHelper::packagePermission($user->id);
         $currPackageFeatures = json_decode($currPackageFeatures, true);
-        
+
         // if the current package does not contain subdomain
         if (empty($currPackageFeatures) || !is_array($currPackageFeatures) || !in_array('Subdomain', $currPackageFeatures)) {
             return false;
@@ -264,7 +265,8 @@ if (!function_exists('cPackageHasSubdomain')) {
 
 // checks if 'current package has custom domain ?'
 if (!function_exists('cPackageHasCdomain')) {
-    function cPackageHasCdomain($user) {
+    function cPackageHasCdomain($user)
+    {
         $currPackageFeatures = UserPermissionHelper::packagePermission($user->id);
         $currPackageFeatures = json_decode($currPackageFeatures, true);
 
@@ -282,6 +284,27 @@ if (!function_exists('getCdomain')) {
     {
         $cdomains = $user->custom_domains()->where('status', 1);
         return $cdomains->count() > 0 ? $cdomains->orderBy('id', 'DESC')->first()->requested_domain : false;
+    }
+}
+
+if (!function_exists('toastrMsg')) {
+
+    function toastrMsg($msg)
+    {
+        if(Auth::check()){
+
+            if(session()->has('currentLangCode')){
+                $lang = UserLang::where('user_id', Auth::guard('web')->user()->id)->where('code', session()->get('currentLangCode'))->first();
+            }else{
+                
+                $lang = UserLang::where('user_id', Auth::guard('web')->user()->id)->where('is_default',1)->first();
+            }
+    
+            $keywords = json_decode($lang->keywords,true);
+    
+            return $keywords[$msg] ?? '';
+        }
+        
     }
 }
 
@@ -308,50 +331,59 @@ if (!function_exists('getUser')) {
                 $username = $hostArr[0];
             }
             
-            $user = User::where('username', $username)
-            ->where('online_status', 1)
-            ->whereHas('memberships', function($q){
-                $q->where('status','=',1)
-                ->where('start_date','<=', Carbon::now()->format('Y-m-d'))
-                ->where('expire_date', '>=', Carbon::now()->format('Y-m-d'));
-            })
-            ->firstOrFail();
-
-            // if the current url is a subdomain
-            if ($host != env('WEBSITE_HOST')) {
-                if (!cPackageHasSubdomain($user)) {
-                    return view('errors.404');
+            if(($host == $username . '.' . env('WEBSITE_HOST')) || ($host . '/' . $username == env('WEBSITE_HOST') . '/' . $username)) {
+                $user = User::where('username', $username)
+                ->where('online_status', 1)
+                ->where('status', 1)
+                ->whereHas('memberships', function($q){
+                    $q->where('status','=',1)
+                    ->where('start_date','<=', Carbon::now()->format('Y-m-d'))
+                    ->where('expire_date', '>=', Carbon::now()->format('Y-m-d'));
+                })
+                ->firstOrFail();
+    
+                // if the current url is a subdomain
+                if ($host != env('WEBSITE_HOST')) {
+                    if (!cPackageHasSubdomain($user)) {
+                        return view('errors.404');
+                    }
                 }
+                
+                return $user;
             }
+        } 
+        
+        // Always include 'www.' at the begining of host
+        if (substr($host, 0, 4) == 'www.') {
+            $host = $host;
         } else {
-            // Always include 'www.' at the begining of host
-            if (substr($host, 0, 4) == 'www.') {
-                $host = $host;
-            } else {
-                $host = 'www.' . $host;
-            }
-            $user = User::where('online_status', 1)
-            ->whereHas('user_custom_domains', function($q) use ($host) {
-                $q->where('status','=',1)
-                ->where('requested_domain','=',$host)
-                ->orWhere('requested_domain','=',str_replace("www.","",$host)); 
-                // fetch the custom domain , if it matches 'with www.' URL or 'without www.' URL
-            })
-            ->whereHas('memberships', function($q){
-                $q->where('status','=',1)
-                ->where('start_date','<=', Carbon::now()->format('Y-m-d'))
-                ->where('expire_date', '>=', Carbon::now()->format('Y-m-d'));
-            })->firstOrFail();
+            $host = 'www.' . $host;
+        }
+        
+        $user = User::where('online_status', 1)
+        ->where('status', 1)
+        ->whereHas('user_custom_domains', function($q) use ($host) {
+            $q->where('status','=',1)
+            ->where(function ($query) use ($host) {
+               $query->where('requested_domain','=',$host)
+                ->orWhere('requested_domain','=',str_replace("www.","",$host));
+            });
+            // fetch the custom domain , if it matches 'with www.' URL or 'without www.' URL
+        })
+        ->whereHas('memberships', function($q){
+            $q->where('status','=',1)
+            ->where('start_date','<=', Carbon::now()->format('Y-m-d'))
+            ->where('expire_date', '>=', Carbon::now()->format('Y-m-d'));
+        })->firstOrFail();
 
-            if (!cPackageHasCdomain($user)) {
-                return view('errors.404');
-            }
+        if (!cPackageHasCdomain($user)) {
+            return view('errors.404');
         }
         
         return $user;
+        
     }
 }
-
 
 
 if (!function_exists('detailsUrl')) {

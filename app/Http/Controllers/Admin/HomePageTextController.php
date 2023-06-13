@@ -30,7 +30,7 @@ class HomePageTextController extends Controller
             $bs->$type = $request[$type];
         }
         $bs->save();
-        Session::flash('success', 'Text updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return "success";
     }
 }

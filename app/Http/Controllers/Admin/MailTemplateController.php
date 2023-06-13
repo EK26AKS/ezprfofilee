@@ -40,7 +40,7 @@ class MailTemplateController extends Controller
           'email_body' => clean($request->email_body)
       ]);
   
-      $request->session()->flash('success', 'Mail template updated successfully!');
+      $request->session()->flash('success', __('Updated successfully!'));
   
       return redirect()->back();
     }

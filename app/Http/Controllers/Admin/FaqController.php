@@ -28,28 +28,24 @@ class FaqController extends Controller
         $messages = [
             'language_id.required' => 'The language field is required'
         ];
-
         $rules = [
             'language_id' => 'required',
             'question' => 'required|max:255',
             'answer' => 'required',
             'serial_number' => 'required|integer',
         ];
-
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             $errmsgs = $validator->getMessageBag()->add('error', 'true');
             return response()->json($validator->errors());
         }
-
         $faq = new Faq;
         $faq->language_id = $request->language_id;
         $faq->question = $request->question;
         $faq->answer = $request->answer;
         $faq->serial_number = $request->serial_number;
         $faq->save();
-
-        Session::flash('success', 'Faq added successfully!');
+        Session::flash('success', __('Store successfully!'));
         return "success";
     }
 
@@ -60,43 +56,36 @@ class FaqController extends Controller
             'answer' => 'required',
             'serial_number' => 'required|integer',
         ];
-
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             $errmsgs = $validator->getMessageBag()->add('error', 'true');
             return response()->json($validator->errors());
         }
-
         $faq = Faq::findOrFail($request->faq_id);
         $faq->question = $request->question;
         $faq->answer = $request->answer;
         $faq->serial_number = $request->serial_number;
         $faq->save();
-
-        Session::flash('success', 'Faq updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return "success";
     }
 
     public function delete(Request $request)
     {
-
         $faq = Faq::findOrFail($request->faq_id);
         $faq->delete();
-
-        Session::flash('success', 'Faq deleted successfully!');
+        Session::flash('success', __('Deleted successfully!'));
         return back();
     }
 
     public function bulkDelete(Request $request)
     {
         $ids = $request->ids;
-
         foreach ($ids as $id) {
             $faq = Faq::findOrFail($id);
             $faq->delete();
         }
-
-        Session::flash('success', 'FAQs deleted successfully!');
+        Session::flash('success', __('Bulk deleted successfully!'));
         return "success";
     }
 }

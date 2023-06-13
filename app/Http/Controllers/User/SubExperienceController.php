@@ -95,7 +95,7 @@ class SubExperienceController extends Controller
         $bcategory->serial_number = $request->serial_number;
         $bcategory->save();
 
-        Session::flash('success', 'Sub Experience added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -154,7 +154,7 @@ class SubExperienceController extends Controller
         $bcategory->serial_number = $request->serial_number;
         $bcategory->save();
 
-        Session::flash('success', 'Experience category updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -172,11 +172,11 @@ class SubExperienceController extends Controller
     public function delete(Request $request){
         $bcategory = ExperienceCategory::findOrFail($request->bcategory_id);
         if ($bcategory->portfolios()->count() > 0) {
-            Session::flash('warning', 'First, delete all the experiences under this category!');
+            Session::flash('warning', toastrMsg('First,_delete_all_the_experiences_under_this_category!'));
             return back();
         }
         $bcategory->delete();
-        Session::flash('success', 'Sub Experience deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
@@ -187,7 +187,7 @@ class SubExperienceController extends Controller
         foreach ($ids as $id) {
             $bcategory = ExperienceCategory::findOrFail($id);
             if ($bcategory->blogs()->count() > 0) {
-                Session::flash('warning', 'First, delete all the experiences under the selected categories!');
+                Session::flash('warning', toastrMsg('First,_delete_all_the_experiences_under_the_selected_categories!'));
                 return "success";
             }
         }
@@ -197,7 +197,7 @@ class SubExperienceController extends Controller
             $bcategory->delete();
         }
 
-        Session::flash('success', 'Sub Experience deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 }

@@ -19,27 +19,27 @@ class BlogCategoryController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has('language')){
+        if ($request->has('language')) {
             $lang = Language::where([
                 ['code', $request->language],
                 ['user_id', Auth::id()]
             ])->first();
-            Session::put('currentLangCode',$request->language);
-        }else{
+            Session::put('currentLangCode', $request->language);
+        } else {
             $lang = Language::where([
                 ['is_default', 1],
-                ['user_id',Auth::id()]
+                ['user_id', Auth::id()]
             ])
-            ->first();
-            Session::put('currentLangCode',$lang->code);
+                ->first();
+            Session::put('currentLangCode', $lang->code);
         }
-            $data['bcategorys'] = BlogCategory::where([
-                ['language_id','=', $lang->id],
-                ['user_id','=', Auth::id()],
-            ])
-                ->orderBy('serial_number', 'ASC')
-                ->get();
-        return view('user.blog.bcategory.index',$data);
+        $data['bcategorys'] = BlogCategory::where([
+            ['language_id', '=', $lang->id],
+            ['user_id', '=', Auth::id()],
+        ])
+            ->orderBy('serial_number', 'ASC')
+            ->get();
+        return view('user.blog.bcategory.index', $data);
     }
 
     /**
@@ -88,7 +88,7 @@ class BlogCategoryController extends Controller
         $bcategory->serial_number = $request->serial_number;
         $bcategory->save();
 
-        Session::flash('success', 'Blog category added successfully!');
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
@@ -123,6 +123,7 @@ class BlogCategoryController extends Controller
      */
     public function update(Request $request)
     {
+
         $messages = [
             'name' => 'The name field is required',
             'status' => 'The status field is required',
@@ -135,7 +136,7 @@ class BlogCategoryController extends Controller
             'serial_number' => 'required|integer',
         ];
 
-        $validator = Validator::make($request->all(), $rules,$messages);
+        $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             $errmsgs = $validator->getMessageBag()->add('error', 'true');
             return response()->json($validator->errors());
@@ -150,7 +151,7 @@ class BlogCategoryController extends Controller
         $bcategory->serial_number = $request->serial_number;
         $bcategory->save();
 
-        Session::flash('success', 'Blog category updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
@@ -165,14 +166,15 @@ class BlogCategoryController extends Controller
         //
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         $bcategory = BlogCategory::findOrFail($request->bcategory_id);
         if ($bcategory->blogs()->count() > 0) {
-            Session::flash('warning', 'First, delete all the blogs under this category!');
+            Session::flash('warning', 'First_delete_all_the_blogs_under_this_category!');
             return back();
         }
         $bcategory->delete();
-        Session::flash('success', 'Blog category deleted successfully!');
+        Session::flash('success', toastrMsg('Deleted_successfully!'));
         return back();
     }
 
@@ -183,7 +185,7 @@ class BlogCategoryController extends Controller
         foreach ($ids as $id) {
             $bcategory = BlogCategory::findOrFail($id);
             if ($bcategory->blogs()->count() > 0) {
-                Session::flash('warning', 'First, delete all the blogs under the selected categories!');
+                Session::flash('warning', 'First_delete_all_the_blogs_under_the_selected_categories!');
                 return "success";
             }
         }
@@ -193,7 +195,7 @@ class BlogCategoryController extends Controller
             $bcategory->delete();
         }
 
-        Session::flash('success', 'Blog categories deleted successfully!');
+        Session::flash('success', toastrMsg('Bulk_Deleted_successfully!'));
         return "success";
     }
 }

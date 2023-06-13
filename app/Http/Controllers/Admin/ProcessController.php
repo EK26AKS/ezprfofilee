@@ -65,7 +65,7 @@ class ProcessController extends Controller
             $main_image = time() . '.' . $img->getClientOriginalExtension();
             $request->file('image')->move(public_path('assets/front/img/process/'), $main_image);
             $image = $main_image;
-        }else{
+        } else {
             $image = null;
         }
 
@@ -76,7 +76,7 @@ class ProcessController extends Controller
         $process->serial_number = $request->serial_number;
         $process->save();
 
-        Session::flash('success', 'Process added successfully!');
+        Session::flash('success', __('Store successfully!'));
         return "success";
     }
 
@@ -118,7 +118,7 @@ class ProcessController extends Controller
         $process->serial_number = $request->serial_number;
         $process->save();
 
-        Session::flash('success', 'Process updated successfully!');
+        Session::flash('success', __('Updated successfully!'));
         return back();
     }
 
@@ -129,11 +129,12 @@ class ProcessController extends Controller
         @unlink(public_path('assets/front/img/process/' . $process->image));
         $process->delete();
 
-        Session::flash('success', 'Process deleted successfully!');
+        Session::flash('success', __('Deleted successfully!'));
         return back();
     }
 
-    public function removeImage(Request $request) {
+    public function removeImage(Request $request)
+    {
         $type = $request->type;
         $featId = $request->process_id;
 
@@ -145,7 +146,7 @@ class ProcessController extends Controller
             $process->save();
         }
 
-        $request->session()->flash('success', 'Image removed successfully!');
+        $request->session()->flash('success', __('Image removed successfully!'));
         return "success";
     }
 }

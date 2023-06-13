@@ -74,6 +74,11 @@
                                 <button class="main-btn login_button">{{__('LOG IN')}}</button>
                             </div>
                         </form>
+                        <div class="form_group">
+                                <a href="{{ url('auth/google') }}" style="margin-top: 0px !important;background: green;color: #ffffff;padding: 5px;border-radius:7px;" class="ml-2">
+                                    <strong>Google Login</strong>
+                                </a> 
+                            </div>
                     </div>
                 </div>
             </div>

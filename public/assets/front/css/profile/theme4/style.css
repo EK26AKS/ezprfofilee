@@ -5,7 +5,7 @@
     Template Name: Portfolio HTML Template
     Template URI: site.com
     Description: Portfolio HTML Template
-    Author: WebTend 
+    Author: WebTend
     Author URI: https://webtend.net/
     Version: 1.0
 
@@ -13,7 +13,7 @@
 
 
 /*=========================
-    1. Start COMMON css 
+    1. Start COMMON css
 ==========================*/
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -372,11 +372,11 @@ button {
 */
 
 /*====================
-    End COMMON css 
+    End COMMON css
 ======================*/
 
 /*==========================
-    Start Header css 
+    Start Header css
 ==========================*/
 header{
 	z-index: 999;
@@ -704,11 +704,11 @@ header{
 	}
 }
 /*==========================
-    Start Header css 
+    Start Header css
 ==========================*/
 
 /*==========================
-    Start Hero css 
+    Start Hero css
 ==========================*/
 .hero-area{
 	position: relative;
@@ -722,7 +722,7 @@ header{
 .hero-area .hero-content h1 span.sm-text{
 	color: var(--primary-color);
 	display: block;
-	
+
 	font-size: 29px;
 	line-height: 30px;
 	margin-bottom: 10px;
@@ -839,11 +839,11 @@ header{
 	margin-right: 7px;
 }
 /*==========================
-    End Hero css 
+    End Hero css
 ==========================*/
 
 /*==========================
-    Start About css 
+    Start About css
 ==========================*/
 .about-area .about-img{
 	position: relative;
@@ -895,11 +895,11 @@ header{
 	margin-bottom: 25px;
 }
 /*==========================
-    End About css 
+    End About css
 ==========================*/
 
 /*==========================
-    Start Skill css 
+    Start Skill css
 ==========================*/
 .skill-area{
 	position: relative;
@@ -966,11 +966,11 @@ header{
 	margin-left: 10px;
 }
 /*==========================
-    End Skill css 
+    End Skill css
 ==========================*/
 
 /*==========================
-    Strat Service css 
+    Strat Service css
 ==========================*/
 .service-area{
 	position: relative;
@@ -1036,12 +1036,12 @@ header{
 	margin-bottom: 18px;
 }
 /*==========================
-    End Service css 
+    End Service css
 ==========================*/
 
 
 /*==========================
-    Start Resume css 
+    Start Resume css
 ==========================*/
 .resume-area{
 	position: relative;
@@ -1128,11 +1128,11 @@ header{
 	background-color: rgba(194, 77, 254, 0.11);
 }
 /*==========================
-    End Resume css 
+    End Resume css
 ==========================*/
 
 /*==========================
-    Start Counter css 
+    Start Counter css
 ==========================*/
 .counter-item{
 	margin-bottom: 40px;
@@ -1146,11 +1146,11 @@ header{
 	font-size: 20px;
 }
 /*==========================
-    End Counter css 
+    End Counter css
 ==========================*/
 
 /*==========================
-    Start Portfolio css 
+    Start Portfolio css
 ==========================*/
 .portfolio-area{
 	position: relative;
@@ -1233,11 +1233,11 @@ header{
 }
 
 /*==========================
-    End Portfolio css 
+    End Portfolio css
 ==========================*/
 
 /*==========================
-    Start Testimonial css 
+    Start Testimonial css
 ==========================*/
 .testimonial-area{
 	position: relative;
@@ -1318,11 +1318,11 @@ header{
 	margin-bottom: 8px;
 }
 /*=========================
-    End Testimonial css 
+    End Testimonial css
 =========================*/
 
 /*======================
-    Start Blog css 
+    Start Blog css
 ======================*/
 .blog-area{
 	position: relative;
@@ -1378,12 +1378,12 @@ header{
 	color: var(--primary-color);
 }
 /*====================
-    End Blog css 
+    End Blog css
 ======================*/
 
 
 /*====================
-    Start Contact css 
+    Start Contact css
 ======================*/
 .contact-area{
 	position: relative;
@@ -1433,11 +1433,11 @@ header{
 	height: 175px;
 }
 /*====================
-    End Contact css 
+    End Contact css
 ======================*/
 
 /*====================
-    Start Footer css 
+    Start Footer css
 ======================*/
 .footer-area{
 	position: relative;
@@ -1483,7 +1483,7 @@ header{
 	color: #fff;
 }
 /*====================
-    End Footer css 
+    End Footer css
 ======================*/
 section.single-page-details {
     padding: 100px 0px;
@@ -1499,4 +1499,8 @@ section.single-page-details {
 .form_group p {
     line-height: 24px;
     font-size: 14px;
+}
+.order_payment_box :is(input, textarea, .form_control),
+.profile-edit :is(input, textarea) {
+    border: 1px solid rgba(1, 1, 1, 0.1) !important;
 }

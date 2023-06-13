@@ -40,7 +40,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <div class="card-title d-inline-block">{{ __('Update Mail Template') }}</div>
+          <div class="card-title d-inline-block">{{ __('Edit Mail Template') }}</div>
           <a
             class="btn btn-info btn-sm float-right d-inline-block"
             href="{{ route('admin.mail_templates') }}"
@@ -80,12 +80,12 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="form-group">
-                      <label for="">{{ __('Mail Subject*') }}</label>
+                      <label for="">{{ __('Mail Subject') }}*</label>
                       <input
                         type="text"
                         class="form-control"
                         name="email_subject"
-                        placeholder="Enter Mail Subject"
+                        placeholder="{{__('Enter Mail Subject')}}"
                         value="{{ $templateInfo->email_subject }}"
                       >
                       @if ($errors->has('email_subject'))
@@ -98,11 +98,11 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <div class="form-group">
-                      <label for="">{{ __('Mail Body*') }}</label>
+                      <label for="">{{ __('Mail Body') }}*</label>
                       <textarea
                         class="form-control summernote" id="mailTemplateSummernote"
                         name="email_body"
-                        placeholder="Enter Mail Body Format"
+                        placeholder="{{__('Enter Mail Body Format')}}"
                         data-height="300"
                       >{!! replaceBaseUrl($templateInfo->email_body, 'summernote') !!}</textarea>
                       @if ($errors->has('email_body'))

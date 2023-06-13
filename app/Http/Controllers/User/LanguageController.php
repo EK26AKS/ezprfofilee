@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Models\User\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User\HomePageText;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -15,20 +16,50 @@ class LanguageController extends Controller
 {
     public function index($lang = false)
     {
-        $data['languages'] = Language::where('user_id', Auth::id())->get();
+        $data['languages'] = Language::where('user_id', Auth::guard('web')->user()->id)->get();
         return view('user.language.index', $data);
     }
-
-
+    public function addKeyword(Request $request)
+    {
+        $rules = [
+            'keyword' => 'required|max:255',
+            'value' => 'required',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            $errmsgs = $validator->getMessageBag()->add('error', 'true');
+            return response()->json($validator->errors());
+        }
+        //    for  user {languages} file 
+        // $languages = Language::orderBy('id', 'asc')->limit(1)->get();
+        $languages = Language::all();
+        // dd($request->all());
+        foreach ($languages as $langkey => $language) {
+            $jsonData = $language->keywords;
+            $keywords = json_decode($jsonData, true);
+            $datas = [];
+            $datas[str_replace(' ', '_', $request->keyword)] = str_replace('_', ' ', $request->value);
+            foreach ($keywords as $key => $keyword) {
+                $datas[$key] = $keyword;
+            }
+            //put data
+            $jsonData = json_encode($datas);
+            $language->keywords  =  $jsonData;
+            $language->save();
+        }
+        Session::flash('success', toastrMsg('Store_successfully!'));
+        return "success";
+    }
     public function store(Request $request)
     {
         $rules = [
             'name' => 'required|max:255',
-            'code' => ['required',
+            'code' => [
+                'required',
                 function ($attribute, $value, $fail) {
                     $language = Language::where([
                         ['code', $value],
-                        ['user_id', Auth::id()]
+                        ['user_id', Auth::guard('web')->user()->id]
                     ])->get();
                     if ($language->count() > 0) {
                         $fail(':attribute already taken');
@@ -50,35 +81,45 @@ class LanguageController extends Controller
         $in['code'] = $request->code;
         $in['rtl'] = $request->direction;
         $in['keywords'] = $deLang->keywords;
-        $in['user_id'] = Auth::id();
+        $in['user_id'] = Auth::guard('web')->user()->id;
+
+
         if (Language::where([
-                ['is_default', 1],
-                ['user_id', Auth::id()]
-            ])->count() > 0) {
+            ['is_default', 1],
+            ['user_id', Auth::guard('web')->user()->id]
+        ])->count() > 0) {
             $in['is_default'] = 0;
         } else {
             $in['is_default'] = 1;
         }
-        Language::create($in);
-        Session::flash('success', 'Language added successfully!');
+        $language =  Language::create($in);
+        HomePageText::create([
+            'user_id' => Auth::guard('web')->user()->id,
+            'language_id' => $language->id
+        ]);
+
+        Session::flash('success', toastrMsg('Store_successfully!'));
         return "success";
     }
 
-    public function edit($id)
+    public function edit(Language $language)
     {
-        if ($id > 0) {
-            $data['language'] = Language::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
+        if ($language->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', 'Authorization Failed');
+            return back();
         }
-        $data['id'] = $id;
+        $data['language'] = $language;
+        $data['id'] = $language->id;
         return view('user.language.edit', $data);
     }
 
 
     public function update(Request $request)
     {
-        $language = Language::findOrFail($request->language_id);
         
-        if ($language->user_id != Auth::user()->id) {
+        $language = Language::findOrFail($request->language_id);
+
+        if ($language->user_id != Auth::guard('web')->user()->id) {
             return;
         }
 
@@ -88,7 +129,7 @@ class LanguageController extends Controller
                 'required',
                 'max:255',
                 function ($attribute, $value, $fail) use ($language, $request) {
-                    $langs = Language::where('user_id', Auth::user()->id)->where('id', '<>', $language->id)->get();
+                    $langs = Language::where('user_id', Auth::guard('web')->user()->id)->where('id', '<>', $language->id)->get();
                     foreach ($langs as $key => $lang) {
                         if ($lang->code == $request->code) {
                             return $fail("Language code have to be unique.");
@@ -108,20 +149,22 @@ class LanguageController extends Controller
         $language->name = $request->name;
         $language->code = $request->code;
         $language->rtl = $request->direction;
-        $language->user_id = Auth::id();
+        $language->user_id = Auth::guard('web')->user()->id;
         $language->save();
 
-        Session::flash('success', 'Language updated successfully!');
+        Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";
     }
 
-    public function editKeyword($id)
+    public function editKeyword(Language $language)
     {
-
-        $data['la'] = Language::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
-        $data['keywords'] = json_decode($data['la']->keywords, true);
+        if ($language->user_id != Auth::guard('web')->user()->id) {
+            Session::flash('warning', toastrMsg('Authorization_Failed'));
+            return back();
+        }
+        $data['la'] = $language;
+        $data['u_keywords'] = json_decode($data['la']->keywords, true);
         return view('user.language.edit-keyword', $data);
-
     }
 
     public function updateKeyword(Request $request, $id)
@@ -133,22 +176,20 @@ class LanguageController extends Controller
         $keywords = $request->except('_token');
         $lang->keywords = json_encode($keywords);
         $lang->save();
-        return back()->with('success', 'Updated Successfully');
+         Session::flash('success', toastrMsg('Updated_successfully!'));
+        return 'success';
     }
-
 
     public function delete($id)
     {
-
         $la = Language::where('user_id', Auth::user()->id)->where('id', $id)->firstOrFail();
         if ($la->is_default == 1) {
-            return back()->with('warning', 'Default language cannot be deleted!');
+            return back()->with('warning', toastrMsg('Default_language_cannot_be_deleted!'));
         }
         if (session()->get('lang') == $la->code) {
             session()->forget('lang');
         }
-
-        // deleting testimonials for corresponding language
+        // deleting services for corresponding language
         if (!empty($la->services)) {
             $services = $la->services;
             if (!empty($services)) {
@@ -158,7 +199,6 @@ class LanguageController extends Controller
                 }
             }
         }
-
         // deleting testimonials for corresponding language
         if (!empty($la->testimonials)) {
             $testimonials = $la->testimonials;
@@ -169,7 +209,6 @@ class LanguageController extends Controller
                 }
             }
         }
-
         // deleting blogs for corresponding language
         if (!empty($la->blogs)) {
             $blogs = $la->blogs;
@@ -189,7 +228,6 @@ class LanguageController extends Controller
                 }
             }
         }
-
         // deleting skills for corresponding language
         if (!empty($la->skills)) {
             $skills = $la->skills;
@@ -200,7 +238,6 @@ class LanguageController extends Controller
                 }
             }
         }
-
         // deleting portfolios for corresponding language
         if (!empty($la->portfolios)) {
             $portfolios = $la->portfolios;
@@ -227,7 +264,6 @@ class LanguageController extends Controller
                 }
             }
         }
-
         // deleting job experience for corresponding language
         if (!empty($la->job_experiences)) {
             $job_experiences = $la->job_experiences;
@@ -237,7 +273,6 @@ class LanguageController extends Controller
                 }
             }
         }
-
         // deleting educations for corresponding language
         if (!empty($la->educations)) {
             $educations = $la->educations;
@@ -247,7 +282,6 @@ class LanguageController extends Controller
                 }
             }
         }
-
         // deleting seos for corresponding language
         if (!empty($la->seos)) {
             $seos = $la->seos;
@@ -257,7 +291,6 @@ class LanguageController extends Controller
                 }
             }
         }
-
         // deleting home page texts for corresponding language
         if (!empty($la->home_page_texts)) {
             $home_page_texts = $la->home_page_texts;
@@ -271,8 +304,7 @@ class LanguageController extends Controller
                 }
             }
         }
-
-        // deleting seos for corresponding language
+        // deleting achievements for corresponding language
         if (!empty($la->achievements)) {
             $achievements = $la->achievements;
             if (!empty($achievements)) {
@@ -281,11 +313,34 @@ class LanguageController extends Controller
                 }
             }
         }
+        // deleting appointment category for corresponding language
+        if (!empty($la->appointment_categories)) {
+            $appointment_categories = $la->appointment_categories;
+            if (!empty($appointment_categories)) {
+                foreach ($appointment_categories as $category) {
+                    @unlink(public_path('assets/user/img/category/' . $category->image));
+                    $category->delete();
+                }
+            }
+        }
+        // deleting form inputs for corresponding language
+        if (!empty($la->form_inputs)) {
+            $form_inputs = $la->form_inputs;
+            if (!empty($form_inputs)) {
+                foreach ($form_inputs as $input) {
+                    if ($input->form_input_options()->count() > 0) {
+                        $input->form_input_options()->delete();
+                    }
+                    $input->delete();
+                }
+            }
+        }
+
 
         // if the the deletable language is the currently selected language in frontend then forget the selected language from session
         session()->forget('lang');
         $la->delete();
-        return back()->with('success', 'Language Delete Successfully');
+        return back()->with('success', toastrMsg('Deleted_Successfully!'));
     }
 
 

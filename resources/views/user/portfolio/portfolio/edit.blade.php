@@ -1,28 +1,28 @@
 @extends('user.layout')
 
-@if(!empty($portfolio->language) && $portfolio->language->rtl == 1)
-@section('styles')
-    <style>
-        form input,
-        form textarea,
-        form select {
-            direction: rtl;
-        }
+@if (!empty($portfolio->language) && $portfolio->language->rtl == 1)
+    @section('styles')
+        <style>
+            form input,
+            form textarea,
+            form select {
+                direction: rtl;
+            }
 
-        form .note-editor.note-frame .note-editing-area .note-editable {
-            direction: rtl;
-            text-align: right;
-        }
-    </style>
-@endsection
+            form .note-editor.note-frame .note-editing-area .note-editable {
+                direction: rtl;
+                text-align: right;
+            }
+        </style>
+    @endsection
 @endif
 
 @section('content')
     <div class="page-header">
-        <h4 class="page-title">Edit Portfolio</h4>
+        <h4 class="page-title">{{ $keywords['Edit_Portfolio'] ?? __('Edit Portfolio') }}</h4>
         <ul class="breadcrumbs">
             <li class="nav-home">
-                <a href="{{route('user-dashboard')}}">
+                <a href="{{ route('user-dashboard') }}">
                     <i class="flaticon-home"></i>
                 </a>
             </li>
@@ -30,13 +30,13 @@
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a href="#">Portfolio Page</a>
+                <a href="#">{{ $keywords['Portfolio_Page'] ?? __('Portfolio Page') }}</a>
             </li>
             <li class="separator">
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a href="#">Edit Portfolio</a>
+                <a href="#">{{ $keywords['Edit_Portfolio'] ?? __('Edit Portfolio') }}</a>
             </li>
         </ul>
     </div>
@@ -44,13 +44,13 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title d-inline-block">Edit Portfolio</div>
+                    <div class="card-title d-inline-block">{{ $keywords['Edit_Portfolio'] ?? __('Edit Portfolio') }}</div>
                     <a class="btn btn-info btn-sm float-right d-inline-block"
-                       href="{{route('user.portfolio.index') . '?language=' . $portfolio->language->code}}">
+                        href="{{ route('user.portfolio.index') . '?language=' . $portfolio->language->code }}">
                         <span class="btn-label">
-                        <i class="fas fa-backward"></i>
+                            <i class="fas fa-backward"></i>
                         </span>
-                        Back
+                        {{ $keywords['Back'] ?? __('Back') }}
                     </a>
                 </div>
                 <div class="card-body pt-5 pb-5">
@@ -60,35 +60,38 @@
 
                             {{-- Slider images upload start --}}
                             <div class="px-2">
-                                <label for="" class="mb-2"><strong>Slider Images **</strong></label>
+                                <label for=""
+                                    class="mb-2"><strong>{{ $keywords['Slider_Images'] ?? __('Slider Images') }}
+                                        **</strong></label>
                                 <div class="row">
                                     <div class="col-12">
                                         <table class="table table-striped" id="imgtable">
                                         </table>
                                     </div>
                                 </div>
-                                <form action="{{route('user.portfolio.sliderstore')}}" id="my-dropzone" enctype="multipart/formdata" class="dropzone">
+                                <form action="{{ route('user.portfolio.sliderstore') }}" id="my-dropzone"
+                                    enctype="multipart/formdata" class="dropzone">
                                     @csrf
-                                    <input type="hidden" name="portfolio_id" value="{{$portfolio->id}}">
+                                    <input type="hidden" name="portfolio_id" value="{{ $portfolio->id }}">
                                 </form>
                                 <p class="em text-danger mb-0" id="errslider_images"></p>
                             </div>
                             {{-- Slider images upload end --}}
 
-                            <form id="ajaxForm" class="" action="{{route('user.portfolio.update')}}" method="post"
-                                  enctype="multipart/form-data">
+                            <form id="ajaxForm" class="" action="{{ route('user.portfolio.update') }}"
+                                method="post" enctype="multipart/form-data">
                                 @csrf
-                                <input type="hidden" name="id" value="{{$portfolio->id}}">
+                                <input type="hidden" name="id" value="{{ $portfolio->id }}">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <div class="col-12 mb-2">
-                                                <label for="image"><strong>Image</strong></label>
+                                                <label
+                                                    for="image"><strong>{{ $keywords['Image'] ?? __('Image') }}</strong></label>
                                             </div>
                                             <div class="col-md-12 showImage mb-3">
-                                                <img
-                                                    src="{{isset($portfolio->image) ? asset('assets/front/img/user/portfolios/'.$portfolio->image) : asset('assets/admin/img/noimage.jpg')}}"
-                                                    alt="..." class="img-thumbnail">
+                                                <img src="{{ isset($portfolio->image) ? asset('assets/front/img/user/portfolios/' . $portfolio->image) : asset('assets/admin/img/noimage.jpg') }}"
+                                                    alt="..." class="img-thumbnail" width="170">
                                             </div>
                                             <input type="file" name="image" id="image" class="form-control">
                                             <p id="errimage" class="mb-0 text-danger em"></p>
@@ -96,53 +99,60 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Title **</label>
-                                    <input type="text" class="form-control" name="title" value="{{$portfolio->title}}"
-                                           placeholder="Enter title">
+                                    <label for="">{{ $keywords['Title'] ?? __('Title') }} **</label>
+                                    <input type="text" class="form-control" name="title"
+                                        value="{{ $portfolio->title }}"
+                                        placeholder="{{ $keywords['Enter_title'] ?? __('Enter title') }}">
                                     <p id="errtitle" class="mb-0 text-danger em"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Category **</label>
+                                    <label for="">{{ $keywords['Category'] ?? __('Category') }} **</label>
                                     <select class="form-control" name="category">
-                                        <option value="" selected disabled>Select a category</option>
+                                        <option value="" selected disabled>
+                                            {{ $keywords['Select_a_category'] ?? __('Select a category') }}</option>
                                         @foreach ($categories as $key => $category)
-                                            <option
-                                                value="{{$category->id}}" {{$category->id == $portfolio->bcategory->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                            <option value="{{ $category->id }}"
+                                                {{ !empty($portfolio->bcategory) ? ($category->id == $portfolio->bcategory->id ? 'selected' : '') : '' }}>
+                                                {{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                     <p id="errcategory" class="mb-0 text-danger em"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Content **</label>
+                                    <label for="">{{ $keywords['Content'] ?? __('Content') }} **</label>
                                     <textarea class="form-control summernote" name="content" data-height="300"
-                                              placeholder="Enter content">{{ replaceBaseUrl($portfolio->content) }}</textarea>
+                                        placeholder="{{ $keywords['Enter_content'] ?? __('Enter content') }}">{{ replaceBaseUrl($portfolio->content) }}</textarea>
                                     <p id="errcontent" class="mb-0 text-danger em"></p>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="">Serial Number **</label>
+                                    <label for="">{{ $keywords['Serial_Number'] ?? __('Serial Number') }}
+                                        **</label>
                                     <input type="number" class="form-control ltr" name="serial_number"
-                                           value="{{$portfolio->serial_number}}" placeholder="Enter Serial Number">
+                                        value="{{ $portfolio->serial_number }}"
+                                        placeholder="{{ $keywords['Enter_Serial_Number'] ?? __('Enter Serial Number') }}">
                                     <p id="errserial_number" class="mb-0 text-danger em"></p>
-                                    <p class="text-warning"><small>The higher the serial number is, the later the
-                                            portfolio will be shown.</small></p>
+                                    <p class="text-warning">
+                                        <small>{{ $keywords['portfolio_Serial_Number_msg'] ?? __('The higher the serial number is, the later the portfolio will be shown') }}.</small>
+                                    </p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="featured" class="my-label mr-3">Featured</label>
-                                    <input id="featured" type="checkbox" name="featured"
-                                           value="1" {{$portfolio->featured == 1 ? "checked": ""}}>
+                                    <label for="featured"
+                                        class="my-label mr-3">{{ $keywords['Featured'] ?? __('Featured') }}</label>
+                                    <input id="featured" type="checkbox" name="featured" value="1"
+                                        {{ $portfolio->featured == 1 ? 'checked' : '' }}>
                                     <p id="errfeatured" class="mb-0 text-danger em"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Meta Keywords</label>
+                                    <label for="">{{ $keywords['Meta_Keywords'] ?? __('Meta Keywords') }}</label>
                                     <input type="text" class="form-control" name="meta_keywords"
-                                           value="{{$portfolio->meta_keywords}}" data-role="tagsinput">
+                                        value="{{ $portfolio->meta_keywords }}" data-role="tagsinput">
                                     <p id="errmeta_keywords" class="mb-0 text-danger em"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Meta Description</label>
-                                    <textarea type="text" class="form-control" name="meta_description"
-                                              rows="5">{{$portfolio->meta_description}}</textarea>
+                                    <label
+                                        for="">{{ $keywords['Meta_Description'] ?? __('Meta Description') }}</label>
+                                    <textarea type="text" class="form-control" name="meta_description" rows="5">{{ $portfolio->meta_description }}</textarea>
                                     <p id="errmeta_description" class="mb-0 text-danger em"></p>
                                 </div>
                             </form>
@@ -153,108 +163,56 @@
                     <div class="form">
                         <div class="form-group from-show-notify row">
                             <div class="col-12 text-center">
-                                <button type="submit" id="submitBtn" class="btn btn-success">Update</button>
+                                <button type="submit" id="" data-form="ajaxForm"
+                                    class="submitBtn btn btn-success">{{ $keywords['Update'] ?? __('Update') }}</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-
 @endsection
 
 
 @section('scripts')
-  {{-- dropzone --}}
-  <script>
-    "use strict";
-    // myDropzone is the configuration for the element that has an id attribute
-    // with the value my-dropzone (or myDropzone)
-    Dropzone.options.myDropzone = {
-        acceptedFiles: '.png, .jpg, .jpeg',
-        url: "{{route('user.portfolio.sliderstore')}}",
-        success : function(file, response){
+    {{-- dropzone --}}
+    <script>
+        "use strict";
+        // myDropzone is the configuration for the element that has an id attribute
+        // with the value my-dropzone (or myDropzone)
+        Dropzone.options.myDropzone = {
+            acceptedFiles: '.png, .jpg, .jpeg',
+            url: "{{ route('user.portfolio.sliderstore') }}",
+            success: function(file, response) {
 
-            // Create the remove button
-            var removeButton = Dropzone.createElement("<button class='rmv-btn'><i class='fa fa-times'></i></button>");
+                // Create the remove button
+                var removeButton = Dropzone.createElement(
+                    "<button class='rmv-btn'><i class='fa fa-times'></i></button>");
 
 
-            // Capture the Dropzone instance as closure.
-            var _this = this;
+                // Capture the Dropzone instance as closure.
+                var _this = this;
 
-            // Listen to the click event
-            removeButton.addEventListener("click", function(e) {
-            // Make sure the button click doesn't submit the form:
-            e.preventDefault();
-            e.stopPropagation();
+                // Listen to the click event
+                removeButton.addEventListener("click", function(e) {
+                    // Make sure the button click doesn't submit the form:
+                    e.preventDefault();
+                    e.stopPropagation();
 
-            rmvimg(response.file_id, _this, file);
-            });
+                    rmvimg(response.file_id, _this, file);
+                });
 
-            // Add the button to the file preview element.
-            file.previewElement.appendChild(removeButton);
+                // Add the button to the file preview element.
+                file.previewElement.appendChild(removeButton);
 
-            var content = {};
+                var content = {};
 
-            content.message = 'Slider images added successfully!';
-            content.title = 'Success';
-            content.icon = 'fa fa-bell';
+                content.message = 'Slider images added successfully!';
+                content.title = 'Success';
+                content.icon = 'fa fa-bell';
 
-            $.notify(content,{
-            type: 'success',
-            placement: {
-                from: 'top',
-                align: 'right'
-            },
-            time: 1000,
-            delay: 1000,
-            });
-        }
-    };
-
-    function rmvimg(fileid, _this, file) {
-
-        // If you want to the delete the file on the server as well,
-        // you can do the AJAX request here.
-
-          $.ajax({
-            url: "{{route('user.portfolio.sliderrmv')}}",
-            type: 'POST',
-            data: {
-              _token: "{{csrf_token()}}",
-              fileid: fileid,
-              type: 'edit'
-            },
-            success: function(data) {
-                if(data == "minimum_one") {
-                    var content = {};
-
-                    content.message = 'Minimum one slider image is required!';
-                    content.title = 'Warning';
-                    content.icon = 'fa fa-bell';
-
-                    $.notify(content,{
-                      type: 'warning',
-                      placement: {
-                        from: 'top',
-                        align: 'right'
-                      },
-                      time: 1000,
-                      delay: 1000,
-                    });
-
-                } else {
-                    _this.removeFile(file);
-
-                    var content = {};
-
-                    content.message = 'Slider image deleted successfully!';
-                    content.title = 'Success';
-                    content.icon = 'fa fa-bell';
-
-                    $.notify(content,{
+                $.notify(content, {
                     type: 'success',
                     placement: {
                         from: 'top',
@@ -262,77 +220,131 @@
                     },
                     time: 1000,
                     delay: 1000,
-                    });
-                }
+                });
             }
-          });
+        };
 
-    }
+        function rmvimg(fileid, _this, file) {
 
-  var el = 0;
+            // If you want to the delete the file on the server as well,
+            // you can do the AJAX request here.
 
-  $(document).ready(function(){
-    $.get("{{route('user.portfolio.images', $portfolio->id)}}", function(data){
-        for (var i = 0; i < data.length; i++) {
-          $("#imgtable").append('<tr class="trdb" id="trdb'+data[i].id+'"><td><div class="thumbnail"><img style="width:150px;" src="{{asset('assets/front/img/user/portfolios/')}}/'+data[i].image+'" alt="Ad Image"></div></td><td><button type="button" class="btn btn-danger pull-right rmvbtndb" onclick="rmvdbimg('+data[i].id+')"><i class="fa fa-times"></i></button></td></tr>');
-        }
-    });
-  });
-
-  function rmvdbimg(indb) {
-    $(".request-loader").addClass("show");
-    $.ajax({
-      url: "{{route('user.portfolio.sliderrmv')}}",
-      type: 'POST',
-      data: {
-        _token: "{{csrf_token()}}",
-        fileid: indb,
-        type: 'edit'
-      },
-      success: function(data) {
-        $(".request-loader").removeClass("show");
-
-        if(data == "minimum_one") {
-            var content = {};
-
-            content.message = 'Minimum one slider image is required!';
-            content.title = 'Warning';
-            content.icon = 'fa fa-bell';
-
-            $.notify(content,{
-                type: 'warning',
-                placement: {
-                from: 'top',
-                align: 'right'
+            $.ajax({
+                url: "{{ route('user.portfolio.sliderrmv') }}",
+                type: 'POST',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    fileid: fileid,
+                    type: 'edit'
                 },
-                time: 1000,
-                delay: 1000,
+                success: function(data) {
+                    if (data == "minimum_one") {
+                        var content = {};
+
+                        content.message = 'Minimum one slider image is required!';
+                        content.title = 'Warning';
+                        content.icon = 'fa fa-bell';
+
+                        $.notify(content, {
+                            type: 'warning',
+                            placement: {
+                                from: 'top',
+                                align: 'right'
+                            },
+                            time: 1000,
+                            delay: 1000,
+                        });
+
+                    } else {
+                        _this.removeFile(file);
+
+                        var content = {};
+
+                        content.message = 'Slider image deleted successfully!';
+                        content.title = 'Success';
+                        content.icon = 'fa fa-bell';
+
+                        $.notify(content, {
+                            type: 'success',
+                            placement: {
+                                from: 'top',
+                                align: 'right'
+                            },
+                            time: 1000,
+                            delay: 1000,
+                        });
+                    }
+                }
             });
 
-        } else {
-
-            $("#trdb"+indb).remove();
-            var content = {};
-
-            content.message = 'Slider image deleted successfully!';
-            content.title = 'Success';
-            content.icon = 'fa fa-bell';
-
-            $.notify(content,{
-              type: 'success',
-              placement: {
-                from: 'top',
-                align: 'right'
-              },
-              time: 1000,
-              delay: 1000,
-            });
         }
-      }
-    });
 
-  }
+        var el = 0;
 
-  </script>
+        $(document).ready(function() {
+            $.get("{{ route('user.portfolio.images', $portfolio->id) }}", function(data) {
+                for (var i = 0; i < data.length; i++) {
+                    $("#imgtable").append('<tr class="trdb" id="trdb' + data[i].id +
+                        '"><td><div class="thumbnail"><img style="width:150px;" src="{{ asset('assets/front/img/user/portfolios/') }}/' +
+                        data[i].image +
+                        '" alt="Ad Image"></div></td><td><button type="button" class="btn btn-danger pull-right rmvbtndb" onclick="rmvdbimg(' +
+                        data[i].id + ')"><i class="fa fa-times"></i></button></td></tr>');
+                }
+            });
+        });
 
+        function rmvdbimg(indb) {
+            $(".request-loader").addClass("show");
+            $.ajax({
+                url: "{{ route('user.portfolio.sliderrmv') }}",
+                type: 'POST',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    fileid: indb,
+                    type: 'edit'
+                },
+                success: function(data) {
+                    $(".request-loader").removeClass("show");
+
+                    if (data == "minimum_one") {
+                        var content = {};
+
+                        content.message = 'Minimum one slider image is required!';
+                        content.title = 'Warning';
+                        content.icon = 'fa fa-bell';
+
+                        $.notify(content, {
+                            type: 'warning',
+                            placement: {
+                                from: 'top',
+                                align: 'right'
+                            },
+                            time: 1000,
+                            delay: 1000,
+                        });
+
+                    } else {
+
+                        $("#trdb" + indb).remove();
+                        var content = {};
+
+                        content.message = 'Slider image deleted successfully!';
+                        content.title = 'Success';
+                        content.icon = 'fa fa-bell';
+
+                        $.notify(content, {
+                            type: 'success',
+                            placement: {
+                                from: 'top',
+                                align: 'right'
+                            },
+                            time: 1000,
+                            delay: 1000,
+                        });
+                    }
+                }
+            });
+
+        }
+    </script>
 @endsection
