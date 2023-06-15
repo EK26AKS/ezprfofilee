@@ -231,7 +231,9 @@ label {
 .mb-50 {
 	margin-bottom: 50px;
 }
-
+.pt-30{
+	margin-top: 30px;
+}
 /*======= Color & Bg =======*/
 .bg-black-color {
 	background-color: var(--color-black);
@@ -247,6 +249,10 @@ label {
 
 .bg-secondary-color {
 	background-color: var(--color-secondary);
+}
+
+.light-bg{
+	background-color:#e2ecfb;
 }
 
 /*======= Main Button =======*/
@@ -325,6 +331,11 @@ label {
 	font-size: unset;
 	line-height: 1;
 }
+
+.template-header .navbar-brand .header-theme6{
+	max-width: 100px;
+}
+
 
 .template-header .navbar-nav .nav-link {
 	color: var(--color-secondary);
@@ -489,12 +500,12 @@ label {
 .section-heading .tagline {
 	font-family: var(--font-oswald);
 	font-size: 16px;
-	line-height: 1;
 	font-weight: 500;
 	color: var(--color-black);
 	position: relative;
 	z-index: 1;
 	text-transform: uppercase;
+	margin-top: 40px;
 }
 
 .section-heading .tagline::before {
@@ -1176,11 +1187,15 @@ label {
 	overflow: hidden;
 }
 
-.single-latest-post .thumbnail img {
+.single-latest-post .thumbnail a img {
 	width: 100%;
 	-webkit-transition: 0.3s;
 	-o-transition: 0.3s;
 	transition: 0.3s;
+	height: 150px;
+}
+.single-latest-post .post-thumbnail img{
+	height: 150px;
 }
 
 .single-latest-post .post-meta {

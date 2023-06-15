@@ -4,32 +4,30 @@
     <div class="footer-widget pt-145 pb-60">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="col-lg-5 col-md-6 col-sm-12">
                     <div class="widget about-widget">
                         <a href="{{route('front.index')}}" class="d-inline-block"><img src="{{asset('assets/front/img/' . $bs->footer_logo)}}" class="img-fluid" alt=""></a>
                         <p>{{$bs->footer_text}}</p>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 ezp-footer-links">
+                <div class="col-lg-2 col-md-6 col-sm-6 ezp-footer-links">
                     <div class="widget useful-link-widget">
-                        <h4 class="widget-title">Our Services</h4>
-
+                        <h4 class="widget-title">Important  Links</h4>
                         @php
                             $ulinks = App\Models\Ulink::where('language_id',$currentLang->id)->orderby('id','desc')->get();
                         @endphp
                         <ul class="widget-link">
-                            <li><a href="https://ezprofile.in/" target="_blank">EZ Profile</a></li>
+                            <li><a href="https://ezprofile.in/about" target="_blank">About Us</a></li>
                             <li><a href="https://ezstore.in/" target="_blank">EZ Store</a></li>
                             <li><a href="https://ezsocial.in/" target="_blank">EZ Social</a></li>
-                            <li><a href="https://ezwordpress.in/" target="_blank">EZ WordPress</a></li>
                             <li><a href="http://ez-genie.com/" target="_blank">EZ Genie</a></li>
+                            <li><a href="http://ektasi.io/" target="_blank">EKTASI Technology</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 ezp-footer-links">
+                <div class="col-lg-2 col-md-6 col-sm-6 ezp-footer-links">
                     <div class="widget useful-link-widget">
                         <h4 class="widget-title">{{$bs->useful_links_title}}</h4>
-
                         @php
                             $ulinks = App\Models\Ulink::where('language_id',$currentLang->id)->orderby('id','desc')->get();
                         @endphp
@@ -53,8 +51,10 @@
                             <p id="erremail" class="text-danger mb-0 err-email"></p>
                         </form>
                         <ul class="social-link">
+                            <?php $i = 1; ?>
                             @foreach ($socials as $social)
-                            <li><a href="{{$social->url}}" class="facebook"><i class="{{$social->icon}}"></i></a></li>
+                            <li><a href="{{$social->url}}" class="facebook-{{$i}}"><i class="{{$social->icon}}"></i></a></li>
+                            <?php $i++; ?>
                             @endforeach
                         </ul>
                     </div>

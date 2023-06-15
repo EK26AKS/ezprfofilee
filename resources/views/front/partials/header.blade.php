@@ -55,8 +55,8 @@
                 <div class="nav-push-item d-none d-xl-block">
                     @guest
                         <div class="navbar-btn">
-                            <a href="{{route('user.login')}}" class="main-btn login_button"><i class="fal fa-sign-in-alt"></i>{{__('Login')}}</a>
-                            <a href="{{route('front.pricing')}}" class="main-btn signup_button"><i class="fal fa-sign-in-alt"></i>{{__('Sign Up')}}</a>
+                            <a href="{{route('user.login')}}" class="main-btn login_button"><i class="far fa-sign-in"></i></i>{{__('Sign In')}}</a>
+                            <a href="{{route('front.pricing')}}" class="main-btn signup_button"><i class="far fa-sign-in"></i></i>{{__('Sign Up')}}</a>
                         </div>
                     @endguest
                     @auth

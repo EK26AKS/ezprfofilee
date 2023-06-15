@@ -14,7 +14,6 @@
 @endsection
 
 @section('content')
-
     <!--====== Start contacts-section ======-->
     <section class="contacts-section pt-120 pb-120">
         <div class="container">

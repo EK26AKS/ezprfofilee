@@ -274,6 +274,7 @@ class BasicController extends Controller
         $data['basic_setting'] = BasicSetting::where('user_id',Auth::id())->first();
         return view('user.cv',$data);
     }
+
     public function updateCV(Request $request){
         $rules = [
             'cv'  => "required|mimes:pdf|max:10000"
@@ -350,20 +351,20 @@ class BasicController extends Controller
     public function updateSEO(Request $request)
     {
       // first, get the language info from db
-     
-      $language = Language::where('code', $request->language)->where('user_id', Auth::guard('web')->user()->id)->first();
-      $langId = $language->id;
-      
+        
+        $language = Language::where('code', $request->language)->where('user_id', Auth::guard('web')->user()->id)->first();
 
-      // then, get the seo info of that language from db
-      $seo = SEO::where('language_id', $langId)->where('user_id', Auth::user()->id)->first();
+        $langId = $language->id;
 
-      // else update the existing seo info of that language
-      $seo->update($request->all());
+        // then, get the seo info of that language from db
+        $seo = SEO::where('language_id', $langId)->where('user_id', Auth::user()->id)->first();
 
-      $request->session()->flash('success', toastrMsg('Updated_successfully!'));
+        // else update the existing seo info of that language
+        $seo->update($request->all());
 
-      return redirect()->back();
+        $request->session()->flash('success', toastrMsg('Updated_successfully!'));
+
+        return redirect()->back();
     }
 
 

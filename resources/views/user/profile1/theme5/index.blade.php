@@ -50,7 +50,7 @@
         </section>
         <!--====== End Hero Section ======-->
         <!--====== Start About Section ======-->
-        <section class="about-area pb-80 pt-120">
+        <section class="about-area pb-80 pt-120 light-bg">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
@@ -79,7 +79,7 @@
 
         @if(is_array($userPermissions) && in_array('Skill',$userPermissions))
         <!--====== Start Skills Section ======-->
-        <section class="skills-area">
+        <section class="skills-area pt-30">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6">
@@ -119,7 +119,7 @@
             <section class="service-area pt-120 pb-80">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-lg-8">
+                        <div class="col-lg-10">
                             <div class="section-title text-center mb-45">
                                 <span class="sub-title">{{$home_text->service_title ?? __('Services')}}</span>
                                 <h2>{{$home_text->service_subtitle ?? __('What I Do ?')}}</h2>

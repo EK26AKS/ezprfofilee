@@ -25,7 +25,7 @@
                 <div class="col-lg-8">
                     <div class="faq-wrapper mb-40">
                         <div class="accordion ezprofile-accordion" id="accordionExample">
-                          @foreach($faqs as $key => $faq)
+                          @foreach($faqs->reverse() as $key => $faq)
                               @if($key == 0)
                                     <div class="card">
                                         <a class="collapsed card-header" id="heading{{$key}}" href="#" data-toggle="collapse" data-target="#collapse{{$key}}" aria-expanded="true" aria-controls="collapse{{$key}}">{{$faq->question}}<span class="toggle_btn"></span>

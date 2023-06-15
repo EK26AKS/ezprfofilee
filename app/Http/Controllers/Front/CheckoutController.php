@@ -70,8 +70,6 @@ class CheckoutController extends Controller
             $transaction_details = "Trial";
             $user = $this->store($request->all(), $transaction_id, $transaction_details, $request->price, $be, $request->password);
 
-
-
             $lastMemb = $user->memberships()->orderBy('id', 'DESC')->first();
             $activation = Carbon::parse($lastMemb->start_date);
             $expire = Carbon::parse($lastMemb->expire_date);
@@ -168,6 +166,7 @@ class CheckoutController extends Controller
             $razorpay = new RazorpayController();
             return $razorpay->paymentProcess($request, $amount, $item_number, $cancel_url, $success_url, $title, $description, $bs, $be);
         } elseif ($request->payment_method == "Instamojo") {
+
             if ($be->base_currency_text != "INR") {
                 return redirect()->back()->with('error', __('only_instamojo_INR'))->withInput($request->all());
             }
@@ -358,7 +357,7 @@ class CheckoutController extends Controller
                     'index' => $index,
                 ]);
             }
-            // create payment gateways 
+            // Assign the array to a variable
             $payment_keywords = ['flutterwave', 'razorpay', 'paytm', 'paystack', 'instamojo', 'stripe', 'paypal', 'mollie', 'mercadopago', 'authorize.net'];
             foreach ($payment_keywords as $key => $value) {
                 UserPaymentGateway::create([
@@ -369,9 +368,11 @@ class CheckoutController extends Controller
                     'subtitle' => null,
                     'name' => ucfirst($value),
                     'type' => 'automatic',
-                    'information' => null
+                    'information' => null,
+                    'status'=> 0,
                 ]);
             }
+            
             // create email template 
             $templates = ['email_verification', 'appointment_booking_notification', 'reset_password'];
             foreach ($templates as $key => $val) {

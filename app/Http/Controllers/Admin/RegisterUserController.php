@@ -129,6 +129,7 @@ class RegisterUserController extends Controller
 
             // create payment gateways 
             $payment_keywords = ['flutterwave', 'razorpay', 'paytm', 'paystack', 'instamojo', 'stripe', 'paypal', 'mollie', 'mercadopago', 'authorize.net'];
+            
             foreach ($payment_keywords as $key => $value) {
                 UserPaymentGateway::create([
                     'title' => null,
@@ -138,9 +139,11 @@ class RegisterUserController extends Controller
                     'subtitle' => null,
                     'name' => ucfirst($value),
                     'type' => 'automatic',
-                    'information' => null
+                    'information' => null,
+                    'status'=> 0,
                 ]);
             }
+
             // create email template 
             $templates = ['email_verification', 'appointment_booking_notification', 'reset_password'];
             foreach ($templates as $key => $val) {
@@ -192,7 +195,6 @@ class RegisterUserController extends Controller
                 'user_id' => $user->id,
                 'permissions' => json_encode($features)
             ]);
-
 
             $requestData = [
                 'start_date' => $startDate,

@@ -41,7 +41,7 @@
         <p class="text-center">{{ $keywords['OR'] ?? __('OR') }}</p>
         @endif
         <div class="row justify-content-center">
-            <div class="col-lg-6">
+            <div class="col-lg-6 login-themes">
                 <div class="sing-in-form-area wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
                     <div class="sing-in-form-wrapper">
                         <form action="{{ route('customer.login_submit', getParam()) }}" method="POST">

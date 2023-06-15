@@ -96,7 +96,7 @@
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-dark justify-content-between align-items-center">
                 <a href="{{ route('front.user.detail.view', getParam()) }}" class="navbar-brand d-block">
-                    <img class="lazy"
+                    <img class="lazy header-theme6"
                         data-src="{{ isset($userBs->logo)
                             ? asset('assets/front/img/user/' . $userBs->logo)
                             : asset('assets/front/img/profile/lgoo.png') }}"

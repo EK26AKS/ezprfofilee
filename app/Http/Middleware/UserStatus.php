@@ -17,11 +17,11 @@ class UserStatus
      */
     public function handle($request, Closure $next)
     {
-        // if(Auth::user()->status != 1){
-        //     Auth::guard('web')->logout();
-        //     Session::flash('error','Your account has been banned!');
-        //     return redirect(route('front.index'));
-        // }
+        if(Auth::user()->status != 1){
+            Auth::guard('web')->logout();
+            Session::flash('error','Your account has been banned!');
+            return redirect(route('front.index'));
+        }
         return $next($request);
     }
 }

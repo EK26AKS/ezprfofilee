@@ -285,6 +285,9 @@ textarea {
 	font-size: unset;
 	line-height: 1;
 }
+.template-header .navbar-brand .header-theme8{
+	max-width: 100px;
+}
 
 .template-header .navbar-nav .nav-link {
 	color: var(--color-white);
@@ -467,6 +470,7 @@ textarea {
 	margin-bottom: 5px;
 	line-height: 1;
 	text-transform: uppercase;
+	margin-top: 30px;
 }
 
 .section-heading .title {
@@ -648,7 +652,7 @@ textarea {
 	z-index: 1;
 }
 
-.about-gallery .img-one .img-inner::before {
+/* .about-gallery .img-one .img-inner::before {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -657,7 +661,7 @@ textarea {
 	z-index: -1;
 	background-color: var(--color-primary);
 	left: -30px;
-}
+} */
 
 .about-gallery .img-two {
 	text-align: right;
@@ -1194,7 +1198,9 @@ textarea {
 	-o-transition: 0.3s;
 	transition: 0.3s;
 }
-
+.single-latest-post .post-thumbnail img{
+	height: 150px;
+}
 .single-latest-post .post-meta {
 	display: -webkit-box;
 	display: -ms-flexbox;

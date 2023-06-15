@@ -169,17 +169,17 @@
                                     </a>
                                 </li>
                                 <li class="@if (request()->path() == 'admin/domains' && request()->input('type') == 'pending') active @endif">
-                                    <a href="{{ route('admin.custom-domain.index', ['type' => 'pending']) . '?language=' . $default->code }}">
+                                    <a href="{{ route('admin.custom-domain.index', ['type' => 'pending'])}}">
                                         <span class="sub-item">{{ __('Pending Requests') }}</span>
                                     </a>
                                 </li>
                                 <li class="@if (request()->path() == 'admin/domains' && request()->input('type') == 'connected') active @endif">
-                                    <a href="{{ route('admin.custom-domain.index', ['type' => 'connected']) . '?language=' . $default->code }}">
+                                    <a href="{{ route('admin.custom-domain.index', ['type' => 'connected'])}}">
                                         <span class="sub-item">{{ __('Connected Requests') }}</span>
                                     </a>
                                 </li>
                                 <li class="@if (request()->path() == 'admin/domains' && request()->input('type') == 'rejected') active @endif">
-                                    <a href="{{ route('admin.custom-domain.index', ['type' => 'rejected']) . '?language=' . $default->code }}">
+                                    <a href="{{ route('admin.custom-domain.index', ['type' => 'rejected'])}}">
                                         <span class="sub-item">{{ __('Rejected Requests') }}</span>
                                     </a>
                                 </li>

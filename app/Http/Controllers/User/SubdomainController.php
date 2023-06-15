@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 
 class SubdomainController extends Controller
 {
-    public function subdomain() {
+    public function subdomain(Request $req) {
+        
         $userId = Auth::user()->id;
         $features = UserPermissionHelper::packagePermission($userId);
         $data['features'] = json_decode($features, true);

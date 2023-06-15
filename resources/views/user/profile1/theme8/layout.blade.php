@@ -106,7 +106,7 @@
             data-src="{{ isset($userBs->logo)
                 ? asset('assets/front/img/user/' . $userBs->logo)
                 : asset('assets/front/img/profile/lgoo.png') }}"
-            class="lazy" alt="Logo">
+            class="lazy header-theme8" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
           aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

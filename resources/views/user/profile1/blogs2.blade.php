@@ -23,7 +23,7 @@
                     <div class="row">
                         @foreach($blogs as $blog)
                         <div class="col-md-6 col-sm-8">
-                            <div class="latest-blog-post blog-post-two mb-30">
+                            <div class="latest-blog-post blog-post-two text-center mb-30">
                                 <a class="post-thumb" href="{{route('front.user.blog.detail', [getParam(), $blog->slug, $blog->id])}}">
                                     <img class="lazy" data-src="{{asset('assets/front/img/user/blogs/'.$blog->image)}}" alt="Image">
                                 </a>

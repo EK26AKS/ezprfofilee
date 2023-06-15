@@ -61,20 +61,23 @@
                                     <div class="selectgroup w-100">
                                         <label class="selectgroup-item">
                                             <input type="radio" name="status" value="1" class="selectgroup-input"
-                                                {{ $paypal->status == 1 ? 'checked' : '' }}>
+                                                @if(!empty($paypal)) {{ $paypal->status == 1 ? 'checked' : '' }} @endif>
                                             <span
                                                 class="selectgroup-button">{{ $keywords['Active'] ?? __('Active') }}</span>
                                         </label>
                                         <label class="selectgroup-item">
                                             <input type="radio" name="status" value="0" class="selectgroup-input"
-                                                {{ $paypal->status == 0 ? 'checked' : '' }}>
+                                                @if(!empty($paypal)) {{ $paypal->status == 1 ? 'checked' : '' }} @endif>
                                             <span
                                                 class="selectgroup-button">{{ $keywords['Deactive'] ?? __('Deactive') }}</span>
                                         </label>
                                     </div>
                                 </div>
                                 @php
+                                    $paypalInfo = "";
+                                    if(!empty($paypal)){
                                     $paypalInfo = json_decode($paypal->information, true);
+                                    }
                                 @endphp
                                 <div class="form-group">
                                     <label>{{ $keywords['Paypal_Test_Mode'] ?? __('Paypal Test Mode') }}</label>
@@ -146,7 +149,10 @@
                             <div class="col-lg-12">
                                 @csrf
                                 @php
+                                    $stripeInfo = "";
+                                    if(!empty($stripe)){
                                     $stripeInfo = json_decode($stripe->information, true);
+                                    }
                                 @endphp
                                 <div class="form-group">
                                     <label>{{ $keywords['Stripe'] ?? __('Stripe') }}</label>
@@ -214,7 +220,10 @@
                             <div class="col-lg-12">
                                 @csrf
                                 @php
+                                    $paytmInfo = "";
+                                    if(!empty($paytm)){
                                     $paytmInfo = json_decode($paytm->information, true);
+                                    }
                                 @endphp
                                 <div class="form-group">
                                     <label>{{ $keywords['Paytm'] ?? __('Paytm') }}</label>
@@ -325,7 +334,10 @@
                             <div class="col-lg-12">
                                 @csrf
                                 @php
+                                    $instamojoInfo = "";
+                                    if(!empty($instamojo)){
                                     $instamojoInfo = json_decode($instamojo->information, true);
+                                    }
                                 @endphp
                                 <div class="form-group">
                                     <label>{{ $keywords['Instamojo'] ?? __('Instamojo') }}</label>
@@ -417,7 +429,10 @@
                             <div class="col-lg-12">
                                 @csrf
                                 @php
+                                    $paystackInfo = "";
+                                    if(!empty($paystack)){
                                     $paystackInfo = json_decode($paystack->information, true);
+                                    }
                                 @endphp
                                 <div class="form-group">
                                     <label>{{ $keywords['Paystack'] ?? __('Paystack') }}</label>
@@ -480,7 +495,10 @@
                             <div class="col-lg-12">
                                 @csrf
                                 @php
+                                    $flutterwaveInfo = "";
+                                    if(!empty($flutterwave)){
                                     $flutterwaveInfo = json_decode($flutterwave->information, true);
+                                    }
                                 @endphp
                                 <div class="form-group">
                                     <label>{{ $keywords['Flutterwave'] ?? __('Flutterwave') }}</label>
@@ -553,7 +571,10 @@
                             <div class="col-lg-12">
                                 @csrf
                                 @php
+                                    $mollieInfo = "";
+                                    if(!empty($mollie)){
                                     $mollieInfo = json_decode($mollie->information, true);
+                                    }
                                 @endphp
                                 <div class="form-group">
                                     <label>{{ $keywords['Mollie_Payment'] ?? __('Mollie Payment') }}</label>
@@ -619,7 +640,10 @@
                             <div class="col-lg-12">
                                 @csrf
                                 @php
+                                    $razorpayInfo = "";
+                                    if(!empty($razorpay)){
                                     $razorpayInfo = json_decode($razorpay->information, true);
+                                    }
                                 @endphp
                                 <div class="form-group">
                                     <label>{{ $keywords['Razorpay'] ?? __('Razorpay') }}</label>
@@ -695,7 +719,10 @@
                             <div class="col-lg-12">
                                 @csrf
                                 @php
+                                    $anetInfo = "";
+                                    if(!empty($anet)){
                                     $anetInfo = json_decode($anet->information, true);
+                                    }
                                 @endphp
                                 <div class="form-group">
                                     <label>{{ $keywords['Authorize_Net'] ?? __('Authorize.Net') }}</label>
@@ -799,7 +826,10 @@
 
                         @csrf
                         @php
+                            $mercadopagoInfo = "";
+                            if(!empty($mercadopago)){
                             $mercadopagoInfo = json_decode($mercadopago->information, true);
+                            }
                         @endphp
                         <div class="form-group">
                             <label>{{ $keywords['Mercado_Pago'] ?? __('Mercado Pago') }}</label>

@@ -12,6 +12,11 @@ use App\Models\User;
 
 class GoogleSocialiteController extends Controller
 {
+    public function __construct()
+    {
+        //$this->middleware('auth');
+        $this->middleware('setlang');
+    }
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
@@ -19,51 +24,43 @@ class GoogleSocialiteController extends Controller
     
     public function handleCallback(Request $request)
     {
+        $redirectUrl = "";
         if (Session::has('link')) {
             $redirectUrl = Session::get('link');
             Session::forget('link');
         } else {
             $redirectUrl = route('user-dashboard');
         }
-
+    
         try {
             $user = Socialite::driver('google')->user();
-            $findUser = $this->findOrCreateUser($user);
-
-            Auth::login($findUser);
-
-            if (Auth::user()->email_verified == 0 || Auth::user()->status == 0) {
-                Auth::logout();
-                if (Auth::user()->email_verified == 0) {
-                    return back()->with('err', toastrMsg('Your email is not verified!'));
-                } elseif (Auth::user()->status == 0) {
-                    return back()->with('err', toastrMsg('Your account is disabled'));
+            $findUser = User::where('email', $user->email)->first();
+        
+            if (!empty($findUser)) {
+                if ($findUser !== null && $findUser->social_type != "google" && $findUser->google_id != $user->id) {
+                    $findUser->google_id = $user->id;
+                    $findUser->social_type = "google";
+                    $findUser->save();
                 }
+                
+                Auth::login($findUser);
+                if (Auth::user()->email_verified == 0 || Auth::user()->status == 0) {
+                    Auth::logout();
+                    if (Auth::user()->email_verified == 0) {
+                        return redirect()->back()->with('err', toastrMsg('Your email is not verified!'));
+                    } elseif (Auth::user()->status == 0) {
+                        return redirect()->back()->with('err', toastrMsg('Your account is disabled'));
+                    }
+                }
+    
+                return redirect($redirectUrl);
             }
-
-            return redirect($redirectUrl);
+            else{
+                return redirect()->route('user.login')->with('error', 'Email is not exist, You need to signup.');
+            }
         } catch (Exception $e) {
             // Handle the exception gracefully, show error message, and redirect back
             return redirect()->route('login')->with('error', 'An error occurred during Google login.');
-        }
-    }
-
-
-    private function findOrCreateUser($googleUser)
-    {
-        $user = User::where('social_id', $googleUser->id)->first();
-        
-        if ($user) {
-            return $user;
-        } else {
-            return User::create([
-                'name' => $googleUser->name,
-                'email' => $googleUser->email,
-                'social_id' => $googleUser->id,
-                'social_type' => 'google',
-                'status' => 1,
-                'email_verified' => 1,
-            ]);
         }
     }
 }

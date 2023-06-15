@@ -156,7 +156,7 @@
     <section class="experience-section section-gap" id="experience">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-9">
+                <div class="col-lg-10 col-md-9">
                     <div class="common-heading text-center mb-60">
                         <span class="tagline-two">{{$home_text->experience_title ?? __('Experience')}}</span>
                         <h2 class="title">{{$home_text->experience_subtitle ?? __('Experience')}}</h2>
@@ -346,7 +346,7 @@
             <div class="row justify-content-center">
                 @foreach($blogs as $blog)
                 <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="latest-blog-post blog-post-two mt-30">
+                    <div class="latest-blog-post blog-post-two text-center mt-30">
                         <a class="post-thumb" href="{{route('front.user.blog.detail', [getParam(), $blog->slug, $blog->id])}}">
                             <img class="lazy" data-src="{{asset('assets/front/img/user/blogs/'.$blog->image)}}" alt="Image">
                         </a>

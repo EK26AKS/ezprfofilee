@@ -75,10 +75,13 @@
                             </div>
                         </form>
                         <div class="form_group">
-                                <a href="{{ url('auth/google') }}" style="margin-top: 0px !important;background: green;color: #ffffff;padding: 5px;border-radius:7px;" class="ml-2">
-                                    <strong>Google Login</strong>
-                                </a> 
-                            </div>
+                            <a href="{{ url('auth/google') }}" class="main-btn login_button google_login_button">
+                                <i class="fab fa-google"></i>
+                            </a>
+                            <a href="{{ url('auth/facebook') }}" class="main-btn login_button facebook_login_button">
+                                <i class="fab fa-facebook"></i>
+                            </a> 
+                        </div>
                     </div>
                 </div>
             </div>

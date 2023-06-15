@@ -60,7 +60,7 @@
     </section>
     <!--====== End Hero Section ======-->
     <!--====== Start About Section ======-->
-    <section class="about-area pt-70 pb-70">
+    <section class="about-area pt-80 pb-80">
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-lg-5">
@@ -97,7 +97,7 @@
 
     @if(is_array($userPermissions) && in_array('Skill',$userPermissions))
     <!--====== Start Skills Section ======-->
-    <section class="skill-area pt-130 pb-80">
+    <section class="skill-area pt-80 pb-80">
         <div class="objects-shape">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-3.png')}}" class="lazy shape shape-one" alt="">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-4.png')}}" class="lazy shape shape-two" alt="">
@@ -143,7 +143,7 @@
 
     @if(is_array($userPermissions) && in_array('Service',$userPermissions))
     <!--====== Start Service Section ======-->
-    <section class="service-area pt-110 pb-90" id="service">
+    <section class="service-area pt-80 pb-80" id="service">
         <div class="objects-shape">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-14.png')}}" class="lazy shape shape-one" alt="">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-15.png')}}" class="lazy shape shape-two" alt="">
@@ -151,7 +151,7 @@
         <div class="service-after-bg"></div>
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-6">
+                <div class="col-lg-10">
                     <div class="section-title text-center mb-50">
                         <span class="sub-title">{{$home_text->service_title ?? __('Services')}}</span>
                         <h2>{{$home_text->service_subtitle ?? __('What I Do ?')}}</h2>
@@ -184,7 +184,7 @@
 
     @if(is_array($userPermissions) && in_array('Experience',$userPermissions))
     <!--====== Start Resume Section ======-->
-    <section class="resume-area pb-90">
+    <section class="resume-area pt-80 pb-80">
         <div class="objects-shape">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-3.png')}}" class="lazy shape shape-one" alt="">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/circle-1.png')}}" class="lazy shape shape-two" alt="">
@@ -193,7 +193,7 @@
         </div>
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-10">
                     <div class="section-title text-center mb-70">
                         <span class="sub-title">{{$home_text->experience_title ?? __('Experience')}}</span>
                         <h2>{{$home_text->experience_subtitle ?? __('Experience')}}</h2>
@@ -261,7 +261,7 @@
 
     @if(is_array($userPermissions) && in_array('Achievements',$userPermissions))
     <!--====== Start Counter Section ======-->
-    <section class="counter-area bg_cover pt-120 pb-85 lazy" data-bg="{{!empty($home_text->achievement_image) ? asset('assets/front/img/user/home_settings/' . $home_text->achievement_image) : asset('assets/front/img/profile1/theme4/counter-bg.jpg')}}">
+    <section class="counter-area bg_cover pt-80 pb-80 lazy" data-bg="{{!empty($home_text->achievement_image) ? asset('assets/front/img/user/home_settings/' . $home_text->achievement_image) : asset('assets/front/img/profile1/theme4/counter-bg.jpg')}}">
         <div class="container">
             <div class="row">
                 @foreach ($achievements as $achievement)
@@ -280,7 +280,7 @@
 
     @if(is_array($userPermissions) && in_array('Portfolio',$userPermissions))
     <!--====== Start Project Section ======-->
-    <section class="portfolio-area pt-120 pb-90" id="masonry-portfolio">
+    <section class="portfolio-area pt-80 pb-80" id="masonry-portfolio">
         <div class="objects-shape">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-13.png')}}" class="lazy shape shape-one" alt="">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-8.png')}}" class="lazy shape shape-two" alt="">
@@ -288,7 +288,7 @@
         </div>
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-10">
                     <div class="section-title text-center mb-45">
                         <span class="sub-title">{{$home_text->portfolio_title ?? __('Portfolios')}}</span>
                         <h2>{{$home_text->portfolio_subtitle ??  __('Portfolios')}}</h2>
@@ -330,7 +330,7 @@
 
     @if(is_array($userPermissions) && in_array('Testimonial',$userPermissions))
     <!--====== Start Testimonial Section ======-->
-    <section class="testimonial-area light-bg pt-120 pb-130">
+    <section class="testimonial-area light-bg pt-80 pb-80">
         <div class="objects-shape">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-2.png')}}" class="lazy shape shape-one" alt="">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/h-ob-1.png')}}" class="lazy shape shape-two" alt="">
@@ -338,7 +338,7 @@
         </div>
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-6">
+                <div class="col-lg-10">
                     <div class="section-title text-center mb-60">
                         <span class="sub-title">{{$home_text->testimonial_title ?? __('Testimonials')}}</span>
                         <h2>{{$home_text->testimonial_subtitle ?? __('Testimonials')}}</h2>
@@ -373,16 +373,16 @@
 
     @if(is_array($userPermissions) && in_array('Blog',$userPermissions))
     <!--====== Start Blog Section ======-->
-    <section class="blog-area pt-110 pb-90" id="blog">
+    <section class="blog-area pt-80 pb-80" id="blog">
         <div class="objects-shape">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-6.png')}}" class="shape shape-one" alt="">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-5.png')}}" class="shape shape-two" alt="">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-8.png')}}" class="shape shape-three" alt="">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-12.png')}}" class="shape shape-four" alt="">
         </div>
-        <div class="container">4
+        <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-6">
+                <div class="col-lg-10">
                     <div class="section-title text-center mb-60">
                         <span class="sub-title">{{$home_text->blog_title ?? __('Blogs')}}</span>
                         <h2>{{$home_text->blog_subtitle ?? "Blogs"}}</h2>
@@ -392,7 +392,7 @@
             <div class="row">
 
                 @foreach($blogs as $blog)
-                    <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="col-lg-4 col-md-6 col-sm-12 blogs-section">
                         <div class="blog-post-item mb-40">
                             <a class="post-thumbnail d-block" href="{{route('front.user.blog.detail', [getParam(), $blog->slug, $blog->id])}}">
                                 <img class="lazy" data-src="{{asset('assets/front/img/user/blogs/'.$blog->image)}}" alt="Blog Image">
@@ -417,7 +417,7 @@
 
     @if(is_array($userPermissions) && in_array('Contact',$userPermissions))
     <!--====== Start Contact Section ======-->
-    <section class="contact-area light-bg pt-110 pb-120" id="contact">
+    <section class="contact-area light-bg pt-80 pb-80" id="contact">
         <div class="objects-shape">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/circle-3.png')}}" class="lazy shape shape-one" alt="">
             <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-2.png')}}" class="lazy shape shape-two" alt="">

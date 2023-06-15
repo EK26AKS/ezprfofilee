@@ -20,6 +20,7 @@
     }
 @endphp
 
+
 @section('content')
     <div class="mt-2 mb-4">
         <h2 class="text-white pb-2">{{ __('Welcome back') }}, {{ Auth::guard('admin')->user()->first_name }}

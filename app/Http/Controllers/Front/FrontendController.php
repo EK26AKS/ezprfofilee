@@ -225,6 +225,52 @@ class FrontendController extends Controller
         return redirect()->route('front.registration.step2');
     }
 
+    public function privacy()
+    {
+        if (session()->has('lang')) {
+            $currentLang = Language::where('code', session()->get('lang'))->first();
+        } else {
+            $currentLang = Language::where('is_default', 1)->first();
+        }
+        $data['seo'] = Seo::where('language_id', $currentLang->id)->first();
+
+        return view('front.privacy', $data);
+    }
+
+    public function refund()
+    {
+        if (session()->has('lang')) {
+            $currentLang = Language::where('code', session()->get('lang'))->first();
+        } else {
+            $currentLang = Language::where('is_default', 1)->first();
+        }
+        $data['seo'] = Seo::where('language_id', $currentLang->id)->first();
+
+        return view('front.refund', $data);
+    }
+
+    public function tearmsAndCondtions ()
+    {
+        if (session()->has('lang')) {
+            $currentLang = Language::where('code', session()->get('lang'))->first();
+        } else {
+            $currentLang = Language::where('is_default', 1)->first();
+        }
+        $data['seo'] = Seo::where('language_id', $currentLang->id)->first();
+
+        return view('front.terms-and-conditions', $data);
+    }
+
+    public function aboutUs(){
+        if (session()->has('lang')) {
+            $currentLang = Language::where('code', session()->get('lang'))->first();
+        } else {
+            $currentLang = Language::where('is_default', 1)->first();
+        }
+        $data['seo'] = Seo::where('language_id', $currentLang->id)->first();
+
+        return view('front.about-us', $data);
+    }
 
     // packages start
     public function pricing(Request $request)

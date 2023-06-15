@@ -33,8 +33,6 @@ class Controller extends BaseController
                 if ($file_name) {
                     $mail->addAttachment(public_path('assets/front/invoices/' . $file_name));
                 }
-
-
                 $mail->isHTML(true);
                 $mail->Subject = $subject;
                 $mail->Body = $body;
@@ -136,7 +134,6 @@ class Controller extends BaseController
         }
         return $userCurrentLang;
     }
-
 
     // tanent user invoice 
     public function userMakeInvoice($request, $member, $appointment, $category, $amount, $payment_method, $base_currency_symbol_position, $base_currency_symbol, $base_currency_text, $order_id)

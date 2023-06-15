@@ -236,7 +236,7 @@
                     @foreach ($blogs as $blog)
                         <div class="col-lg-4 col-md-6 col-sm-10">
                             <div class="single-latest-post mt-30">
-                                <div class="thumbnail">
+                                <div class="thumbnail text-center">
                                     <a href="{{ route('front.user.blog.detail', [getParam(), $blog->slug, $blog->id]) }}">
                                         <img class="lazy"
                                             data-src="{{ asset('assets/front/img/user/blogs/' . $blog->image) }}"

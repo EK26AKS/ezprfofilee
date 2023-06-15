@@ -42,8 +42,8 @@
                     <div class="row">
                         @foreach ($blogs as $blog)
                             <div class="col-lg-6">
-                                <div class="blog-post-item blog-post-item-one mb-40">
-                                    <a class="post-thumbnail d-block"
+                                <div class="blog-post-item blog-post-item-one single-latest-post mb-40">
+                                    <a class="post-thumbnail d-block text-center"
                                         href="{{ route('front.user.blog.detail', [getParam(), $blog->slug, $blog->id]) }}">
                                         <img class="lazy"
                                             data-src="{{ asset('assets/front/img/user/blogs/' . $blog->image) }}"

@@ -904,6 +904,7 @@ header{
 .skill-area{
 	position: relative;
 	z-index: 1;
+	background-color: rgba(51, 0, 255, 0.03)
 }
 .skill-area .shape{
 	position: absolute;
@@ -928,7 +929,7 @@ header{
 	right: 50px;
 	bottom: 100px;
 }
-.skill-area:after{
+/* .skill-area:after{
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -937,7 +938,7 @@ header{
 	height: 100%;
 	background-color: #FEDED7;
 	z-index: -1;
-}
+} */
 .skill-area .skill-img{
 	margin-left: -100px;
 	margin-right: 50px;
@@ -1324,6 +1325,9 @@ header{
 /*======================
     Start Blog css
 ======================*/
+.blogs-section{
+	text-align: center;
+}
 .blog-area{
 	position: relative;
 }
@@ -1355,6 +1359,7 @@ header{
 }
 .blog-area .blog-post-item .post-thumbnail img{
 	border-radius: 15px 15px 0px 0px;
+	height: 135px;
 }
 .blog-area .blog-post-item .entry-content h3.title{
 	font-weight: 500;
@@ -1368,7 +1373,7 @@ header{
 }
 .blog-area .blog-post-item .entry-content .post-meta ul{
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-evenly;
 	padding-top: 15px;
 	padding-bottom: 12px;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.06);

@@ -237,7 +237,7 @@
                     @foreach ($blogs as $blog)
                         <div class="col-lg-4 col-md-6 col-sm-10">
                             <div class="single-latest-post mt-30">
-                                <div class="thumbnail">
+                                <div class="thumbnail text-center">
                                     <a href="{{ route('front.user.blog.detail', [getParam(), $blog->slug, $blog->id]) }}">
 
                                         <img class="lazy"
@@ -269,9 +269,9 @@
     @endif
     @if (is_array($userPermissions) && in_array('Contact', $userPermissions))
         <!--====== Contact Section Start ======-->
-        <section class="contact-section section-gap-bottom">
+        <section class="contact-section section-gap-bottom light-bg ">
             <div class="container">
-                <div class="section-heading text-center mb-50">
+                <div class="section-heading text-center mb-50 mt-50">
                     <span class="tagline">{{ $home_text->contact_title ?? __('Get in touch') }}</span>
                     <h2 class="title">{{ $home_text->contact_subtitle ?? __('Get in touch') }}</h2>
                 </div>

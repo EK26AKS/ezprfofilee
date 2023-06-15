@@ -42,7 +42,7 @@
     }
 
     .experience-boxes .single-experience {
-        height: 290px;
+       /*  height: 290px; */
         font-size: 15px;
     }
 
@@ -73,9 +73,9 @@
         display: none;
     }
 
-    .experience-boxes .single-experience {
+   /*  .experience-boxes .single-experience {
         height: 330px;
-    }
+    } */
 
     .template-header.absolute-header.sticky-on {
         padding: 10px 0;
@@ -160,13 +160,20 @@
     }
     .template-header .language-selector.bordered-style .nice-select {
         font-size: 14px;
-        padding: 0 20px 0 20px;
+        padding: 0 20px 0 15px;
     }
 }
 
 @media (max-width: 424px) {
     .template-btn {
         font-size: 15px;
+        padding: 12px 12px;
+        margin-left: 0;
+    }
+
+    .template-header .language-selector.bordered-style{
+        margin-left:0;
+        height: 45px;
     }
 
     .progress-bars .single-progress-bar .progress-line {
@@ -231,7 +238,7 @@
 
     .experience-boxes .single-experience {
         width: 270px;
-        height: 270px;
+       /*  height: 270px; */
         font-size: 14px;
     }
 

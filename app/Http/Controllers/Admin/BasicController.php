@@ -454,6 +454,7 @@ class BasicController extends Controller
     {
         // first, get the language info from db
         $language = Language::where('code', $request->language)->firstOrFail();
+
         $langId = $language->id;
 
         // then, get the seo info of that language from db
@@ -477,14 +478,10 @@ class BasicController extends Controller
         return view('admin.basic.seo', $information);
     }
 
-    public function updateSEO(Request $request)
+    public function updateSEO(Request $request, $langid)
     {
-        // first, get the language info from db
-        $language = Language::where('code', $request->language)->first();
-        $langId = $language->id;
-
         // then, get the seo info of that language from db
-        $seo = SEO::where('language_id', $langId)->first();
+        $seo = SEO::where('language_id', $langid)->first();
 
         // else update the existing seo info of that language
         $seo->update($request->all());

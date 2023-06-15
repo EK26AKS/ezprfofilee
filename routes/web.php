@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\User\Auth\GoogleSocialiteController;
+use App\Http\Controllers\User\Auth\FacebookSocialiteController;
 
 $domain = env('WEBSITE_HOST');
 
@@ -9,9 +10,6 @@ if (!app()->runningInConsole()) {
         $domain = 'www.' . env('WEBSITE_HOST');
     }
 }
-
-// all route shift to https
-URL::forceScheme('https');
 
 Route::fallback(function () {
     return view('errors.404');
@@ -38,6 +36,13 @@ Route::domain($domain)->group(function () {
         Route::get('/check/{username}/username', 'Front\FrontendController@checkUsername')->name('front.username.check');
         Route::get('/p/{slug}', 'Front\FrontendController@dynamicPage')->name('front.dynamicPage');
         Route::view('/success', 'front.success')->name('success.page');
+
+        // Custom Add by Ektasi Team
+        Route::get('/privacy-policy', 'Front\FrontendController@privacy')->name('front.privacy-policy');
+        Route::get('/refund-policy', 'Front\FrontendController@refund')->name('front.refund-policy');
+        Route::get('/tearms-and-conditions', 'Front\FrontendController@tearmsAndCondtions')->name('front.tearms-and-conditions');
+        Route::get('/about', 'Front\FrontendController@aboutUs')->name('front.about');
+
     });
 
     Route::group(['middleware' => ['web', 'guest', 'setlang']], function () {
@@ -50,6 +55,9 @@ Route::domain($domain)->group(function () {
         // social login start
         Route::get('auth/google', [GoogleSocialiteController::class, 'redirectToGoogle']);
         Route::get('callback/google', [GoogleSocialiteController::class, 'handleCallback']);
+        Route::get('auth/facebook', [FacebookSocialiteController::class, 'redirectToFB']);
+        Route::get('callback/facebook', [FacebookSocialiteController::class, 'handleCallback']);
+        // social login end
 
         Route::get('/register', 'User\Auth\RegisterController@registerPage')->name('user-register');
         Route::post('/register/submit', 'User\Auth\RegisterController@register')->name('user-register-submit');
@@ -572,11 +580,9 @@ Route::domain($domain)->group(function () {
             Route::get('/maintainance', 'Admin\BasicController@maintainance')->name('admin.maintainance');
             Route::post('/maintainance/update', 'Admin\BasicController@updatemaintainance')->name('admin.maintainance.update');
 
-
             // Admin Section Customization Routes
             Route::get('/sections', 'Admin\BasicController@sections')->name('admin.sections.index');
             Route::post('/sections/update', 'Admin\BasicController@updatesections')->name('admin.sections.update');
-
 
             // Admin Cookie Alert Routes
             Route::get('/cookie-alert', 'Admin\BasicController@cookiealert')->name('admin.cookie.alert');
@@ -584,9 +590,8 @@ Route::domain($domain)->group(function () {
 
             // basic settings seo route
             Route::get('/seo', 'Admin\BasicController@seo')->name('admin.seo');
-            Route::post('/seo/update', 'Admin\BasicController@updateSEO')->name('admin.seo.update');
+            Route::post('/seo/{langid}/update', 'Admin\BasicController@updateSEO')->name('admin.seo.update');
         });
-
 
         Route::group(['middleware' => 'checkpermission:Subscribers'], function () {
             // Admin Subscriber Routes
@@ -895,6 +900,7 @@ Route::domain($domain)->group(function () {
             Route::post('/subdomain/mail', 'Admin\SubdomainController@mail')->name('admin.subdomain.mail');
         });
     });
+    
     Route::group(['middleware' => ['web']], function () {
         Route::post('/coupon', 'Front\CheckoutController@coupon')->name('front.membership.coupon');
         Route::post('/membership/checkout', 'Front\CheckoutController@checkout')->name('front.membership.checkout');

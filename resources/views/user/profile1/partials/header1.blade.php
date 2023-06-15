@@ -5,7 +5,7 @@
                 <div class="header-left">
                     <div class="brand-logo">
                         <a href="{{ route('front.user.detail.view', getParam()) }}">
-                            <img class="lazy"
+                            <img class="lazy header-theme8"
                                 data-src="{{ isset($userBs->logo)
                                     ? asset('assets/front/img/user/' . $userBs->logo)
                                     : asset('assets/front/img/profile/lgoo.png') }}"

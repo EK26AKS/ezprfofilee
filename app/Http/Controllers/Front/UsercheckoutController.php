@@ -299,6 +299,7 @@ class UsercheckoutController extends Controller
         $ubs->save();
         return $appointment;
     }
+    
     public function mailToTanentUser($requestData, $appointment, $amount, $method, $be, $transaction_id)
     {
         $user = Auth::guard('customer')->user();
@@ -323,11 +324,13 @@ class UsercheckoutController extends Controller
         ];
         $mailer->mailFromTanent($data);
     }
+    
     public function customerSuccess($domain, AppointmentBooking $appointment)
     {
         $data['appointment'] = $appointment;
         return view('user-front.online-success', $data);
     }
+
     public function offlineSuccess($domain, AppointmentBooking $appointment)
     {
         $data['appointment'] = $appointment;

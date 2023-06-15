@@ -172,7 +172,7 @@
         <section class="experience-section section-gap" id="experience">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-lg-6 col-md-9">
+                    <div class="col-lg-10 col-md-9">
                         <div class="common-heading text-center mb-50">
                             <span class="tagline">{{ $home_text->experience_title ?? __('Experience') }}</span>
                             <h2 class="title">{{ $home_text->experience_subtitle ?? __('Experience') }}</h2>
@@ -357,7 +357,7 @@
         <!--====== Latest Blog Section Start ======-->
         <section class="latest-blog-section section-gap-top" id="blog">
             <div class="container">
-                <div class="common-heading mb-20">
+                <div class="common-heading text-center mb-20">
                     <span class="tagline">{{ $home_text->blog_title ?? __('Blogs') }}</span>
                     <h2 class="title">{{ $home_text->blog_subtitle ?? 'Blogs' }}</h2>
                 </div>
@@ -397,7 +397,7 @@
         <!--====== Contact Section Start ======-->
         <section class="contact-section section-gap" id="contact">
             <div class="container">
-                <div class="common-heading mb-50">
+                <div class="common-heading text-center mb-50">
                     <span class="tagline">{{ $home_text->contact_title ?? __('Get in touch') }}</span>
                     <h2 class="title">{{ $home_text->contact_subtitle ?? __('Get in touch') }}</h2>
                 </div>

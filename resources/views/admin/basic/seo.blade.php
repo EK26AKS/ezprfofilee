@@ -45,7 +45,10 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <form action="{{ route('admin.seo.update') }}" method="post">
+            <?php 
+            // dd($data->language_id);
+            ?>
+                <form action="{{ route('admin.seo.update', $data->language_id) }}" method="post">
                     @csrf
                     <div class="card-header">
                         <div class="row">

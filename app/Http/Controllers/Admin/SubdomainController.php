@@ -20,15 +20,16 @@ class SubdomainController extends Controller
         }
 
         $type = $request->type;
+        //dd($type);
         $username = $request->username;
         $subdomains = User::whereHas('memberships', function($q){
             $q->where('status','=',1)
             ->where('start_date','<=', Carbon::now()->format('Y-m-d'))
             ->where('expire_date', '>=', Carbon::now()->format('Y-m-d'));
         })->when($type, function ($query, $type) {
-            if ($type == 'pending') {
+            if ($type == 'pending?language=en') {
                 return $query->where('subdomain_status', 0);
-            } elseif ($type == 'connected') {
+            } elseif ($type == 'connected?language=en') {
                 return $query->where('subdomain_status', 1);
             }
         })->when($username, function ($query, $username) {

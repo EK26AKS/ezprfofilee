@@ -42,7 +42,8 @@ class User extends Authenticatable
         'verification_link',
         'email_verified',
         'online_status',
-        'social_id',
+        'google_id',
+        'facebook_id',
         'social_type'
     ];
 

@@ -28,7 +28,7 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $deLang = Language::where('user_id', Auth::id())->where('is_default', 1)->firstOrFail();
+        $deLang = Language::where('user_id',Auth::id())->where('is_default', 1)->firstOrFail();
         $data['user'] = $user;
         $data['skills'] = $user->skills()->where('language_id', $deLang->id)->count();
         $data['portfolios'] = $user->portfolios()->where('language_id', $deLang->id)->count();

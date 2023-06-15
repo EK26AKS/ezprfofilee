@@ -37,7 +37,7 @@ class FeatureController extends Controller
             'language_id' => 'required',
             'icon' => 'required',
             'title' => 'required|max:50',
-            'text' => 'required|max:255',
+            'text' => 'required|max:512',
             'serial_number' => 'required|integer',
         ];
 
@@ -64,7 +64,7 @@ class FeatureController extends Controller
         $rules = [
             'icon' => 'required',
             'title' => 'required|max:50',
-            'text' => 'required|max:255',
+            'text' => 'required|max:800',
             'serial_number' => 'required|integer',
         ];
 

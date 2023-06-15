@@ -25,7 +25,9 @@ class GatewayController extends Controller
         $data['razorpay'] = UserPaymentGateway::where([['user_id', Auth::guard('web')->user()->id], ['keyword', 'razorpay']])->first();
         $data['mercadopago'] = UserPaymentGateway::where([['user_id', Auth::guard('web')->user()->id], ['keyword', 'mercadopago']])->first();
         $data['anet'] = UserPaymentGateway::where([['user_id', Auth::guard('web')->user()->id], ['keyword', 'authorize.net']])->first();
-        // dd($data);
+        
+        //dd($data);
+
         return view('user.gateways.index', $data);
     }
 
