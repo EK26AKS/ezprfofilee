@@ -99,7 +99,7 @@
 
      <!--====== Start saas-features card section ======-->
      <section class="saas-features-card">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="section-title-one text-center mb-55">
@@ -288,7 +288,7 @@
     </section><!--====== End saas-project section ======-->
     @endif
 
-    @if ($bs->templates_section == 1 && count($templates) > 0)
+    @if($bs->templates_section == 1 || count($templates) > 0)
     <section class="saas-features pt-120">
         <div class="container">
             <div class="row justify-content-center text-center">
@@ -390,7 +390,7 @@
 
     @if ($bs->pricing_section == 1)
     <!--====== Start saas-pricing section ======-->
-    <section class="saas-pricing pt-110 pb-120" id="ezprofile-pricing-section">
+    <section class="saas-pricing pt-60 pb-60" id="ezprofile-pricing-section">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6 ezprofile-tab_wrapper">

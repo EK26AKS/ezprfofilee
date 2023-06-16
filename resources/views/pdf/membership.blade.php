@@ -12,11 +12,8 @@
         <table class="heading">
             <tr>
                 <td>
-                    @if($bs->logo)
-                        <img loading="lazy"  src="{{asset('assets/front/img/'.$bs->logo)}}" height="40" class="d-inline-block">
-                    @else
-                        <img loading="lazy"  src="{{asset('assets/admin/img/noimage.jpg')}}" height="40" class="d-inline-block">
-                    @endif
+                    <img loading="lazy"  src="{{asset('assets/front/img/ektasi_logo.png')}}" height="40" class="d-inline-block">
+                    <p>GST:07AAGFF2194N1Z1</p>
                 </td>
                 <td class="text-right strong invoice-heading">INVOICE</td>
             </tr>

@@ -49,6 +49,11 @@
                             @endphp
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="pricing-item">
+                                    @if($package->is_trial === "1" && $package->price != 0)
+                                    <div class="listing-badges">
+                                        <span class="featured">Introductory Offer</span>
+                                    </div>
+                                    @endif
                                     <div class="title">
                                         <h3>{{$package->title}}</h3>
                                         <h2 class="price">{{$package->price != 0 && $be->base_currency_symbol_position == 'left' ? $be->base_currency_symbol : ''}}{{$package->price == 0 ? "Free" : $package->price}}{{$package->price != 0 && $be->base_currency_symbol_position == 'right' ? $be->base_currency_symbol : ''}}<span class="month">/ {{__("$package->term")}}</span>

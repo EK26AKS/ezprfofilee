@@ -88,7 +88,7 @@
                     <div class="form-group">
                       <label for="">{{ $keywords['User_name'] ?? 'User Name' }} **</label>
                       <input type="text" class="form-control" name="username" value="{{ $user->username }}"
-                        placeholder="{{ $keywords['Enter_username'] ?? 'Enter username' }}">
+                        placeholder="{{ $keywords['Enter_username'] ?? 'Enter username' }}" pattern="^[A-Za-z0-9\S]+$">
                       <p id="errusername" class="mb-0 text-danger em"></p>
                     </div>
                   </div>

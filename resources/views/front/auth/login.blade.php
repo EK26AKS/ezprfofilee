@@ -74,7 +74,7 @@
                                 <button class="main-btn login_button">{{__('LOG IN')}}</button>
                             </div>
                         </form>
-                        <div class="form_group">
+                        <div class="form_group social-login-btn">
                             <a href="{{ url('auth/google') }}" class="main-btn login_button google_login_button">
                                 <i class="fab fa-google"></i>
                             </a>

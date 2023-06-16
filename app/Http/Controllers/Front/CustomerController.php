@@ -409,6 +409,7 @@ class CustomerController extends Controller
         $customer->save();
         // send a mail to user for verify his/her email address
         $this->sendVerificationMail($request, $token);
+        
         return redirect()
             ->back()
             ->with('sendmail', 'We need to verify your email address. We have sent an email to  ' . $request->email . ' to verify your email address. Please click link in that email to continue.');
@@ -439,6 +440,7 @@ class CustomerController extends Controller
         $email = $userInfo->email ?? $user->email;
         $name = $userInfo->from_name ?? $user->username;
         // initialize a new mail
+        
         $mail = new PHPMailer(true);
         // if smtp status == 1, then set some value for PHPMailer
         if ($info->is_smtp == 1) {

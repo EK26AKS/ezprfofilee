@@ -40,7 +40,7 @@
 
                     <div class="card-body py-5">
                         <div class="row">
-                            <div class="col-lg-6 offset-lg-3">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label>{{ $keywords['Website_Title'] ?? __('Website Title') }}</label>
                                     <input type="text" class="form-control" name="website_title"

@@ -16,3 +16,6 @@
 .closebtn:hover {
     color: black;
 }
+.user__pricing-plan{
+    height: 100%;
+}

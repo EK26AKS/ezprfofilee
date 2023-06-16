@@ -189,8 +189,8 @@ class UserController extends Controller
         } else {
             $oldPassMatch = 'not_matched';
         }
-        if ($validator->fails() || $oldPassMatch == 'not_matched') {
-            if ($oldPassMatch == 'not_matched') {
+        if ($validator->fails() || $oldPassMatch == 'matched') {
+            if ($oldPassMatch == 'matched') {
                 $validator->errors()->add('oldPassMatch', true);
             }
             return redirect()->route('user.changePass')

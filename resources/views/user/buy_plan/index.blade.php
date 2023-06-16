@@ -90,7 +90,7 @@
     <div class="row mb-5 justify-content-center">
         @foreach ($packages as $key => $package)
             <div class="col-md-3 pr-md-0 mb-5">
-                <div class="card-pricing2 @if (isset($current_package->id) && $current_package->id === $package->id) card-success @else card-primary @endif">
+                <div class="card-pricing2 user__pricing-plan @if (isset($current_package->id) && $current_package->id === $package->id) card-success @else card-primary @endif">
                     <div class="pricing-header">
                         <h3 class="fw-bold d-inline-block">
                             {{ $keywords[str_replace(' ', '_', $package->title)] ?? __($package->title) }}
