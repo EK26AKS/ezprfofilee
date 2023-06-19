@@ -54,8 +54,8 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-12 mb-2">
-                                                <label
-                                                    for="logo"><strong>{{ $keywords['Hero_Section_Image'] ?? __('Hero Section Image') }}</strong></label>
+                                                <label for="logo"><strong>{{ $keywords['Hero_Section_Image'] ?? __('Hero Section Image') }}</strong></label>
+                                                <label for="hero-section-image-dimentions">( 900 * 600 )<span class="text-danger"> * </span></label>
                                             </div>
                                             <div class="showHeroImage mb-3">
                                                 <img width="200" src="{{ $home_setting->hero_image ? asset('assets/front/img/user/home_settings/' . $home_setting->hero_image) : asset('assets/admin/img/noimage.jpg') }}"
@@ -123,7 +123,9 @@
                                             <div class="col-12 mb-2">
                                                 <label
                                                     for="logo"><strong>{{ $keywords['About_Section_Image'] ?? __('About Section Image') }}</strong></label>
-                                            </div>
+                                            
+                                                    <label for="hero-section-image-dimentions">( 550 * 550 )<span class="text-danger"> * </span></label>
+                                                </div>
                                             <div class="col-md-12 showAboutImage mb-3">
                                                 <img  width="200" src="{{ $home_setting->about_image ? asset('assets/front/img/user/home_settings/' . $home_setting->about_image) : asset('assets/admin/img/noimage.jpg') }}"
                                                     alt="..." class="img-thumbnail">
@@ -181,8 +183,9 @@
                                                 @if ($userBs->theme != 6 && $userBs->theme != 7)
                                                     <div class="form-group">
                                                         <div class="col-12 mb-2">
-                                                            <label
-                                                                for="logo"><strong>{{ $keywords['Skills_Image'] ?? __('Skills Image') }}</strong></label>
+                                                            <label for="logo"><strong>{{ $keywords['Skills_Image'] ?? __('Skills Image') }}</strong></label>
+
+                                                            <label for="hero-section-image-dimentions">( 550 * 550 )<span class="text-danger"> * </span></label>
                                                         </div>
                                                         <div class="col-md-12 showSkillsImage mb-3">
                                                             <img width="200" src="{{ $home_setting->skills_image ? asset('assets/front/img/user/home_settings/' . $home_setting->skills_image) : asset('assets/admin/img/noimage.jpg') }}"
@@ -326,7 +329,8 @@
                                                     <div class="col-12 mb-2">
                                                         <label
                                                             for="logo"><strong>{{ $keywords['Achievements_Image'] ?? __('Achievements Image') }}</strong></label>
-                                                    </div>
+                                                            <label for="hero-section-image-dimentions">( 550 * 550 )<span class="text-danger"> * </span></label>
+                                                        </div>
                                                     <div class="col-md-12 showAchievementImage mb-3">
                                                         <img width="200" src="{{ $home_setting->achievement_image ? asset('assets/front/img/user/home_settings/' . $home_setting->achievement_image) : asset('assets/admin/img/noimage.jpg') }}"
                                                             alt="..." class="img-thumbnail">

@@ -114,12 +114,16 @@ class UserController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'username' => 'required|unique:users,username,' . Auth::user()->id,
+            'username' => 'required|regex:/^[^\s]+$/|unique:users,username,' . Auth::user()->id,
             'phone' => 'required',
             'city' => 'required',
             'state' => 'required',
             'country' => 'required',
             'address' => 'required',
+        ],
+            [
+                'username.regex' => 'Username should not contain spaces.',
+                // Custom error messages for other fields
         ]);
 
         //--- Validation Section Ends

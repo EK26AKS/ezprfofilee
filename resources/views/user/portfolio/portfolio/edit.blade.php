@@ -61,8 +61,8 @@
                             {{-- Slider images upload start --}}
                             <div class="px-2">
                                 <label for=""
-                                    class="mb-2"><strong>{{ $keywords['Slider_Images'] ?? __('Slider Images') }}
-                                        **</strong></label>
+                                    class="mb-2"><strong>{{ $keywords['Slider_Images'] ?? __('Slider Images') }}</strong></label>
+                                        <label for="hero-section-image-dimentions">( 550 * 550 )<span class="text-danger"> * </span></label>
                                 <div class="row">
                                     <div class="col-12">
                                         <table class="table table-striped" id="imgtable">
@@ -86,8 +86,8 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <div class="col-12 mb-2">
-                                                <label
-                                                    for="image"><strong>{{ $keywords['Image'] ?? __('Image') }}</strong></label>
+                                                <label for="image"><strong>{{ $keywords['Image'] ?? __('Image') }}</strong></label>
+                                                <label for="hero-section-image-dimentions">( 350 * 350 )<span class="text-danger"> * </span></label>
                                             </div>
                                             <div class="col-md-12 showImage mb-3">
                                                 <img src="{{ isset($portfolio->image) ? asset('assets/front/img/user/portfolios/' . $portfolio->image) : asset('assets/admin/img/noimage.jpg') }}"

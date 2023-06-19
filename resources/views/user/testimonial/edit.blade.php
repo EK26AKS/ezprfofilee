@@ -85,7 +85,7 @@
                                     <p id="errname" class="mb-0 text-danger em"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">{{ $keywords['Occupation'] ?? __('Occupation') }}</label>
+                                    <label for="">{{ $keywords['Occupation'] ?? __('Occupation') }} **</label>
                                     <input type="text" class="form-control" name="occupation"
                                         value="{{ $testimonial->occupation }}"
                                         placeholder="{{ $keywords['Enter_Occupation'] ?? __('Enter Occupation') }}">

@@ -170,6 +170,7 @@
                         <label for=""
                             class="mb-2"><strong>{{ $keywords['Slider_Images'] ?? __('Slider Images') }}
                                 **</strong></label>
+                        <label for="hero-section-image-dimentions">( 550 * 550 )<span class="text-danger"> * </span></label>
                         <form action="{{ route('user.portfolio.sliderstore') }}" id="my-dropzone"
                             enctype="multipart/formdata" class="dropzone create">
                             @csrf
@@ -191,6 +192,7 @@
                                     <div class="col-12 mb-2">
                                         <label for="image"><strong>{{ $keywords['Thumbnail'] ?? __('Thumbnail') }}
                                                 **</strong></label>
+                                            <label for="hero-section-image-dimentions">( 350 * 350 )<span class="text-danger"> * </span></label>
                                     </div>
                                     <div class="col-md-12 showImage mb-3">
                                         <img src="{{ asset('assets/admin/img/noimage.jpg') }}" alt="..."

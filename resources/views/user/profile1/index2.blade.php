@@ -386,7 +386,7 @@
                             <div class="row gutters-20">
                                 <div class="col-lg-4 col-md-6">
                                     <div class="input-field mb-20">
-                                        <input type="text" placeholder="{{$keywords["Name"] ?? "Name"}}" name="fullname">
+                                        <input type="text" placeholder="{{$keywords["Name"] ?? "Name"}}" pattern="[a-zA-Z]+" name="fullname">
                                         @if ($errors->has('fullname'))
                                             <p class="text-danger mb-0">{{$errors->first('fullname')}}</p>
                                         @endif

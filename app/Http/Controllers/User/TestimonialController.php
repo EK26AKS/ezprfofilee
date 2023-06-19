@@ -64,6 +64,7 @@ class TestimonialController extends Controller
         $rules = [
             'name' => 'required|max:255',
             'user_language_id' => 'required',
+            'occupation' => 'required',
             'content' => 'required',
             'serial_number' => 'required|integer',
             'image' => [
@@ -154,6 +155,7 @@ class TestimonialController extends Controller
         $rules = [
             'name' => 'required|max:255',
             'content' => 'required',
+            'occupation' => 'required',
             'serial_number' => 'required|integer',
             'image' => [
                 function ($attribute, $value, $fail) use ($img, $allowedExts) {

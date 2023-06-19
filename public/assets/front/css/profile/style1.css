@@ -1069,6 +1069,12 @@ div#preloader img {
   background-color: var(--color-heading);
 }
 
+.service-section .service-thumb img{
+    height: 280px;
+    width: auto;
+    object-fit: cover;
+}
+
 /*======= Experience =======*/
 .experience-wrapper.boxed-wrapper {
   background-color: var(--color-offwhite);
