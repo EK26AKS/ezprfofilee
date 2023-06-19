@@ -345,7 +345,6 @@ Route::domain($domain)->group(function () {
         Route::post('/social/update', 'User\SocialController@update')->name('user.social.update');
         Route::post('/social/delete', 'User\SocialController@delete')->name('user.social.delete');
 
-
         Route::group(['middleware' => 'checkUserPermission:Blog'], function () {
             //user blog categories
             Route::get('/blog-categories', 'User\BlogCategoryController@index')->name('user.blog.category.index');

@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'd7b42070848db27a3c39078ff072bd682483b038',
+        'reference' => 'd9a9eb42a0398621b21b561eab8c51d1a4008fd1',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -70,6 +70,15 @@
             'reference' => '9843d2be423670fb434f4c978b3c0f4dd92c87a6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../barryvdh/laravel-dompdf',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'behat/transliterator' => array(
+            'pretty_version' => 'v1.5.0',
+            'version' => '1.5.0.0',
+            'reference' => 'baac5873bac3749887d28ab68e2f74db3a4408af',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../behat/transliterator',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -565,6 +574,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'jeroendesloovere/vcard' => array(
+            'pretty_version' => 'v1.7.3',
+            'version' => '1.7.3.0',
+            'reference' => '2b8b6190c613d368b8cb6552e59cf6e6e7d0aea9',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../jeroendesloovere/vcard',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -592,7 +610,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'd7b42070848db27a3c39078ff072bd682483b038',
+            'reference' => 'd9a9eb42a0398621b21b561eab8c51d1a4008fd1',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1188,8 +1206,8 @@
         'psr/http-client-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '*',
-                1 => '1.0',
+                0 => '1.0',
+                1 => '*',
             ),
         ),
         'psr/http-factory' => array(
@@ -1204,8 +1222,8 @@
         'psr/http-factory-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '*',
-                1 => '1.0',
+                0 => '1.0',
+                1 => '*',
             ),
         ),
         'psr/http-message' => array(
@@ -1220,8 +1238,8 @@
         'psr/http-message-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '*',
-                1 => '1.0',
+                0 => '1.0',
+                1 => '*',
             ),
         ),
         'psr/log' => array(
@@ -1236,8 +1254,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '1.0.0 || 2.0.0 || 3.0.0',
+                0 => '1.0.0 || 2.0.0 || 3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(

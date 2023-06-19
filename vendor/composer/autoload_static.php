@@ -200,6 +200,7 @@ class ComposerStaticInitdf6863ba61dbbaef7808114c9b4623ba
             'Jose\\Component\\KeyManagement\\' => 29,
             'Jose\\Component\\Core\\Util\\Ecc\\' => 29,
             'Jose\\Component\\Core\\' => 20,
+            'JeroenDesloovere\\VCard\\' => 23,
         ),
         'I' => 
         array (
@@ -265,6 +266,7 @@ class ComposerStaticInitdf6863ba61dbbaef7808114c9b4623ba
         'B' => 
         array (
             'Brick\\Math\\' => 11,
+            'Behat\\Transliterator\\' => 21,
             'Base64Url\\' => 10,
             'Barryvdh\\DomPDF\\' => 16,
             'BaconQrCode\\' => 12,
@@ -558,8 +560,8 @@ class ComposerStaticInitdf6863ba61dbbaef7808114c9b4623ba
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -725,6 +727,10 @@ class ComposerStaticInitdf6863ba61dbbaef7808114c9b4623ba
         array (
             0 => __DIR__ . '/..' . '/web-token/jwt-core',
         ),
+        'JeroenDesloovere\\VCard\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jeroendesloovere/vcard/src',
+        ),
         'Intervention\\Image\\' => 
         array (
             0 => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image',
@@ -753,8 +759,8 @@ class ComposerStaticInitdf6863ba61dbbaef7808114c9b4623ba
         ),
         'Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/php-http/message-factory/src',
-            1 => __DIR__ . '/..' . '/php-http/message/src',
+            0 => __DIR__ . '/..' . '/php-http/message/src',
+            1 => __DIR__ . '/..' . '/php-http/message-factory/src',
         ),
         'Http\\Discovery\\' => 
         array (
@@ -892,6 +898,10 @@ class ComposerStaticInitdf6863ba61dbbaef7808114c9b4623ba
         'Brick\\Math\\' => 
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
+        ),
+        'Behat\\Transliterator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/behat/transliterator/src/Behat/Transliterator',
         ),
         'Base64Url\\' => 
         array (
@@ -1112,6 +1122,7 @@ class ComposerStaticInitdf6863ba61dbbaef7808114c9b4623ba
         'App\\Http\\Controllers\\UpdateController' => __DIR__ . '/../..' . '/app/Http/Controllers/UpdateController.php',
         'App\\Http\\Controllers\\User\\AchievementController' => __DIR__ . '/../..' . '/app/Http/Controllers/User/AchievementController.php',
         'App\\Http\\Controllers\\User\\AppointmentController' => __DIR__ . '/../..' . '/app/Http/Controllers/User/AppointmentController.php',
+        'App\\Http\\Controllers\\User\\Auth\\FacebookSocialiteController' => __DIR__ . '/../..' . '/app/Http/Controllers/User/Auth/FacebookSocialiteController.php',
         'App\\Http\\Controllers\\User\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/User/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\User\\Auth\\GoogleSocialiteController' => __DIR__ . '/../..' . '/app/Http/Controllers/User/Auth/GoogleSocialiteController.php',
         'App\\Http\\Controllers\\User\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/User/Auth/LoginController.php',
@@ -1340,6 +1351,8 @@ class ComposerStaticInitdf6863ba61dbbaef7808114c9b4623ba
         'Barryvdh\\DomPDF\\PDF' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/PDF.php',
         'Barryvdh\\DomPDF\\ServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/ServiceProvider.php',
         'Base64Url\\Base64Url' => __DIR__ . '/..' . '/spomky-labs/base64url/src/Base64Url.php',
+        'Behat\\Transliterator\\SyncTool' => __DIR__ . '/..' . '/behat/transliterator/src/Behat/Transliterator/SyncTool.php',
+        'Behat\\Transliterator\\Transliterator' => __DIR__ . '/..' . '/behat/transliterator/src/Behat/Transliterator/Transliterator.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
         'Brick\\Math\\BigNumber' => __DIR__ . '/..' . '/brick/math/src/BigNumber.php',
@@ -4503,6 +4516,9 @@ class ComposerStaticInitdf6863ba61dbbaef7808114c9b4623ba
         'Intervention\\Image\\Point' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Point.php',
         'Intervention\\Image\\Response' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Response.php',
         'Intervention\\Image\\Size' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Size.php',
+        'JeroenDesloovere\\VCard\\VCard' => __DIR__ . '/..' . '/jeroendesloovere/vcard/src/VCard.php',
+        'JeroenDesloovere\\VCard\\VCardException' => __DIR__ . '/..' . '/jeroendesloovere/vcard/src/VCardException.php',
+        'JeroenDesloovere\\VCard\\VCardParser' => __DIR__ . '/..' . '/jeroendesloovere/vcard/src/VCardParser.php',
         'Jose\\Component\\Core\\Algorithm' => __DIR__ . '/..' . '/web-token/jwt-core/Algorithm.php',
         'Jose\\Component\\Core\\AlgorithmManager' => __DIR__ . '/..' . '/web-token/jwt-core/AlgorithmManager.php',
         'Jose\\Component\\Core\\AlgorithmManagerFactory' => __DIR__ . '/..' . '/web-token/jwt-core/AlgorithmManagerFactory.php',
