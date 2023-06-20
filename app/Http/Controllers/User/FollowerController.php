@@ -44,6 +44,7 @@ class FollowerController extends Controller
       if(count($followerListIds) > 0){
           $data['users'] = User::whereIn('id',$followerListIds)->paginate(10);
       }
+      dd($data);
       return view('user.follower.index',$data);
     }
 

@@ -26,7 +26,7 @@
 <div class="sidebar sidebar-style-2" @if (request()->cookie('user-theme') == 'dark') data-background-color="dark2" @endif>
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
-            <div class="user">
+            <!-- <div class="user">
                 <div class="avatar-sm float-left mr-2">
                     @if (!empty(Auth::user()->photo))
                         <img src="{{ asset('assets/front/img/user/' . Auth::user()->photo) }}" alt="..."
@@ -37,7 +37,7 @@
                     @endif
                 </div>
                 <div class="info">
-                    <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                    <a href="#" aria-expanded="true">
                         <span>
                             {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
                             <span class="user-level">{{ auth()->user()->username }}</span>
@@ -69,7 +69,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <ul class="nav nav-primary">
                 <div class="row mb-2">
                     <div class="col-12">
@@ -89,13 +89,13 @@
                         <p>{{ $keywords['Dashboard'] ?? __('Dashboard') }}</p>
                     </a>
                 </li>
-                <li class="nav-item
+                <!-- <li class="nav-item
                 @if (request()->path() == 'user/profile') active @endif">
                     <a href="{{ route('user-profile', ['language' => $default->code]) }}">
                         <i class="far fa-user-circle"></i>
                         <p>{{ $keywords['Edit_Profile'] ?? __('Edit Profile') }} </p>
                     </a>
-                </li>
+                </li> -->
                 @if (!is_null($package))
                     <li
                         class="nav-item

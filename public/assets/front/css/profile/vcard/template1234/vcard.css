@@ -658,7 +658,7 @@ body {
 .video-section-widget,
 .service-section-widget,
 .about-section-widget{
-    padding: 60px 30px 0px;
+   padding: 60px 30px 60px 30px;
 }
 .about-section-widget p{
     font-size: 16px;

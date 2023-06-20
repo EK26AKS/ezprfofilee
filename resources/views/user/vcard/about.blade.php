@@ -68,7 +68,6 @@
                                 @csrf
                                 <input type="hidden" name="vcard_id" value="{{ $vcard->id }}">
 
-
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">

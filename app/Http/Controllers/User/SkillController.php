@@ -112,7 +112,7 @@ class SkillController extends Controller
         $slug = make_slug($request->title);
 
         $rules = [
-            'title' => 'required|max:255',
+            'title' => 'required|max:255|unique:user_skills',
             'percentage' => 'required|numeric|digits_between:1,100',
             'color' => 'required|max:20',
             'serial_number' => 'required|integer'

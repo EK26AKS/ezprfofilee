@@ -20,8 +20,8 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <div class="col-12 mb-2">
-                                    <label
-                                        for="image"><strong>{{ $keywords['Image'] ?? __('Image') }}*</strong></label>
+                                    <label for="image"><strong>{{ $keywords['Image'] ?? __('Image') }}*</strong></label>
+                                    <label for="hero-section-image-dimentions">( 350 * 350 )<span class="text-danger"> * </span></label>
                                 </div>
                                 <div class="col-md-12 showImage mb-3">
                                     <img src="{{ asset('assets/admin/img/noimage.jpg') }}" alt="..."
