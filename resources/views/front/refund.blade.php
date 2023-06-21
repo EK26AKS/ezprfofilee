@@ -33,7 +33,7 @@
                             <b>User (or You)</b><br>
                             The natural person or legal entity that uses this Website.<br>
                             <hr>
-                            Thanks for purchasing our products (or subscribing to our services) at https://ektasi.io operated by Ektasi Technology Pvt Ltd.<br><br>
+                            Thanks for purchasing our products (or subscribing to our services) at https://ezprofile.in operated by Ektasi Technology Pvt Ltd.<br><br>
                             As per our policy, digital products that are downloadable, licensed, or accessed on a subscription basis can’t be returned. <br><br>
                             You are eligible for a full refund within 7 days of your purchase. After the 7-day period you will no longer be eligible and won't be able to receive a refund. <br><br>
                             We encourage our customers to try the product (or service) in the first 7 days after their purchase to ensure it fits your needs. <br>

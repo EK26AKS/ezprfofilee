@@ -16,10 +16,7 @@ $(function () {
         }
     });
 
-
     "use strict";
-
-
     // format date & time for announcement popup
     $('.offer-timer').each(function () {
         let $this = $(this);

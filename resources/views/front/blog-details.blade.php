@@ -18,7 +18,7 @@
 @endsection
 
 @section('breadcrumb-title')
-    {{strlen($blog->title) > 30 ? mb_substr($blog->title, 0, 30) . '...' : $blog->title}}
+    {{strlen($blog->title) > 10 ? mb_substr($blog->title, 0, 200) : $blog->title}}
 @endsection
 @section('breadcrumb-link')
     {{__('Blog Details')}}
@@ -47,10 +47,14 @@
                             <div class="shop-social d-flex align-items-center">
                                 <span>{{__('Share')}} :</span>
                                 <ul class="ml-3 d-flex">
-                                    <li class="p-1"><a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(url()->current()) }}"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li class="p-1"><a href="https://twitter.com/intent/tweet?text=my share text&amp;url={{urlencode(url()->current()) }}"><i class="fab fa-twitter"></i></a></li>
-                                    <li class="p-1"><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{urlencode(url()->current()) }}&amp;title={{$blog->title}}"><i class="fab fa-linkedin-in"></i></a></li>
-
+                                    <li class="p-1"><a href="https://www.facebook.com/sharer/sharer.php?u={{urlencode(url()->current()) }}" class="social-facebook"><i class="fab fa-facebook-f"></i>
+                                    </a></li>
+                                    <li class="p-1"><a href="https://twitter.com/intent/tweet?text=my share text&amp;url={{urlencode(url()->current()) }}" class="social-twitter">
+                                        <i class="fab fa-twitter"></i>
+                                    </a></li>
+                                    <li class="p-1"><a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{urlencode(url()->current()) }}&amp;title={{$blog->title}}" class="social-linkedin">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a></li>
                                 </ul>
                             </div>
                         </div>

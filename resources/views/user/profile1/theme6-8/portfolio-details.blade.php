@@ -121,6 +121,10 @@
                                     </ul>
                                 </div>
                             @endif
+                            @if ($portfolio->project_url)
+                                <a href="{{$portfolio->project_url}}" class="main-btn" target="_blank">Project Link</a>
+                                @endif
+
                         </div>
                     </div>
                 </div>

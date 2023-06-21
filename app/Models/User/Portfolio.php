@@ -19,6 +19,7 @@ class Portfolio extends Model
         "user_id",
         "meta_keywords",
         "meta_description",
+        "project_url"
     ];
 
     public function bcategory() {

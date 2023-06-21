@@ -164,11 +164,9 @@ class PortfolioController extends Controller
             $input['image'] = $filename;
         }
         $input['content'] = Purifier::clean($request->content);
+        $input['project_url'] = $request->project_url;
         $portfolio = new Portfolio;
         $portfolio = $portfolio->create($input);
-
-
-
         $sliders = $request->slider_images;
         $pis = PortfolioImage::findOrFail($sliders);
         foreach ($pis as $key => $pi) {
@@ -270,6 +268,7 @@ class PortfolioController extends Controller
         }
         if (!isset($request->featured)) $input["featured"] = "0";
         $input['content'] = Purifier::clean($request->content);
+        $input['project_url'] = $request->project_url;
         $portfolio->update($input);
         Session::flash('success', toastrMsg('Updated_successfully!'));
         return "success";

@@ -157,7 +157,7 @@
 
                             Website has collected the following categories of personal information from its consumers within the last 12 months: <br><br>
                            
-                            <table>
+                            <table class="privacy__policy-table">
                                 <thead>
                                     <tr>
                                         <th>Category</th>
@@ -255,7 +255,7 @@
                             <ul style="list-style-type:disc;">
                                 <li><b>The right to notice.</b> You have the right to be notified which categories of Personal Data are being collected and the purposes for which the Personal Data is being used.</li>
                                 <li>
-                                    <b>The right to request.</b> Under CCPA, You have the right to request that We disclose information to You about Our collection, use, sale, disclosure for business purposes and share of personal information. Once We receive and confirm Your request, we will disclose to You: <br><br>
+                                    <b>The right to request.</b> Under CCPA, You have the right to request that We disclose information to You about Our collection, use, sale, disclosure for business purposes and share of personal information. Once We receive and confirm Your request, we will disclose to You: <br>
                                     <ol>
                                         <li>The categories of personal information We collected about You.</li>
                                         <li>The categories of sources for the personal information We collected about You.</li>
@@ -322,13 +322,12 @@
                             To request removal of such data, and if You are a California resident, you can contact Us using the contact information provided below, and include the email address associated with Your account. 
                             Be aware that Your request does not guarantee complete or comprehensive removal of content or information posted online and that the law may not permit or require removal in certain circumstances. <br><br>
                             <h5><b>How can Users correct any inaccuracies in Personally Identifiable Information?</b></h5>
-                            Users may contact us to update Personally Identifiable Information about them or to correct any inaccuracies by either: <br><br>
+                            Users may contact us to update Personally Identifiable Information about them or to correct any inaccuracies by either: <br>
                             •	Emailing us at <a href="mailto:info@ektasi.io ">info@ektasi.io</a><br><br>
 
                             <h6><b>Can a User delete or deactivate Personally Identifiable Information collected by the Website?</b></h6>
                             We provide Users with a mechanism to delete/deactivate Personally Identifiable Information from the Website’s database by contacting. However, because of backups and records of deletions, it may be impossible to delete a user’s entry without retaining some residual information. An individual who requests to have Personally Identifiable Information deactivated will have this information functionally deleted, and we will not sell, transfer, or use Personally Identifiable Information relating to that individual in any way moving forward. <br><br>
 
-                            
                             <h6><b>User rights</b></h6>
                             <b>These are summarized rights that you have under data protection law:</b>
                             <br>
@@ -342,8 +341,7 @@
                                 <li>The right to complain to a supervisory authority.</li>
                                 <li>The right to withdraw consent.</li>
                             </ol>
-
-                            
+                            <br>
                            <h5>
                             <b> What happens if the Privacy Policy changes?</b>
                            </h5>

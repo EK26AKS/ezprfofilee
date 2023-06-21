@@ -355,7 +355,7 @@ button {
 	height: 50px;
 	line-height: 50px;
 	position: fixed;
-	right: 30px;
+	left: 30px;
 	text-align: center;
 	text-decoration: none;
 	-webkit-transition: 0.3s;
@@ -1025,7 +1025,9 @@ header{
 }
 .service-area .service-item .service-img img{
 	width: 100%;
-	border-radius: 15px;
+    border-radius: 15px;
+    height: 250px;
+    object-fit: cover;
 }
 .service-area .service-item .service-content{
 	padding-top: 22px;

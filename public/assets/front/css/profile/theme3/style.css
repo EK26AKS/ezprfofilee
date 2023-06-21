@@ -593,6 +593,8 @@ button {
 }
 .service-item .service-img img{
 	width: 100%;
+    height: 250px;
+    object-fit: cover;
 }
 .service-item .service-img .service-overlay{
 	/* position: absolute;
@@ -922,8 +924,9 @@ button {
 	color: var(--heading);
 	font-weight: 600;
 }
-.blog-area .blog-post-item .post-thumbnail img{
-	width: 100%;
+.blog-area .blog-post-item .post-thumbnail img {
+    width: auto;
+    height: 280px;
 }
 .blog-area .blog-post-item .post-thumbnail .post-date .date span.month{
 	font-size: 18px;

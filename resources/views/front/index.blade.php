@@ -391,7 +391,7 @@
     @if ($bs->pricing_section == 1)
     <!--====== Start saas-pricing section ======-->
     <section class="saas-pricing pt-60 pb-60" id="ezprofile-pricing-section">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-lg-6 ezprofile-tab_wrapper">
                     <div class="section-title-one text-center mb-50">
@@ -432,7 +432,7 @@
                             @php
                                 $pFeatures = json_decode($package->features);
                             @endphp
-                            <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="col pricing__plan-column">
                                 <div class="pricing-item">
                                     @if($package->is_trial === "1" && $package->price != 0)
                                     <div class="listing-badges">
@@ -529,14 +529,20 @@
                 </div>
             </div>
             <div class="row">
+                <?php //echo count($blogs); ?>
                 @foreach($blogs as $blog)
-                    <div class="col-lg-6">
-                        <div class="blog-item mb-40">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                        <div class="blog-item blog-card-main mb-40">
+                            <a class="post-img d-block" href="{{route('front.blogdetails',['id' => $blog->id,'slug' => $blog->slug])}}">
+                                <img data-src="{{asset('assets/front/img/blogs/'.$blog->main_image)}}" class="img-fluid lazy"
+                                     alt="blog-image">
+                            </a>
                             <div class="entry-content">
                                 <div class="entry-meta">
                                     <ul>
-                                        <li><span><i class="fas fa-user"></i><a
-                                                    href="{{route('front.blogs', ['category'=>$blog->bcategory->id])}}">{{$blog->bcategory->name}}</a></span></li>
+                                        <li>
+                                            <span><i class="fas fa-user"></i>
+                                            <a href="{{route('front.blogs', ['category'=>$blog->bcategory->id])}}">{{$blog->bcategory->name}}</a></span></li>
                                         <li>
                                         <span>
                                             <i class="fas fa-calendar-alt"></i>
@@ -546,15 +552,18 @@
                                     </ul>
                                 </div>
                                 <h3 class="title"><a href="{{route('front.blogdetails',['id' => $blog->id,'slug' => $blog->slug])}}">{{$blog->title}}</a></h3>
-                                <a href="{{route('front.blogdetails',['id' => $blog->id,'slug' => $blog->slug])}}" class="read-btn">{{__('Read More')}}</a>
+                                <a href="{{route('front.blogdetails',['id' => $blog->id,'slug' => $blog->slug])}}" class="read-btn">{{__('Continue Reading ')}} <i class="fas fa-arrow-right"></i></a>
                             </div>
-                            <a class="post-img d-block" href="{{route('front.blogdetails',['id' => $blog->id,'slug' => $blog->slug])}}">
-                                <img data-src="{{asset('assets/front/img/blogs/'.$blog->main_image)}}" class="img-fluid lazy"
-                                     alt="">
-                            </a>
                         </div>
                     </div>
                 @endforeach
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="blog-explore-wrap text-center mt-3">
+                        <a href="https://ezprofile.in/blogs" class="main-btn">Explore Blogs</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section><!--====== End saas-blog section ======-->

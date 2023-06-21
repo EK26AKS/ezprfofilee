@@ -30,6 +30,7 @@
                 <div class="col-lg-8">
                     <div class="single-page-wrapper mb-30">
                         <div class="post-item">
+                            <?php //dd($portfolio->project_url); ?>
                             @if ($portfolio->portfolio_images()->count() > 0)
                                 <div class="post-img mb-20">
                                     <div class="post-gallery-slider">
@@ -81,6 +82,9 @@
                                     @endforeach
                                 </ul>
                             </div>
+                        @endif
+                        @if ($portfolio->project_url)
+                        <a href="{{$portfolio->project_url}}" class="main-btn" target="_blank">Project Link</a>
                         @endif
                     </div>
                 </div>

@@ -51,14 +51,14 @@
                                 <div class="actions">
                                     @if (!empty($vcard->phone) && (is_array($prefs) && in_array('Call', $prefs)))
                                     <div class="action-btn">
-                                        <a class="call" href="tel:{{$vcard->phone}}" style="background: #{{$vcard->call_button_color}}"><i class="fas fa-mobile-alt"></i></a>
+                                        <a class="call" href="tel:{{$vcard->country_code}}{{$vcard->phone}}" style="background: #{{$vcard->call_button_color}}"><i class="fas fa-mobile-alt"></i></a>
                                         <br>
                                         <span>{{$keywords["Call"] ?? "Call"}}</span>
                                     </div>
                                     @endif
                                     @if (!empty($vcard->phone) && (is_array($prefs) && in_array('Whatsapp', $prefs)))
                                     <div class="action-btn">
-                                        <a href="https://wa.me/{{$vcard->phone}}?text=Hello" class="whatsapp" style="background: #{{$vcard->whatsapp_button_color}}"><i class="fab fa-whatsapp"></i></a>
+                                        <a href="https://wa.me/{{$vcard->country_code}}{{$vcard->phone}}?text=Hello" class="whatsapp" style="background: #{{$vcard->whatsapp_button_color}}"><i class="fab fa-whatsapp"></i></a>
                                         <br>
                                         <span>{{$keywords["Whatsapp"] ?? "Whatsapp"}}</span>
                                     </div>
@@ -88,12 +88,12 @@
                     <div class="page-info-widget">
                         @if (!empty($vcard->phone))
                         <div class="info-widget d-flex align-items-center">
-                            <a href="tel:{{$vcard->phone}}" class="icon icon-1" style="background: #{{$vcard->phone_icon_color}}1a;">
+                            <a href="tel:{{$vcard->country_code}}{{$vcard->phone}}" class="icon icon-1" style="background: #{{$vcard->phone_icon_color}}1a;">
                                 <i class="fas fa-mobile-alt" style="color: #{{$vcard->phone_icon_color}};"></i>
                             </a>
                             <div class="content">
                                 <span class="title">{{$keywords["Phone"] ?? "Phone"}}</span>
-                                <h5><a href="tel:{{$vcard->phone}}">{{$vcard->phone}}</a></h5>
+                                <h5><a href="tel:{{$vcard->country_code}}{{$vcard->phone}}">{{$vcard->country_code}}{{$vcard->phone}}</a></h5>
                             </div>
                         </div>
                         @endif

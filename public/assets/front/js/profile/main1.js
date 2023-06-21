@@ -79,7 +79,7 @@
 
         slider.slick({
             infinite: true,
-            dots: false,
+            dots: true,
             arrows: false,
             speed: 500,
             slidesToShow: 3,
@@ -102,7 +102,12 @@
                 }
             ]
         });
+
+
+
     }
+
+
 
     // ===== Counter Up
     function counterUp() {
@@ -203,11 +208,11 @@
     });
 
     // Typed js
-    if($("#typed").length > 0) {
+    if ($("#typed").length > 0) {
         var typed = new Typed('#typed', {
-          stringsElement: '.type-string',
-          typeSpeed: 80,
-          loop: true
+            stringsElement: '.type-string',
+            typeSpeed: 80,
+            loop: true
         });
     }
 
@@ -220,7 +225,7 @@
 ----------------------*/
 $(window).on('scroll', function () {
     const scroll_top = $(window).scrollTop(),
-    siteHeader = $('.template-header');
+        siteHeader = $('.template-header');
 
     if (siteHeader.hasClass('sticky-header')) {
         if (scroll_top < 110) {
@@ -236,4 +241,21 @@ $(window).on('scroll', function () {
 --------------------*/
 $(window).on('load', function () {
     $('#preloader').fadeOut(500);
+});
+
+$(document).ready(function () {
+    $('.testimonial-slider').on('setPosition', function (event, slick) {
+        var tallestSlideHeight = 0;
+
+        // Loop through each slide to find the tallest height
+        $('.testimonial-slider .slick-slide').each(function () {
+            var slideHeight = $(this).height();
+            if (slideHeight > tallestSlideHeight) {
+                tallestSlideHeight = slideHeight;
+            }
+        });
+
+        // Set the height of all slides to match the tallest height
+        $('.testimonial-slider .slick-slide').height(tallestSlideHeight);
+    });
 });

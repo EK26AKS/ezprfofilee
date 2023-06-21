@@ -99,7 +99,8 @@ class FrontendController extends Controller
         $data['testimonials'] = Testimonial::where('language_id', $lang_id)
             ->orderBy('serial_number', 'ASC')
             ->get();
-        $data['blogs'] = Blog::where('language_id', $lang_id)->orderBy('id', 'DESC')->take(2)->get();
+
+        $data['blogs'] = Blog::where('language_id', $lang_id)->orderBy('id', 'DESC')->take(3)->get();
 
         $data['partners'] = Partner::where('language_id', $lang_id)
             ->orderBy('serial_number', 'ASC')
@@ -108,6 +109,7 @@ class FrontendController extends Controller
         $data['seo'] = Seo::where('language_id', $lang_id)->first();
 
         $terms = [];
+        
         if (Package::query()->where('status', '1')->where('featured', '1')->where('term', 'monthly')->count() > 0) {
             $terms[] = 'Monthly';
         }
@@ -120,8 +122,11 @@ class FrontendController extends Controller
         $data['terms'] = $terms;
 
         $be = BasicExtended::select('package_features')->firstOrFail();
+        
         $allPfeatures = $be->package_features ? $be->package_features : "[]";
+        
         $data['allPfeatures'] = json_decode($allPfeatures, true);
+
         return view('front.index', $data);
     }
 
@@ -146,7 +151,6 @@ class FrontendController extends Controller
 
     public function loginView()
     {
-
         return view('front.login');
     }
 
@@ -1452,7 +1456,7 @@ class FrontendController extends Controller
             $vcardObj->addEmail($vcard->email);
         }
         if (!empty($vcard->phone)) {
-            $vcardObj->addPhoneNumber($vcard->phone, 'WORK');
+            $vcardObj->addPhoneNumber($vcard->country_code.''.$vcard->phone, 'WORK');
         }
         if (!empty($vcard->address)) {
             $vcardObj->addAddress($vcard->address);

@@ -276,6 +276,8 @@
             </div>
             <div class="row portfolio-items filter-items justify-content-center">
                 @foreach($portfolios as $portfolio)
+
+                
                 <div class="col-lg-4 col-md-6 filter-item cat-{{$portfolio->bcategory->id}}">
                     <div class="portfolio-item-two mt-30">
                         <div class="portfolio-thumb">
@@ -307,7 +309,7 @@
             <div class="row testimonial-slider">
                 @foreach($testimonials as $testimonial)
                 <div class="col-lg-4">
-                    <div class="testimonial-box-two">
+                    <div class="testimonial-box-two testimonial-slide">
                         <div class="author">
                             <img src="{{asset('assets/front/img/user/testimonials/'.$testimonial->image)}}" alt="Author">
                         </div>

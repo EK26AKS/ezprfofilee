@@ -12,6 +12,7 @@ use App\Models\User\UserVcardProject;
 use App\Models\User\UserVcardService;
 use App\Http\Helpers\LimitCheckerHelper;
 use App\Models\User\UserVcardTestimonial;
+use App\Models\CountryModel;
 
 class VcardController extends Controller
 {
@@ -23,7 +24,9 @@ class VcardController extends Controller
 
     public function create()
     {
-        return view('user.vcard.create');
+        $countries = CountryModel::get();
+
+        return view('user.vcard.create',compact('countries'));
     }
 
     public function edit(UserVcard $uservcard)
@@ -33,6 +36,8 @@ class VcardController extends Controller
             return back();
         }
         $data['vcard'] = $uservcard;
+        $countries = CountryModel::get();
+        $data['countries'] = $countries;
         return view('user.vcard.edit', $data);
     }
 
@@ -282,6 +287,7 @@ class VcardController extends Controller
         $vcard->company = $request->company;
         $vcard->email = $request->email;
         $vcard->phone = $request->phone;
+        $vcard->country_code = '+'.$request->country_code;
         $vcard->address = $request->address;
         $vcard->website_url = $request->website_url;
         $vcard->introduction = $request->introduction;
@@ -414,6 +420,7 @@ class VcardController extends Controller
         $vcard->company = $request->company;
         $vcard->email = $request->email;
         $vcard->phone = $request->phone;
+        $vcard->country_code = '+'.$request->country_code;
         $vcard->address = $request->address;
         $vcard->website_url = $request->website_url;
         $vcard->introduction = $request->introduction;

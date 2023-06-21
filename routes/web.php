@@ -41,8 +41,7 @@ Route::domain($domain)->group(function () {
         Route::get('/privacy-policy', 'Front\FrontendController@privacy')->name('front.privacy-policy');
         Route::get('/refund-policy', 'Front\FrontendController@refund')->name('front.refund-policy');
         Route::get('/tearms-and-conditions', 'Front\FrontendController@tearmsAndCondtions')->name('front.tearms-and-conditions');
-        Route::get('/about', 'Front\FrontendController@aboutUs')->name('front.about');
-
+        Route::get('/about-us', 'Front\FrontendController@aboutUs')->name('front.about-us');
     });
 
     Route::group(['middleware' => ['web', 'guest', 'setlang']], function () {

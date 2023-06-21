@@ -76,7 +76,7 @@
                                                 placeholder="{{ $keywords['Enter_embed_URL_of_video'] ?? __('Enter embed URL of video') }}"
                                                 value="{{ $vcard->video }}">
                                             <p class="text-warning mb-0">
-                                                {{ $keywords['Vcard_about_Video_Link_msg'] ?? __('Please enter embed URL of video, don\'t take URL from browser search bar') }}
+                                                {{ $keywords['Vcard_about_Video_Link_msg'] ?? __('Please enter embed URL of video, don`t take URL from browser search bar') }}
                                             </p>
                                         </div>
                                     </div>

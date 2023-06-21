@@ -165,7 +165,7 @@
           src="{{ isset($userBs->logo)
               ? asset('assets/front/img/user/' . $userBs->logo)
               : asset('assets/front/img/profile1/theme3/logo.png') }}"
-          alt="Brand Logo"></a>
+          alt="Brand Logo" class="theme-3-logo"></a>
     </div>
     <div class="primary-menu">
       <nav class="main-menu">

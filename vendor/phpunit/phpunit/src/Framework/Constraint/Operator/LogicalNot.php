@@ -44,7 +44,7 @@ final class LogicalNot extends UnaryOperator
             'does not match ',
             'starts not with ',
             'ends not with ',
-            'don\'t reference ',
+            'don`t reference ',
             'not ',
         ];
 

@@ -266,10 +266,16 @@
                             <p id="errfeatured" class="mb-0 text-danger em"></p>
                         </div>
                         <div class="form-group">
+                            <label for="">{{ $keywords['Project_Url'] ?? __('Project Url') }}</label>
+                            <input type="text" class="form-control" name="project_url" value=""
+                                data-role="tagsinput" placeholder="{{ $keywords['Enter_Project_Url'] ?? __('Enter Project Url') }}">
+                        </div>
+                        <div class="form-group">
                             <label for="">{{ $keywords['Meta_Keywords'] ?? __('Meta Keywords') }}</label>
                             <input type="text" class="form-control" name="meta_keywords" value=""
                                 data-role="tagsinput">
                         </div>
+                       
                         <div class="form-group">
                             <label for="">{{ $keywords['Meta_Description'] ?? __('Meta Description') }}</label>
                             <textarea type="text" class="form-control" name="meta_description" rows="5"></textarea>

@@ -4,7 +4,7 @@
         <div class="nav-container d-flex align-items-center justify-content-between">
             <!-- site logo -->
             <div class="brand_logo">
-                <a href="{{route('front.index')}}"><img src="{{asset('assets/front/img/'.$bs->logo)}}" class="img-fluid" alt=""></a>
+                <a href="{{route('front.index')}}"><img src="{{asset('assets/front/img/'.$bs->logo)}}" class="img-fluid landing-page-logo" alt=""></a>
             </div>
             <div class="nav-menu">
                 <!-- Navbar Close Icon -->
@@ -12,7 +12,9 @@
                     <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                 </div>
                 <div class="mobile-logo">
-                    <a href="#"><img src="{{asset('assets/front/img/'.$bs->logo)}}" class="img-fluid" alt=""></a>
+                    <a href="#">
+                        <img src="{{asset('assets/front/img/'.$bs->logo)}}" class="ezprofile-mobile-logo" alt="mobile-logo">
+                    </a>
                 </div>
                 <!-- nav-menu -->
                 <nav class="main-menu">

@@ -323,7 +323,7 @@
 
                 <div class="row testimonial-slider">
                     @foreach ($testimonials as $testimonial)
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 col-sm-12 col-xs-12">
                             <div class="testimonial-box-one">
                                 <div class="author-wrap">
                                     <div class="author">

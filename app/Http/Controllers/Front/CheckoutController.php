@@ -375,6 +375,7 @@ class CheckoutController extends Controller
             
             // create email template 
             $templates = ['email_verification', 'appointment_booking_notification', 'reset_password'];
+            
             foreach ($templates as $key => $val) {
                 UserEmailTemplate::create([
                     'user_id' => $user->id,

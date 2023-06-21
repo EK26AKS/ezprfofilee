@@ -61,10 +61,10 @@
                 <div class="user-social user-social-one text-center">
                     <ul class="d-flex">
                         @if (!empty($vcard->phone) && (is_array($prefs) && in_array('Call', $prefs)))
-                        <li><a style="background: #{{$vcard->call_button_color}}" href="tel:{{$vcard->phone}}"><i class="fas fa-phone"></i></a></li>
+                        <li><a style="background: #{{$vcard->call_button_color}}" href="tel:{{$vcard->country_code}}{{$vcard->phone}}"><i class="fas fa-phone"></i></a></li>
                         @endif
                         @if (!empty($vcard->phone) && (is_array($prefs) && in_array('Whatsapp', $prefs)))
-                        <li><a style="background: #{{$vcard->whatsapp_button_color}}" href="https://wa.me/{{$vcard->phone}}?text=Hello"><i class="fab fa-whatsapp"></i></a></li>
+                        <li><a style="background: #{{$vcard->whatsapp_button_color}}" href="https://wa.me/{{$vcard->country_code}}{{$vcard->phone}}?text=Hello"><i class="fab fa-whatsapp"></i></a></li>
                         @endif
                         @if (!empty($vcard->email) && (is_array($prefs) && in_array('Mail', $prefs)))
                         <li><a style="background: #{{$vcard->mail_button_color}}" href="mailto:{{$vcard->email}}"><i class="fas fa-envelope"></i></a></li>
@@ -88,7 +88,7 @@
                             </div>
                             <div class="text">
                                 <h3>{{$keywords["Phone"] ?? "Phone"}}</h3>
-                                <p><a href="tel:{{$vcard->phone}}">{{$vcard->phone}}</a></p>
+                                <p><a href="tel:{{$vcard->country_code}}{{$vcard->phone}}">{{$vcard->country_code}}{{$vcard->phone}}</a></p>
                             </div>
                         </div>
                         @endif

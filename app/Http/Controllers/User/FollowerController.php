@@ -40,18 +40,17 @@ class FollowerController extends Controller
 
     public function follower(){
       $data['users'] = [];
-      $followerListIds = Follower::query()->where('following_id',Auth::id())->pluck('follower_id');
+      $followerListIds = Follower::query()->where('follower_id',Auth::id())->pluck('follower_id');
       if(count($followerListIds) > 0){
           $data['users'] = User::whereIn('id',$followerListIds)->paginate(10);
       }
-      dd($data);
       return view('user.follower.index',$data);
     }
 
     public function following()
     {
         $data['users'] = [];
-        $followingListIds = Follower::query()->where('follower_id', Auth::id())->pluck('following_id');
+        $followingListIds = Follower::query()->where('following_id', Auth::id())->pluck('following_id');
         if (count($followingListIds) > 0) {
             $data['users'] = User::whereIn('id',$followingListIds)->paginate(10);
         }

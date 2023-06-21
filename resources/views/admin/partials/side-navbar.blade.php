@@ -20,7 +20,7 @@
 <div class="sidebar sidebar-style-2" @if (request()->cookie('admin-theme') == 'dark') data-background-color="dark2" @endif>
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
-            <div class="user">
+            <!-- <div class="user">
                 <div class="avatar-sm float-left mr-2">
                     @if (!empty(Auth::guard('admin')->user()->image))
                         <img src="{{ asset('assets/admin/img/propics/' . Auth::guard('admin')->user()->image) }}"
@@ -60,7 +60,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <ul class="nav nav-primary">
 
                 <div class="row mb-2">

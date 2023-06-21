@@ -258,11 +258,18 @@
                                             <p id="erremail" class="mb-0 text-danger em"></p>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
+                                    <div class="col-lg-6 row ml-1">
+                                        <div class="form-group col-lg-3">
                                             <label for="">{{ $keywords['Phone'] ?? __('Phone') }}</label>
+                                            <select class="form-control" name="country_code"> 
+                                                @foreach($countries as $country)
+                                                    <option value="{{$country->code}}">{{$country->iso}} +{{$country->code}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-9 mt-4">
                                             <input type="text" class="form-control ltr" name="phone" value=""
-                                                placeholder="{{ $keywords['Enter_phone'] ?? __('Enter phone') }}">
+                                                placeholder="{{ $keywords['Enter_phone'] ?? __('Enter phone') }}" max-length="10">
                                             <p class="text-warning mb-0">
                                                 {{ $keywords['Enter_Phone_Number_with'] ?? __('Enter Phone Number with') }}
                                                 <strong

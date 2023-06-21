@@ -177,7 +177,7 @@ $(function () {
             autoplay: true,
             speed: 1000,
             slidesToShow: 3,
-            slidesToScroll: 3,
+            slidesToScroll: 1,
             rtl: rtl == 1 ? true : false,
             responsive: [
                 {

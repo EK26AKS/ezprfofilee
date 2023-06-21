@@ -89,13 +89,13 @@
                         <p>{{ $keywords['Dashboard'] ?? __('Dashboard') }}</p>
                     </a>
                 </li>
-                <!-- <li class="nav-item
+                <li class="nav-item
                 @if (request()->path() == 'user/profile') active @endif">
                     <a href="{{ route('user-profile', ['language' => $default->code]) }}">
                         <i class="far fa-user-circle"></i>
                         <p>{{ $keywords['Edit_Profile'] ?? __('Edit Profile') }} </p>
                     </a>
-                </li> -->
+                </li>
                 @if (!is_null($package))
                     <li
                         class="nav-item

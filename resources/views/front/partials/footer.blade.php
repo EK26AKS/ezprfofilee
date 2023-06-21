@@ -1,10 +1,10 @@
 <!--====== Start Footer ======-->
 <footer class="saas-footer ektasi-footer">
     @if ($bs->top_footer_section == 1)
-    <div class="footer-widget pt-145 pb-60">
+    <div class="footer-widget">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-5 col-md-6 col-sm-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 footer-logo-desc">
                     <div class="widget about-widget">
                         <a href="{{route('front.index')}}" class="d-inline-block"><img src="{{asset('assets/front/img/' . $bs->footer_logo)}}" class="img-fluid" alt=""></a>
                         <p>{{$bs->footer_text}}</p>
@@ -17,10 +17,10 @@
                             $ulinks = App\Models\Ulink::where('language_id',$currentLang->id)->orderby('id','desc')->get();
                         @endphp
                         <ul class="widget-link">
-                            <li><a href="https://ezprofile.in/about" target="_blank">About Us</a></li>
-                            <li><a href="https://ezstore.in/" target="_blank">EZ Store</a><span class="badge badge-pill badge-primary ezprofile-badge">Launching Soon</span></li>
-                            <li><a href="#" target="_blank">EZ Social</a><span class="badge badge-pill badge-primary ezprofile-badge">Launching Soon</span></li>
-                            <li><a href="http://ez-genie.com/" target="_blank">EZ Genie</a><span class="badge badge-pill badge-primary ezprofile-badge">Launching Soon</span></li>
+                            <li><a href="https://ezprofile.in/about-us" target="_blank">About Us</a></li>
+                            <li><a href="https://ezstore.in/" target="_blank">EZ Store</a><span class="badge badge-pill badge-primary ezprofile-badge">Upcoming</span></li>
+                            <li><a href="#" target="_blank">EZ Social</a><span class="badge badge-pill badge-primary ezprofile-badge">Upcoming</span></li>
+                            <li><a href="http://ez-genie.com/" target="_blank">EZ Genie</a><span class="badge badge-pill badge-primary ezprofile-badge">Upcoming</span></li>
                             <li><a href="http://ektasi.io/" target="_blank">EKTASI Technology</a></li>
                         </ul>
                     </div>
@@ -38,7 +38,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="widget newsletter-widget">
                         <h4 class="widget-title">{{$bs->newsletter_title}}</h4>
                         <p>{{$bs->newsletter_subtitle}}</p>
@@ -78,11 +78,11 @@
                     <div class="legal-links">
                         <p class="copyright-right">
                             <a href="https://ezprofile.in/privacy-policy" target="_blank">Privacy Policy</a>
-                            <span>|</span>
+                            <span></span>
                         </p>
                         <p class="copyright-right">
                             <a href="https://ezprofile.in/tearms-and-conditions" target="_blank">Terms & Conditions</a>
-                            <span>|</span>
+                            <span></span>
                         </p>
                         <p class="copyright-right">
                             <a href="https://ezprofile.in/refund-policy" target="_blank">Refund Policy</a>

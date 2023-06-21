@@ -18,7 +18,7 @@
 
     <!--====== Start saas-pricing section ======-->
     <section class="saas-pricing pricing-page pt-110 pb-120">
-        <div class="container">
+        <div class="container-fluid">
  
             @if (count($terms) > 1)
             <div class="row justify-content-center">
@@ -47,7 +47,7 @@
                             @php
                                 $pFeatures = json_decode($package->features);
                             @endphp
-                            <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="col">
                                 <div class="pricing-item">
                                     @if($package->is_trial === "1" && $package->price != 0)
                                     <div class="listing-badges">
