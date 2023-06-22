@@ -82,7 +82,7 @@ class ServiceController extends Controller
             'detail_page' => 'required',
             'serial_number' => 'required|integer',
             'image' => [
-                'required',
+                'required','dimensions:width=350,height=350',
                 function ($attribute, $value, $fail) use ($img, $allowedExts) {
                     if (!empty($img)) {
                         $ext = $img->getClientOriginalExtension();
@@ -173,7 +173,7 @@ class ServiceController extends Controller
             'content' => 'required',
             'detail_page' => 'required',
             'serial_number' => 'required|integer',
-            'image' => [
+            'image' => [ 'dimensions:width=350,height=350',
                 function ($attribute, $value, $fail) use ($img, $allowedExts) {
                     if (!empty($img)) {
                         $ext = $img->getClientOriginalExtension();

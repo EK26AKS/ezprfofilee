@@ -187,6 +187,7 @@ class MegaMailer
     public function mailFromTanent($data)
     {
         $temp = UserEmailTemplate::where('email_type', '=', $data['templateType'])->where('user_id', $data['user']->id)->first();
+        if(!empty($temp))
         $body = $temp->email_body;
 
         if (array_key_exists('customer_name', $data)) {

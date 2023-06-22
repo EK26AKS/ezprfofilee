@@ -330,7 +330,10 @@
         $anet = \App\Models\User\UserPaymentGateway::where('user_id', getUser()->id)
             ->where('keyword', 'authorize.net')
             ->first();
-        $anerInfo = $anet->convertAutoData();
+        $anerInfo = '';
+        if(!empty($anet))
+            $anerInfo = $anet->convertAutoData();
+
         $anetTest = $anerInfo['sandbox_check'] ?? '';
 
         if ($anetTest == 1) {

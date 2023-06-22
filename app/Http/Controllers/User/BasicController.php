@@ -213,6 +213,16 @@ class BasicController extends Controller
     }
 
     public function homePageTextUpdate(Request $request){
+        $rules = [
+            'hero_image' => 'dimensions:width=900,height=600',
+            'about_image' => 'dimensions:width=550,height=550',
+            'skills_image' => 'dimensions:width=550,height=550',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            $errmsgs = $validator->getMessageBag()->add('error', 'true');
+            return response()->json($validator->errors());
+        }
         $homeText = HomePageText::query()->where('language_id', $request->language_id)->where('user_id', Auth::user()->id)->firstOrFail();
         foreach ($request->types as $key => $type) {
             if ($type == 'about_image' || $type == 'skills_image' || $type == 'achievement_image' || $type == 'hero_image') {

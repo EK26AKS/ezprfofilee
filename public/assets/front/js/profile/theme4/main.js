@@ -200,3 +200,21 @@
 $(window).on('load', function(event) {
     $('.preloader').fadeOut('500');
 })
+
+
+$(document).ready(function () {
+    $('.testimonial-slider-one').on('setPosition', function (event, slick) {
+        var tallestSlideHeight = 0;
+
+        // Loop through each slide to find the tallest height
+        $('.testimonial-slider-one .slick-slide').each(function () {
+            var slideHeight = $(this).height();
+            if (slideHeight > tallestSlideHeight) {
+                tallestSlideHeight = slideHeight;
+            }
+        });
+
+        // Set the height of all slides to match the tallest height
+        $('.testimonial-slider-one .slick-slide').height(tallestSlideHeight);
+    });
+});

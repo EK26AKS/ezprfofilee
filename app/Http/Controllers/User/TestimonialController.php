@@ -68,7 +68,7 @@ class TestimonialController extends Controller
             'content' => 'required',
             'serial_number' => 'required|integer',
             'image' => [
-                'required',
+                'required','dimensions:width=350,height=350',
                 function ($attribute, $value, $fail) use ($img, $allowedExts) {
                     if (!empty($img)) {
                         $ext = $img->getClientOriginalExtension();
@@ -157,7 +157,7 @@ class TestimonialController extends Controller
             'content' => 'required',
             'occupation' => 'required',
             'serial_number' => 'required|integer',
-            'image' => [
+            'image' => [ 'dimensions:width=350,height=350',
                 function ($attribute, $value, $fail) use ($img, $allowedExts) {
                     if (!empty($img)) {
                         $ext = $img->getClientOriginalExtension();

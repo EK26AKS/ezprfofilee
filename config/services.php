@@ -51,8 +51,8 @@ return [
     ], 
 
     'facebook' => [
-        'client_id' => '1512880189204836',
-        'client_secret' => '6006a5f74dcfa4ae1093b98514630b33',
+        'client_id' => '285845837234550',
+        'client_secret' => 'dd5dfcd493219b64b0093e415a1c566d',
         'redirect' => 'https://ezprofile.in/callback/facebook',
     ], 
 

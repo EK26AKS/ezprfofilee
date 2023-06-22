@@ -50,7 +50,7 @@ class BlogController extends Controller
             'category' => 'required',
             'content' => 'required',
             'serial_number' => 'required|integer',
-            'image' => [
+            'image' => [ 'dimensions:width=500,height=500',
                 function ($attribute, $value, $fail) use ($img, $allowedExts) {
                     if (!empty($img)) {
                         $ext = $img->getClientOriginalExtension();
@@ -105,7 +105,7 @@ class BlogController extends Controller
             'content' => 'required',
             'serial_number' => 'required|integer',
 
-            'image' => [
+            'image' => [ 'dimensions:width=500,height=500',
                 function ($attribute, $value, $fail) use ($img, $allowedExts) {
                     if (!empty($img)) {
                         $ext = $img->getClientOriginalExtension();

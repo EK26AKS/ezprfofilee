@@ -131,7 +131,7 @@ class PortfolioController extends Controller
             'content' => 'required',
             'serial_number' => 'required|integer',
             'image' => [
-                'required',
+                'required','dimensions:width=350,height=350',
                 function ($attribute, $value, $fail) use ($img, $allowedExts) {
                     if (!empty($img)) {
                         $ext = $img->getClientOriginalExtension();
@@ -141,7 +141,7 @@ class PortfolioController extends Controller
                     }
                 },
             ],
-            'slider_images' => 'required',
+            'slider_images' => 'required','dimensions:width=550,height=550',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -236,7 +236,7 @@ class PortfolioController extends Controller
             'category' => 'required',
             'content' => 'required',
             'serial_number' => 'required|integer',
-            'image' => [
+            'image' => [ 'dimensions:width=350,height=350',
                 function ($attribute, $value, $fail) use ($img, $allowedExts) {
                     if (!empty($img)) {
                         $ext = $img->getClientOriginalExtension();
@@ -246,6 +246,7 @@ class PortfolioController extends Controller
                     }
                 },
             ],
+            'slider_image' => 'dimensions:width=550,height=550'
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {

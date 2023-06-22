@@ -20,8 +20,8 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-lg-7">
-                    <div class="login-form-preview">
-                        <img src="{{asset('assets/front/img/login-page.png')}}" alt="">
+                    <div class="login-form-preview" style="background-image: url('{{asset('assets/front/img/login-page.png')}}');">
+                        <!-- <img src="{{asset('assets/front/img/login-page.png')}}" alt=""> -->
                     </div>
                 </div>
                 <div class="col-lg-5">

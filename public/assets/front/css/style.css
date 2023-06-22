@@ -3270,18 +3270,17 @@ ul#anetErrors {
 
 .login-form-preview {
     text-align: center;
-}
-
-.login-form-preview img {
-    width: 75%;
-    margin-top: 15%;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 /* feature section added */
 .ezprofile-feature-card {
     background: #fff;
     box-shadow: 5px 9px 30px 0px #464a5b14;
-    padding: 40px;
+    padding: 50px 30px;
     border-radius: 10px;
     text-align: center;
     position: relative;
@@ -3449,7 +3448,9 @@ ul#anetErrors {
 }
 /* responsive css start */
 @media only screen and (max-width: 600px) {
-
+    .footer-logo-desc {
+        padding-left: 15px !important;
+    }
     .saas-features-card {
         padding: 30px 15px;
     }

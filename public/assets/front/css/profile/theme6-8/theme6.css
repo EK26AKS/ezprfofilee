@@ -1101,8 +1101,15 @@ label {
 	border-radius: 15px;
 	text-align: center;
 	margin-top: 40px;
+	height: 100% !important;
 }
 
+.testimonial-slider .slick-track{
+	display: flex !important;
+}
+.testimonial-slider .slick-slide {
+    height: inherit !important;
+}
 .testimonial-box .content {
 	font-style: italic;
 }
@@ -1620,6 +1627,14 @@ label {
 .dark-version .testimonial-box {
 	background-color: #171717;
 	border: 1px solid #1b1b1b;
+	height: 100% !important;
+}
+.dark-version .slick-slide {
+    display: block;
+    height: inherit !important;
+}
+.dark-version .testimonial-slider .slick-track{
+	display: flex !important;
 }
 
 .dark-version .single-latest-post .title {

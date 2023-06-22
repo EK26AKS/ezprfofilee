@@ -1266,10 +1266,12 @@ header{
 }
 .testimonial-area .testimonial-slider-one .slick-track{
 	padding-top: 40px;
+	display: flex;
 }
 .testimonial-area .testimonial-slider-one .testimonial-item{
 	margin-left: 15px;
-	margin-right: 15px;
+    margin-right: 15px;
+    height: inherit !important;
 }
 .testimonial-area .testimonial-item{
 	position: relative;
