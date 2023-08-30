@@ -187,6 +187,7 @@ class MegaMailer
     public function mailFromTanent($data)
     {
         $temp = UserEmailTemplate::where('email_type', '=', $data['templateType'])->where('user_id', $data['user']->id)->first();
+        $body='';
         if(!empty($temp))
         $body = $temp->email_body;
 
@@ -248,8 +249,8 @@ class MegaMailer
 
             // Content
             $mail->isHTML(true);
-            $mail->Subject = $temp->email_subject;
-            $mail->Body = $body;
+            $mail->Subject = !empty($temp->email_subject) ? $temp->email_subject : 'testing';
+            $mail->Body = !empty($body) ? $body : "testing";
 
             $mail->send();
         } catch (Exception $e) {

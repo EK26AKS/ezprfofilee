@@ -115,9 +115,11 @@
                         </div>
                     </div>
                     <ul class="pricing-content">
+                    @if (!is_null($package->features)&& (is_array($package->features) || is_object($package->features)))
                         @foreach (json_decode($package->features) as $feature)
                             <li>{{ $keywords[str_replace(' ', '_', $feature)] ?? __($feature) }}</li>
                         @endforeach
+                    @endif
                     </ul>
                     @php
                         $hasPendingMemb = \App\Http\Helpers\UserPermissionHelper::hasPendingMembership(Auth::id());

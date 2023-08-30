@@ -60,7 +60,7 @@ class SkillController extends Controller
         $slug = make_slug($request->title);
         $rules = [
             'user_language_id' => 'required',
-            'title' => 'required|max:255|unique:user_skills',
+            'title' => 'required|max:255',
             'percentage' => 'required|numeric|digits_between:1,100',
             'color' => 'required|max:20',
             'serial_number' => 'required|integer'
@@ -112,7 +112,7 @@ class SkillController extends Controller
         $slug = make_slug($request->title);
 
         $rules = [
-            'title' => 'required|max:255|unique:user_skills',
+            'title' => 'required|max:255',
             'percentage' => 'required|numeric|digits_between:1,100',
             'color' => 'required|max:20',
             'serial_number' => 'required|integer'

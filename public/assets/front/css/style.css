@@ -3589,10 +3589,6 @@ ul#anetErrors {
     color: white;
     background: #0A66C2;
 }
-.footer-logo-desc{
-    padding-left: unset !important;
-}
-
 .saas-pricing .pricing-item .title h3 {
     font-weight: 500;
     color: #d60a84;

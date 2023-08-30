@@ -272,7 +272,7 @@ class UsercheckoutController extends Controller
             $due  = $total_fee - (($total_fee * $ubs->advance_percentage) / 100);
             $payment_status = 3;
         }
-
+        //dd($request);
         $appointment  =  AppointmentBooking::create([
             'customer_id' => $customer ? $customer->id : null,
             'user_id' => $user->id,
