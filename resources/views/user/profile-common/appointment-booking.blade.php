@@ -41,7 +41,7 @@
         <!--====== Breadcrumbs End ======-->
     @endif
     <!--====== Start Vaughn-Features section ======-->
-    <section class=" @if ($userBs->theme == 6 || $userBs->theme == 7 || $userBs->theme == 8) page-content-section section-gap @endif vaughn-features pt-5"
+    <section class=" @if ($userBs->theme == 6 || $userBs->theme == 7 || $userBs->theme == 8 ) page-content-section section-gap @endif vaughn-features pt-5"
         id="service">
         <div class="container mb-5">
             <div class="row justify-content-center">
@@ -83,7 +83,8 @@
                                     $userBs->theme == 5 ||
                                     $userBs->theme == 6 ||
                                     $userBs->theme == 7 ||
-                                    $userBs->theme == 8) main-btn @else template-btn @endif"
+                                    $userBs->theme == 8 ||
+                                    $userBs->theme == 9 ) main-btn @else template-btn @endif"
                                 type="submit">{{ $keywords['Next'] ?? 'Next' }}</button>
                         </div>
                     </form>

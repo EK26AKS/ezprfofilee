@@ -18,9 +18,9 @@
                         @endphp
                         <ul class="widget-link">
                             <li><a href="https://ezprofile.in/about-us" target="_blank">About Us</a></li>
-                            <li><a href="https://ezstore.in/" target="_blank">EZ Store</a><span class="badge badge-pill badge-primary ezprofile-badge">Upcoming</span></li>
+                            <li><a href="https://ezstore.in/" target="_blank">EZ Store</a></li>
                             <li><a href="#" target="_blank">EZ Social</a><span class="badge badge-pill badge-primary ezprofile-badge">Upcoming</span></li>
-                            <li><a href="http://ez-genie.com/" target="_blank">EZ Genie</a><span class="badge badge-pill badge-primary ezprofile-badge">Upcoming</span></li>
+                            <li><a href="http://ez-genie.com/" target="_blank">EZ Genie</a></li>
                             <li><a href="http://ektasi.io/" target="_blank">EKTASI Technology</a></li>
                         </ul>
                     </div>

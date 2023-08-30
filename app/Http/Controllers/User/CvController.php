@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User\UserCv;
+use App\Models\User;
 use Auth;
 use Session;
 use Validator;
@@ -52,7 +53,6 @@ class CvController extends Controller
                 },
             ]
         ];
-
 
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -105,7 +105,6 @@ class CvController extends Controller
                 },
             ],
         ];
-
 
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -205,7 +204,6 @@ class CvController extends Controller
             'colors.*.required' => 'The Color field cannot be empty',
             'contents.*.required' => 'The Content field cannot be empty'
         ];
-
 
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {

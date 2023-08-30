@@ -19,11 +19,13 @@
     <link rel="stylesheet" href="{{ asset('assets/front/css/pignose.calendar.min.css') }}">
     <!--====== Common css ======-->
     <link rel="stylesheet" href="{{ asset('assets/front/css/profile/common.css') }}">
+    
     <link rel="stylesheet" href="{{ asset('assets/front/css/profile/whatsapp.min.css') }}">
     <!--====== Style css ======-->
     <link rel="stylesheet" href="{{ asset('assets/front/css/profile/style1.css') }}">
     <!--====== Responsive css ======-->
     <link rel="stylesheet" href="{{ asset('assets/front/css/profile/responsive1.css') }}">
+    
     @if ($userCurrentLang->rtl == 1)
         <!--====== Common RTL Style css ======-->
         <link rel="stylesheet" href="{{ asset('assets/front/css/profile/common-rtl.css') }}">
@@ -148,7 +150,7 @@
     <!--====== Start End ======-->
     <!--====== Jquery ======-->
     <script src="{{ asset('assets/front/js/vendor/jquery-3.4.1.min.js') }}"></script>
-    {{-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> --}}
+    <!--{{-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> --}}-->
     <!-- Bootstrap Datepicker -->
     <script src="{{ asset('assets/admin/js/plugin/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
     <!-- jQuery Timepicker -->

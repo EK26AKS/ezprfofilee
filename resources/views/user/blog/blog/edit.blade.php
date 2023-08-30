@@ -78,13 +78,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">{{ $keywords['Title'] ?? __('Title') }} **</label>
+                                    <label for="">{{ $keywords['Title'] ?? __('Title') }}*</label>
                                     <input type="text" class="form-control" name="title" value="{{ $blog->title }}"
                                         placeholder="{{ $keywords['Enter_title'] ?? __('Enter title') }}">
                                     <p id="eerrtitle" class="mb-0 text-danger em"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">{{ $keywords['Category'] ?? __('Category') }} **</label>
+                                    <label for="">{{ $keywords['Category'] ?? __('Category') }}*</label>
                                     <select class="form-control" name="category">
                                         <option value="" selected disabled>
                                             {{ $keywords['Select_a_category'] ?? __('Select a category') }}</option>
@@ -97,13 +97,13 @@
                                     <p id="eerrcategory" class="mb-0 text-danger em"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">{{ $keywords['Content'] ?? __('Content') }} **</label>
+                                    <label for="">{{ $keywords['Content'] ?? __('Content') }}*</label>
                                     <textarea class="form-control summernote" name="content" data-height="300" placeholder="{{ $keywords['Enter_content'] ?? __('Enter content') }}">{{ replaceBaseUrl($blog->content) }}</textarea>
                                     <p id="eerrcontent" class="mb-0 text-danger em"></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="">{{ $keywords['Serial_Number'] ?? __('Serial Number') }}
-                                        **</label>
+                                       *</label>
                                     <input type="number" class="form-control ltr" name="serial_number"
                                         value="{{ $blog->serial_number }}" placeholder="{{ $keywords['Enter_Serial_Number'] ?? __('Enter Serial Number') }}">
                                     <p id="eerrserial_number" class="mb-0 text-danger em"></p>

@@ -115,7 +115,7 @@
         <div class="mobile-slide-panel">
             <div class="panel-overlay"></div>
             <div class="panel-inner">
-                <div class="mobile-logo">
+                <div class="mobile-logo" style="width:25%; margin-left:8em">
                     <a href="{{ route('front.user.detail.view', getParam()) }}">
                         <img class="lazy"
                             data-src="{{ isset($userBs->logo)

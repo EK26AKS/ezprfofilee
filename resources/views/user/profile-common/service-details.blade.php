@@ -30,7 +30,7 @@
                 <div class="single-page-wrapper mb-30">
                     <div class="post-item">
                         <div class="post-img mb-20">
-                            <img data-src="{{asset('assets/front/img/user/services/'.$service->image)}}" class="img-fluid lazy" alt="">
+                            <img src="{{asset('assets/front/img/user/services/'.$service->image)}}" class="img-fluid lazy" alt="">
                         </div>
                         <div class="entry-content">
                             <h3 class="title mb-4 mt-2">{{$service->name}}</h3>

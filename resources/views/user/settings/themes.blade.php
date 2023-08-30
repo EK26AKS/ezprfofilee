@@ -160,9 +160,104 @@
                                             </label>
                                             <h5 class="text-center">{{ $keywords['Theme_8'] ?? __('Theme 8') }}</h5>
                                         </div>
+                                        <div class="col-6 col-sm-4 mb-2">
+                                            <label class="imagecheck mb-2">
+                                                <input name="theme" type="radio" value="9"
+                                                    class="imagecheck-input"
+                                                    {{ !empty($data->theme) && $data->theme == 9 ? 'checked' : '' }}>
+                                                <figure class="imagecheck-figure">
+                                                    <img src="{{ asset('assets/front/img/user/themes/theme9.png') }}"
+                                                        alt="title" class="imagecheck-image">
+                                                </figure>
+                                            </label>
+                                            <h5 class="text-center">{{ $keywords['Theme_9'] ?? __('Theme 9') }}</h5>
+                                        </div>
+                                        <div class="col-6 col-sm-4 mb-2">
+                                            <label class="imagecheck mb-2">
+                                                <input name="theme" type="radio" value="10"
+                                                    class="imagecheck-input"
+                                                    {{ !empty($data->theme) && $data->theme == 10 ? 'checked' : '' }}>
+                                                <figure class="imagecheck-figure">
+                                                    <img src="{{ asset('assets/front/img/user/themes/theme10.png') }}"
+                                                        alt="title" class="imagecheck-image">
+                                                </figure>
+                                            </label>
+                                            <h5 class="text-center">{{ $keywords['Theme_10'] ?? __('Theme 10') }}</h5>
+                                        </div>
+                                        <div class="col-6 col-sm-4 mb-2">
+                                            <label class="imagecheck mb-2">
+                                                <input name="theme" type="radio" value="11"
+                                                    class="imagecheck-input"
+                                                    {{ !empty($data->theme) && $data->theme == 11 ? 'checked' : '' }}>
+                                                <figure class="imagecheck-figure">
+                                                    <img src="{{ asset('assets/front/img/user/themes/theme11.png') }}"
+                                                        alt="title" class="imagecheck-image">
+                                                </figure>
+                                            </label>
+                                            <h5 class="text-center">{{ $keywords['Theme_11'] ?? __('Theme 11') }}</h5>
+                                        </div>
+                                        <div class="col-6 col-sm-4 mb-2">
+                                            <label class="imagecheck mb-2">
+                                                <input name="theme" type="radio" value="12"
+                                                    class="imagecheck-input"
+                                                    {{ !empty($data->theme) && $data->theme == 12 ? 'checked' : '' }}>
+                                                <figure class="imagecheck-figure">
+                                                    <img src="{{ asset('assets/front/img/user/themes/theme12.png') }}"
+                                                        alt="title" class="imagecheck-image">
+                                                </figure>
+                                            </label>
+                                            <h5 class="text-center">{{ $keywords['Theme_12'] ?? __('Theme 12') }}</h5>
+                                        </div>                                        
+                                        <div class="col-6 col-sm-4 mb-2">
+                                            <label class="imagecheck mb-2">
+                                                <input name="theme" type="radio" value="13"
+                                                    class="imagecheck-input"
+                                                    {{ !empty($data->theme) && $data->theme == 13 ? 'checked' : '' }}>
+                                                <figure class="imagecheck-figure">
+                                                    <img src="{{ asset('assets/front/img/user/themes/theme13.png') }}"
+                                                        alt="title" class="imagecheck-image">
+                                                </figure>
+                                            </label>
+                                            <h5 class="text-center">{{ $keywords['Theme_13'] ?? __('Theme 13') }}</h5>
+                                        </div>
+                                        <div class="col-6 col-sm-4 mb-2">
+                                            <label class="imagecheck mb-2">
+                                                <input name="theme" type="radio" value="14"
+                                                    class="imagecheck-input"
+                                                    {{ !empty($data->theme) && $data->theme == 14 ? 'checked' : '' }}>
+                                                <figure class="imagecheck-figure">
+                                                    <img src="{{ asset('assets/front/img/user/themes/theme14.png') }}"
+                                                        alt="title" class="imagecheck-image">
+                                                </figure>
+                                            </label>
+                                            <h5 class="text-center">{{ $keywords['Theme_14'] ?? __('Theme 14') }}</h5>
+                                        </div>
+                                        <div class="col-6 col-sm-4 mb-2">
+                                            <label class="imagecheck mb-2">
+                                                <input name="theme" type="radio" value="15"
+                                                    class="imagecheck-input"
+                                                    {{ !empty($data->theme) && $data->theme == 15 ? 'checked' : '' }}>
+                                                <figure class="imagecheck-figure">
+                                                    <img src="{{ asset('assets/front/img/user/themes/theme15.png') }}"
+                                                        alt="title" class="imagecheck-image">
+                                                </figure>
+                                            </label>
+                                            <h5 class="text-center">{{ $keywords['Theme_15'] ?? __('Theme 15') }}</h5>
+                                        </div> 
+                                        <div class="col-6 col-sm-4 mb-2">
+                                            <label class="imagecheck mb-2">
+                                                <input name="theme" type="radio" value="16"
+                                                    class="imagecheck-input"
+                                                    {{ !empty($data->theme) && $data->theme == 16 ? 'checked' : '' }}>
+                                                <figure class="imagecheck-figure">
+                                                    <img src="{{ asset('assets/front/img/user/themes/theme16.png') }}"
+                                                        alt="title" class="imagecheck-image">
+                                                </figure>
+                                            </label>
+                                            <h5 class="text-center">{{ $keywords['Theme_16'] ?? __('Theme 16') }}</h5>
+                                        </div>                                                                                 
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>

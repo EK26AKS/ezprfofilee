@@ -16,7 +16,7 @@
 
 @section('content')
 
-    @if ($userBs->theme == 6 || $userBs->theme == 7 || $userBs->theme == 8)
+    @if ($userBs->theme == 6 || $userBs->theme == 7 || $userBs->theme == 8 )
         <!--====== Breadcrumbs Start ======-->
         <section class="breadcrumbs-section">
             <div class="container">
@@ -38,7 +38,7 @@
         <!--====== Breadcrumbs End ======-->
     @endif
     <!--====== Start Vaughn-Features section ======-->
-    <section class="pt-5 mt-5 mb-5 @if ($userBs->theme == 6 || $userBs->theme == 7 || $userBs->theme == 8) page-content-section @endif vaughn-features"
+    <section class="pt-5 mt-5 mb-5 @if ($userBs->theme == 6 || $userBs->theme == 7 || $userBs->theme == 8 || $userBs->theme == 9) page-content-section @endif vaughn-features"
         id="service">
         <div class="container">
             @if (count($categories))

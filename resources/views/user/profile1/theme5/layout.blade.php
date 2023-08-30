@@ -95,7 +95,7 @@
     <!--====== End Preloader ======-->
   @endif
   <!--====== Start nav-toggole ======-->
-  <div class="nav-toggoler">
+  <div class="nav-toggoler" style="height: 66px;">
     <span></span>
     <span></span>
     <span></span>

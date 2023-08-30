@@ -397,7 +397,6 @@ class FrontendController extends Controller
     public function users(Request $request)
     {
 
-
         if (session()->has('lang')) {
             $currentLang = Language::where('code', session()->get('lang'))->first();
         } else {
@@ -523,8 +522,7 @@ class FrontendController extends Controller
 
         $data['user'] = $user;
 
-        $ubs = User\BasicSetting::select('theme')->where('user_id', $user->id)->firstOrFail();
-
+        $ubs = User\BasicSetting::select('theme')->where('user_id', $user->id)->firstOrFail();               
         if ($ubs->theme == 1) {
             return view('user.profile1.index', $data);
         } elseif ($ubs->theme == 2) {
@@ -541,12 +539,59 @@ class FrontendController extends Controller
             return view('user.profile1.theme7.index', $data);
         } elseif ($ubs->theme == 8) {
             return view('user.profile1.theme8.index', $data);
-        } else {
+        }elseif ($ubs->theme == 9) {
+            return view('user.profile1.theme9.index', $data);
+        }elseif ($ubs->theme == 10) {
+            return view('user.profile1.theme10.index', $data);
+        } elseif ($ubs->theme == 11) {
+            return view('user.profile1.theme11.index', $data);
+        } elseif ($ubs->theme == 12) {
+            return view('user.profile1.theme12.index', $data);
+        }elseif ($ubs->theme == 13) {
+            return view('user.profile1.theme13.index', $data);
+        }elseif ($ubs->theme == 14) {
+            return view('user.profile1.theme14.index', $data);
+        }elseif ($ubs->theme == 15) {
+            return view('user.profile1.theme15.index', $data);
+        }elseif ($ubs->theme == 16) {
+            return view('user.profile1.theme16.index', $data);
+        }
+        else {
             return view('user.profile.profile', $data);
         }
     }
 
     public function userAbout($domain)
+    {
+        $user = getUser();
+        $id = $user->id;
+
+        $ubs = User\BasicSetting::select('theme')->where('user_id', $user->id)->firstOrFail();
+        if ($ubs->theme != 3 && $ubs->theme != 13 && $ubs->theme != 14) {
+            return view('errors.404');
+        }
+
+        if (session()->has('user_lang')) {
+            $userCurrentLang = UserLanguage::where('code', session()->get('user_lang'))->where('user_id', $user->id)->first();
+            if (empty($userCurrentLang)) {
+                $userCurrentLang = UserLanguage::where('is_default', 1)->where('user_id', $user->id)->first();
+                session()->put('user_lang', $userCurrentLang->code);
+            }
+        } else {
+            $userCurrentLang = UserLanguage::where('is_default', 1)->where('user_id', $user->id)->first();
+        }
+        $data['home_text'] = User\HomePageText::query()
+            ->where([
+                ['user_id', $id],
+                ['language_id', $userCurrentLang->id]
+            ])->first();
+        $data['achievements'] = $user->achievements()->where('language_id', $userCurrentLang->id)->orderBy('serial_number', 'ASC')->get() ?? collect([]);
+
+        $themeView = 'user.profile1.theme' . $ubs->theme . '.about';
+         return view($themeView, $data);
+    }
+    
+    public function userSkill($domain)
     {
         $user = getUser();
         $id = $user->id;
@@ -570,8 +615,8 @@ class FrontendController extends Controller
                 ['user_id', $id],
                 ['language_id', $userCurrentLang->id]
             ])->first();
-        $data['achievements'] = $user->achievements()->where('language_id', $userCurrentLang->id)->orderBy('serial_number', 'ASC')->get() ?? collect([]);
-        return view('user.profile1.theme3.about', $data);
+        $data['skills'] = $user->skills()->where('language_id', $userCurrentLang->id)->orderBy('serial_number', 'ASC')->get() ?? collect([]);
+        return view('user.profile1.theme3.skills', $data);
     }
 
     public function paymentInstruction(Request $request)
@@ -705,7 +750,13 @@ class FrontendController extends Controller
             return view('user.profile1.theme4.services', $data);
         } elseif ($ubs->theme == 5) {
             return view('user.profile1.theme5.services', $data);
-        } elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8) {
+        } 
+        elseif ($ubs->theme == 13) {
+            return view('user.profile1.theme13.services', $data);
+        } elseif ($ubs->theme == 14) {
+            return view('user.profile1.theme14.services', $data);
+        }
+        elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8 || $ubs->theme == 10 || $ubs->theme == 11) {
             $data['layout'] = 'theme' . $ubs->theme;
             return view('user.profile1.theme6-8.services', $data);
         } else {
@@ -723,10 +774,27 @@ class FrontendController extends Controller
             $data['folder'] = "profile1";
         } elseif ($ubs->theme == 3) {
             $data['folder'] = "profile1.theme3";
-        } elseif ($ubs->theme == 4) {
+        } elseif ($ubs->theme == 11) {
+            $data['folder'] = "profile1.theme11";
+        }
+        elseif ($ubs->theme == 10) {
+            $data['folder'] = "profile1.theme10";
+        }elseif ($ubs->theme == 4) {
             $data['folder'] = "profile1.theme4";
         } elseif ($ubs->theme == 5) {
             $data['folder'] = "profile1.theme5";
+        }elseif ($ubs->theme == 9) {
+            $data['folder'] = "profile1.theme9";
+        }elseif ($ubs->theme == 12) {
+            $data['folder'] = "profile1.theme12";
+        }elseif ($ubs->theme == 14) {
+            $data['folder'] = "profile1.theme14";
+        }elseif ($ubs->theme == 13) {
+            $data['folder'] = "profile1.theme13";
+        }elseif ($ubs->theme == 15) {
+            $data['folder'] = "profile1.theme15";
+        }elseif ($ubs->theme == 16) {
+            $data['folder'] = "profile1.theme16";
         } elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8) {
             $data['layout'] = 'theme' . $ubs->theme;
             return view('user.profile1.theme6-8.service-details', $data);
@@ -873,7 +941,13 @@ class FrontendController extends Controller
             return view('user.profile1.theme4.blogs', $data);
         } elseif ($ubs->theme == 5) {
             return view('user.profile1.theme5.blogs', $data);
-        } elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8) {
+        }elseif ($ubs->theme == 13) {
+            $data['layout'] = 'theme' . $ubs->theme;
+            return view('user.profile1.theme13.blogs', $data);
+        }elseif ($ubs->theme == 14) {
+            $data['layout'] = 'theme' . $ubs->theme;
+            return view('user.profile1.theme14.blogs', $data);
+        }elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8 || $ubs->theme == 12 || $ubs->theme == 15 || $ubs->theme == 16 || $ubs->theme == 10 || $ubs->theme == 11) {
             $data['layout'] = 'theme' . $ubs->theme;
             return view('user.profile1.theme6-8.blogs', $data);
         } else {
@@ -881,12 +955,12 @@ class FrontendController extends Controller
         }
     }
 
-
     public function appointment(Request $request, $domain)
     {
-
         $user = getUser();
         $ubs = User\BasicSetting::where('user_id', $user->id)->firstOrFail();
+
+
         if (!Auth::guard('customer')->check()) {
             if ($ubs->guest_checkout == 1) {
                 if ($request->type != 'guest') {
@@ -915,13 +989,15 @@ class FrontendController extends Controller
                 ['user_id', $id],
                 ['language_id', $userCurrentLang->id]
             ])->first();
-
-
+            
+               
         if ($ubs->theme == 1 || $ubs->theme == 2) {
             $data['folder'] = "profile1";
         } elseif ($ubs->theme == 3) {
             $data['folder'] = "profile1.theme3";
-        } elseif ($ubs->theme == 4) {
+        } elseif ($ubs->theme == 9) {
+            $data['folder'] = "profile1.theme9";
+        }elseif ($ubs->theme == 4) {
             $data['folder'] = "profile1.theme4";
         } elseif ($ubs->theme == 5) {
             $data['folder'] = "profile1.theme5";
@@ -931,6 +1007,7 @@ class FrontendController extends Controller
             $data['folder'] = "profile";
         }
 
+       
         if ($ubs->appointment_category == 1) {
             $data['categories'] = Category::where([
                 ['user_id', $id],
@@ -964,6 +1041,8 @@ class FrontendController extends Controller
             $data['folder'] = "profile1.theme3";
         } elseif ($ubs->theme == 4) {
             $data['folder'] = "profile1.theme4";
+        }elseif ($ubs->theme == 9) {
+            $data['folder'] = "profile1.theme9";
         } elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8) {
             $data['folder'] = 'profile1.theme' . $ubs->theme;
         } elseif ($ubs->theme == 5) {
@@ -1067,6 +1146,8 @@ class FrontendController extends Controller
             $data['folder'] = "profile1.theme3";
         } elseif ($ubs->theme == 4) {
             $data['folder'] = "profile1.theme4";
+        }elseif ($ubs->theme == 9) {
+            $data['folder'] = "profile1.theme9";
         } elseif ($ubs->theme == 5) {
             $data['folder'] = "profile1.theme5";
         } elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8) {
@@ -1096,11 +1177,13 @@ class FrontendController extends Controller
             $data['folder'] = "profile1";
         } elseif ($ubs->theme == 3) {
             $data['folder'] = "profile1.theme3";
+        }elseif ($ubs->theme == 9) {
+            $data['folder'] = "profile1.theme9";
         } elseif ($ubs->theme == 4) {
             $data['folder'] = "profile1.theme4";
         } elseif ($ubs->theme == 5) {
             $data['folder'] = "profile1.theme5";
-        } elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8) {
+        } elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8 ) {
             $data['folder'] = 'profile1.theme' . $ubs->theme;
         } else {
             $data['folder'] = "profile";
@@ -1190,8 +1273,17 @@ class FrontendController extends Controller
             $data['folder'] = "profile1.theme4";
         } elseif ($ubs->theme == 5) {
             $data['folder'] = "profile1.theme5";
-        } elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8) {
+        } elseif ($ubs->theme == 14) {
+            $data['layout'] = 'theme' . $ubs->theme;
+            return view('user.profile1.theme14.single-blog', $data);
+        }elseif ($ubs->theme == 13) {
+            $data['layout'] = 'theme' . $ubs->theme;
+            return view('user.profile1.theme13.single-blog', $data);
+        }
+        elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8 ||$ubs->theme == 12 || $ubs->theme == 15 || $ubs->theme == 16 || $ubs->theme == 9 || $ubs->theme == 11) {
             $data['folder'] = 'profile1.theme' . $ubs->theme;
+        }elseif ($ubs->theme == 10) {
+            $data['folder'] = "profile1.theme10";
         } else {
             $data['folder'] = "profile";
         }
@@ -1244,7 +1336,17 @@ class FrontendController extends Controller
             return view('user.profile1.theme4.portfolios', $data);
         } elseif ($ubs->theme == 5) {
             return view('user.profile1.theme5.portfolios', $data);
-        } elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8) {
+        }elseif ($ubs->theme == 12) {
+            return view('user.profile1.theme12.portfolios', $data);
+        } elseif ($ubs->theme == 13) {
+            return view('user.profile1.theme13.portfolios', $data);
+        }elseif ($ubs->theme == 14) {
+            return view('user.profile1.theme14.portfolios', $data);
+        }elseif ($ubs->theme == 15) {
+            return view('user.profile1.theme15.portfolios', $data);
+        }elseif ($ubs->theme == 16) {
+            return view('user.profile1.theme16.portfolios', $data);
+        }elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8 || $ubs->theme == 9  || $ubs->theme == 10 || $ubs->theme == 11) {
             $data['layout'] = 'theme' . $ubs->theme;
             return view('user.profile1.theme6-8.portfolios', $data);
         } else {
@@ -1279,7 +1381,7 @@ class FrontendController extends Controller
         $data['allCount'] = User\Portfolio::where('language_id', $userCurrentLang->id)->where('user_id', $userId)->count();
 
         $ubs = User\BasicSetting::select('theme')->where('user_id', $userId)->firstOrFail();
-        if ($ubs->theme == 1 || $ubs->theme == 2) {
+        if ($ubs->theme == 1 || $ubs->theme == 2 ) {
             $data['folder'] = "profile1";
         } elseif ($ubs->theme == 3) {
             $data['folder'] = "profile1.theme3";
@@ -1287,7 +1389,20 @@ class FrontendController extends Controller
             $data['folder'] = "profile1.theme4";
         } elseif ($ubs->theme == 5) {
             $data['folder'] = "profile1.theme5";
-        } elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8) {
+        }elseif ($ubs->theme == 10) {
+            $data['folder'] = "profile1.theme10";
+        }elseif ($ubs->theme == 11) {
+            $data['folder'] = "profile1.theme11";
+        }elseif ($ubs->theme == 14) {
+            $data['layout'] = 'theme' . $ubs->theme;
+            return view('user.profile1.theme14.portfolio-details', $data);
+        }elseif ($ubs->theme == 13) {
+            $data['layout'] = 'theme' . $ubs->theme;
+            return view('user.profile1.theme13.portfolio-details', $data);
+        }elseif ($ubs->theme == 16 || $ubs->theme == 15 || $ubs->theme == 12 || $ubs->theme == 9) {
+            $data['layout'] = 'theme' . $ubs->theme;
+            return view('user.profile1.theme16.portfolio-details', $data);
+        }elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8 ) {
             $data['layout'] = 'theme' . $ubs->theme;
             return view('user.profile1.theme6-8.portfolio-details', $data);
         } else {
@@ -1323,10 +1438,19 @@ class FrontendController extends Controller
 
         if ($ubs->theme == 3) {
             return view('user.profile1.theme3.contact', $data);
-        } elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8) {
+        }         
+        elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8) {
             $data['layout'] = 'theme' . $ubs->theme;
             return view('user.profile1.theme6-8.contact', $data);
-        } else {
+        } 
+        elseif ($ubs->theme == 13 ) {
+            $data['layout'] = 'theme' . $ubs->theme;
+            return view('user.profile1.theme13.contact', $data);
+        }
+        elseif ($ubs->theme == 14 ) {
+            $data['layout'] = 'theme' . $ubs->theme;
+            return view('user.profile1.theme14.contact', $data);
+        }else {
             return view('errors.404');
         }
     }

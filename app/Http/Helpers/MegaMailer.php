@@ -251,7 +251,6 @@ class MegaMailer
             $mail->isHTML(true);
             $mail->Subject = !empty($temp->email_subject) ? $temp->email_subject : 'testing';
             $mail->Body = !empty($body) ? $body : "testing";
-
             $mail->send();
         } catch (Exception $e) {
             Session::flash('error', $e->getMessage());

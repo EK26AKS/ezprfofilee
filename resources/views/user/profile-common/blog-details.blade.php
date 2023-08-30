@@ -65,7 +65,7 @@
                     <div class="single-page-wrapper mb-30">
                         <div class="post-item">
                             <div class="post-img mb-20">
-                                <img data-src="{{ asset('assets/front/img/user/blogs/' . $blog->image) }}"
+                                <img src="{{ asset('assets/front/img/user/blogs/' . $blog->image) }}"
                                     class="img-fluid lazy" alt="">
                             </div>
                             <div class="entry-content">

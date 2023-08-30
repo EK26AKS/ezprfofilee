@@ -10,7 +10,7 @@
         padding-right: 15px;
     }
     .hero-area .hero-img{
-        display: none !important;
+        display: block !important;
     }
     .hero-area .hero-content span.span {
         font-size: 60px;
@@ -51,7 +51,10 @@
         padding-right: 15px;
     }
     .about-area .about-img{
-        display: none;
+         margin-top: -5em;
+        margin-left: 27px;
+         width: 83%;
+        position: relative;
     }
     .testimonial-area .testimonial-item .testimonial-author-content{
         flex-direction: column;
@@ -62,10 +65,20 @@
     .testimonial-area .testimonial-item .author-info:before{
         left: 0;
     }
+
+    .skill-area:after{
+        display: none;
+    }
+    .skill-area .skill-img {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .hero-area .hero-content span.span {
         font-size: 60px;
+         padding: 521px 0px 135px;
+        margin-bottom: -1em;
     }
     .hero-area .hero-content h1 {
         font-size: 100px;
@@ -75,12 +88,14 @@
     }
     .hero-area .hero-content h3{
         font-size: 16px;
-    }
+    }   
+    
 }
 @media (max-width: 767px) {
     .hero-area .hero-content span.span {
         font-size: 40px;
-        margin-bottom: 20px;
+        margin-bottom: -111px;
+         padding: 315px 0 135px;
     }
     .hero-area .hero-content h1 {
         font-size: 50px;
@@ -94,10 +109,34 @@
     .testimonial-area .testimonial-wrapper:after{
         display: none;
     }
+    .skill-area .skill-content-box .skill-wrapper .skill-item{
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .hero-area .hero-img span.circle-one {
+        top: 0;
+        right: 70px;
+    }
+   
+    .hero-area .hero-content {
+        padding: 0px;
+    }
+
+    .section-title h2 span.light-text {
+        color: var(--primary-color);
+        font-weight: 300;
+        font-size: 25px;
+    }
+   
 }
 @media only screen and (max-width: 349px) {
     
 }
 @media only screen and (min-width: 450px) and (max-width: 767px) {
-    
+    .hero-area .hero-content span.span {
+        font-size: 40px;
+        margin-bottom: -111px;
+        padding: 320px 0 135px;
+    }
 }

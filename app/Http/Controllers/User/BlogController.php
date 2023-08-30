@@ -89,7 +89,7 @@ class BlogController extends Controller
             'content' => 'required',
             'serial_number' => 'required|integer',
             'image' => [
-                'required','dimensions:width=500,height=500',
+                'required','dimensions:width=550,height=550',
                 function ($attribute, $value, $fail) use ($img, $allowedExts) {
                     if (!empty($img)) {
                         $ext = $img->getClientOriginalExtension();

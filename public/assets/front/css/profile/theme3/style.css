@@ -63,7 +63,7 @@ h3,
 h4,
 h5,
 h6 {
-	color: #0d0d0d;
+	color: var(--primary-color);
 	margin: 0px;
 	font-family: var(--poppins);
 	font-weight: 700;
@@ -495,7 +495,7 @@ button {
     left: -20%;
 }
 /* Hero Area */
-.hero-area{
+/* .hero-area{
 	position: relative;
 }
 .hero-area .hero-content{
@@ -538,6 +538,145 @@ button {
 }
 .hero-area .hero-img img {
     width: 100%;
+} */
+/*======= Hero Area =======*/
+.hero-section .hero-text .tagline {
+	color: var(--color-primary);
+	font-size: 30px;
+	font-weight: 600;
+	line-height: 1;
+	display: block;
+	margin-bottom: 10px;
+  }
+  
+  .hero-section .hero-text .hero-title {
+	font-size: 55px;
+	margin-bottom: 20px;
+	line-height: 1;
+  }
+  
+  .hero-section .hero-text p {
+	font-size: 20px;
+	font-weight: 500;
+  }
+  
+  .hero-section .hero-text p#typed {
+	line-height: 20px;
+  }
+  
+  .hero-section .hero-text .social-links {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	margin-top: 35px;
+	margin-bottom: 50px;
+  }
+  
+  .hero-section .hero-text .social-links a {
+	height: 50px;
+	width: 50px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	background-color:#dbd8f3;
+	border-radius: 50%;
+	font-size: 18px;
+	position: relative;
+	z-index: 1;
+	-webkit-transition: 0.3s;
+	transition: 0.3s;
+	/* color: #dbd8f3; */
+	margin-right: 10px;
+  }
+  
+  .hero-section .hero-text .social-links a:hover {
+	color: var(--color-primary);
+  }
+  
+  .hero-section.hero-section-one {
+	padding-top: 240px;
+	padding-bottom: 160px;
+	background: #FFF9FB;
+  }
+  
+  .hero-section.hero-section-two {
+	padding-top: 170px;
+	padding-bottom: 90px;
+	background-color: var(--color-offwhite);
+	position: relative;
+	z-index: 1;
+  }
+  
+  .hero-section.hero-section-two::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url(../../img/profile1/hero-dots.png);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+  }
+  
+  .breadcrumbs-section {
+	background: #FFF9FB;
+  }
+  
+  .breadcrumbs-section .page-title {
+	text-align: center;
+  }
+  
+  .breadcrumbs-section .page-title h1 {
+	margin-bottom: 20px;
+  }
+  
+  .breadcrumbs-section .page-title ul.breadcrumbs-link li {
+	display: inline-block;
+  }
+  
+  .breadcrumbs-section .page-title ul.breadcrumbs-link li:last-child:after {
+	display: none;
+  }
+  
+  .breadcrumbs-section .page-title ul.breadcrumbs-link li:after {
+	content: "";
+	font-family: "Font Awesome 5 Pro";
+	font-weight: 400;
+	margin-left: 10px;
+	margin-right: 7px;
+  }
+  
+  .breadcrumbs-section.breadcrumbs-section-one {
+	padding: 210px 0 120px;
+  }
+  
+  .breadcrumbs-section.breadcrumbs-section-two {
+	padding: 120px 0 125px;
+  }
+
+  .template-btn {
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: white;   
+    padding: 15px 30px;
+    border-radius: 30px;
+	background: linear-gradient( 252.28deg, #4C3EC7 23.53%, #FEAF2F 97.18%);
+    -webkit-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
 }
 @media (min-width: 992px){
 	.about-area,
@@ -805,7 +944,7 @@ button {
 
 
 /* Testimonial Area */
-.testimonial-area .testimonial-wrapper{
+/* .testimonial-area .testimonial-wrapper{
 	position: relative;
 	border: 1px solid rgba(41, 41, 41, 0.06);
 }
@@ -874,7 +1013,94 @@ button {
 	height: 3px;
 	background: linear-gradient(269.9deg, #F57236 9.79%, #FEAF2F 91.6%);
 	border-radius: 1.5px;
+} */
+
+/*==========================
+    Start Testimonial css
+==========================*/
+.testimonial-area{
+	position: relative;
 }
+.testimonial-area .shape{
+	position: absolute;
+}
+.testimonial-area .objects-shape .shape-one{
+	top: 20%;
+	right: 7%;
+}
+.testimonial-area .objects-shape .shape-two{
+	bottom:50px;
+	left: 50px;
+}
+.testimonial-area .objects-shape .shape-three{
+	bottom: 30%;
+	right: 13%;
+}
+.testimonial-area .testimonial-slider-one{
+	margin-left: -15px;
+	margin-right: -15px;
+}
+.testimonial-area .testimonial-slider-one .slick-track{
+	padding-top: 40px;
+	display: flex;
+}
+.testimonial-area .testimonial-slider-one .testimonial-item{
+	margin-left: 15px;
+    margin-right: 15px;
+    height: inherit !important;
+}
+.testimonial-area .testimonial-item{
+	position: relative;
+	padding: 40px;
+	background-color: #fff;
+	border-radius: 15px;
+	border: 1px solid rgba(0, 0, 0, 0.06);
+	z-index: 1;
+}
+.testimonial-area .testimonial-item:after{
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	content: '\f10e';
+	font-weight: 400;
+	font-family: 'Font Awesome 5 Pro';
+	font-size: 60px;
+	z-index: -1;
+}
+.testimonial-area .testimonial-item.item-one:after{
+	color: #F8DBCE;
+}
+.testimonial-area .testimonial-item.item-two:after{
+	color: #F1D6FF;
+}
+.testimonial-area .testimonial-item.item-three:after{
+	color: #D0FBEB;
+}
+.testimonial-area .testimonial-item .wt-thumb{
+	position: relative;
+	display: inline-flex;
+    z-index: 1;
+	margin-top: -80px;
+	margin-bottom: 30px;
+}
+.testimonial-area .testimonial-item .wt-thumb svg{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: -1;
+}
+.testimonial-area .testimonial-item .wt-thumb img{
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+}
+.testimonial-area .testimonial-item .testimonial-content .author-info{
+	margin-bottom: 8px;
+}
+/*=========================
+    End Testimonial css
+=========================*/
 
 
 
@@ -1019,3 +1245,76 @@ button {
 .profile-edit :is(input, textarea) {
     border: 1px solid rgba(1, 1, 1, 0.1);
 }
+
+
+/*==========================
+    Start Skill css
+==========================*/
+.skill-area{
+	position: relative;
+	z-index: 1;	
+}
+.skill-area .shape{
+	position: absolute;
+}
+.skill-area .objects-shape .shape-one{
+	top: 180px;
+	left: 180px;
+}
+.skill-area .objects-shape .shape-two{
+	top: 150px;
+	right: 20%;
+}
+.skill-area .objects-shape .shape-three{
+	bottom: 50px;
+	left: 100px;
+}
+.skill-area .objects-shape .shape-four{
+	top: 180px;
+	right: 5%;
+}
+.skill-area .objects-shape .shape-five{
+	right: 50px;
+	bottom: 100px;
+}
+/* .skill-area:after{
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: '';
+	width: 35%;
+	height: 100%;
+	background-color: #FEDED7;
+	z-index: -1;
+} */
+.skill-area .skill-img{
+	margin-left: -100px;
+	margin-right: 50px;
+}
+.skill-area .skill-content-box .skill-wrapper{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.skill-area .skill-content-box .skill-wrapper .skill-item{
+	flex: 0 0 25%;
+	max-width: 25%;
+}
+.skill-area .skill-content-box .skill-wrapper .skill-item .skill-circle{
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 130px;
+	max-width: 130px;
+	height: 130px;
+	margin: auto;
+	margin-bottom: 20px;
+}
+.skill-area .skill-content-box .skill-wrapper .skill-item h5 span.percentage{
+	margin-left: 10px;
+}
+/*==========================
+    End Skill css
+==========================*/
+

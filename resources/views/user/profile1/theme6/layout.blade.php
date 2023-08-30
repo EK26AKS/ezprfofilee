@@ -110,7 +110,7 @@
                         is_array($packagePermissions) &&
                         in_array('Appointment', $userPermissions) &&
                         in_array('Appointment', $packagePermissions))
-                    <div class="language-dropdown order-lg-last">
+                    <div class="language-dropdown order-lg-last ezprofile-theme8-login-btn">
                         @if (!Auth::guard('customer')->check())
                             <a href="{{ route('customer.login', getParam()) }}"
                                 class="main-btn filled-btn">{{ $keywords['Login'] ?? 'Login' }}</a>
@@ -131,7 +131,7 @@
                         @endif
                     </div>
                 @endif
-                <div class="language-dropdown order-lg-last">
+                <div class="language-dropdown order-lg-last" style="margin-right: 10px;">
                     @if (!empty($userLangs))
                         <div class="language-selector bordered-style  d-flex">
                             <form action="{{ route('changeUserLanguage', getParam()) }}" id="userLangForm">
@@ -147,7 +147,7 @@
                         </div>
                     @endif
                 </div>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item @if (request()->routeIs('front.user.detail.view')) active @endif">
                             <a class="nav-link"
@@ -198,6 +198,32 @@
                                     href="{{ route('front.user.appointment', getParam()) }}">{{ $keywords['Appointment'] ?? 'Appointment' }}</a>
                             </li>
                         @endif
+
+                        @if (is_array($userPermissions) &&
+                            is_array($packagePermissions) &&
+                            in_array('Appointment', $userPermissions) &&
+                            in_array('Appointment', $packagePermissions))
+                        <li class="nav-item ezprofile-login-button">
+                            @if (!Auth::guard('customer')->check())
+                            <a href="{{ route('customer.login', getParam()) }}"
+                                class="nav-link">{{ $keywords['Login'] ?? 'Login' }}</a>
+                            @else
+                            <div class="dropdown show">
+                                <a class="nav-link dropdown-toggle filled-btn" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::guard('customer')->user()->username }}
+                                </a>
+                                <li class="nav-item" aria-labelledby="dropdownMenuLink">
+                                <a class="nav-link"
+                                    href="{{ route('customer.dashboard', getParam()) }}">{{ $keywords['Dashboard'] ?? __('Dashboard') }}</a>
+                                <a class="nav-link"
+                                    href="{{ route('customer.logout', getParam()) }}">{{ $keywords['Signout'] ?? __('Sign out') }}</a>
+                                </li>
+                            </div>
+                            @endif
+                        </li>
+                        @endif
+                        
                     </ul>
                 </div>
             </nav>
@@ -232,8 +258,8 @@
                 </div>
             </div>
             <div class="footer-copyright">
-                <p>{{ $keywords['Copyright'] ?? __('Copyright') }} {{ date('Y') }}
-                    {{ $keywords['All_Right_Reserved'] ?? __('All Right Reserved') }}</p>
+                <p>{{ $keywords['Copyright'] ?? __('Copyright') }} {{ date('Y') }} <a href="http://ektasi.io/" target="_blank">{{ 'EKTASI Technology' }}</a>
+                    {{ $keywords['All_Right_Reserved'] ?? __('All Rights Reserved') }}</p>
             </div>
         </div>
     </footer>

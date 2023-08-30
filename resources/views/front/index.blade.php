@@ -1,7 +1,7 @@
 @extends('front.layout')
 
 @section('pagename')
-    - {{__('Home')}}
+    - {{__('Crafting Powerful Profiles')}}
 @endsection
 
 @section('meta-description', !empty($seo) ? $seo->home_meta_description : '')
@@ -432,7 +432,7 @@
                             @php
                                 $pFeatures = json_decode($package->features);
                             @endphp
-                            <div class="col pricing__plan-column">
+                            <div class="col-4 pricing__plan-column">
                                 <div class="pricing-item">
                                     @if($package->is_trial === "1" && $package->price != 0)
                                     <div class="listing-badges">

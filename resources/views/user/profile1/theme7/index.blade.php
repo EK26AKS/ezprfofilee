@@ -70,7 +70,7 @@
     <!--====== About Section End ======-->
     @if (is_array($userPermissions) && in_array('Skill', $userPermissions))
         <!--====== Skill Section Start ======-->
-        <section class="skill-section section-gap bg-primary-color">
+        <section class="skill-section section-gap bg-primary-color" >
             <div class="container">
                 <div class="section-heading heading-white text-center">
                     <span class="tagline">{{ $home_text->skills_subtitle ?? __('Technical Skills') }}</span>
@@ -128,7 +128,7 @@
         <!--====== Counter Section Start ======-->
         <section class="counter-section">
             <div class="container">
-                <div class="row">
+                <div class="row justify-content-center">
                     @foreach ($achievements as $achievement)
                         <div class="col-lg-3 col-md-6">
                             <div class="counter-item">
@@ -148,81 +148,81 @@
         <!--====== Counter Section End ======-->
     @endif
     @if (is_array($userPermissions) && in_array('Portfolio', $userPermissions))
-        <!--====== Project Section Start ======-->
-        <section class="project-section section-gap">
-            <div class="container">
-                <div class="section-heading text-center mb-50">
-                    <span class="tagline">{{ $home_text->portfolio_title ?? __('Portfolios') }}</span>
-                    <h2 class="title">{{ $home_text->portfolio_subtitle ?? __('Portfolios') }}</h2>
-                </div>
-                <div class="project-filter">
-                    <ul>
-                        <li data-filter="*" class="active">All</li>
-                        @foreach ($portfolio_categories as $portfolio_category)
-                            <li data-filter=".cat-{{ $portfolio_category->id }}">{{ $portfolio_category->name }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                <div class="project-loop row">
-                    @foreach ($portfolios as $portfolio)
-                        <div class="col-lg-3 col-md-6 cat-{{ $portfolio->bcategory->id }}">
-                            <div class="project-item">
-                                <div class="project-thumbnail">
-                                    <img class="lazy"
-                                        data-src="{{ asset('assets/front/img/user/portfolios/' . $portfolio->image) }}"
-                                        alt="ProjectImage">
-                                </div>
-                                <div class="hover-content">
-                                    <div class="content-inner">
-                                        <a href="{{ route('front.user.portfolio.detail', [getParam(), $portfolio->slug, $portfolio->id]) }}"
-                                            class="plus-icon"></a>
-                                        <a href="{{ route('front.user.portfolio.detail', [getParam(), $portfolio->slug, $portfolio->id]) }}"
-                                            class="title">{{ strlen($portfolio->title) > 25 ? mb_substr($portfolio->title, 0, 25, 'UTF-8') . '...' : $portfolio->title }}</a>
-                                    </div>
+    <!--====== Project Section Start ======-->
+    <section class="project-section section-gap">
+        <div class="container">
+            <div class="section-heading text-center mb-50">
+                <span class="tagline">{{ $home_text->portfolio_title ?? __('Portfolios') }}</span>
+                <h2 class="title">{{ $home_text->portfolio_subtitle ?? __('Portfolios') }}</h2>
+            </div>
+            <div class="project-filter">
+                <ul>
+                    <li data-filter="*" class="active">All</li>
+                    @foreach ($portfolio_categories as $portfolio_category)
+                        <li data-filter=".cat-{{ $portfolio_category->id }}">{{ $portfolio_category->name }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="project-loop row justify-content-center">
+                @foreach ($portfolios as $portfolio)
+                    <div class="col-lg-3 col-md-6 cat-{{ $portfolio->bcategory->id }}">
+                        <div class="project-item">
+                            <div class="project-thumbnail">
+                                <img class="lazy"
+                                    data-src="{{ asset('assets/front/img/user/portfolios/' . $portfolio->image) }}"
+                                    alt="ProjectImage">
+                            </div>
+                            <div class="hover-content">
+                                <div class="content-inner">
+                                    <a href="{{ route('front.user.portfolio.detail', [getParam(), $portfolio->slug, $portfolio->id]) }}"
+                                        class="plus-icon"></a>
+                                    <a href="{{ route('front.user.portfolio.detail', [getParam(), $portfolio->slug, $portfolio->id]) }}"
+                                        class="title">{{ strlen($portfolio->title) > 25 ? mb_substr($portfolio->title, 0, 25, 'UTF-8') . '...' : $portfolio->title }}</a>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
+                    </div>
+                @endforeach
             </div>
-        </section>
-        <!--====== Project Section End ======-->
+        </div>
+    </section>
+    <!--====== Project Section End ======-->
     @endif
     @if (is_array($userPermissions) && in_array('Testimonial', $userPermissions))
-        <!--====== Testimonial Section Start ======-->
-        <section class="testimonial-section">
-            <div class="container">
-                <div class="section-heading mb-50">
-                    <span class="tagline">{{ $home_text->testimonial_title ?? __('Testimonials') }}</span>
-                    <h2 class="title">{{ $home_text->testimonial_subtitle ?? __('Testimonials') }}</h2>
-                </div>
-                <div class="row testimonial-slider">
-                    @foreach ($testimonials as $testimonial)
-                        <div class="col">
-                            <div class="testimonial-box">
-                                <div class="author-photo">
-                                    <img class="lazy"
-                                        data-src="{{ asset('assets/front/img/user/testimonials/' . $testimonial->image) }}"
-                                        alt="Image">
-                                    <svg width="117" height="114" viewBox="0 0 117 114">
-                                        <path
-                                            d="M89.8169 85.345L65.5127 98.7562C60.3865 101.585 54.145 101.463 49.1422 98.4367L25.3831 84.1077C20.3803 81.0815 17.3725 75.6305 17.4795 69.7846L18.0246 42.0444C18.1316 36.1985 21.3562 30.8531 26.4824 28.0244L50.7866 14.6132C55.9128 11.7846 62.1543 11.9065 67.1571 14.9327L90.9162 29.2617C95.919 32.2879 98.9268 37.7389 98.8198 43.5848L98.2747 71.325C98.1677 77.1709 94.9431 82.5163 89.8169 85.345Z" />
-                                    </svg>
-                                </div>
-                                <div class="author-info">
-                                    <h5 class="name">{{ $testimonial->name }}</h5>
-                                    @if (!empty($testimonial->occupation))
-                                        <span class="title">{{ $testimonial->occupation }}</span>
-                                    @endif
-                                </div>
-                                <p class="content">{!! nl2br($testimonial->content) !!}</p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+    <!--====== Testimonial Section Start ======-->
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="section-heading mb-50">
+                <span class="tagline">{{ $home_text->testimonial_title ?? __('Testimonials') }}</span>
+                <h2 class="title">{{ $home_text->testimonial_subtitle ?? __('Testimonials') }}</h2>
             </div>
-        </section>
-        <!--====== Testimonial Section End ======-->
+            <div class="row testimonial-slider">
+                @foreach ($testimonials as $testimonial)
+                    <div class="col">
+                        <div class="testimonial-box">
+                            <div class="author-photo">
+                                <img class="lazy"
+                                    data-src="{{ asset('assets/front/img/user/testimonials/' . $testimonial->image) }}"
+                                    alt="Image">
+                                <svg width="117" height="114" viewBox="0 0 117 114">
+                                    <path
+                                        d="M89.8169 85.345L65.5127 98.7562C60.3865 101.585 54.145 101.463 49.1422 98.4367L25.3831 84.1077C20.3803 81.0815 17.3725 75.6305 17.4795 69.7846L18.0246 42.0444C18.1316 36.1985 21.3562 30.8531 26.4824 28.0244L50.7866 14.6132C55.9128 11.7846 62.1543 11.9065 67.1571 14.9327L90.9162 29.2617C95.919 32.2879 98.9268 37.7389 98.8198 43.5848L98.2747 71.325C98.1677 77.1709 94.9431 82.5163 89.8169 85.345Z" />
+                                </svg>
+                            </div>
+                            <div class="author-info">
+                                <h5 class="name">{{ $testimonial->name }}</h5>
+                                @if (!empty($testimonial->occupation))
+                                    <span class="title">{{ $testimonial->occupation }}</span>
+                                @endif
+                            </div>
+                            <p class="content">{!! nl2br($testimonial->content) !!}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    <!--====== Testimonial Section End ======-->
     @endif
     @if (is_array($userPermissions) && in_array('Blog', $userPermissions))
         <!--====== Blog Section Start ======-->
@@ -253,7 +253,7 @@
                                                 class="far fa-calendar-alt"></i>{{ \Carbon\Carbon::parse($blog->created_at)->format('F j, Y') }}</a>
                                     </li>
                                 </ul>
-                                <h3 class="title">
+                                <h3 class="title text-center">
                                     <a
                                         href="{{ route('front.user.blog.detail', [getParam(), $blog->slug, $blog->id]) }}">{{ strlen($blog->title) > 45 ? mb_substr($blog->title, 0, 45, 'UTF-8') . '...' : $blog->title }}</a>
                                 </h3>

@@ -156,7 +156,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row align-items-center">
+                    <div class="row">
                         @if (count($educations) > 0)
                             <div class="col-lg-5">
                                 <div class="resume-title text-center">
@@ -191,7 +191,7 @@
 
                         @if (count($job_experiences) > 0)
 
-                            <div class="col-lg-5">
+                            <div class="col-lg-5 col-sm-12">
                                 <div class="resume-title text-center">
                                     <h5>{{$keywords["Job"] ?? "Job"}}</h5>
                                 </div>
@@ -225,7 +225,7 @@
             <section class="counter-area">
                 <div class="container">
                     <div class="counter-wrapper-one bg_cover lazy" data-bg="{{!empty($home_text->achievement_image) ? asset('assets/front/img/user/home_settings/' . $home_text->achievement_image) : asset('assets/front/img/profile1/theme4/counter-bg.jpg')}}">
-                        <div class="row">
+                        <div class="row justify-content-center">
                             @foreach ($achievements as $achievement)
                                 <div class="col-lg-3 col-md-6 col-sm-12">
                                     <div class="counter-item counter-item-one text-center mb-30">
@@ -268,7 +268,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row masonry-row">
+                    <div class="row masonry-row justify-content-center">
                         @foreach($portfolios as $portfolio)
                             <div class="col-lg-6 portfolio-column cat-{{$portfolio->bcategory->id}}">
                                 <div class="portfolio-item portfolio-item-one mb-30">
@@ -341,16 +341,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="height:auto;">
                         @foreach($blogs as $blog)
                             <div class="col-lg-4 col-md-6 col-sm-12">
                                 <div class="blog-post-item blog-post-item-one mb-40">
                                     <a class="post-thumbnail d-block" href="{{route('front.user.blog.detail', [getParam(), $blog->slug, $blog->id])}}">
                                         <img class="lazy" data-src="{{asset('assets/front/img/user/blogs/'.$blog->image)}}" alt="Blog Image">
                                     </a>
-                                    <div class="entry-content">
+                                    <div class="entry-content text-center">
                                         <h3 class="title"><a href="{{route('front.user.blog.detail', [getParam(), $blog->slug, $blog->id])}}">{{strlen($blog->title) > 45 ? mb_substr($blog->title, 0, 45, 'UTF-8') . '...' : $blog->title}}</a></h3>
-                                        <div class="post-meta">
+                                        <div class="post-meta" style="margin-left: 30px;">
                                             <ul>
                                                 <li><span><i class="fas fa-user"></i>{{$keywords['by'] ?? "by"}} <a>{{$user->username}}</a></span></li>
                                                 <li><span><i class="fas fa-calendar-alt"></i><a>{{\Carbon\Carbon::parse($blog->created_at)->format('F j, Y')}}</a></span></li>

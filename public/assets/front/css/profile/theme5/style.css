@@ -948,7 +948,6 @@ button {
 /*====================
     End Footer css
 ======================*/
-
 section.single-page-details {
 	padding: 120px 0 90px;
 }
@@ -971,4 +970,8 @@ section.single-page-details {
 
 .header-area .nav-right {
 	background-color: #121736;
+}
+
+.footer-content h5 {
+	word-break: break-all;
 }

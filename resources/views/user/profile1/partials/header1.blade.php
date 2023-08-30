@@ -18,16 +18,14 @@
                     <nav class="nav-menu d-none d-lg-block">
                         <ul class="primary-menu">
                             <li class="@if (request()->routeIs('front.user.detail.view')) active @endif">
-                                <a
-                                    href="{{ route('front.user.detail.view', getParam()) }}">{{ $keywords['Home'] ?? 'Home' }}</a>
+                                <a href="{{ route('front.user.detail.view', getParam()) }}">{{ $keywords['Home'] ?? 'Home' }}</a>
                             </li>
                             @if (is_array($userPermissions) &&
                                     is_array($packagePermissions) &&
                                     in_array('Service', $userPermissions) &&
                                     in_array('Service', $packagePermissions))
                                 <li class="@if (request()->routeIs('front.user.services') || request()->routeIs('front.user.service.detail')) active @endif">
-                                    <a
-                                        href="{{ route('front.user.services', getParam()) }}">{{ $keywords['Services'] ?? 'Services' }}</a>
+                                    <a href="{{ route('front.user.services', getParam()) }}">{{ $keywords['Services'] ?? 'Services' }}</a>
                                 </li>
                             @endif
                             @if (is_array($userPermissions) &&
@@ -44,8 +42,7 @@
                                     in_array('Blog', $userPermissions) &&
                                     in_array('Blog', $packagePermissions))
                                 <li class="@if (request()->routeIs('front.user.blogs') || request()->routeIs('front.user.blog.detail')) active @endif">
-                                    <a
-                                        href="{{ route('front.user.blogs', getParam()) }}">{{ $keywords['Blogs'] ?? 'Blogs' }}</a>
+                                    <a href="{{ route('front.user.blogs', getParam()) }}">{{ $keywords['Blogs'] ?? 'Blogs' }}</a>
                                 </li>
                             @endif
                             @if (is_array($userPermissions) && in_array('Contact', $userPermissions))
@@ -63,8 +60,7 @@
                                 <li class="@if (request()->routeIs('front.user.appointment') ||
                                         request()->routeIs('front.user.appointment.form') ||
                                         request()->routeIs('front.user.appointment.booking')) active @endif">
-                                    <a
-                                        href="{{ route('front.user.appointment', getParam()) }}">{{ $keywords['Appointment'] ?? 'Appointment' }}</a>
+                                    <a href="{{ route('front.user.appointment', getParam()) }}">{{ $keywords['Appointment'] ?? 'Appointment' }}</a>
                                 </li>
                             @endif
                         </ul>
@@ -116,7 +112,7 @@
             <div class="panel-inner">
                 <div class="mobile-logo">
                     <a href="{{ route('front.user.detail.view', getParam()) }}">
-                        <img class="lazy"
+                        <img class="lazy"s
                             data-src="{{ isset($userBs->logo)
                                 ? asset('assets/front/img/user/' . $userBs->logo)
                                 : asset('assets/front/img/profile/lgoo.png') }}"
@@ -126,8 +122,7 @@
                 <nav class="mobile-menu">
                     <ul class="primary-menu">
                         <li class="@if (request()->routeIs('front.user.detail.view')) active @endif">
-                            <a
-                                href="{{ route('front.user.detail.view', getParam()) }}">{{ $keywords['Home'] ?? 'Home' }}</a>
+                            <a href="{{ route('front.user.detail.view', getParam()) }}">{{ $keywords['Home'] ?? 'Home' }}</a>
                         </li>
 
                         @if (is_array($userPermissions) &&
@@ -135,8 +130,7 @@
                                 in_array('Service', $userPermissions) &&
                                 in_array('Service', $packagePermissions))
                             <li class="@if (request()->routeIs('front.user.services') || request()->routeIs('front.user.service.detail')) active @endif">
-                                <a
-                                    href="{{ route('front.user.services', getParam()) }}">{{ $keywords['Services'] ?? 'Services' }}</a>
+                                <a href="{{ route('front.user.services', getParam()) }}">{{ $keywords['Services'] ?? 'Services' }}</a>
                             </li>
                         @endif
 
@@ -145,8 +139,7 @@
                                 in_array('Portfolio', $userPermissions) &&
                                 in_array('Portfolio', $packagePermissions))
                             <li class="@if (request()->routeIs('front.user.portfolios') || request()->routeIs('front.user.portfolio.detail')) active @endif">
-                                <a
-                                    href="{{ route('front.user.portfolios', getParam()) }}">{{ $keywords['Portfolios'] ?? 'Portfolios' }}</a>
+                                <a href="{{ route('front.user.portfolios', getParam()) }}">{{ $keywords['Portfolios'] ?? 'Portfolios' }}</a>
                             </li>
                         @endif
                         @if (is_array($userPermissions) &&

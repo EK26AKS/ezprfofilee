@@ -1,4 +1,4 @@
-<div class="js-cookie-consent cookie-consent">
+<div class="js-cookie-consent cookie-consent ezprofile__cookie_wrap">
 
     <div class="container">
       <div class="cookie-container">

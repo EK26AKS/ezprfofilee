@@ -37,7 +37,7 @@
                             {{-- <button class="btn btn-primary float-lg-right float-none btn-sm ml-2 mt-1" data-toggle="modal"
                                 data-target="#addUserModal"><i class="fas fa-plus"></i> {{ __('Add User') }}</button> --}}
                             <form action="{{ url()->full() }}" class="float-lg-right float-none">
-                                <input type="text" name="term" class="form-control min-w-250"
+                                <input type="text" name="term" class="form-control ezprofile-user-search min-w-250"
                                     value="{{ request()->input('term') }}"
                                     placeholder="{{ $keywords['Search_by_Username_Email'] ?? __('Search by Username / Email') }}">
                             </form>

@@ -47,7 +47,7 @@
                             @php
                                 $pFeatures = json_decode($package->features);
                             @endphp
-                            <div class="col">
+                            <div class="col-4">
                                 <div class="pricing-item">
                                     @if($package->is_trial === "1" && $package->price != 0)
                                     <div class="listing-badges">

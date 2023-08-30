@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/css/admin-rtl.css') }}">
     @endif
 
-     @if($currentLang->code !== 'ar')
+     @if(!empty($currentLang->code) && $currentLang->code !== 'ar')
        <style>
         .navbar-expand-lg .navbar-nav .dropdown-menu {
             left: auto;
@@ -40,7 +40,7 @@
     </style>
      @endif
 
-    @if($currentLang->rtl == 1 && $selLang == null)
+    @if(!empty($currentLang->rtl) && $currentLang->rtl == 1 && $selLang == null)
     <link rel="stylesheet" href="{{ asset('assets/admin/css/admin-rtl.css') }}">
     @endif
 

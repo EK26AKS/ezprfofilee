@@ -186,6 +186,7 @@
                                             <div class="col-12 mb-2">
                                                 <label
                                                     for="image"><strong>{{ $keywords['Profile_Image'] ?? __('Profile Image') }}</strong></label>
+                                                    <label for="hero-section-image-dimentions">( 350 * 350 )<span class="text-danger"> * </span></label>
                                             </div>
                                             <div class="col-md-12 showImage mb-3">
                                                 <img src="{{ !empty($vcard->profile_image) ? asset('assets/front/img/user/vcard/' . $vcard->profile_image) : asset('assets/admin/img/noimage.jpg') }}"
@@ -201,6 +202,7 @@
                                             <div class="col-12 mb-2">
                                                 <label
                                                     for="image"><strong>{{ $keywords['Cover_Image'] ?? __('Cover Image') }}</strong></label>
+                                                    <label for="hero-section-image-dimentions">( 350 * 350 )<span class="text-danger"> * </span></label>
                                             </div>
                                             <div class="col-md-12 showImage mb-3">
                                                 <img src="{{ !empty($vcard->cover_image) ? asset('assets/front/img/user/vcard/' . $vcard->cover_image) : asset('assets/admin/img/noimage.jpg') }}"

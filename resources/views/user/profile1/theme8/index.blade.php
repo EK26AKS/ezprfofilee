@@ -8,7 +8,29 @@
 @section('meta-keywords', !empty($userSeo) ? $userSeo->home_meta_keywords : '')
 
 @section('content')
+<style>
+   .tab-link {
+        cursor: pointer;
+    }
 
+/* Style for Tab Content */
+.experience-list {
+    /* padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f7f7f7; */
+    display: none; /* Hide tab content by default */
+}
+
+.experience-list.active {
+    display: block; /* Display active tab content */
+}
+
+
+
+
+
+
+</style>
     <!--====== Start Hero Section ======-->
     <section class="hero-section">
         <div class="container">
@@ -59,14 +81,14 @@
         <ul class="social-links">
             @if (isset($social_medias))
                 @foreach ($social_medias as $social_media)
-                    <li><a target="_blank" href="{{ $social_media->url }}"><i class="{{ $social_media->icon }}"></i></a>
+                    <li><a style="transform: rotate(-90deg);" target="_blank" href="{{ $social_media->url }}"><i class="{{ $social_media->icon }}"></i></a>
                     </li>
                 @endforeach
             @endif
         </ul>
     </section>
     <!--====== End Hero Section ======-->
-
+    
     <!--====== Start About Section ======-->
     <section class="about-section section-gap">
         <div class="container">
@@ -97,6 +119,97 @@
             </div>
         </div>
     </section>
+
+    <section class="experience-section section-gap" id="experience" style="margin-left:100px">
+        {{-- <div class="container"> --}}          
+            <div class="experience-wrapper boxed-wrapper">
+                <div class="row justify-content-between">                    
+                    @if (count($job_experiences) > 0)
+                        <div class="col-lg-4">
+                            <h4 class="experience-wrapper-title">
+                                <a href="#education-tab" aria-controls="education-tab" aria-selected="false" class="tab-link">
+                                    {{ $keywords['Education'] ?? 'Education' }}
+                                </a>
+                            </h4>
+                            <div class="experience-list tab-pane" id="education-tab">
+                                @foreach ($job_experiences as $job_experience)
+                                    <div class="single-experience">
+                                        <h5 class="title">{{ $job_experience->designation }}
+                                            [{{ $job_experience->company_name }}]</h5>
+                                        <span class="duration">
+                                            {{ \Carbon\Carbon::parse($job_experience->start_date)->format('M j, Y') }}
+                                            -
+                                            @if ($job_experience->is_continue == 0)
+                                                {{ \Carbon\Carbon::parse($job_experience->end_date)->format('M j, Y') }}
+                                            @else
+                                                {{ $keywords['Present'] ?? 'Present' }}
+                                            @endif
+                                        </span>
+                                        <p>{!! nl2br($job_experience->content) !!}</p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                    @if (count($educations) > 0)
+                        <div class="col-lg-4 md-gap-80">
+                            <h4 class="experience-wrapper-title">
+                                <a href="#experience-tab" aria-controls="experience-tab" aria-selected="false" class="tab-link">
+                                    {{ $keywords['Experience'] ?? 'Experience' }}
+                                </a>
+                            </h4>
+                            <div class="experience-list tab-pane active" id="experience-tab">
+                                <!-- Content for Education Tab -->
+                                @foreach ($educations as $education)
+                                <div class="single-experience">
+                                    <h5 class="title">{{ $education->degree_name }}</h5>
+                                    <span class="duration">
+                                        {{ \Carbon\Carbon::parse($education->start_date)->format('M j, Y') }}
+                                        -
+                                        @if (!empty($education->end_date))
+                                            {{ \Carbon\Carbon::parse($education->end_date)->format('M j, Y') }}
+                                        @else
+                                            {{ $keywords['Present'] ?? 'Present' }}
+                                        @endif
+                                    </span>
+                                    <p>{!! nl2br($education->short_description) !!}</p>
+                                </div>
+                            @endforeach
+                            </div>
+                        </div>
+                    @endif
+                    @if (count($job_experiences) > 0)
+                        <div class="col-lg-4">
+                            <h4 class="experience-wrapper-title">
+                                <a href="#awards-tab" aria-controls="awards-tab" aria-selected="false" class="tab-link">
+                                    {{ $keywords['Awards'] ?? 'Awards' }}
+                                </a>
+                            </h4>
+                            <div class="experience-list tab-pane" id="awards-tab">
+                                @foreach ($job_experiences as $job_experience)
+                                    <div class="single-experience">
+                                        <h5 class="title">{{ $job_experience->designation }}
+                                            [{{ $job_experience->company_name }}]</h5>
+                                        <span class="duration">
+                                            {{ \Carbon\Carbon::parse($job_experience->start_date)->format('M j, Y') }}
+                                            -
+                                            @if ($job_experience->is_continue == 0)
+                                                {{ \Carbon\Carbon::parse($job_experience->end_date)->format('M j, Y') }}
+                                            @else
+                                                {{ $keywords['Present'] ?? 'Present' }}
+                                            @endif
+                                        </span>
+                                        <p>{!! nl2br($job_experience->content) !!}</p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                </div>          
+        </div>
+    </section>
+
+   
     <!--====== End About Section ======-->
     @if (is_array($userPermissions) && in_array('Skill', $userPermissions))
         <!--====== Skill Section Start ======-->
@@ -106,24 +219,24 @@
                     <span class="tagline">{{ $home_text->skills_subtitle ?? __('Technical Skills') }}</span>
                     <h2 class="title">{{ $home_text->skills_subtitle ?? __('Technical Skills') }}</h2>
                 </div>
-                <div class="row justify-content-xl-start justify-content-center">
+                <div class="row justify-content-center">
                     @foreach ($skills as $skill)
                         <div class="col-xl-3 col-lg-4 col-md-6">
                             <div class="single-skill-item mt-50">
                                 <div class="chart" data-percent="{{ $skill->percentage }}">
                                     <span>{{ $skill->percentage }}</span>
                                 </div>
-                                <p class="title">{{ $skill->title }}</p>
+                                <p class="title w-100">{{ $skill->title }}</p>
                             </div>
                         </div>
                     @endforeach
                 </div>
             </div>
             @isset($home_text->skills_image)
-                <div class="skill-img d-none d-xl-block">
-                    <img data-src="{{ asset('assets/front/img/user/home_settings/' . $home_text->skills_image) }}"
-                        class="lazy" alt="Image">
-                </div>
+                <!--<div class="skill-img d-none d-xl-block">-->
+                <!--    <img data-src="{{ asset('assets/front/img/user/home_settings/' . $home_text->skills_image) }}"-->
+                <!--        class="lazy" alt="Image">-->
+                <!--</div>-->
             @endisset
         </section>
         <!--====== Skill Section End ======-->
@@ -249,7 +362,7 @@
         <!--====== Counter Section Start ======-->
         <section class="counter-section bg-secondary-color">
             <div class="container">
-                <div class="row">
+                <div class="row justify-content-center">
                     @foreach ($achievements as $achievement)
                         <div class="col-lg-3 col-md-6">
                             <div class="counter-item">
@@ -345,7 +458,7 @@
         </section>
         <!--====== Testimonial Section End ======-->
     @endif
-    @if (is_array($userPermissions) && in_array('Testimonial', $userPermissions))
+    @if (is_array($userPermissions) && in_array('Blog', $userPermissions))
         <!--====== Blog Section Start ======-->
         <section class="blog-section section-gap">
             <div class="container">
@@ -455,3 +568,24 @@
     </section>
     <!--====== Contact Section End ======-->
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.tab-link').click(function(event) {
+            event.preventDefault();
+
+            // Get the target tab ID from the clicked link's href attribute
+            var targetTab = $(this).attr('href');
+
+            // Remove 'active' class from all tab links and content divs
+            $('.tab-link').removeClass('active');
+            $('.tab-pane').removeClass('active');
+
+            // Add 'active' class to the clicked tab link and its corresponding content div
+            $(this).addClass('active');
+            $(targetTab).addClass('active');
+        });
+    });
+</script>
+

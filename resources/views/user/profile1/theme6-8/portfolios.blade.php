@@ -52,7 +52,7 @@
                         <div class="project-item">
                             <div class="project-thumbnail">
                                 <img class="lazy"
-                                    data-src="{{ asset('assets/front/img/user/portfolios/' . $portfolio->image) }}"
+                                src="{{ asset('assets/front/img/user/portfolios/' . $portfolio->image) }}"
                                     alt="ProjectImage">
                             </div>
                             <div class="hover-content">

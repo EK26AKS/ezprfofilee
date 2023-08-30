@@ -16,8 +16,7 @@
 
 
   <!--====== Favicon Icon ======-->
-  <link rel="shortcut icon"
-    href="{{ !empty($userBs->favicon) ? asset('assets/front/img/user/' . $userBs->favicon) : '' }}" type="image/png">
+  <link rel="shortcut icon" href="{{ !empty($userBs->favicon) ? asset('assets/front/img/user/' . $userBs->favicon) : '' }}" type="image/png">
   <link rel="stylesheet" href="{{ asset('assets/front/css/plugin.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/admin/css/bootstrap-datepicker.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/admin/css/jquery.timepicker.min.css') }}">
@@ -158,6 +157,7 @@
     </div>
   </header>
   <!--====== End Header ======-->
+
   <!--====== Start Navigation Wrapper ======-->
   <div class="navigation-wrapper">
     <div class="logo text-center">
@@ -187,6 +187,16 @@
             </a>
             <span>{{ $keywords['About'] ?? 'About' }}</span>
           </li>
+          
+          @if (is_array($userPermissions) && in_array('Skill', $userPermissions))
+            <li>
+              <a href="{{ route('front.user.skill', getParam()) }}"
+                class="
+                                @if (request()->routeIs('front.user.skill')) active @endif"><i
+                  class="fas fa-user"></i></a>
+              <span>{{ $keywords['Skill'] ?? 'Skill' }}</span>
+            </li>
+          @endif              
 
           @if (is_array($userPermissions) &&
                   is_array($packagePermissions) &&
@@ -203,8 +213,7 @@
 
           @if (is_array($userPermissions) && in_array('Experience', $userPermissions))
             <li>
-              <a href="{{ route('front.user.experience', getParam()) }}"
-                class="
+              <a href="{{ route('front.user.experience', getParam()) }}" class="
                                 @if (request()->routeIs('front.user.experience')) active @endif"><i
                   class="fas fa-portrait"></i></a>
               <span>{{ $keywords['Experience'] ?? 'Experience' }}</span>
@@ -331,6 +340,60 @@
       toastr['success']("{{ __(session('success')) }}");
     </script>
   @endif
+
+  <script>
+    $('#testimonial_item').slick({
+        dots: false,
+        arrows: false,
+        infinite: true,
+        autoplaySpeed: 1500,
+        autoplay: false,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        prevArrow: '<div class="prev"><i class="ti-arrow-left"></i></div>',
+        nextArrow: '<div class="next"><i class="ti-arrow-right"></i></div>',
+        rtl: rtl == 1 ? true : false,
+        responsive: [
+            {
+                breakpoint: 1199,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 991,
+                settings: {
+                    slidesToShow: 1
+                }
+            },
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
+    
+    $(document).ready(function () {
+        $('testimonial_item').on('setPosition', function (event, slick) {
+            var tallestSlideHeight = 0;
+    
+            // Loop through each slide to find the tallest height
+            $('testimonial_item #item_testimonial').each(function () {
+                var slideHeight = $(this).height();
+                if (slideHeight > tallestSlideHeight) {
+                    tallestSlideHeight = slideHeight;
+                }
+            });
+    
+            // Set the height of all slides to match the tallest height
+            $('testimonial_item #item_testimonial').height(tallestSlideHeight);
+        });
+    });
+        
+    </script>
+    
 
   {{-- plugins --}}
   @includeif('user.profile1.partials.plugins')

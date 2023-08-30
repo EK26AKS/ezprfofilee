@@ -60,9 +60,9 @@ class LoginController extends Controller
             'password' => 'required'
         ];
 
-        if ($bs->is_recaptcha == 1) {
-            $rules['g-recaptcha-response'] = 'required|captcha';
-        }
+        // if ($bs->is_recaptcha == 1) {
+        //     $rules['g-recaptcha-response'] = 'required|captcha';
+        // }
         $messages = [
             'g-recaptcha-response.required' => 'Please verify that you are not a robot.',
             'g-recaptcha-response.captcha' => 'Captcha error! try again later or contact site admin.',

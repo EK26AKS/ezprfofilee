@@ -46,11 +46,11 @@
                                     <a class="post-thumbnail d-block text-center"
                                         href="{{ route('front.user.blog.detail', [getParam(), $blog->slug, $blog->id]) }}">
                                         <img class="lazy"
-                                            data-src="{{ asset('assets/front/img/user/blogs/' . $blog->image) }}"
+                                            src="{{ asset('assets/front/img/user/blogs/' . $blog->image) }}"
                                             alt="Blog Image">
                                     </a>
-                                    <div class="entry-content">
-                                        <div class="post-meta mb-1">
+                                    <div class="entry-content text-center">
+                                        <div class="post-meta mb-1 justify-content-center">
                                             <ul>
                                                 <li><span><i class="fas fa-user"></i>{{ $keywords['by'] ?? 'by' }}
                                                         <a>{{ $user->username }}</a></span></li>

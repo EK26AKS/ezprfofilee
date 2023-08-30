@@ -152,7 +152,7 @@
                                                                         <a target="_blank"
                                                                             href="//{{ $pathUrl }}">{{ $pathUrl }}</a>
                                                                     </li>
-                                                                    @if (cPackageHasSubdomain(Auth::user()))
+                                                                    @if (cPackageHasSubdomain(Auth::user()) && Auth::user()->subdomain_status == '1')
                                                                         <li>
                                                                             @php
                                                                                 $subUrl = Auth::user()->username . '.' . env('WEBSITE_HOST') . '/vcard/' . $vcard->id;

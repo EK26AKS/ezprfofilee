@@ -131,15 +131,13 @@
                                                                         <a target="_blank"
                                                                             href="//{{ $pathUrl }}">{{ $pathUrl }}</a>
                                                                     </li>
-                                                                    @if (cPackageHasSubdomain(Auth::user()))
+                                                                    @if (cPackageHasSubdomain(Auth::user()) && Auth::user()->subdomain_status == '1')
                                                                         <li>
                                                                             @php
                                                                                 $subUrl = Auth::user()->username . '.' . env('WEBSITE_HOST') . '/cv/' . $cv->id;
                                                                             @endphp
-                                                                            <strong
-                                                                                class="mr-2">{{ $keywords['Subdomain_Based_URL'] ?? __('Subdomain Based URL') }}:</strong>
-                                                                            <a target="_blank"
-                                                                                href="//{{ $subUrl }}">{{ $subUrl }}</a>
+                                                                            <strong class="mr-2">{{ $keywords['Subdomain_Based_URL'] ?? __('Subdomain Based URL') }}:</strong>
+                                                                            <a target="_blank" href="//{{ $subUrl }}">{{ $subUrl }}</a>
                                                                         </li>
                                                                     @endif
                                                                     @if (cPackageHasCdomain(Auth::user()))

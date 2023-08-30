@@ -17,7 +17,13 @@ class LanguageController extends Controller
     public function index($lang = false)
     {
         $data['languages'] = Language::where('user_id', Auth::guard('web')->user()->id)->get();
+
+        $deLang = Language::first();
+
+        // dd($deLang);
+        
         return view('user.language.index', $data);
+
     }
     public function addKeyword(Request $request)
     {
@@ -92,7 +98,9 @@ class LanguageController extends Controller
         } else {
             $in['is_default'] = 1;
         }
+
         $language =  Language::create($in);
+        
         HomePageText::create([
             'user_id' => Auth::guard('web')->user()->id,
             'language_id' => $language->id

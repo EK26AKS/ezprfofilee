@@ -44,7 +44,7 @@ class CustomerController extends Controller
             $data['folder'] = "profile1.theme4";
         } elseif ($ubs->theme == 5) {
             $data['folder'] = "profile1.theme5";
-        } elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8) {
+        } elseif ($ubs->theme == 6 || $ubs->theme == 7 || $ubs->theme == 8 || $ubs->theme == 9 || $ubs->theme == 10 || $ubs->theme == 11 || $ubs->theme == 12 || $ubs->theme == 13 || $ubs->theme == 14 || $ubs->theme == 15 || $ubs->theme == 16) {
             $data['folder'] = 'profile1.theme' . $ubs->theme;
         } else {
             $data['folder'] = "profile";

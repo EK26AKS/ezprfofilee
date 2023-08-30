@@ -12,7 +12,7 @@
                 <i class="flaticon-right-arrow"></i>
             </li>
             <li class="nav-item">
-                <a href="{{ route('user.cv') }}">{{ $keywords['CV_Management'] ?? __('CV Management') }}</a>
+                <a href="{{ route('user.cv') . '?language=' . request('language') }}">{{ $keywords['CV_Management'] ?? __('CV Management') }}</a>
             </li>
             <li class="separator">
                 <i class="flaticon-right-arrow"></i>

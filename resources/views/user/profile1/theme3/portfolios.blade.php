@@ -12,13 +12,15 @@
     <div class="main-wrapper inner">
         <section class="portfolio-area pt-120 pb-100" id="masonry-portfolio">
             <div class="container">
-                <div class="row align-items-end">
-                    <div class="col-lg-5">
-                        <div class="section-title mb-50">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="section-title mb-30">
                             <span class="sub-title">{{$home_text->portfolio_title ?? __('Portfolios')}}</span>
-                            <h2><span class="light-text">{{$home_text->portfolio_subtitle ??  __('Portfolios')}}</span></h2>
+                            <h2><span class="light-text">{{$home_text->portfolio_subtitle ?? __('Portfolios')}}</span></h2>
                         </div>
                     </div>
+                </div>
+                <div class="row align-items-end">                   
                     <div class="col-lg-7">
                         <div class="portfolio-filter-button mb-40">
                             <ul class="filter-btn">

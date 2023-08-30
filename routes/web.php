@@ -929,6 +929,7 @@ Route::domain($domain)->group(function () {
 });
 
 $parsedUrl = parse_url(url()->current());
+
 // dd($parsedUrl);
 // Output:
 // array:3 [▼
@@ -1032,8 +1033,12 @@ Route::group(['domain' => $domain, 'prefix' => $prefix], function () {
     // customer end
     Route::get('/', 'Front\FrontendController@userDetailView')
         ->name('front.user.detail.view');
-
+  
     Route::get('/about', 'Front\FrontendController@userAbout')->name('front.user.about');
+    
+    Route::group(['middleware' => ['routeAccess:Skill']], function () {
+        Route::get('/skill', 'Front\FrontendController@userSkill')->name('front.user.skill');
+    });
 
     Route::group(['middleware' => ['routeAccess:Testimonial']], function () {
         Route::get('/testimonial', 'Front\FrontendController@userTestimonial')->name('front.user.testimonial');

@@ -35,7 +35,7 @@
                                 <div class="post-img mb-20">
                                     <div class="post-gallery-slider">
                                             @foreach ($portfolio->portfolio_images as $pi)
-                                            <a href="{{asset('assets/front/img/user/portfolios/' . $pi->image)}}" class="image-popup"><img data-src="{{asset('assets/front/img/user/portfolios/' . $pi->image)}}" class="lazy" alt=""></a>
+                                            <a href="{{asset('assets/front/img/user/portfolios/' . $pi->image)}}" class="image-popup"><img src="{{asset('assets/front/img/user/portfolios/' . $pi->image)}}" class="lazy" alt=""></a>
                                             @endforeach
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@
                                 <ul class="recent-post-list">
                                     @foreach ($relatedPortfolios->get() as $rp)
                                         <li class="post-thumbnail-content">
-                                            <img data-src="{{asset('assets/front/img/user/portfolios/' . $rp->image)}}" class="img-fluid lazy" alt="">
+                                            <img src="{{asset('assets/front/img/user/portfolios/' . $rp->image)}}" class="img-fluid lazy" alt="">
                                             <div class="post-title-date">
                                                 <h6><a href="{{route('front.user.portfolio.detail', [getParam(), $rp->slug, $rp->id])}}">{{strlen($rp->title) > 30 ? mb_substr($rp->title, 0, 30, 'UTF-8') : $rp->title}}</a></h6>
                                             </div>

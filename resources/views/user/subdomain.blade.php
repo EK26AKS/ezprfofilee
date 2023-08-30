@@ -67,12 +67,18 @@
                                     </thead>
                                     <tbody>
                                         <tr>
+                                             @if (cPackageHasSubdomain(Auth::user()) && Auth::user()->subdomain_status == '1')
                                             <td>
                                                 @php
                                                     $subdomain = strtolower(Auth::user()->username) . "." . env('WEBSITE_HOST');
                                                 @endphp
                                                 <a href="//{{$subdomain}}" target="_blank">{{$subdomain}}</a>
                                             </td>
+                                            @else
+                                            <td>
+                                                {{ 'Subdomain Is Not Available' }}
+                                            </td>
+                                            @endif
                                         </tr>
                                     </tbody>
                                 </table>

@@ -20,8 +20,7 @@ class BasicController extends Controller
 {
     public function themeVersion()
     {
-        $data = BasicSetting::where('user_id',Auth::id())->first();
-
+        $data = BasicSetting::where('user_id',Auth::id())->first();                     
         return view('user.settings.themes', ['data' => $data]);
     }
 

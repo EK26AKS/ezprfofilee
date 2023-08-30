@@ -6,6 +6,107 @@
 
 @section('meta-description', !empty($userSeo) ? $userSeo->home_meta_description : '')
 @section('meta-keywords', !empty($userSeo) ? $userSeo->home_meta_keywords : '')
+<style>
+    .card-slider {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  padding: 20px;
+  gap: 20px;
+  width: 960px; /* Set the width to accommodate three slides */
+}
+
+.card-slider::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.card {
+  flex: 0 0 calc((100% - 40px) / 3); /* Adjust the width based on the number of visible slides */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  scroll-snap-align: start;
+  text-align: center;
+  justify-content: center;
+}
+.card .author-wrap {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 60px;
+  flex: 0 0 60px;
+}
+
+.card .author-wrap .author img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.card .author-wrap .quote-icon {
+  display: block;
+  margin-top: 20px;
+}
+
+.card .author-wrap .quote-icon img {
+  max-width: 55px;
+}
+
+.card .content {
+  text-align: justify;
+}
+
+.card .content p {
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.card .content .name {
+  font-size: 18px;
+}
+
+.card .content .title {
+  font-size: 14px;
+  line-height: 1;
+  color: var(--color-primary);
+}
+
+.card:hover {
+  border-bottom-left-radius: 40px;
+  border-top-right-radius: 0;
+}
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Increase the margin to create space between cards and dots */
+}
+
+.slider-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.slider-dot.active {
+  background-color: #555;
+}
+@media screen and (max-width: 768px) {
+  .card {
+    flex: 0 0 calc(50% - 20px); /* Adjust the width for two slides on smaller screens */
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .card {
+    flex: 0 0 100%; /* Display one slide on the smallest screens */
+    max-width: 100%;
+  }
+}
+</style>
 @section('content')
     <!--====== Hero Area Start ======-->
     <section class="hero-section hero-section-one" id="home">
@@ -247,7 +348,7 @@
         <section class="counter-section lazy"
             data-bg="{{ !empty($home_text->achievement_image) ? asset('assets/front/img/user/home_settings/' . $home_text->achievement_image) : asset('assets/front/img/achievement_bg.jpg') }}">
             <div class="container">
-                <div class="row">
+                <div class="row justify-content-center">
                     @foreach ($achievements as $achievement)
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="counter-box mb-40">
@@ -286,9 +387,9 @@
                         @endforeach
                     </ul>
                 </div>
-                <div class="row portfolio-items filter-items justify-content-center">
+                <div class="row portfolio-items filter-items justify-content-center" style="position: inherit !important">
                     @foreach ($portfolios as $portfolio)
-                        <div class="col-lg-4 col-md-6 filter-item cat-{{ $portfolio->bcategory->id }}">
+                        <div class="col-lg-4 col-md-6 filter-item cat-{{ $portfolio->bcategory->id }}" style="position: inherit !important">
                             <div class="portfolio-item mt-30">
                                 <div class="portfolio-thumb">
                                     <img src="{{ asset('assets/front/img/user/portfolios/' . $portfolio->image) }}"
@@ -314,40 +415,67 @@
 
     @if (is_array($userPermissions) && in_array('Testimonial', $userPermissions))
         <!--====== Testimonial Section Start ======-->
-        <section class="testimonial-section section-gap bg-offwhite-color">
+       <section class="testimonial-section section-gap bg-offwhite-color">
             <div class="container">
                 <div class="common-heading text-center mb-50">
                     <span class="tagline">{{ $home_text->testimonial_title ?? __('Testimonials') }}</span>
                     <h2 class="title">{{ $home_text->testimonial_subtitle ?? __('Testimonials') }}</h2>
                 </div>
+    <div class="card-slider w-100">
 
-                <div class="row testimonial-slider">
-                    @foreach ($testimonials as $testimonial)
-                        <div class="col-lg-4 col-sm-12 col-xs-12">
-                            <div class="testimonial-box-one">
-                                <div class="author-wrap">
-                                    <div class="author">
-                                        <img src="{{ asset('assets/front/img/user/testimonials/' . $testimonial->image) }}"
-                                            alt="Author">
-                                    </div>
+            @foreach ($testimonials as $testimonial)
+                    <div class="card col-lg-4 col-sm-12 col-xs-12">
+                            <div class="author-wrap">
+                            <div class="author">
+                                <img src="{{ asset('assets/front/img/user/testimonials/' . $testimonial->image) }}"
+                                    alt="Author">
+                            </div>
 
-                                    <span class="quote-icon">
-                                        <img src="{{ asset('assets/front/img/profile1/quote.png') }}" alt="">
-                                    </span>
-                                </div>
-                                <div class="content">
-                                    <p>{!! nl2br($testimonial->content) !!}</p>
-                                    <div class="author-info">
-                                        <h6 class="name">{{ $testimonial->name }}</h6>
-                                        @if (!empty($testimonial->occupation))
-                                            <span class="title">{{ $testimonial->occupation }}</span>
-                                        @endif
-                                    </div>
-                                </div>
+                            <span class="quote-icon">
+                                <img src="{{ asset('assets/front/img/profile1/quote.png') }}" alt="">
+                            </span>
+                        </div>
+                        <div class="content">
+                            <p>{!! nl2br($testimonial->content) !!}</p>
+                            <div class="author-info text-center">
+                                <h6 class="name" style="line-height:2">{{ $testimonial->name }}</h6>
+                                @if (!empty($testimonial->occupation))
+                                    <span class="title">{{ $testimonial->occupation }}</span>
+                                @endif
                             </div>
                         </div>
+                    </div>
                     @endforeach
-                </div>
+
+    </div>
+    <div class="slider-dots"></div>
+                <!--<div class="testimonial-slider">-->
+                <!--    @foreach ($testimonials as $testimonial)-->
+                <!--        <div class="col-lg-4 col-sm-12 col-xs-12">-->
+                <!--            <div class="testimonial-box-one">-->
+                <!--                <div class="author-wrap">-->
+                <!--                    <div class="author">-->
+                <!--                        <img src="{{ asset('assets/front/img/user/testimonials/' . $testimonial->image) }}"-->
+                <!--                            alt="Author">-->
+                <!--                    </div>-->
+
+                <!--                    <span class="quote-icon">-->
+                <!--                        <img src="{{ asset('assets/front/img/profile1/quote.png') }}" alt="">-->
+                <!--                    </span>-->
+                <!--                </div>-->
+                <!--                <div class="content">-->
+                <!--                    <p>{!! nl2br($testimonial->content) !!}</p>-->
+                <!--                    <div class="author-info">-->
+                <!--                        <h6 class="name">{{ $testimonial->name }}</h6>-->
+                <!--                        @if (!empty($testimonial->occupation))-->
+                <!--                            <span class="title">{{ $testimonial->occupation }}</span>-->
+                <!--                        @endif-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--            </div>-->
+                <!--        </div>-->
+                <!--    @endforeach-->
+                <!--</div>-->
             </div>
         </section>
         <!--====== Testimonial Section End ======-->
@@ -366,7 +494,7 @@
                     @foreach ($blogs as $blog)
                         <div class="col-lg-4 col-md-6 col-sm-8">
                             <div class="latest-blog-post mt-30">
-                                <div class="post-content">
+                                <div class="post-content text-center">
                                     <h5 class="post-title">
                                         <a
                                             href="{{ route('front.user.blog.detail', [getParam(), $blog->slug, $blog->id]) }}">{{ strlen($blog->title) > 45 ? mb_substr($blog->title, 0, 45, 'UTF-8') . '...' : $blog->title }}</a>
@@ -461,4 +589,81 @@
         </section>
         <!--====== Contact Section End ======-->
     @endif
+
+    <script>
+        const slider = document.querySelector('.card-slider');
+const cards = document.querySelectorAll('.card');
+const dotsContainer = document.querySelector('.slider-dots');
+
+let cardWidth = 0;
+cards.forEach(card => {
+  cardWidth += card.offsetWidth;
+});
+
+slider.style.width = `${cardWidth}px`;
+
+const numVisibleSlides = 3; // Number of visible slides
+
+cards.forEach((card, index) => {
+  const dot = document.createElement('span');
+  dot.classList.add('slider-dot');
+  dotsContainer.appendChild(dot);
+
+  dot.addEventListener('click', () => {
+    slider.scroll({
+      left: card.offsetLeft - slider.offsetLeft,
+      behavior: 'smooth'
+    });
+  });
+});
+
+const updateSliderDots = () => {
+  const numSlides = Math.ceil(cards.length / numVisibleSlides);
+
+  dotsContainer.innerHTML = ''; // Clear existing dots
+
+  for (let i = 0; i < numSlides; i++) {
+    const dot = document.createElement('span');
+    dot.classList.add('slider-dot');
+    dotsContainer.appendChild(dot);
+
+    dot.addEventListener('click', () => {
+      slider.scroll({
+        left: cards[i * numVisibleSlides].offsetLeft - slider.offsetLeft,
+        behavior: 'smooth'
+      });
+    });
+  }
+};
+
+updateSliderDots();
+
+slider.addEventListener('scroll', () => {
+  const scrollPosition = slider.scrollLeft;
+
+  cards.forEach((card, index) => {
+    const cardPosition = card.offsetLeft - slider.offsetLeft;
+
+    if (scrollPosition >= cardPosition && scrollPosition < cardPosition + cardWidth) {
+      setActiveDot(index);
+    }
+  });
+});
+
+window.addEventListener('resize', () => {
+  updateSliderDots();
+});
+
+function setActiveDot(index) {
+  const dots = dotsContainer.querySelectorAll('.slider-dot');
+
+  dots.forEach((dot, i) => {
+    if (i === index) {
+      dot.classList.add('active');
+    } else {
+      dot.classList.remove('active');
+    }
+  });
+}
+    </script>
 @endsection

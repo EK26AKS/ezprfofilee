@@ -106,7 +106,7 @@
             data-src="{{ isset($userBs->logo)
                 ? asset('assets/front/img/user/' . $userBs->logo)
                 : asset('assets/front/img/profile/lgoo.png') }}"
-            class="lazy header-theme8" alt="Logo">
+            class="lazy header-theme8" alt="Logo" style="width:25%">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
           aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,7 +116,7 @@
                 is_array($packagePermissions) &&
                 in_array('Appointment', $userPermissions) &&
                 in_array('Appointment', $packagePermissions))
-          <div class="language-dropdown order-lg-last">
+          <div class="language-dropdown order-lg-last ezprofile-theme8-login-btn">
             @if (!Auth::guard('customer')->check())
               <a href="{{ route('customer.login', getParam()) }}"
                 class="main-btn">{{ $keywords['Login'] ?? 'Login' }}</a>
@@ -203,6 +203,32 @@
                   href="{{ route('front.user.appointment', getParam()) }}">{{ $keywords['Appointment'] ?? 'Appointment' }}</a>
               </li>
             @endif
+
+            @if (is_array($userPermissions) &&
+                is_array($packagePermissions) &&
+                in_array('Appointment', $userPermissions) &&
+                in_array('Appointment', $packagePermissions))
+              <li class="nav-item ezprofile-login-button">
+                @if (!Auth::guard('customer')->check())
+                  <a href="{{ route('customer.login', getParam()) }}"
+                    class="nav-link">{{ $keywords['Login'] ?? 'Login' }}</a>
+                @else
+                  <div class="dropdown show">
+                    <a class="nav-link dropdown-toggle filled-btn" href="#" role="button" id="dropdownMenuLink"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{ Auth::guard('customer')->user()->username }}
+                    </a>
+                    <li class="nav-item" aria-labelledby="dropdownMenuLink">
+                      <a class="nav-link"
+                        href="{{ route('customer.dashboard', getParam()) }}">{{ $keywords['Dashboard'] ?? __('Dashboard') }}</a>
+                      <a class="nav-link"
+                        href="{{ route('customer.logout', getParam()) }}">{{ $keywords['Signout'] ?? __('Sign out') }}</a>
+                    </li>
+                  </div>
+                @endif
+            </li>
+            @endif
+        
           </ul>
         </div>
       </nav>
@@ -236,7 +262,7 @@
 
       <div class="footer-copyright">
         <p>{{ $keywords['Copyright'] ?? __('Copyright') }} {{ date('Y') }}
-          {{ $keywords['All_Right_Reserved'] ?? __('All Right Reserved') }}</p>
+          {{ $keywords['All_Right_Reserved'] ?? __('All Rights Reserved') }}</p>
       </div>
     </div>
   </footer>

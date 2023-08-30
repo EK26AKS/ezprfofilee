@@ -108,7 +108,7 @@ class AppServiceProvider extends ServiceProvider
                         ])->first();
                         session()->put('currentLangCode', $lang->code);
                     }
-                    $keywords = json_decode($lang->keywords, true);
+                    $keywords = !empty($lang->keywords) ? json_decode($lang->keywords, true) : '';
                     $userBs = DB::table('user_basic_settings')->where('user_id', $userId)->first();
                     $view->with('userBs', $userBs);
                     $view->with('keywords', $keywords);

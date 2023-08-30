@@ -127,7 +127,7 @@
         <!--====== Counter Section Start ======-->
         <section class="counter-section">
             <div class="container">
-                <div class="row">
+                <div class="row justify-content-center">
                     @foreach ($achievements as $achievement)
                         <div class="col-lg-3 col-md-6">
                             <div class="counter-item">
@@ -162,7 +162,7 @@
                         @endforeach
                     </ul>
                 </div>
-                <div class="project-loop row">
+                <div class="project-loop row justify-content-center">
                     @if (count($portfolios) > 0)
                         @foreach ($portfolios as $portfolio)
                             <div class="col-lg-3 col-md-6 cat-{{ $portfolio->bcategory->id ?? '' }}">
@@ -255,7 +255,7 @@
                                                 class="far fa-calendar-alt"></i>{{ \Carbon\Carbon::parse($blog->created_at)->format('F j, Y') }}</a>
                                     </li>
                                 </ul>
-                                <h3 class="title">
+                                <h3 class="title text-center">
                                     <a
                                         href="{{ route('front.user.blog.detail', [getParam(), $blog->slug, $blog->id]) }}">{{ strlen($blog->title) > 45 ? mb_substr($blog->title, 0, 45, 'UTF-8') . '...' : $blog->title }}</a>
                                 </h3>

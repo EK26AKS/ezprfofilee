@@ -31,9 +31,7 @@
                     <div class="page-title">
                         <h1>{{ $keywords['Portfolio_Details'] ?? 'Portfolio Details' }}</h1>
                         <ul class="breadcrumbs-link">
-                            <li><a
-                                    href="{{ route('front.user.detail.view', getParam()) }}">{{ $keywords['Home'] ?? 'Home' }}</a>
-                            </li>
+                            <li><a href="{{ route('front.user.detail.view', getParam()) }}">{{ $keywords['Home'] ?? 'Home' }}</a> </li>
                             <li class="">{{ $keywords['Portfolio_Details'] ?? 'Portfolio Details' }}</li>
                         </ul>
                     </div>
@@ -56,9 +54,8 @@
                                         <div class="post-gallery-slider">
                                             @foreach ($portfolio->portfolio_images as $pi)
                                                 <a href="{{ asset('assets/front/img/user/portfolios/' . $pi->image) }}"
-                                                    class="image-popup"><img
-                                                        data-src="{{ asset('assets/front/img/user/portfolios/' . $pi->image) }}"
-                                                        class="lazy" alt=""></a>
+                                                    class="image-popup"><img src="{{ asset('assets/front/img/user/portfolios/' . $pi->image) }}"
+                                                         alt=""></a>
                                             @endforeach
                                         </div>
                                     </div>
@@ -109,7 +106,7 @@
                                     <ul class="recent-post-list">
                                         @foreach ($relatedPortfolios->get() as $rp)
                                             <li class="post-thumbnail-content">
-                                                <img data-src="{{ asset('assets/front/img/user/portfolios/' . $rp->image) }}"
+                                                <img src="{{ asset('assets/front/img/user/portfolios/' . $rp->image) }}"
                                                     class="img-fluid lazy" alt="">
                                                 <div class="post-title-date">
                                                     <h6><a
@@ -123,8 +120,7 @@
                             @endif
                             @if ($portfolio->project_url)
                                 <a href="{{$portfolio->project_url}}" class="main-btn" target="_blank">Project Link</a>
-                                @endif
-
+                            @endif
                         </div>
                     </div>
                 </div>

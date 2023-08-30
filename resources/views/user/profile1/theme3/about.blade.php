@@ -12,7 +12,7 @@
     <div class="main-wrapper inner">
         <section class="about-area">
             @if (!empty($home_text->about_image))
-                <div class="about-img">
+                <div class="about-img" style="top:180px; right:0px">
                     <img data-src="{{asset('assets/front/img/user/home_settings/'.$home_text->about_image)}}" class="lazy" alt="About Image">
                 </div>
             @endif

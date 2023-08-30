@@ -8,10 +8,10 @@
 @section('meta-keywords', !empty($userSeo) ? $userSeo->testimonial_meta_keywords : '')
 
 @section('content')
+
     <!--====== Start Main Wrapper ======-->
-    <div class="main-wrapper inner">
-        
-        <section class="testimonial-area pt-110 pb-120">
+    <div class="main-wrapper inner">                
+        {{-- <section class="testimonial-area pt-110 pb-120">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
@@ -47,6 +47,48 @@
                     @endforeach
                 </div>
             </div>
+        </section> --}}
+        <section class="testimonial-area light-bg pt-110 pb-110">            
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="section-title mb-30">
+                            <span class="sub-title">{{$home_text->testimonial_title ?? __('Testimonials')}}</span>
+                            <h2><span class="light-text">{{$home_text->testimonial_subtitle ?? __('Testimonials')}}</span></h2>
+                        </div>
+                    </div>
+                </div>
+                {{-- <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="section-title text-center mb-60">
+                            <span class="sub-title">{{$home_text->testimonial_title ?? __('Testimonials')}}</span>
+                            <h2 style="color:#4C3EC7;font-weight: 300">{{$home_text->testimonial_subtitle ?? __('Testimonials')}}</h2>
+                        </div>
+                    </div>
+                </div> --}}
+                <div class="testimonial-slider-one" id="testimonial_item">
+                    @foreach($testimonials as $testimonial)
+                        <div class="testimonial-item item-one" id="item_testimonial">
+                            <div class="wt-thumb">
+                                <img src="{{asset('assets/front/img/user/testimonials/'.$testimonial->image)}}" alt="">
+                                <svg width="130" height="125" viewBox="0 0 117 114">
+                                    <path fill="#F57236" d="M89.8169 85.345L65.5127 98.7562C60.3865 101.585 54.145 101.463 49.1422 98.4367L25.3831 84.1077C20.3803 81.0815 17.3725 75.6305 17.4795 69.7846L18.0246 42.0444C18.1316 36.1985 21.3562 30.8531 26.4824 28.0244L50.7866 14.6132C55.9128 11.7846 62.1543 11.9065 67.1571 14.9327L90.9162 29.2617C95.919 32.2879 98.9268 37.7389 98.8198 43.5848L98.2747 71.325C98.1677 77.1709 94.9431 82.5163 89.8169 85.345Z"/>
+                                </svg>
+                            </div>
+                            <div class="testimonial-content">
+                                <div class="author-info">
+                                    <h5>{{$testimonial->name}}</h5>
+                                    @if (!empty($testimonial->occupation))
+                                    <span class="location">{{$testimonial->occupation}}</span>
+                                    @endif
+                                </div>
+                                <p>{!! nl2br($testimonial->content) !!}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </section>
     </div><!--====== End Main Wrapper ======-->
 @endsection
+

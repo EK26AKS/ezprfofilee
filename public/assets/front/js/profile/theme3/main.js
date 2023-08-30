@@ -13,6 +13,10 @@
     ## Main Menu
 -----------------------------------------------------------------------------------*/
 
+$(document).ready(function () {    
+    progressBar();  
+});
+
 (function($) {
     'use strict';
 
@@ -77,3 +81,18 @@
 $(window).on('load', function(event) {
     $('.preloader').delay(500).fadeOut('500');
 })
+
+function progressBar() {
+    $('.progress-bars').on('inview', function (event, isInView) {
+        if (isInView) {
+            $(this).find('.single-progress-bar').each(function () {
+                const percentage = $(this).data('percentage'),
+                    lineInner = $(this).find('.line'),
+                    widthCss = percentage + '%';
+
+                lineInner.width(widthCss);
+            });
+            $(this).unbind('inview');
+        }
+    });
+}

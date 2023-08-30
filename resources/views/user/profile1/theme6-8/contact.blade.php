@@ -14,12 +14,12 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-10">
                     <div class="page-title">
-                        <h1>{{ $keywords['Contact'] ?? 'Contact' }}</h1>
+                        <h1>{{ $keywords['Contact_Us'] ?? 'Contact Us' }}</h1>
                         <ul class="breadcrumbs-link">
                             <li><a
                                     href="{{ route('front.user.detail.view', getParam()) }}">{{ $keywords['Home'] ?? 'Home' }}</a>
                             </li>
-                            <li class="">{{ $keywords['Contact'] ?? 'Contact' }}</li>
+                            <li class="">{{ $keywords['Contact_Us'] ?? 'Contact Us' }}</li>
                         </ul>
                     </div>
                 </div>

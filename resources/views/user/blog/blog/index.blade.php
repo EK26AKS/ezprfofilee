@@ -174,7 +174,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="">{{ $keywords['Language'] ?? __('Language') }} **</label>
+                            <label for="">{{ $keywords['Language'] ?? __('Language') }} *</label>
                             <select id="language" name="user_language_id" class="form-control">
                                 <option value="" selected disabled>
                                     {{ $keywords['Select_a_language'] ?? __('Select a language') }}</option>
@@ -185,28 +185,29 @@
                             <p id="erruser_language_id" class="mb-0 text-danger em"></p>
                         </div>
                         <div class="form-group">
-                            <label for="">{{ $keywords['Title'] ?? __('Title') }} **</label>
+                            <label for="">{{ $keywords['Title'] ?? __('Title') }} *</label>
                             <input type="text" class="form-control" name="title"
                                 placeholder="{{ $keywords['Enter_title'] ?? __('Enter title') }}" value="">
                             <p id="errtitle" class="mb-0 text-danger em"></p>
                         </div>
                         <div class="form-group">
-                            <label for="">{{ $keywords['Category'] ?? __('Category') }} **</label>
+                            <label for="">{{ $keywords['Category'] ?? __('Category') }} *</label>
                             <select id="ucategory" class="form-control" name="category" disabled>
                                 <option value="" selected disabled>
                                     {{ $keywords['Select_a_category'] ?? __('Select a category') }}</option>
                             </select>
+
                             <p id="errcategory" class="mb-0 text-danger em"></p>
                         </div>
                         <div class="form-group">
-                            <label for="">{{ $keywords['Content'] ?? __('Content') }} **</label>
+                            <label for="">{{ $keywords['Content'] ?? __('Content') }} *</label>
                             <textarea class="form-control summernote" name="content" rows="8" cols="80"
                                 placeholder="{{ $keywords['Enter_content'] ?? __('Enter content') }}"></textarea>
                             <p id="errcontent" class="mb-0 text-danger em"></p>
                         </div>
 
                         <div class="form-group">
-                            <label for="">{{ $keywords['Serial_Number'] ?? __('Serial Number') }} **</label>
+                            <label for="">{{ $keywords['Serial_Number'] ?? __('Serial Number') }}*</label>
                             <input type="number" class="form-control ltr" name="serial_number" value=""
                                 placeholder="{{ $keywords['Enter_Serial_Number'] ?? __('Enter Serial Number') }}">
                             <p id="errserial_number" class="mb-0 text-danger em"></p>

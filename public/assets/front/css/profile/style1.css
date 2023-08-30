@@ -841,7 +841,7 @@ textarea {
 }
 
 .mobile-slide-panel .panel-inner {
-  width: 300px;
+  width: 100% !important;
   height: 100vh;
   background-color: var(--color-white);
   padding: 40px 30px;
@@ -914,11 +914,13 @@ textarea {
   opacity: 1;
   visibility: visible;
 }
-
+.mobile-slide-panel .mobile-logo img{
+  width: 65%;
+}
 .mobile-slide-panel.panel-on .panel-inner {
   visibility: visible;
   opacity: 1;
-  margin-right: -18px;
+  margin-right: 0px;
 }
 
 .mobile-slide-panel.panel-on .panel-overlay {
@@ -1526,7 +1528,7 @@ div#preloader img {
 
 .pie-charts .single-pie-chart .chart-inner .title {
   line-height: 1;
-  font-size: 20px;
+  font-size: 14px;
   text-transform: uppercase;
   margin-top: 5px;
 }
@@ -2053,9 +2055,7 @@ div#preloader img {
 }
 
 .brand-logo img {
-  /* width: 100px;
-  height: 25px; */
-  max-width: 140px;
+  max-width: 100%;
   max-height: 80px;
   padding: 10px;
 }

@@ -36,7 +36,7 @@
     <div class="container">
         @if ($userBs->guest_checkout && !empty(request('redirected')))
         <div class="single-form text-center p-5">
-            <a type="submit" href="{{ route('front.user.appointment', [getParam(), 'type' => 'guest']) }}" class=" @if ($userBs->theme == 6 || $userBs->theme == 7 || $userBs->theme == 8) main-btn @else template-btn main-btn arrow-btn @endif">{{ $keywords['Book_as_guest'] ?? __('Book as guest') }}</a>
+            <a type="submit" href="{{ route('front.user.appointment', [getParam(), 'type' => 'guest']) }}" class=" @if ($userBs->theme == 6 || $userBs->theme == 7 || $userBs->theme == 8 || $userBs->theme == 9) main-btn @else template-btn main-btn arrow-btn @endif">{{ $keywords['Book_as_guest'] ?? __('Book as guest') }}</a>
         </div>
         <p class="text-center">{{ $keywords['OR'] ?? __('OR') }}</p>
         @endif
@@ -77,7 +77,7 @@
                         </form>
                         <div class="new-user text-center mt-5">
                             <p class="text">{{ $keywords['New_user'] ?? 'New user' }}?
-                                <a href="{{ route('customer.signup', getParam()) }}">{{ $keywords['Donot_have_an_account'] ?? "Don't have an account" }}?</a>
+                                <a href="{{ route('customer.signup', getParam()) }}">{{ "Don't have an account" }}?</a>
                             </p>
                         </div>
                     </div> <!-- sing in form wrapper -->

@@ -503,7 +503,7 @@ a {
 }
 
 .single-timeslot {
-	background: var(--color-primary);
+	background: var(--color-primary) !important;
 	color: #ffffff;
 	cursor: pointer;
 }
@@ -559,6 +559,8 @@ a {
 	box-shadow: 0px 0px 5px rgba(18, 23, 39, 0.5);
 	padding: 20px;
     border-radius: 12px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 .profile-sidebar-title {
