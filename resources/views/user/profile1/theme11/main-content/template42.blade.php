@@ -263,24 +263,26 @@
             </div>
         </div>
     </section>
-<h1>!!</h1>
 
-    <section class="" id="about-me">
-        <div class="container-fluid talk-about-me">
-            <div class="p-3">
+
+    <section class="about-me" id="about-me">
+        <div class="container m-2">
+            <div class="talk-about-me">
                 <div id="section-header">
                     <span>{{ $home_text->about_title ?? 'My Resume' }}</span>
                     <div class="header-img d-flex justify-content-center">
                         <h2> {{ $home_text->about_subtitle ?? 'About Me' }} </h2>
                     </div>
                 </div>
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-lg-7">
-                        <p>{!! nl2br($home_text->about_content ?? '') !!}</p>
-                    </div>
-                    <div class="col-lg-5">
-                        <img src="{{ isset($home_text->about_image) ? asset('assets/front/img/user/home_settings/' . $home_text->about_image) : asset('assets/front/img/profile/about.png') }}"
-                            class="img-fluid" alt="">
+                <div class="aboutme-content d-flex align-items-center">
+                    <div class="row align-items-center">
+                        <div class="col-lg-7 order-1 order-lg-1">
+                            <p>{!! nl2br($home_text->about_content ?? '') !!}</p>
+                        </div>
+                        <div class="col-lg-5 order-2 order-lg-2 aboutme-img">
+                            <img src="{{ isset($home_text->about_image) ? asset('assets/front/img/user/home_settings/' . $home_text->about_image) : asset('assets/front/img/profile/about.png') }}"
+                                width="500" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -288,7 +290,7 @@
     </section>
 
 
-
+    <h1>!!</h1>
     @if (is_array($userPermissions) && in_array('Skill', $userPermissions))
         <section class="skills" id="skills">
             <div class="container">
@@ -489,7 +491,7 @@
     <section class="services section-bg" id="services" style="background-color: #0a58ca;">
         <div class="container">
             <header class="section-header">
-                <h3>Testimonial</h3>
+                <h3>Services</h3>
 
                 <p style="color: #fff">Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo
                     abhorreant vituperatoribus.
@@ -503,7 +505,7 @@
                             <i class="fa fa-briefcase service-icon" style="color: #c59c35;"></i>
                         </div>
 
-                        <h4 class="title"><a href="">Name 1</a></h4>
+                        <h4 class="title"><a href="">Service 1</a></h4>
 
                         <p class="description">Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo
                             abhorreant vituperatoribus.</p>
@@ -516,7 +518,7 @@
                             <i class="fa fa-clipboard service-icon" style="color: #c59c35;"></i>
                         </div>
 
-                        <h4 class="title"><a href="">Name 2</a></h4>
+                        <h4 class="title"><a href="">Service 2</a></h4>
 
                         <p class="description">Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo
                             abhorreant vituperatoribus.</p>
@@ -529,7 +531,7 @@
                             <i class="fa fa-chart-bar service-icon" style="color: #c59c35;"></i>
                         </div>
 
-                        <h4 class="title"><a href="">Name 3</a></h4>
+                        <h4 class="title"><a href="">Service 3</a></h4>
 
                         <p class="description">Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo
                             abhorreant vituperatoribus.</p>
@@ -542,7 +544,7 @@
                             <i class="fa fa-binoculars service-icon" style="color: #c59c35;"></i>
                         </div>
 
-                        <h4 class="title"><a href="">Name 4</a></h4>
+                        <h4 class="title"><a href="">Service 4</a></h4>
 
                         <p class="description">Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo
                             abhorreant vituperatoribus.</p>
@@ -555,7 +557,7 @@
                             <i class="fa fa-cog service-icon" style="color:#c59c35;"></i>
                         </div>
 
-                        <h4 class="title"><a href="">Name 5</a></h4>
+                        <h4 class="title"><a href="">Service 5</a></h4>
 
                         <p class="description">Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo
                             abhorreant vituperatoribus.</p>
@@ -568,7 +570,7 @@
                             <i class="fa fa-calendar-alt service-icon" style="color: #c59c35;"></i>
                         </div>
 
-                        <h4 class="title"><a href="">Name 6</a></h4>
+                        <h4 class="title"><a href="">Service 6</a></h4>
 
                         <p class="description">Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo
                             abhorreant vituperatoribus.</p>
@@ -754,7 +756,7 @@
 
 
 
-    <section class="portfolio" id="portfolio">
+    {{-- <section class="portfolio" id="portfolio">
         <div class="portfolio-section">
             <div id="section-header">
                 <span>Portfolio</span>
@@ -799,17 +801,351 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-content current" id="tab-1">
+                    <div class="float-left pr-3 pt-3">
+                        <img alt="speed" class="finbyz-icon" src="https://finbyz.tech/svg/speed.svg" title="speed">
+                    </div>
+                    <p class="pb-20">
+                        Time is money! If you can increase annual working cycles from 5 to 6, the return on working
+                        capital will increase by 20%. In today’s competitive environment, if you can’t meet client
+                        expectations within a stipulated time you are sure to lose the business. An informed quick
+                        decision can get you the deal! But if you have to wait for information the time consumed in
+                        taking a decision can cost you a deal. How many times you have to wait for your team members
+                        to combine the various spreadsheets to give you reports like revenue statements, sales
+                        trends of various items, inactive customers, shipment tracking etc. Even manual Invoice
+                        generation or preparing various trade and bank documents can also be time-consuming. With
+                        ERP Software these tasks are done on a click of a button!
+                    </p>
+                </div>
+                <div class="tab-content" id="tab-2">
+                    <div class="float-left pr-3 pt-3">
+                        <img alt="accuracy" class="finbyz-icon" src="https://finbyz.tech/svg/accuracy.svg"
+                            title="accuracy">
+                    </div>
+                    <p class="pb-20">
+                        Humans make mistake! Then how do six sigma companies avoid these errors and be
+                        perfectionist? The answer lies in efficient ERP software development to ensure tasks are
+                        handled with accuracy. Who will understand it better than you, that even a small error in
+                        documentation can lead to huge loss of time and money. Think of a time when a silly mistake
+                        in export invoice replicated in many other documents, leading to hours of liasoning with
+                        different departments and even external agencies to rectify this small error. Not only that,
+                        sometimes your relation and business reputation can be at stake when a small error leads to
+                        customer dissatisfaction. With Automation through ERP Software the repetitive tasks are
+                        performed with highest accuracy saving you from the painful embarrassments and time wasted
+                        on corrections.
+                    </p>
+                </div>
+                <div class="tab-content" id="tab-3">
+                    <div class="float-left pr-3 pt-3">
+                        <img alt="efficiency" class="finbyz-icon" src="https://finbyz.tech/svg/efficiency.svg"
+                            title="efficiency">
+                    </div>
+                    <p class="pb-20">
+                        The first step to increase the efficiency of your team is to track and limit how much time
+                        they send on each task. ERP software will not only give you tools to monitor &amp; measure
+                        financial performance, but can also help you in monitoring the tasks performed by each team
+                        member. Sometimes the most important part of solving the problem is knowing where the
+                        problem lies. An efficient organization needs you to be a leader, and ERP software
+                        development provides you all the tools required to mentor your team to success! The
+                        efficiency also increases when you have all information on the figure tips. Don’t you think
+                        the sales call will be more efficient if caller has all information about last conversation
+                        with the client, even the details of a call done few years ago!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section> --}}
 
+
+<style>
+    /*==========================
+    Strat Service css
+==========================*/
+.service-area{
+	position: relative;
+	z-index: 1;
+}
+.service-area .shape{
+	position: absolute;
+}
+.service-area .objects-shape .shape-one{
+	top: 60px;
+	left: 20%;
+}
+.service-area .objects-shape .shape-two{
+	top: 60px;
+	right: 20%;
+}
+.service-area .service-after-bg{
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: '';
+	width: 100%;
+	height: 430px;
+	background-color: #F7F5FE;
+	overflow: hidden;
+	z-index: -1;
+}
+.service-after-bg:before,
+.service-after-bg:after{
+	position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 25px solid rgba(255,255,255,.7);
+    border-radius: 50%;
+    z-index: -1;
+    content: '';
+}
+.service-after-bg:before{
+	bottom: -70px;
+	left: -70px;
+}
+.service-after-bg:after{
+	top: -70px;
+	right: -70px;
+}
+.service-area .service-item{
+	background-color: #fff;
+	padding: 25px 25px 35px;
+	border-radius: 15px;
+	border: 1px solid rgba(0, 0, 0, 0.06);
+}
+.service-area .service-item .service-img img{
+	width: 100%;
+    border-radius: 15px;
+    height: 250px;
+    object-fit: cover;
+}
+.service-area .service-item .service-content{
+	padding-top: 22px;
+}
+.service-area .service-item .service-content h3.title{
+	font-size: 20px;
+	line-height: 30px;
+	font-weight: 500;
+	margin-bottom: 18px;
+}
+/*==========================
+    End Service css
+==========================*/
+    </style>
+    @if(is_array($userPermissions) && in_array('Service',$userPermissions))
+    <!--====== Start Service Section ======-->
+    <section class="service-area pt-80 pb-80" id="service">
+        <div class="objects-shape">
+            <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-14.png')}}" class="lazy shape shape-one" alt="">
+            <img data-src="{{asset('assets/front/img/profile1/theme4/objects/ob-15.png')}}" class="lazy shape shape-two" alt="">
+        </div>
+        <div class="service-after-bg"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section-title text-center mb-50">
+                        <span class="sub-title">{{$home_text->service_title ?? __('Services')}}</span>
+                        <h2>{{$home_text->service_subtitle ?? __('What I Do ?')}}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach($services as $service)
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="service-item text-center mb-40">
+                            <a class="service-img d-block" href="{{route('front.user.service.detail',[getParam(),'slug' => $service->slug,'id' => $service->id])}}">
+                                <img data-src="{{isset($service->image) ? asset('assets/front/img/user/services/'.$service->image) : asset('assets/front/img/profile/service-1.jpg')}}" class="lazy" alt="Service Image">
+                            </a>
+                            <div class="service-content">
+                                @if($service->detail_page == 1)
+                                <h3 class="title"><a href="{{route('front.user.service.detail',[getParam(),'slug' => $service->slug,'id' => $service->id])}}">{{$service->name}}</a></h3>
+                                @else
+                                <h3 class="title">{{$service->name}}</h3>
+                                @endif
+                                <a @if($service->detail_page == 1) href="{{route('front.user.service.detail',[getParam(),'slug' => $service->slug,'id' => $service->id])}}" @endif class="btn-link">{{$keywords["Read_More"] ?? "Read More"}} <span class="btn-cirle"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
+    <!--====== End Service Section ======-->
+    @endif
+
+    {{-- <style>
+        .nav-pill-main-div {
+    position: relative;
+    border-radius: 20px;
+    box-shadow: inset -1px -7px 28px 3px rgba(1, 1, 1, 0.11);
+    height: 100%;
+}
+ul.tabs{
+		margin: 0px;
+		padding: 0px;
+		list-style: none;
+	}
+	 ul.tabs li{
+		background: none;
+		color: #222;
+		display: inline-block;
+		padding: 10px 15px;
+		cursor: pointer;
+		transition: 0.3s ease all;
+     width: 33%;
+	}
+	ul.tabs li.current{
+		color: #222;
+		transition: 0.3s ease all;
+	}
+	ul.tabs li.current span{
+		color: #1AA8E2;
+		transition: 0.3s ease all;
+	}
+	.tab-content{
+		display: none;
+		padding: 15px;
+		transition: 0.3s ease all;
+	}
+	.tab-content.current{
+		display: inherit;
+		transition: 0.3s ease all;
+	}
+
+
+	/*------ease effect------*/
+	.nav-justified > li {
+		float: none;
+	}
+	.nav-justified > li span {
+		width: 100%;
+	}
+	.customize_solution .nav-justified > li {
+    	float: none;
+	}
+	.customize_solution span.ease-effect {
+		text-decoration: none;
+		-webkit-transition: 0.3s all ease;
+		transition: 0.3s ease all;
+	}
+	.customize_solution span.ease-effect:hover, .customize_solution span.ease-effect:focus,.customize_solution ul.tabs li.current span:hover,.customize_solution ul.tabs li.current span:focus {
+		color: #FFF;
+		transition: 0.3s ease all;
+	}
+	.customize_solution span.ease-effect {
+		letter-spacing: 2px;
+		text-transform: uppercase;
+		display: inline-block;
+		text-align: center;
+		font-weight: bold;
+		padding: 14px 0px;
+		border-top-right-radius: 2px;
+		border-top-left-radius: 2px;
+		position: relative;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+	}
+	.customize_solution .ease-effect:before {
+		-webkit-transition: 0.5s all ease;
+		transition: 0.5s all ease;
+		position: absolute;
+		top: 0; left: 50%;
+		right: 50%;
+		bottom: 0;
+		opacity: 0;
+		content: '';
+		background-color: #1AA8E2;
+		z-index: -2;
+	}
+	.customize_solution .ease-effect:hover:before, .customize_solution .ease-effect:focus:before {
+		-webkit-transition: 0.5s all ease;
+		transition: 0.5s all ease;
+		left: 0;
+		right: 0;
+		opacity: 1;
+	}
+
+.finbyz-icon {
+    height: 100px;
+    width: 100px;
+}
+    </style>
+    <section>
+        <div class="container">
+            <h2 align="center"><a href="https://finbyz.tech" target="_blank"><u>Live Example</u></a></h2>
+        </div>
+
+        <div class="col-lg-8 col-xl-8 col-12 nav-pill-main-div mx-auto">
+            <div class="customize_solution pt-3">
+                <ul class="tabs nav nav-justified">
+                    <li class="tab-link current nav-pill mt-2" href="tab-1">
+                        <span class="ease-effect">Speed</span>
+                    </li>
+                    <li class="tab-link nav-pill mt-2" href="tab-2">
+                        <span class="ease-effect">Accuracy</span>
+                    </li>
+                    <li class="tab-link nav-pill mt-2" href="tab-3">
+                        <span class="ease-effect">Efficiency</span>
+                    </li>
+                </ul>
+                <div class="tab-content current" id="tab-1">
+                    <div class="float-left pr-3 pt-3">
+                        <img alt="speed" class="finbyz-icon" src="https://finbyz.tech/svg/speed.svg" title="speed">
+                    </div>
+                    <p class="pb-20">
+                        Time is money! If you can increase annual working cycles from 5 to 6, the return on working
+                        capital will increase by 20%. In today’s competitive environment, if you can’t meet client
+                        expectations within a stipulated time you are sure to lose the business. An informed quick
+                        decision can get you the deal! But if you have to wait for information the time consumed in
+                        taking a decision can cost you a deal. How many times you have to wait for your team members
+                        to combine the various spreadsheets to give you reports like revenue statements, sales
+                        trends of various items, inactive customers, shipment tracking etc. Even manual Invoice
+                        generation or preparing various trade and bank documents can also be time-consuming. With
+                        ERP Software these tasks are done on a click of a button!
+                    </p>
+                </div>
+                <div class="tab-content" id="tab-2">
+                    <div class="float-left pr-3 pt-3">
+                        <img alt="accuracy" class="finbyz-icon" src="https://finbyz.tech/svg/accuracy.svg"
+                            title="accuracy">
+                    </div>
+                    <p class="pb-20">
+                        Humans make mistake! Then how do six sigma companies avoid these errors and be
+                        perfectionist? The answer lies in efficient ERP software development to ensure tasks are
+                        handled with accuracy. Who will understand it better than you, that even a small error in
+                        documentation can lead to huge loss of time and money. Think of a time when a silly mistake
+                        in export invoice replicated in many other documents, leading to hours of liasoning with
+                        different departments and even external agencies to rectify this small error. Not only that,
+                        sometimes your relation and business reputation can be at stake when a small error leads to
+                        customer dissatisfaction. With Automation through ERP Software the repetitive tasks are
+                        performed with highest accuracy saving you from the painful embarrassments and time wasted
+                        on corrections.
+                    </p>
+                </div>
+                <div class="tab-content" id="tab-3">
+                    <div class="float-left pr-3 pt-3">
+                        <img alt="efficiency" class="finbyz-icon" src="https://finbyz.tech/svg/efficiency.svg"
+                            title="efficiency">
+                    </div>
+                    <p class="pb-20">
+                        The first step to increase the efficiency of your team is to track and limit how much time
+                        they send on each task. ERP software will not only give you tools to monitor &amp; measure
+                        financial performance, but can also help you in monitoring the tasks performed by each team
+                        member. Sometimes the most important part of solving the problem is knowing where the
+                        problem lies. An efficient organization needs you to be a leader, and ERP software
+                        development provides you all the tools required to mentor your team to success! The
+                        efficiency also increases when you have all information on the figure tips. Don’t you think
+                        the sales call will be more efficient if caller has all information about last conversation
+                        with the client, even the details of a call done few years ago!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section> --}}
 
 
 
 
 
     {{-- 2 --}}
-    {{-- <section class="testimonial" id="testimonial">
+    <section class="testimonial" id="testimonial">
         <div class="testimonial-div">
             <div class="testimonial-container">
                 <div id="section-header">
@@ -875,7 +1211,7 @@
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
 
 
 

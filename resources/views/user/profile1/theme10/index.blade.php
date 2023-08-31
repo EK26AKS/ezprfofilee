@@ -10,7 +10,7 @@
 @section('content')
 
             <div class="main-wrap ">
-                
+
                 <div class="main-container">
 
                     <div class="details d-flex justify-content-between align-items-center">
@@ -108,7 +108,7 @@
                                                     @endforeach
                                                     </div>
                                                 </div>
-                                            
+
                                             </div>
                                         </div>
                                     </div>
@@ -129,7 +129,7 @@
                         <div class="am-all d-flex flex-column gap-3 mx-5">
                             <div class="am-header">
                                 <span><img src="{{asset('assets/front/img/profile1/theme10/rectangle.svg') }}" class="me-3" id="bar-img" alt="">{{$home_text->service_title ?? __('Services')}}</span>
-                                <h3>{{$home_text->service_subtitle ?? __('What I Do ?')}}</h3>    
+                                <h3>{{$home_text->service_subtitle ?? __('What I Do ?')}}</h3>
                             </div>
 
                             <div class="slick-slider services-content my-3" id="service-slick">
@@ -139,8 +139,8 @@
                                         <img src="{{isset($service->image) ? asset('assets/front/img/user/services/'.$service->image) : asset('assets/front/img/profile/service-1.jpg')}}" alt="Service Image">
                                     </a>
                                     </div>
-                            @endforeach   
-                               
+                            @endforeach
+
                             </div>
                         </div>
                     </div>
@@ -182,12 +182,12 @@
                                             </div>
                                             <div class="ece-description">
                                                 <span class="">{!! nl2br($education->short_description) !!}</span>
-                                        
+
                                             </div>
                                         </div>
                                     @endforeach
 
-                                        
+
                                 </div>
                             </div>
 
@@ -209,7 +209,7 @@
                                                 {{$job_experience->designation}} [{{$job_experience->company_name}}]
                                             </div>
                                             <div class="ece-content">
-                                                <span class=""> jul 28, 2020 <{{\Carbon\Carbon::parse($job_experience->start_date)->format('M j, Y')}} - 
+                                                <span class=""> jul 28, 2020 <{{\Carbon\Carbon::parse($job_experience->start_date)->format('M j, Y')}} -
                                                 @if ($job_experience->is_continue == 0)
                                                 {{ \Carbon\Carbon::parse($job_experience->end_date)->format('M j, Y') }}
                                                 @else
@@ -218,7 +218,7 @@
                                             </div>
                                             <div class="ece-description">
                                                 <span class="">{!! nl2br($job_experience->content) !!}</span>
-                                        
+
                                             </div>
                                         </div>
                                     @endforeach
@@ -237,7 +237,7 @@
                         <div class="am-all d-flex flex-column gap-3 mx-5">
                             <div class="am-header">
                                 <span><img src="{{asset('assets/front/img/profile1/theme10/rectangle.svg') }}" class="me-3" id="bar-img" alt="">{{$home_text->portfolio_title ?? __('Portfolios')}}</span>
-                                <h3>{{$home_text->portfolio_subtitle ??  __('Portfolios')}}</h3>    
+                                <h3>{{$home_text->portfolio_subtitle ??  __('Portfolios')}}</h3>
                             </div>
 
                             <div class="filter-portfolio my-3">
@@ -272,7 +272,7 @@
                         <div class="am-all d-flex flex-column gap-3 mx-5">
                             <div class="am-header">
                                 <span><img src="{{asset('assets/front/img/profile1/theme10/rectangle.svg') }}" class="me-3" id="bar-img" alt="">{{$home_text->testimonial_title ?? __('Testimonials')}}</span>
-                                <h3>{{$home_text->testimonial_subtitle ?? __('Testimonials')}}</h3>    
+                                <h3>{{$home_text->testimonial_subtitle ?? __('Testimonials')}}</h3>
                             </div>
 
                             <div class="slick-slider-testimonial services-content  my-3" id="testimonial-slick">
@@ -286,7 +286,7 @@
                                     <div class="card-body">
                                     <p class="card-text">{!! nl2br($testimonial->content) !!}</p>
                                         <h5 class="card-title">{{$testimonial->name}}</h5>
-                                        
+
                                         <p class="card-text"><small class="text-muted">@if (!empty($testimonial->occupation))
                                             <span class="position">{{$testimonial->occupation}}</span>
                                             @endif</small></p>
@@ -306,7 +306,7 @@
                         <div class="am-all d-flex flex-column gap-3 mx-5">
                             <div class="am-header">
                                 <span><img src="{{asset('assets/front/img/profile1/theme10/rectangle.svg') }}" class="me-3" id="bar-img" alt="">{{$home_text->blog_title ?? __('Blogs')}}</span>
-                                <h3>{{$home_text->blog_subtitle ?? "Blogs"}}</h3>    
+                                <h3>{{$home_text->blog_subtitle ?? "Blogs"}}</h3>
                             </div>
 
                             <div class="slick-slider-blog blog-content  my-3" id="blogs-slick">
@@ -335,7 +335,7 @@
                         <div class="am-all d-flex flex-column gap-3 mx-5">
                             <div class="am-header">
                                 <span><img src="{{asset('assets/front/img/profile1/theme10/rectangle.svg') }}" class="me-3" id="bar-img" alt="">{{$home_text->contact_title ??  __('Get in touch')}}</span>
-                                <h3>{{$home_text->contact_subtitle ?? __('Get in touch')}}</h3>    
+                                <h3>{{$home_text->contact_subtitle ?? __('Get in touch')}}</h3>
                             </div>
 
                             <div class="contact-form my-5">
@@ -345,7 +345,7 @@
                                 <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                        
+
                                         <input type="text" class="form-control" placeholder="{{$keywords["Name"] ?? "Name"}}" name="fullname" required>
                                                 @if ($errors->has('fullname'))
                                                     <p class="text-danger mb-0">{{$errors->first('fullname')}}</p>
@@ -354,7 +354,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                        
+
                                         <input type="email" class="form-control" placeholder="{{$keywords["Email_Address"] ?? "Email Address"}}" name="email" required>
                                                 @if ($errors->has('email'))
                                                     <p class="text-danger mb-0">{{$errors->first('email')}}</p>
@@ -367,27 +367,27 @@
                                 <div class="row mb-4">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            
+
                                         <input type="text" class="form-control" placeholder="{{$keywords["Subject"] ?? "Subject"}}" name="subject" required>
                                                 @if ($errors->has('subject'))
                                                     <p class="text-danger mb-0">{{$errors->first('subject')}}</p>
                                                 @endif
                                         </div>
                                     </div>
-                                
+
                                 </div>
 
                                 <div class="row mb-4">
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                        
+
                                         <textarea class="form-control" placeholder="{{$keywords["Message"] ?? "Message"}}" name="message"></textarea>
                                                 @if ($errors->has('message'))
                                                     <p class="text-danger mb-0">{{$errors->first('message')}}</p>
                                                 @endif
                                         </div>
                                     </div>
-                                
+
                                 </div>
 
                                 <div class="mb-4">
@@ -406,23 +406,23 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-   
+
     <script>
         $(".slick-slider").slick({
             slidesToShow: 3,
             infinite:false,
             slidesToScroll: 1,
-           
+
         });
 
         $(".slick-slider-portfolio").slick({
-            
+
             slidesToShow: 3,
             infinite:false,
             slidesToScroll: 1,
-          
+
         });
 
     </script>
@@ -436,8 +436,8 @@
             variableWidth: true,
         });
 
-        
-    </script> 
+
+    </script>
 
     <script>
         $(".slick-slider-blog").slick({
@@ -455,7 +455,7 @@
             $('#sidebar .nav-bar .default-show').toggleClass("show");
             //$('#sidebar .nav-manage .icon-svg').toggleClass("rotate");
         });
-    </script> 
+    </script>
 
     <script>
         function myFunction() {

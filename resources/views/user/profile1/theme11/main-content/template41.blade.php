@@ -5,32 +5,32 @@
         /* @import url("https://fonts.googleapis.com/css2?family=Shippori+Antique&display=swap"); */
 
         /* * {
-                     margin: 0;
-                     padding: 0;
-                     box-sizing: border-box;
-                    }
+                 margin: 0;
+                 padding: 0;
+                 box-sizing: border-box;
+                }
 
-                    button,
-                    input,
-                    select {
-                     font-family: inherit;
-                     font-size: 100%;
-                     box-sizing: border-box;
-                     padding: 0;
-                     margin: 0;
-                    }
+                button,
+                input,
+                select {
+                 font-family: inherit;
+                 font-size: 100%;
+                 box-sizing: border-box;
+                 padding: 0;
+                 margin: 0;
+                }
 
-                    html {
-                     font-size: 12px;
-                    }
+                html {
+                 font-size: 12px;
+                }
 
-                    body {
-                     color: #000;
-                     font-family: "Shippori Antique", sans-serif;
-                     height: 100vh;
-                     display: grid;
-                     place-items: center;
-                    } */
+                body {
+                 color: #000;
+                 font-family: "Shippori Antique", sans-serif;
+                 height: 100vh;
+                 display: grid;
+                 place-items: center;
+                } */
 
         .content-wrapper {
             height: 100%;
@@ -263,24 +263,26 @@
             </div>
         </div>
     </section>
-<h1>!!</h1>
 
-    <section class="" id="about-me">
-        <div class="container-fluid talk-about-me">
-            <div class="p-3">
+
+    <section class="about-me" id="about-me">
+        <div class="container m-2">
+            <div class="talk-about-me">
                 <div id="section-header">
                     <span>{{ $home_text->about_title ?? 'My Resume' }}</span>
                     <div class="header-img d-flex justify-content-center">
                         <h2> {{ $home_text->about_subtitle ?? 'About Me' }} </h2>
                     </div>
                 </div>
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-lg-7">
-                        <p>{!! nl2br($home_text->about_content ?? '') !!}</p>
-                    </div>
-                    <div class="col-lg-5">
-                        <img src="{{ isset($home_text->about_image) ? asset('assets/front/img/user/home_settings/' . $home_text->about_image) : asset('assets/front/img/profile/about.png') }}"
-                            class="img-fluid" alt="">
+                <div class="aboutme-content d-flex align-items-center">
+                    <div class="row align-items-center">
+                        <div class="col-lg-7 order-1 order-lg-1">
+                            <p>{!! nl2br($home_text->about_content ?? '') !!}</p>
+                        </div>
+                        <div class="col-lg-5 order-2 order-lg-2 aboutme-img">
+                            <img src="{{ isset($home_text->about_image) ? asset('assets/front/img/user/home_settings/' . $home_text->about_image) : asset('assets/front/img/profile/about.png') }}"
+                                width="500" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -288,7 +290,7 @@
     </section>
 
 
-
+    <h1>!!</h1>
     @if (is_array($userPermissions) && in_array('Skill', $userPermissions))
         <section class="skills" id="skills">
             <div class="container">
@@ -489,7 +491,7 @@
     <section class="services section-bg" id="services" style="background-color: #0a58ca;">
         <div class="container">
             <header class="section-header">
-                <h3>Testimonial</h3>
+                <h3>Services</h3>
 
                 <p style="color: #fff">Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo
                     abhorreant vituperatoribus.
@@ -503,7 +505,7 @@
                             <i class="fa fa-briefcase service-icon" style="color: #c59c35;"></i>
                         </div>
 
-                        <h4 class="title"><a href="">Name 1</a></h4>
+                        <h4 class="title"><a href="">Service 1</a></h4>
 
                         <p class="description">Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo
                             abhorreant vituperatoribus.</p>
@@ -516,7 +518,7 @@
                             <i class="fa fa-clipboard service-icon" style="color: #c59c35;"></i>
                         </div>
 
-                        <h4 class="title"><a href="">Name 2</a></h4>
+                        <h4 class="title"><a href="">Service 2</a></h4>
 
                         <p class="description">Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo
                             abhorreant vituperatoribus.</p>
@@ -529,7 +531,7 @@
                             <i class="fa fa-chart-bar service-icon" style="color: #c59c35;"></i>
                         </div>
 
-                        <h4 class="title"><a href="">Name 3</a></h4>
+                        <h4 class="title"><a href="">Service 3</a></h4>
 
                         <p class="description">Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo
                             abhorreant vituperatoribus.</p>
@@ -542,7 +544,7 @@
                             <i class="fa fa-binoculars service-icon" style="color: #c59c35;"></i>
                         </div>
 
-                        <h4 class="title"><a href="">Name 4</a></h4>
+                        <h4 class="title"><a href="">Service 4</a></h4>
 
                         <p class="description">Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo
                             abhorreant vituperatoribus.</p>
@@ -555,7 +557,7 @@
                             <i class="fa fa-cog service-icon" style="color:#c59c35;"></i>
                         </div>
 
-                        <h4 class="title"><a href="">Name 5</a></h4>
+                        <h4 class="title"><a href="">Service 5</a></h4>
 
                         <p class="description">Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo
                             abhorreant vituperatoribus.</p>
@@ -568,7 +570,7 @@
                             <i class="fa fa-calendar-alt service-icon" style="color: #c59c35;"></i>
                         </div>
 
-                        <h4 class="title"><a href="">Name 6</a></h4>
+                        <h4 class="title"><a href="">Service 6</a></h4>
 
                         <p class="description">Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo
                             abhorreant vituperatoribus.</p>
@@ -703,7 +705,7 @@
 
 
     <style>
-        .about {
+        .about{
             background-color: #0a58ca;
 
         }
@@ -769,14 +771,29 @@
                         <div class="col-lg-12">
                             <div class="portfolio-filter-button text-center">
                                 <ul class="filter-btn mb-30">
-                                    <li data-filter="" class="active" href="tab-1">All</li>
-                                    <li data-filter="" href="tab-2">ui/ux design</li>
-                                    <li data-filter="" href="tab-3">ui/ux design</li>
-                                    <li data-filter="" href="tab-4">ui/ux design</li>
+                                    <li data-filter="" class="active">All</li>
+
+                                    <li data-filter="">ui/ux design</li>
+                                    <li data-filter="">ui/ux design</li>
+                                    <li data-filter="">ui/ux design</li>
+
                                 </ul>
                             </div>
                         </div>
                     </div>
+                    <!--div class="filter-portfolio">
+                                <div class="filter-box d-flex gap-3 flex-wrap">
+                                    <div class="filter-button">
+                                        <button class="btn-all">All</button>
+                                    </div>
+                                    <div class="filter-button">
+                                        <button class="btn-uiux">ui/ux design</button>
+                                    </div>
+                                    <div class="filter-button">
+                                        <button class="btn-graphic">graphic design</button>
+                                    </div>
+                                </div>
+                            </div--->
                 </div>
                 <div class="portfolio-content mt-5">
                     <div
@@ -799,7 +816,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -809,7 +825,7 @@
 
 
     {{-- 2 --}}
-    {{-- <section class="testimonial" id="testimonial">
+    <section class="testimonial" id="testimonial">
         <div class="testimonial-div">
             <div class="testimonial-container">
                 <div id="section-header">
@@ -875,7 +891,9 @@
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
+
+
 
 
 
@@ -936,27 +954,27 @@
 
     <style>
         /* section {
-                            padding: 60px 0;
-                            min-height: 100vh;
-                        }
+                        padding: 60px 0;
+                        min-height: 100vh;
+                    }
 
-                        a,
-                        a:hover,
-                        a:focus,
-                        a:active {
-                            text-decoration: none;
-                            outline: none;
-                        }
+                    a,
+                    a:hover,
+                    a:focus,
+                    a:active {
+                        text-decoration: none;
+                        outline: none;
+                    }
 
-                        ul {
-                            margin: 0;
-                            padding: 0;
-                            list-style: none;
-                        }
+                    ul {
+                        margin: 0;
+                        padding: 0;
+                        list-style: none;
+                    }
 
-                        .bg-gray {
-                            background-color: #f9f9f9;
-                        } */
+                    .bg-gray {
+                        background-color: #f9f9f9;
+                    } */
 
         .site-heading h2 {
             display: block;
@@ -1279,6 +1297,7 @@
             </div>
         </div>
     </section>
+
 
 
     <section class="contact" id="contact">

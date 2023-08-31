@@ -1,9 +1,9 @@
 @extends('user.profile1.theme12.layout')
-@section('content')
+@section('content')    
 <section id="header">
     <div class="header-left-box">
         <div class="navigation-wrapper">
-            <div class="logo text-center">
+            <div class="logo text-center">         
             </div>
             <div class="primary-menu">
                 <nav class="main-menu">
@@ -11,7 +11,7 @@
                         <li>
                             <a href="{{ route('front.user.detail.view', getParam()) }}"
                                 class="
-                                    @if (request()->routeIs('front.user.detail.view')) active @endif
+                                    @if (request()->routeIs('front.user.detail.view')) active @endif    
                                     "><i
                                     class="fas fa-home-alt"></i></a>
                             <span>{{ $keywords['Home'] ?? 'Home' }}</span>
@@ -34,11 +34,11 @@
                                 in_array('Service', $userPermissions) &&
                                 in_array('Service', $packagePermissions))
                             <li>
-
+                              
                                 <li>
                                     <a href="#services" class="@if (request()->routeIs('front.user.services') || request()->routeIs('front.user.service.detail')) active @endif"><i class="fas fa-cog"></i></a>
                                     <span>{{ $keywords['Services'] ?? 'Services' }}</span>
-                                </li>
+                                </li>                            
                         @endif
 
                         @if (is_array($userPermissions) && in_array('Experience', $userPermissions))
@@ -81,7 +81,7 @@
                                 <a href="#contact" class=" @if (request()->routeIs('front.user.contact')) active @endif"><i
                                         class="fas fa-comments"></i></a>
                                 <span>{{ $keywords['Contact'] ?? 'Contact' }}</span>
-
+                                
                             </li>
                         @endif
                     </ul>
@@ -97,7 +97,7 @@
         </div>
     </div>
     <div class="header-right-box">
-        <div class="logo-div">
+        <div class="logo-div">           
             <a href="{{ route('front.user.detail.view', getParam()) }}"><img
                 src="{{ isset($userBs->logo)
                     ? asset('assets/front/img/user/' . $userBs->logo)
@@ -222,7 +222,7 @@
         </div>
     </section>
 
-
+    
 
     <section class="section-light section-gap" id="experience">
         <div class="row" id="row" style="display:grid">
@@ -339,12 +339,14 @@
                     </div>
                 @endforeach
             </div>
-            <div class="portfolio-grid-item" style="display:flex">
-                    @foreach ($portfolios as $portfolio)
+            <div class="row">
+                @foreach ($portfolios as $portfolio)
+                <div class="col-lg-3">
                     <a class="pr" href="{{route('front.user.portfolio.detail', [getParam(), $portfolio->slug, $portfolio->id])}}">
-                    <img src="{{ asset('assets/front/img/user/portfolios/' . $portfolio->image) }}" alt="Image">
+                        <img src="{{ asset('assets/front/img/user/portfolios/' . $portfolio->image) }}" alt="Image">
                     </a>
-                    @endforeach
+                </div>
+                @endforeach
             </div>
         </div>
     <section>
@@ -392,7 +394,7 @@
                 <p class="para">{{ $home_text->blog_title ?? __('Blogs') }}</p>
                 <p class="section-head">{{ $home_text->blog_subtitle ?? 'Blogs' }}</p>
             </div>
-
+           
             <div class="blog-grid">
                 @foreach ($blogs as $blog)
                     <div class="blog-grid-item">
@@ -400,13 +402,13 @@
                             <a class="post-thumbnail d-block" href="{{route('front.user.blog.detail', [getParam(), $blog->slug, $blog->id])}}">
                                 <img class="lazy" src="{{asset('assets/front/img/user/blogs/'.$blog->image)}}" alt="Blog Image" style="height
                                 :350px">
-                            </a>
+                            </a>                      
                                 <p>{{ \Carbon\Carbon::parse($blog->created_at)->format('d') }}</p>
                                 <p class="blog-date">{{ \Carbon\Carbon::parse($blog->created_at)->format('M') }}
                                 </p>
                             </div>
                             <div class="blog-orange-box">
-                                <p class="orange-box-content">
+                                <p class="orange-box-content">                                    
                                     {{ $blog->title }}
                                 </p>
                                 <div class="orange-sub-grid">

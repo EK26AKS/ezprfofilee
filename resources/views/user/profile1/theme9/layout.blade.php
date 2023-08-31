@@ -19,7 +19,6 @@
   <link rel="stylesheet" href="{{ asset('assets/admin/css/jquery.timepicker.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/front/css/pignose.calendar.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/front/css/plugin.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/front/css/profile/theme9/theme9.css') }}" />
   <!--====== COMMON css ======-->
   <link rel="stylesheet" href="{{ asset('assets/front/css/profile/common.css') }}">
   <!--====== Bootstrap css ======-->
@@ -33,7 +32,8 @@
   <link rel="stylesheet" href="{{ asset('assets/front/css/profile/theme6-8/magnific-popup.min.css') }}" />
   <!--====== Font Awesome ======-->
   <link rel="stylesheet" href="{{ asset('assets/front/css/profile/theme6-8/all.min.css') }}" />
-  <!--====== Main Css ======--> 
+  <!--====== Main Css ======-->
+  <link rel="stylesheet" href="{{ asset('assets/front/css/profile/theme6-8/theme8.css') }}" />
   @if ($userCurrentLang->rtl == 1)
     <!--====== Common RTL Style css ======-->
     <link rel="stylesheet" href="{{ asset('assets/front/css/profile/common-rtl.css') }}">
@@ -92,98 +92,180 @@
       }
     </style>
   @endforeach
-  <style>
-    .navbar-dark .navbar-nav .nav-link {
-      text-decoration: none;
-    color: #ff6060;
-    cursor: pointer;
-    font-weight: 700;
-    font-family: var(--font-poppins);
-    margin-top: 15px
-    }
-  </style>
-  
+
   @yield('styles')
 </head>
 
 <body>
   <!--====== Start Template Header ======-->
-             
-      <nav class="nav" style="height:100px">
-        <input type="checkbox" id="nav-check" />
-        <div class="nav-header">
-            <img
-                src="{{ isset($userBs->logo)
-                    ? asset('assets/front/img/user/' . $userBs->logo)
-                    : asset('assets/front/img/profile/lgoo.png') }}"
-                height="90px"
-                width="90px"
-            />
-        </div>
-        <div class="nav-btn">
-            <label for="nav-check">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-        </div>
-
-        <ul class="nav-list">
-            <li><a href="{{ route('front.user.detail.view', getParam()) }}">Home</a></li>          
-            <li><a href="{{ route('front.user.detail.view', getParam()) }}#services">Services</a></li>
-            <li><a href="{{ route('front.user.detail.view', getParam()) }}#portfolio">Portfolio</a></li>
-            <li><a href="{{ route('front.user.detail.view', getParam()) }}#blog">Blog</a></li>
-            <li><a href="{{ route('front.user.detail.view', getParam()) }}#">Appointment</a></li>
-            <li><a href="{{ route('front.user.detail.view', getParam()) }}#contact">Contact</a></li>
-            <li>    
-                <form action="{{ route('changeUserLanguage', getParam()) }}" id="userLangForm">
-                    <input type="hidden" name="username" value="{{ $user->username }}">
-                    <select name="code" onchange="document.getElementById('userLangForm').submit();">
-                        @foreach ($userLangs as $userLang)
-                            <option value="{{ $userLang->code }}"
-                                {{ $userLang->id == $userCurrentLang->id ? 'selected' : '' }}>
-                                {{ $userLang->name }}</option>
-                        @endforeach
-                    </select>
-                </form>
+  <header class="template-header">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-dark justify-content-between align-items-center">
+        <a href="{{ route('front.user.detail.view', getParam()) }}" class="navbar-brand d-block">
+          <img
+            data-src="{{ isset($userBs->logo)
+                ? asset('assets/front/img/user/' . $userBs->logo)
+                : asset('assets/front/img/profile/lgoo.png') }}"
+            class="lazy header-theme8" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        @if (is_array($userPermissions) &&
+                is_array($packagePermissions) &&
+                in_array('Appointment', $userPermissions) &&
+                in_array('Appointment', $packagePermissions))
+          <div class="language-dropdown order-lg-last ezprofile-theme8-login-btn">
+            @if (!Auth::guard('customer')->check())
+              <a href="{{ route('customer.login', getParam()) }}"
+                class="main-btn">{{ $keywords['Login'] ?? 'Login' }}</a>
+            @else
+              <div class="dropdown show">
+                <a class="main-btn dropdown-toggle filled-btn" href="#" role="button" id="dropdownMenuLink"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ Auth::guard('customer')->user()->username }}
                 </a>
-            </li>            
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item"
+                    href="{{ route('customer.dashboard', getParam()) }}">{{ $keywords['Dashboard'] ?? __('Dashboard') }}</a>
+                  <a class="dropdown-item"
+                    href="{{ route('customer.logout', getParam()) }}">{{ $keywords['Signout'] ?? __('Sign out') }}</a>
+                </div>
+              </div>
+            @endif
+          </div>
+        @endif
+        <div class="language-dropdown order-lg-last">
+          @if (!empty($userLangs))
+            <div class="language-selector bordered-style  d-flex">
+              <form action="{{ route('changeUserLanguage', getParam()) }}" id="userLangForm">
+                <input type="hidden" name="username" value="{{ $user->username }}">
+                <select name="code" onchange="document.getElementById('userLangForm').submit();">
+                  @foreach ($userLangs as $userLang)
+                    <option value="{{ $userLang->code }}"
+                      {{ $userLang->id == $userCurrentLang->id ? 'selected' : '' }}>
+                      {{ $userLang->name }}</option>
+                  @endforeach
+                </select>
+              </form>
+            </div>
+          @endif
+        </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item @if (request()->routeIs('front.user.detail.view')) active @endif">
+              <a class="nav-link"
+                href="{{ route('front.user.detail.view', getParam()) }}">{{ $keywords['Home'] ?? 'Home' }}</a>
+            </li>
             @if (is_array($userPermissions) &&
-                  is_array($packagePermissions) &&
-                  in_array('Appointment', $userPermissions) &&
-                  in_array('Appointment', $packagePermissions))
-                <li>
-                    @if (!Auth::guard('customer')->check())
-                    <a href="{{ route('customer.login', getParam()) }}" style="color:white;margin-top: 0px" class="main-btn login-btn">{{ $keywords['Login'] ?? 'Login' }}</a>
-                    @else
-                    <div class="dropdown show">
-                        <a class="nav-link dropdown-toggle filled-btn" href="#" role="button" id="dropdownMenuLink"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ Auth::guard('customer')->user()->username }}
-                        </a>
-                        <li class="nav-item" aria-labelledby="dropdownMenuLink">
-                        <a class="nav-link"
-                            href="{{ route('customer.dashboard', getParam()) }}">{{ $keywords['Dashboard'] ?? __('Dashboard') }}</a>
-                        <a class="nav-link"
-                            href="{{ route('customer.logout', getParam()) }}">{{ $keywords['Signout'] ?? __('Sign out') }}</a>
-                        </li>
-                    </div>
-                    @endif
-                </li>
-            @endif        
-        </ul>
-    </nav>
- 
+                    is_array($packagePermissions) &&
+                    in_array('Service', $userPermissions) &&
+                    in_array('Service', $packagePermissions))
+              <li class="nav-item @if (request()->routeIs('front.user.services') || request()->routeIs('front.user.service.detail')) active @endif">
+                <a class="nav-link"
+                  href="{{ route('front.user.services', getParam()) }}">{{ $keywords['Services'] ?? 'Services' }}</a>
+              </li>
+            @endif
+            @if (is_array($userPermissions) &&
+                    is_array($packagePermissions) &&
+                    in_array('Portfolio', $userPermissions) &&
+                    in_array('Portfolio', $packagePermissions))
+              <li class="nav-item @if (request()->routeIs('front.user.portfolios') || request()->routeIs('front.user.portfolio.detail')) active @endif">
+                <a class="nav-link"
+                  href="{{ route('front.user.portfolios', getParam()) }}">{{ $keywords['Portfolios'] ?? 'Portfolios' }}</a>
+              </li>
+            @endif
+            @if (is_array($userPermissions) &&
+                    is_array($packagePermissions) &&
+                    in_array('Blog', $userPermissions) &&
+                    in_array('Blog', $packagePermissions))
+              <li class="nav-item @if (request()->routeIs('front.user.blogs') || request()->routeIs('front.user.blog.detail')) active @endif">
+                <a href="{{ route('front.user.blogs', getParam()) }}" class="nav-link">
+                  {{ $keywords['Blogs'] ?? 'Blogs' }}
+                </a>
+              </li>
+            @endif
+            @if (is_array($userPermissions) && in_array('Contact', $userPermissions))
+              <li class="nav-item @if (request()->routeIs('front.user.contact')) active @endif">
+                <a href="{{ route('front.user.contact', getParam()) }}"
+                  class="nav-link">{{ $keywords['Contact'] ?? 'Contact' }}</a>
+              </li>
+            @endif
+            @if (is_array($userPermissions) &&
+                    is_array($packagePermissions) &&
+                    in_array('Appointment', $userPermissions) &&
+                    in_array('Appointment', $packagePermissions))
+              <li class="nav-item @if (request()->routeIs('front.user.appointment') ||
+                      request()->routeIs('front.user.appointment.form') ||
+                      request()->routeIs('front.user.appointment.booking')) active @endif">
+                <a class="nav-link"
+                  href="{{ route('front.user.appointment', getParam()) }}">{{ $keywords['Appointment'] ?? 'Appointment' }}</a>
+              </li>
+            @endif
+
+            @if (is_array($userPermissions) &&
+                is_array($packagePermissions) &&
+                in_array('Appointment', $userPermissions) &&
+                in_array('Appointment', $packagePermissions))
+              <li class="nav-item ezprofile-login-button">
+                @if (!Auth::guard('customer')->check())
+                  <a href="{{ route('customer.login', getParam()) }}"
+                    class="nav-link">{{ $keywords['Login'] ?? 'Login' }}</a>
+                @else
+                  <div class="dropdown show">
+                    <a class="nav-link dropdown-toggle filled-btn" href="#" role="button" id="dropdownMenuLink"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{ Auth::guard('customer')->user()->username }}
+                    </a>
+                    <li class="nav-item" aria-labelledby="dropdownMenuLink">
+                      <a class="nav-link"
+                        href="{{ route('customer.dashboard', getParam()) }}">{{ $keywords['Dashboard'] ?? __('Dashboard') }}</a>
+                      <a class="nav-link"
+                        href="{{ route('customer.logout', getParam()) }}">{{ $keywords['Signout'] ?? __('Sign out') }}</a>
+                    </li>
+                  </div>
+                @endif
+            </li>
+            @endif
+        
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
   <!--====== End Template Header ======-->
 
   @yield('content')
   <!--====== Template Footer Start ======-->
-  <section id="footer" class="services-section">
-    <div class="col-sm-3 col-md-3 col-lg-3 testimonial-row-1" style="text-align: center;">
-      <p class="about-me-para">{{ $keywords['Stay_Connected'] ?? 'Stay Connected' }}</p>
-      <a class="section-head" href="mailto:{{ $user->email }}">{{ $user->email }}</a>
-  </div>
-  </section>
+  <footer class="template-footer lazy" data-bg="{{ asset('assets/front/css/profile/theme6-8/footer-bg.jpg') }}">
+    <div class="container">
+      <div class="footer-content">
+        <div class="row justify-content-center">
+          <div class="col-lg-4">
+            @if (is_array($userPermissions) && in_array('Footer Mail', $userPermissions))
+              <p class="mail-title">{{ $keywords['Stay_Connected'] ?? 'Stay Connected' }}</p>
+              <a class="mail" href="mailto:{{ $user->email }}">{{ $user->email }}</a>
+            @endif
+            <ul class="social-links">
+              @if (isset($social_medias))
+                @foreach ($social_medias as $social_media)
+                  <li><a href="{{ $social_media->url }}" target="_blank"><i
+                        class="{{ $social_media->icon }}"></i></a>
+                  </li>
+                @endforeach
+              @endif
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-copyright">
+        <p>{{ $keywords['Copyright'] ?? __('Copyright') }} {{ date('Y') }}
+          {{ $keywords['All_Right_Reserved'] ?? __('All Right Reserved') }}</p>
+      </div>
+    </div>
+  </footer>
   <!--====== Template Footer End ======-->
   <!--====== End Main Wrapper ======-->
 

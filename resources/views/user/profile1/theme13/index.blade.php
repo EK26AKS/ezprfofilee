@@ -196,7 +196,7 @@
         			<h2>{{ $home_text->service_title ?? __('Services') }}</h2>
         			<p>{{ $home_text->service_subtitle ?? __('What I Do ?') }}</p>
         		</div>
-        		<div class="feature_inner row">
+        		<div class="feature_inner row align-items-center justify-content-center">
         			@foreach ($services as $service)
 					<div class="col-lg-4">
 						<div class="feature_item">
@@ -237,7 +237,7 @@
         		</div>
         	</div>
         	<div class="container">
-        		<div class="gallery_f_inner row imageGallery1">
+        		<div class="gallery_f_inner row imageGallery1 align-items-center justify-content-center">
 					@foreach ($portfolios as $portfolio)
         			<div class="col-lg-4 col-md-4 col-sm-6 brand manipul design print">
         				<div class="h_gallery_item">
