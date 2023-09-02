@@ -821,7 +821,7 @@ Footer
     {{-- achievements --}}
 
     <style>
-        .about{
+        .about {
             background-color: #ffffff;
 
         }
@@ -932,9 +932,10 @@ Footer
                                     <a
                                         @if ($service->detail_page == 1) href="{{ route('front.user.service.detail', [getParam(), 'slug' => $service->slug, 'id' => $service->id]) }}" @endif>
                                         <div class="imgwrapper">
-                                        <img class="img-responsive portfolio-img"
-                                            src="{{ isset($service->image) ? asset('assets/front/img/user/services/' . $service->image) : asset('assets/front/img/profile/service-1.jpg') }}"
-                                            alt="Portfolio"></div>
+                                            <img class="img-responsive portfolio-img"
+                                                src="{{ isset($service->image) ? asset('assets/front/img/user/services/' . $service->image) : asset('assets/front/img/profile/service-1.jpg') }}"
+                                                alt="Portfolio">
+                                        </div>
                                     </a>
                                     <div class="services-box-2">
                                         <p class="service-head"><a style="color: 4c3ec7;"
@@ -1062,7 +1063,7 @@ Footer
     {{-- exp --}}
 
     {{-- df --}}
-    @if (is_array($userPermissions) && in_array('Portfolio', $userPermissions))
+    {{-- @if (is_array($userPermissions) && in_array('Portfolio', $userPermissions))
         <section id="" class="services-section">
             <div class="row">
                 <div class="col-sm-6 col-md-6 col-lg-6 services-row-1">
@@ -1088,8 +1089,8 @@ Footer
                     <div class="row portfolio-row-2">
                         @foreach ($portfolios as $portfolio)
                             <div class="col-md-6 img-responsive portfolio-box cat-{{ $portfolio->bcategory->id }} ">
-                                <div><img src="{{ asset('assets/front/img/user/portfolios/' . $portfolio->image) }}"
-                                        alt="Image"></div>
+                                <img src="{{ asset('assets/front/img/user/portfolios/' . $portfolio->image) }}" class="img-fluid"
+                                        alt="Image">
                                 <div class="portfolio-box-2">
                                     <h4 class="title"><a
                                             href="{{ route('front.user.portfolio.detail', [getParam(), $portfolio->slug, $portfolio->id]) }}">{{ strlen($portfolio->title) > 25 ? mb_substr($portfolio->title, 0, 25, 'UTF-8') . '...' : $portfolio->title }}</a>
@@ -1100,97 +1101,68 @@ Footer
                     </div>
                 </div>
         </section>
-    @endif
+    @endif --}}
     {{-- end df --}}
 
-{{-- <h1>1</h1> --}}
+
     {{-- 3 --}}
-    {{-- @if (is_array($userPermissions) && in_array('Portfolio', $userPermissions))
+    @if (is_array($userPermissions) && in_array('Portfolio', $userPermissions))
         <div class="container-fluid portfolio-container-holder content-section" id="portfolio"
-            style="background-color: white">
+            style="background-color: #4c3ec7;">
             <div class="portfolio-container container">
-                <h1 class="text-center">My Portfolio</h1>
-                <hr class="star-portfolio">
-
                 <div class="row">
-                    @foreach ($portfolios as $portfolio)
-                        <div class="col-md-6 col-xs-12 col-sm-6 portfolio-card-holder">
-                            <div><img src="{{ asset('assets/front/img/user/portfolios/' . $portfolio->image) }}"
-                                    alt="Image"></div>
-                            <div class="portfolio-box-2">
-                                <h4 class="title"><a
-                                        href="{{ route('front.user.portfolio.detail', [getParam(), $portfolio->slug, $portfolio->id]) }}">{{ strlen($portfolio->title) > 25 ? mb_substr($portfolio->title, 0, 25, 'UTF-8') . '...' : $portfolio->title }}</a>
-                                </h4>
-                            </div>
-                        </div>
-                    @endforeach
-
-                </div>
-            </div>
-        </div>
-    @endif --}}
-    {{-- 3 --}}
-
-
-
-    @if (is_array($userPermissions) && in_array('Testimonial', $userPermissions))
-    <section id="about" class="experience-section" style="background-color: white">
-        <div class="col-sm-6 col-md-6 col-lg-6 services-row-1">
-            <p class="section-head">{{ $home_text->testimonial_title ?? __('Testimonials') }}</p>
-            <p class="about-me-para">{{ $home_text->testimonial_subtitle ?? __('Testimonials') }}</p>
-            <div class="about-me-line" style="margin: 0 auto; width: 40%; margin-bottom:30px"></div>
-        </div>
-        <div class="conatiner px-5">
-        <div class="row testimonial-slider" id="testimonials_item">
-            @foreach ($testimonials as $testimonial)
-                <div class="col" id="item_testimonials" style="padding-top: 100px;">
-                    <div class="testimonial-box" style="margin-top: 100px;">
-                        <div class="author-photo">
-                            <img class="lazy"
-                                src="{{ asset('assets/front/img/user/testimonials/' . $testimonial->image) }}"
-                                alt="Image">
-                            <svg width="117" height="114" viewBox="0 0 117 114">
-                                <path
-                                    d="M89.8169 85.345L65.5127 98.7562C60.3865 101.585 54.145 101.463 49.1422 98.4367L25.3831 84.1077C20.3803 81.0815 17.3725 75.6305 17.4795 69.7846L18.0246 42.0444C18.1316 36.1985 21.3562 30.8531 26.4824 28.0244L50.7866 14.6132C55.9128 11.7846 62.1543 11.9065 67.1571 14.9327L90.9162 29.2617C95.919 32.2879 98.9268 37.7389 98.8198 43.5848L98.2747 71.325C98.1677 77.1709 94.9431 82.5163 89.8169 85.345Z" />
-                            </svg>
-                        </div>
-                        <div class="author-info">
-                            <h5 class="name">{{ $testimonial->name }}</h5>
-                            @if (!empty($testimonial->occupation))
-                                <span class="title">{{ $testimonial->occupation }}</span>
-                            @endif
-                        </div>
-                        <p class="content">{!! nl2br($testimonial->content) !!}</p>
+                    <div class="col-sm-6 col-md-6 col-lg-6 services-row-1">
+                        <p class="section-head">{{ $keywords['All'] ?? 'All' }}</p>
+                        <p class="about-me-para">{{ $home_text->portfolio_subtitle ?? __('Portfolios') }}</p>
+                        <div class="about-me-line" style="margin: 0 auto; width: 40%;"></div>
                     </div>
                 </div>
-            @endforeach
-        </div>
-    </div>
-    </section>
-    @endif
 
-    {{-- <h1 style="color: white">1</h1> --}}
+                <div class="container pt-5">
+                    <div class="row p-2 ">
+                        @foreach ($portfolios as $portfolio)
+                            <div class="col-md-6 pt-5">
+                                <div class="text-center"><img
+                                        src="{{ asset('assets/front/img/user/portfolios/' . $portfolio->image) }}"
+                                        class="img-fluid" alt="Image">
+                                </div>
+                                <div class="portfolio-box-2">
+                                    <a class="title"
+                                        href="{{ route('front.user.portfolio.detail', [getParam(), $portfolio->slug, $portfolio->id]) }}">{{ strlen($portfolio->title) > 25 ? mb_substr($portfolio->title, 0, 25, 'UTF-8') . '...' : $portfolio->title }}</a>
 
-    {{-- testimonial --}}
-    {{-- @if(is_array($userPermissions) && in_array('Testimonial',$userPermissions))
-    <section id="about" class="experience-section" style="background-color: white">
-        <div class="row">
-            <div class="col-sm-6 col-md-6 services-row-1">
-                <p class="section-head">{{$home_text->testimonial_title ?? __('Testimonials')}}</p>
-                <p class="about-me-para">{{$home_text->testimonial_subtitle ?? __('Testimonials')}}</p>
-                <div class="about-me-line" style="margin: 0 auto; width: 40%; margin-bottom:30px"></div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
-            <div class="container">
-                <div class="row">
+    @endif
+    {{-- 3 --}}
+
+<h1>!work!</h1>
+
+    @if (is_array($userPermissions) && in_array('Testimonial', $userPermissions))
+        <section id="about" class="experience-section" style="background-color: white">
+            <div class="col-sm-6 col-md-6 col-lg-6 services-row-1">
+                <p class="section-head">{{ $home_text->testimonial_title ?? __('Testimonials') }}</p>
+                <p class="about-me-para">{{ $home_text->testimonial_subtitle ?? __('Testimonials') }}</p>
+                <div class="about-me-line" style="margin: 0 auto; width: 40%; margin-bottom:30px"></div>
+            </div>
+            <div class="conatiner p-2">
+                <div class="row testimonial-slider" id="testimonials_item">
                     @foreach ($testimonials as $testimonial)
-                        <div class="col-sm-6 col-lg-3" id="">
-                            <div class="testimonial-box">
+                        <div class="col" id="item_testimonials" style="padding-top: 100px;">
+                            <div class="testimonial-box" style="margin-top: 100px;">
                                 <div class="author-photo">
-                                    <img class="lazy" src="{{ asset('assets/front/img/user/testimonials/' . $testimonial->image) }}"
+                                    <img src="{{ asset('assets/front/img/user/testimonials/' . $testimonial->image) }}" class="img-fluid"
                                         alt="Image">
+                                    <svg width="117" height="114" viewBox="0 0 117 114">
+                                        <path
+                                            d="M89.8169 85.345L65.5127 98.7562C60.3865 101.585 54.145 101.463 49.1422 98.4367L25.3831 84.1077C20.3803 81.0815 17.3725 75.6305 17.4795 69.7846L18.0246 42.0444C18.1316 36.1985 21.3562 30.8531 26.4824 28.0244L50.7866 14.6132C55.9128 11.7846 62.1543 11.9065 67.1571 14.9327L90.9162 29.2617C95.919 32.2879 98.9268 37.7389 98.8198 43.5848L98.2747 71.325C98.1677 77.1709 94.9431 82.5163 89.8169 85.345Z" />
+                                    </svg>
                                 </div>
-                                <div class="author-info">
+                                <div class="author-info pt-5">
                                     <h5 class="name">{{ $testimonial->name }}</h5>
                                     @if (!empty($testimonial->occupation))
                                         <span class="title">{{ $testimonial->occupation }}</span>
@@ -1202,183 +1174,109 @@ Footer
                     @endforeach
                 </div>
             </div>
-    </section>
-@endif --}}
-    {{-- testimonial --}}
-
-
-    <!-- Contact form -->
-    {{-- <div class="container-fluid contact-me-container content-section" id="contact">
-        <div class="container">
-            <h1 class="intro-text text-center">Contact Me</h1>
-            <hr class="star-light">
-            <div class="row">
-                <div class="col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                            <input type="text" class="form-control" id="name" placeholder="Name">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-at"></i></div>
-                            <input type="text" class="form-control" id="email" placeholder="Email ID">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-phone"></i></div>
-                            <input type="text" class="form-control" id="phone" placeholder="Phone Number">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-12">
-                    <textarea class="form-control" rows="5" placeholder="Message"></textarea>
-                </div>
-            </div>
-
-            <div class="text-center">
-                <button class="btn btn-default submit-button btn-lg btn-primary"><i class="fa fa-paper-plane"></i>
-                    Send</button>
-            </div>
-        </div>
-    </div> --}}
-
-{{--
-    @if (is_array($userPermissions) && in_array('Contact', $userPermissions))
-        <section id="contact" class="experience-section">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-6 services-row-1">
-                    <p class="section-head">{{ $home_text->contact_title ?? __('Get in touch') }}</p>
-                    <p class="about-me-para">{{ $home_text->contact_subtitle ?? __('Get in touch') }}</p>
-                    <div class="about-me-line" style="margin: 0 auto; width: 40%;"></div>
-                </div>
-
-            </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-6 testimonial-row-1">
-                    <div class="row">
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <div class="input-field mb-30">
-                                <label for="name">{{ $keywords['Name'] ?? 'Name' }}</label>
-                                <input type="text" placeholder="{{ $keywords['Name'] ?? 'Name' }}"
-                                    name="fullname" required id="name">
-                                @if ($errors->has('fullname'))
-                                    <p class="text-danger mb-0">{{ $errors->first('fullname') }}</p>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <div class="input-field mb-30">
-                                <label for="email">{{ $keywords['Email_Address'] ?? 'Email Address' }}</label>
-                                <input type="email"
-                                    placeholder="{{ $keywords['Email_Address'] ?? 'Email Address' }}" name="email"
-                                    required id="email">
-                                @if ($errors->has('email'))
-                                    <p class="text-danger mb-0">{{ $errors->first('email') }}</p>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-12" style="margin-top:20px ;">
-                            <div class="input-field mb-30">
-                                <label for="subject">{{ $keywords['Subject'] ?? 'Subject' }}</label>
-                                <input type="text" placeholder="{{ $keywords['Subject'] ?? 'Subject' }}"
-                                    name="subject" required id="subject">
-                                @if ($errors->has('subject'))
-                                    <p class="text-danger mb-0">{{ $errors->first('subject') }}</p>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-12" style="margin-top:20px ;">
-                            <div class="input-field mb-30">
-                                <label for="message">{{ $keywords['Message'] ?? 'Message' }}</label>
-                                <textarea placeholder="{{ $keywords['Message'] ?? 'Message' }}" name="message" id="message"></textarea>
-                                @if ($errors->has('message'))
-                                    <p class="text-danger mb-0">{{ $errors->first('message') }}</p>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="input-field text-center">
-                                <button type="submit"
-                                    class="main-btn login-btn snd-msg">{{ $keywords['Send_Message'] ?? 'Send Message' }}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         </section>
-    @endif --}}
+    @endif
 
 
-        <!--================End Latest Blog Area =================-->
-	@if (is_array($userPermissions) && in_array('Contact', $userPermissions))
-    <section class="contact_area p_120">
-        <div class="margin footer-div" style="text-align: center;line-height:1">
-            <h4>{{ $home_text->contact_title ?? __('Get in touch') }}
-            </h4>
-            <p class="footer-head">{{ $home_text->contact_subtitle ?? __('Get in touch') }} </p>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9">
-                    <form class="row contact_form" action="{{ route('front.contact.message', [getParam()]) }}" enctype="multipart/form-data" method="post" id="contactForm" novalidate="novalidate">
-						@csrf
-						<input type="hidden" name="id" value="{{ $user->id }}">
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <div class="form-group">
-								<input type="text" class="form-control" placeholder="{{ $keywords['Name'] ?? 'Name' }}" name="fullname">
-								@if ($errors->has('fullname'))
-									<p class="text-danger mb-0">{{ $errors->first('fullname') }}</p>
-								@endif
-                            </div>
+
+
+
+
+    <!--================ Contact =================-->
+    @if (is_array($userPermissions) && in_array('Contact', $userPermissions))
+        <section class="contact_area mt-5" id="contact">
+            <div class="contact">
+                <div class="contact-box">
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-6 services-row-1">
+                            <p class="section-head">{{ $home_text->contact_title ?? __('Get in touch') }}</p>
+                            <p class="about-me-para">{{ $home_text->contact_subtitle ?? __('Get in touch') }}</p>
+                            <div class="about-me-line" style="margin: 0 auto; width: 40%;"></div>
                         </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <input class="form-control" type="email" placeholder="{{ $keywords['Email_Address'] ?? 'Email Address' }}" name="email" required>
-								@if ($errors->has('email'))
-									<p class="text-danger mb-0">{{ $errors->first('email') }}</p>
-								@endif
-                            </div>
+                    </div>
+
+                    <div class="container pt-3">
+                        <div class="contact-form p-3">
+                            <form action="{{ route('front.contact.message', [getParam()]) }}"
+                                enctype="multipart/form-data" method="post" class="contact">
+                                @csrf
+                                @method('POST')
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id=""
+                                                placeholder="{{ $keywords['Name'] ?? 'Name' }}" name="fullname">
+                                            @if ($errors->has('fullname'))
+                                                <p class="text-danger mb-0">{{ $errors->first('fullname') }}</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <input type="email" class="form-control" id=""
+                                                placeholder="{{ $keywords['Email_Address'] ?? 'Email Address' }}"
+                                                name="email" required>
+                                            @if ($errors->has('email'))
+                                                <p class="text-danger mb-0">{{ $errors->first('email') }}</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" id=""
+                                                placeholder="{{ $keywords['Subject'] ?? 'Subject' }}" name="subject"
+                                                required>
+                                            @if ($errors->has('subject'))
+                                                <p class="text-danger mb-0">{{ $errors->first('subject') }}</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <textarea type="text" class="form-control" placeholder="{{ $keywords['Message'] ?? 'Message' }}" name="message"
+                                                rows="10" required></textarea>
+                                            @if ($errors->has('message'))
+                                                <p class="text-danger mb-0">{{ $errors->first('message') }}</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <div class="row m-4 align-items-center justify-content-center">
+                                <div class="col-md-3">
+                                    <div class="contact-btn">
+                                        <input type="button" class="main_btn" value="Send Message">
+                                    </div>
+                                </div>
+                            </div> --}}
+                                <div class="col-12">
+                                    <div class="input-field text-center">
+                                        <button type="submit"
+                                            class="main-btn login-btn snd-msg">{{ $keywords['Send_Message'] ?? 'Send Message' }}</button>
+                                    </div>
+                                </div>
+
+                            </form>
                         </div>
-                        <div class="col-sm-12 col-md-12 col-lg-12">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="{{ $keywords['Subject'] ?? 'Subject' }}" name="subject" required>
-									@if ($errors->has('subject'))
-										<p class="text-danger mb-0">{{ $errors->first('subject') }}</p>
-									@endif
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 col-lg-12">
-                            <div class="form-group">
-								<textarea class="form-control" placeholder="{{ $keywords['Message'] ?? 'Message' }}" name="message"  rows="1" required></textarea>
-								@if ($errors->has('message'))
-									<p class="text-danger mb-0">{{ $errors->first('message') }}</p>
-								@endif
-                            </div>
-                        </div>
-                        <div class="col-md-12 text-center">
-                            <button type="submit" value="submit" class="btn submit_btn">Send Message</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-	@endif
+        </section>
+    @endif
+    <!--================ End Contact =================-->
 
 
     <!-- Footer -->
     <section id="footer" class="services-section">
-       <div class="testimonial-row-1" style="text-align: center;">
+        <div class="testimonial-row-1" style="text-align: center;">
             <p class="about-me-para">{{ $keywords['Stay_Connected'] ?? 'Stay Connected' }}</p>
-            <a class="section-head" href="mailto:{{ $user->email }}">{{ $user->email }}</a>
+            <a class="section-head pt-3" href="mailto:{{ $user->email }}">{{ $user->email }}</a>
         </div>
     </section>
 
@@ -1386,7 +1284,7 @@ Footer
     <!-- Bootstrap core JavaScript -->
     <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
-</body>
+
 <script src="{{ asset('assets/front/js/profile/theme6-8/slick.min.js') }}"></script>
 <script>
     $('#testimonials_item').slick({
@@ -1437,4 +1335,5 @@ Footer
         });
     });
 </script>
+
 </html>

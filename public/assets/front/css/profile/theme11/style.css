@@ -620,7 +620,7 @@ p {
     }
 
     .footer_area .section-head{
-        font-size: 50px;
+        font-size: 35px;
         padding-top: 100px;
         color: #fff;
     }
@@ -911,7 +911,7 @@ p {
     padding-top: 40px;
     color: #fff;
     font-size: 15px;
-    /* border-top: 1px solid rgba(255, 255, 255, 0.4); */
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
     text-align: center;
 } */
 

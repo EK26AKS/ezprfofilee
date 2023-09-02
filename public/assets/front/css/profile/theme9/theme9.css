@@ -279,7 +279,19 @@ body {
     display: none;
 }
 
-@media(min-width: 340px) {
+@media(min-width: 320px) {
+
+    .services-section .testimonial-row-1 .about-me-para {
+        text-align: center;
+        font-size: 25px;
+        font-family: var(--font-poppins);
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        color: var(--color-primary-2);
+    }
+
+
     .services-section .testimonial-row-1 .section-head {
         text-align: center;
         font-size: 20px;
@@ -289,6 +301,9 @@ body {
         line-height: normal;
         color: var(--color-primary-2);
     }
+
+
+
 }
 
 @media(min-width: 480px) {
@@ -838,7 +853,11 @@ body {
 @media (max-width: 320px){
     .experience-section .services-row-1 .about-me-para {
         color:var(--color-primary-2);
-        font-size: 5px;
+        font-size: 15px;
+    }
+
+    .experience-section .services-row-1 .section-head{
+        font-size: 25px;
     }
 }
 
